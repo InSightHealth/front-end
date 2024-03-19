@@ -20,3 +20,9 @@ export function createApp() {
   }
 }
 // #endif
+
+// import homehead from './components/header/homehead.vue'
+// import homefoot from './components/footer/homefoot.vue'
+
+// Vue.component('homeHead', homehead);
+// Vue.component('homeFoot', homefoot);
