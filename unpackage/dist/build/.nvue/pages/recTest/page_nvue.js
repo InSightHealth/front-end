@@ -1,18 +1,5 @@
+import { _ as _export_sfc, f as formatAppLog } from "../../_plugin-vue_export-helper.js";
 import { resolveComponent, openBlock, createElementBlock, createElementVNode, normalizeClass, normalizeStyle, createVNode, withCtx, createTextVNode, toDisplayString, createCommentVNode, Fragment, renderList } from "vue";
-function formatAppLog(type, filename, ...args) {
-  if (uni.__log__) {
-    uni.__log__(type, filename, ...args);
-  } else {
-    console[type].apply(console, [...args, filename]);
-  }
-}
-const _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
-  }
-  return target;
-};
 var RecordApp$1, $T;
 const _sfc_main$1 = {
   data() {

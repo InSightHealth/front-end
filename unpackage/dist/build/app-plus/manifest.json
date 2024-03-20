@@ -17,6 +17,7 @@
     "url": ""
   },
   "permissions": {
+    "LivePusher": {},
     "UniNView": {
       "description": "UniNView原生渲染"
     }

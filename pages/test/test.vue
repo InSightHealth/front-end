@@ -16,7 +16,7 @@
 						lebal: "测试音频"
 					},
 					{
-						path: "/pages/test-camera/test-camera",
+						path: "/pages/test-camera/test_nvue",
 						lebal: "测试摄像头"
 					}
 				]

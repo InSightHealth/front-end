@@ -55,6 +55,22 @@
 		    "style" : {
 		        "navigationBarTitleText": "RecordApp纯renderjs调用 - uni-app"
 		    }
+		},
+		{
+			"path" : "pages/test-camera/test_nvue",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/test_api/test_api",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {
