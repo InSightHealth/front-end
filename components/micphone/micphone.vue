@@ -66,7 +66,6 @@ var disableOgg=false;
 	import 'recorder-core/src/engine/beta-ogg-engine'
 // #endif
 
-
 /** 可选：App中引入原生录音插件来进行录音，兼容性和体验更好 **/
 var RecNativePlugin=null;
 // #ifdef APP
@@ -81,6 +80,16 @@ var RecNativePlugin=null;
 
 export default {
 	components: {TestPlayer},
+	props: {
+		// 检测类型 + 其他验证
+		StopHandler: {
+			type: Function,
+			default: function(value) {
+				console.log("default handler");
+			},
+			required: true,
+		},
+	},
 	data() {
 		return {
 			recType:"mp3"

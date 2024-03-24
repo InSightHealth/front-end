@@ -7085,6 +7085,16 @@ if (uni.restoreGlobal) {
   var RecUtsPlugin = null;
   const _sfc_main$2 = {
     components: { TestPlayer },
+    props: {
+      // 检测类型 + 其他验证
+      StopHandler: {
+        type: Function,
+        default: function(value) {
+          formatAppLog("log", "at components/micphone/micphone.vue:88", "default handler");
+        },
+        required: true
+      }
+    },
     data() {
       return {
         recType: "mp3",
@@ -7115,19 +7125,19 @@ if (uni.restoreGlobal) {
       var v2 = (((this.$root || {}).constructor || {}).super || {}).version;
       if (v2)
         vueVer.push("constructor.super:" + v2);
-      formatAppLog("log", "at components/micphone/micphone.vue:110", "页面mounted(" + getCurrentPages().length + "层)，Vue=" + vueVer.join("/") + "，WebViewId=" + (this.$root.$page && this.$root.$page.id || "?") + "，ComponentId=_$id:" + (this._$id || "?") + "/$.uid:" + (this.$ && this.$.uid || "?") + "，Recorder.LM=" + Recorder.LM + "，RecordApp.LM=" + RecordApp$1.LM + "，UniSupportLM=" + RecordApp$1.UniSupportLM + "，UniJsSource=" + RecordApp$1.UniJsSource.IsSource);
+      formatAppLog("log", "at components/micphone/micphone.vue:119", "页面mounted(" + getCurrentPages().length + "层)，Vue=" + vueVer.join("/") + "，WebViewId=" + (this.$root.$page && this.$root.$page.id || "?") + "，ComponentId=_$id:" + (this._$id || "?") + "/$.uid:" + (this.$ && this.$.uid || "?") + "，Recorder.LM=" + Recorder.LM + "，RecordApp.LM=" + RecordApp$1.LM + "，UniSupportLM=" + RecordApp$1.UniSupportLM + "，UniJsSource=" + RecordApp$1.UniJsSource.IsSource);
       this.pageDeep = getCurrentPages().length;
       this.pageNewPath = /main_recTest/.test(this.getRouteStr()) ? "page_index2" : "main_recTest";
       this.isMounted = true;
       this.uniPage__onShow();
-      formatAppLog("log", "at components/micphone/micphone.vue:124", "正在执行Install，请勿操作...", "#f60");
+      formatAppLog("log", "at components/micphone/micphone.vue:133", "正在执行Install，请勿操作...", "#f60");
       RecordApp$1.UniNativeUtsPlugin = RecUtsPlugin;
       RecordApp$1.Install(() => {
-        formatAppLog("log", "at components/micphone/micphone.vue:127", "Install成功，环境：" + this.currentKeyTag(), 2);
-        formatAppLog("log", "at components/micphone/micphone.vue:128", "请先请求录音权限，然后再开始录音");
+        formatAppLog("log", "at components/micphone/micphone.vue:136", "Install成功，环境：" + this.currentKeyTag(), 2);
+        formatAppLog("log", "at components/micphone/micphone.vue:137", "请先请求录音权限，然后再开始录音");
         this.recReq();
       }, (err) => {
-        formatAppLog("log", "at components/micphone/micphone.vue:131", "RecordApp.Install出错：" + err, 1);
+        formatAppLog("log", "at components/micphone/micphone.vue:140", "RecordApp.Install出错：" + err, 1);
       });
     },
     unmounted() {
@@ -7156,14 +7166,14 @@ if (uni.restoreGlobal) {
           RecordApp$1.UniNativeUtsPlugin = null;
         }
         if (RecordApp$1.UniIsApp() && !RecordApp$1.UniNativeUtsPlugin) {
-          formatAppLog("log", "at components/micphone/micphone.vue:171", "当前是在App的renderjs中使用H5进行录音，iOS上只支持14.3以上版本，且iOS上每次进入页面后第一次请求录音权限时、或长时间无操作再请求录音权限时WebView均会弹出录音权限对话框，不同旧iOS版本（低于iOS17）下H5录音可能存在的问题在App中同样会存在；使用配套的原生录音插件或uts插件时无以上问题和版本限制，Android也无以上问题", "#f60");
+          formatAppLog("log", "at components/micphone/micphone.vue:180", "当前是在App的renderjs中使用H5进行录音，iOS上只支持14.3以上版本，且iOS上每次进入页面后第一次请求录音权限时、或长时间无操作再请求录音权限时WebView均会弹出录音权限对话框，不同旧iOS版本（低于iOS17）下H5录音可能存在的问题在App中同样会存在；使用配套的原生录音插件或uts插件时无以上问题和版本限制，Android也无以上问题", "#f60");
         }
-        formatAppLog("log", "at components/micphone/micphone.vue:174", "正在请求录音权限...");
+        formatAppLog("log", "at components/micphone/micphone.vue:183", "正在请求录音权限...");
         RecordApp$1.UniWebViewActivate(this);
         RecordApp$1.RequestPermission(() => {
-          formatAppLog("log", "at components/micphone/micphone.vue:177", this.currentKeyTag() + " 已获得录音权限，可以开始录音了", 2);
+          formatAppLog("log", "at components/micphone/micphone.vue:186", this.currentKeyTag() + " 已获得录音权限，可以开始录音了", 2);
         }, (msg, isUserNotAllow) => {
-          formatAppLog("log", "at components/micphone/micphone.vue:182", this.currentKeyTag() + " " + (isUserNotAllow ? "isUserNotAllow," : "") + "请求录音权限失败：" + msg, 1);
+          formatAppLog("log", "at components/micphone/micphone.vue:191", this.currentKeyTag() + " " + (isUserNotAllow ? "isUserNotAllow," : "") + "请求录音权限失败：" + msg, 1);
         });
       },
       recStart() {
@@ -7206,18 +7216,18 @@ if (uni.restoreGlobal) {
 					this.audioData=aBuf; //留着给Stop时进行转码成wav播放
 				}`
         }, () => {
-          formatAppLog("log", "at components/micphone/micphone.vue:245", this.currentKeyTag() + " 录制中：" + this.recType + " " + this.recSampleRate + " " + this.recBitRate + "kbps" + (this.takeoffEncodeChunkSet ? " takeoffEncodeChunk" : "") + (this.appUseH5Rec ? " appUseH5Rec" : ""));
+          formatAppLog("log", "at components/micphone/micphone.vue:254", this.currentKeyTag() + " 录制中：" + this.recType + " " + this.recSampleRate + " " + this.recBitRate + "kbps" + (this.takeoffEncodeChunkSet ? " takeoffEncodeChunk" : "") + (this.appUseH5Rec ? " appUseH5Rec" : ""));
         }, (msg) => {
-          formatAppLog("log", "at components/micphone/micphone.vue:252", this.currentKeyTag() + " 开始录音失败：" + msg);
+          formatAppLog("log", "at components/micphone/micphone.vue:261", this.currentKeyTag() + " 开始录音失败：" + msg);
         });
       },
       recStop() {
-        formatAppLog("log", "at components/micphone/micphone.vue:256", "正在结束录音...");
+        formatAppLog("log", "at components/micphone/micphone.vue:265", "正在结束录音...");
         RecordApp$1.Stop((aBuf, duration, mime) => {
           var recSet = (RecordApp$1.GetCurrentRecOrNull() || { set: { type: this.recType } }).set;
-          formatAppLog("log", "at components/micphone/micphone.vue:262", "已录制[" + mime + "]：" + this.formatTime(duration, 1) + " " + aBuf.byteLength + "字节 " + recSet.sampleRate + "hz " + recSet.bitRate + "kbps", 2);
+          formatAppLog("log", "at components/micphone/micphone.vue:271", "已录制[" + mime + "]：" + this.formatTime(duration, 1) + " " + aBuf.byteLength + "字节 " + recSet.sampleRate + "hz " + recSet.bitRate + "kbps", 2);
           if (this.takeEcChunks) {
-            formatAppLog("log", "at components/micphone/micphone.vue:268", "启用takeoffEncodeChunk后Stop返回的blob长度为0不提供音频数据");
+            formatAppLog("log", "at components/micphone/micphone.vue:277", "启用takeoffEncodeChunk后Stop返回的blob长度为0不提供音频数据");
             var len = 0;
             for (var i = 0; i < this.takeEcChunks.length; i++)
               len += this.takeEcChunks[i].length;
@@ -7228,7 +7238,7 @@ if (uni.restoreGlobal) {
               idx += itm.length;
             }
             aBuf = chunkData.buffer;
-            formatAppLog("log", "at components/micphone/micphone.vue:277", "takeoffEncodeChunk接收到的音频片段，已合并成一个音频文件 " + aBuf.byteLength + "字节");
+            formatAppLog("log", "at components/micphone/micphone.vue:286", "takeoffEncodeChunk接收到的音频片段，已合并成一个音频文件 " + aBuf.byteLength + "字节");
           }
           RecordApp$1.UniSaveLocalFile("recorder.mp3", aBuf, (savePath) => {
             uni.uploadFile({
@@ -7237,18 +7247,18 @@ if (uni.restoreGlobal) {
               name: "mp3",
               formData: {},
               success: (res) => {
-                formatAppLog("log", "at components/micphone/micphone.vue:305", "上传成功：" + res.data);
+                formatAppLog("log", "at components/micphone/micphone.vue:314", "上传成功：" + res.data);
                 this.StopHandler();
               },
               fail: (err) => {
-                formatAppLog("error", "at components/micphone/micphone.vue:308", "上传录音失败：" + err);
+                formatAppLog("error", "at components/micphone/micphone.vue:317", "上传录音失败：" + err);
               }
             });
           }, (err) => {
-            formatAppLog("error", "at components/micphone/micphone.vue:310", "保存录音失败：" + err);
+            formatAppLog("error", "at components/micphone/micphone.vue:319", "保存录音失败：" + err);
           });
         }, (msg) => {
-          formatAppLog("log", "at components/micphone/micphone.vue:313", "结束录音失败：" + msg, 1);
+          formatAppLog("log", "at components/micphone/micphone.vue:322", "结束录音失败：" + msg, 1);
         });
       },
       recTypeClick(e) {
@@ -7260,7 +7270,7 @@ if (uni.restoreGlobal) {
       appUseH5RecClick() {
         this.appUseH5Rec = !this.appUseH5Rec;
         RecordApp$1.Current = null;
-        formatAppLog("log", "at components/micphone/micphone.vue:335", "切换了appUseH5Rec=" + this.appUseH5Rec + "，重新请求录音权限后生效", "#f60");
+        formatAppLog("log", "at components/micphone/micphone.vue:344", "切换了appUseH5Rec=" + this.appUseH5Rec + "，重新请求录音权限后生效", "#f60");
       },
       formatTime(ms, showSS) {
         var ss = ms % 1e3;
@@ -7287,7 +7297,7 @@ if (uni.restoreGlobal) {
       }
       // ,reloadPage(){
       // 	var url=this.getRouteStr();
-      // 	__f__('log','at components/micphone/micphone.vue:422',"刷新页面 url="+url);
+      // 	__f__('log','at components/micphone/micphone.vue:431',"刷新页面 url="+url);
       // 	if(getCurrentPages().length==1){
       // 		uni.reLaunch({ url:url })
       // 	}else{
@@ -7298,15 +7308,15 @@ if (uni.restoreGlobal) {
       // }
       // ,evalExecClick(){
       // 	if(!this.evalExecCode){
-      // 		__f__('log','at components/micphone/micphone.vue:433',"请填写要执行的代码",1);
+      // 		__f__('log','at components/micphone/micphone.vue:442',"请填写要执行的代码",1);
       // 		return;
       // 	}
       //
       // 	try{
       // 		new Function("Recorder,RecordApp",this.evalExecCode).call(this,Recorder,RecordApp);
-      // 		__f__('log','at components/micphone/micphone.vue:439',"代码已执行",2);
+      // 		__f__('log','at components/micphone/micphone.vue:448',"代码已执行",2);
       // 	}catch(e){
-      // 		__f__('log','at components/micphone/micphone.vue:441',"代码执行异常："+e.message,1);
+      // 		__f__('log','at components/micphone/micphone.vue:450',"代码执行异常："+e.message,1);
       // 	}
       //
       // }
@@ -7320,7 +7330,7 @@ if (uni.restoreGlobal) {
       // 			if(isApp){
       // 				This.$ownerInstance.callMethod("reclog","vConsole已加载");
       // 			}else{
-      // 				__f__('log','at components/micphone/micphone.vue:455',"vConsole已加载");
+      // 				__f__('log','at components/micphone/micphone.vue:464',"vConsole已加载");
       // 			}
       // 		}
       // 		if(window.VConsole)return ok();
@@ -7332,12 +7342,12 @@ if (uni.restoreGlobal) {
       // 			new VConsole(); ok()
       // 		};
       // 	})()`;
-      // 	__f__('log','at components/micphone/micphone.vue:467',"正在renderjs中加载vConsole...");
+      // 	__f__('log','at components/micphone/micphone.vue:476',"正在renderjs中加载vConsole...");
       // 	if(isApp){
       // 		RecordApp.UniWebViewVueCall(this,jsCode);
       // 	}else if(isH5){
       // 	}else{
-      // 		__f__('log','at components/micphone/micphone.vue:473',"非app环境，不加载vConsole",1)
+      // 		__f__('log','at components/micphone/micphone.vue:482',"非app环境，不加载vConsole",1)
       // 	}
       // }
     }
