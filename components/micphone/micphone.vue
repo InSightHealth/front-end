@@ -323,91 +323,11 @@ export default {
 			});
 		}
 		
-		// ,reclog(msg,color){
-		// 	var now=new Date();
-		// 	var t=("0"+now.getHours()).substr(-2)
-		// 		+":"+("0"+now.getMinutes()).substr(-2)
-		// 		+":"+("0"+now.getSeconds()).substr(-2);
-		// 	var txt="["+t+"]"+msg;
-		// 	console.log(txt);
-		// 	console.logs.splice(0,0,{txt:txt,color:color});
-		// }
-		,recTypeClick(e){
-			var type=e.target.dataset.type;
-			if(type){
-				this.recType=type;
-			}
-		}
 		,appUseH5RecClick(){
 			this.appUseH5Rec=!this.appUseH5Rec;
 			RecordApp.Current=null;
 			console.log('切换了appUseH5Rec='+this.appUseH5Rec+'，重新请求录音权限后生效',"#f60");
 		}
-		
-		// 可视化波形，这里是一次性创建多个波形，可以参考page_i18n.vue只创建一个波形会简单一点
-		// ,initWaveStore(){
-		// 	if(this.waveStore)return;
-		// 	var store=this.waveStore=this.waveStore||{};
-		// 	var webStore=`var store=this.waveStore=this.waveStore||{};`;//在renderjs中执行，this是renderjs模块的this
-		// 	webStore+=`this.recwaveChoiceKey="${this.recwaveChoiceKey}";`;//把当前选中的波形也传过去
-			
-		// 	//App环境下是在renderjs中绘制，H5、小程序等是在逻辑层中绘制，因此需要提供两段相同的代码（宽高值需要和canvas style的宽高一致）
-		// 	RecordApp.UniFindCanvas(this,[".recwave-WaveView"],`${webStore}
-		// 		store.WaveView=Recorder.WaveView({compatibleCanvas:canvas1, width:300, height:100});
-		// 	`,(canvas1)=>{
-		// 		store.WaveView=Recorder.WaveView({compatibleCanvas:canvas1, width:300, height:100});
-		// 	});
-			
-		// 	RecordApp.UniFindCanvas(this,[".recwave-SurferView",".recwave-SurferView-2x"],`${webStore}
-		// 		store.SurferView=Recorder.WaveSurferView({compatibleCanvas:canvas1,compatibleCanvas_2x:canvas2, width:300, height:100});
-		// 	`,(canvas1,canvas2)=>{
-		// 		store.SurferView=Recorder.WaveSurferView({compatibleCanvas:canvas1,compatibleCanvas_2x:canvas2, width:300, height:100});
-		// 		//注意：iOS上微信小程序基础库存在bug，canvas.drawImage(canvas)可能无法绘制，可能会导致WaveSurferView在iOS小程序上不能正确显示，其他环境下无此兼容性问题
-		// 	});
-			
-		// 	RecordApp.UniFindCanvas(this,[".recwave-Histogram1"],`${webStore}
-		// 		store.Histogram1=Recorder.FrequencyHistogramView({compatibleCanvas:canvas1, width:300, height:100});
-		// 	`,(canvas1)=>{
-		// 		store.Histogram1=Recorder.FrequencyHistogramView({compatibleCanvas:canvas1, width:300, height:100});
-		// 	});
-		// 	RecordApp.UniFindCanvas(this,[".recwave-Histogram2"],`${webStore}
-		// 		store.Histogram2=Recorder.FrequencyHistogramView({compatibleCanvas:canvas1, width:300, height:100
-		// 			,lineCount:200,widthRatio:1,position:0,minHeight:1
-		// 			,fallDuration:600,stripeEnable:false,mirrorEnable:true});
-		// 	`,(canvas1)=>{
-		// 		store.Histogram2=Recorder.FrequencyHistogramView({compatibleCanvas:canvas1, width:300, height:100
-		// 			,lineCount:200,widthRatio:1,position:0,minHeight:1
-		// 			,fallDuration:600,stripeEnable:false,mirrorEnable:true});
-		// 	});
-		// 	RecordApp.UniFindCanvas(this,[".recwave-Histogram3"],`${webStore}
-		// 		store.Histogram3=Recorder.FrequencyHistogramView({compatibleCanvas:canvas1, width:300, height:100
-		// 			,lineCount:20,position:0,minHeight:1,fallDuration:400,stripeEnable:false,mirrorEnable:true
-		// 			,linear:[0,"#0ac",1,"#0ac"]});
-		// 	`,(canvas1)=>{
-		// 		store.Histogram3=Recorder.FrequencyHistogramView({compatibleCanvas:canvas1, width:300, height:100
-		// 			,lineCount:20,position:0,minHeight:1,fallDuration:400,stripeEnable:false,mirrorEnable:true
-		// 			,linear:[0,"#0ac",1,"#0ac"]});
-		// 	});
-		// }
-		// ,recwaveChoice(e){
-		// 	var key=e.target.dataset.key;
-		// 	if(key){
-		// 		if(key!=this.recwaveChoiceKey){
-		// 			console.log("已切换波形显示为："+key);
-		// 			if(key=="SurferView"){
-		// 				// #ifdef MP-WEIXIN
-		// 				console.log("注意：iOS上微信小程序基础库存在bug，canvas.drawImage(canvas)可能无法绘制，可能会导致WaveSurferView在iOS小程序上不能正确显示，其它可视化插件无此兼容性问题","#fa0");
-		// 				// #endif
-		// 			}
-		// 		}
-		// 		this.recwaveChoiceKey=key;
-		// 		//App中传送给renderjs里面，同样赋值
-		// 		if(RecordApp.UniIsApp()){
-		// 			RecordApp.UniWebViewVueCall(this,'this.recwaveChoiceKey="'+key+'"');
-		// 		}
-		// 	}
-		// }
-		
 		,formatTime(ms,showSS){
 			var ss=ms%1000;ms=(ms-ss)/1000;
 			var s=ms%60;ms=(ms-s)/60;
@@ -426,62 +346,6 @@ export default {
 			}
 			return "/"+url;
 		}
-		// ,reloadPage(){
-		// 	var url=this.getRouteStr();
-		// 	console.log("刷新页面 url="+url);
-		// 	if(getCurrentPages().length==1){
-		// 		uni.reLaunch({ url:url })
-		// 	}else{
-		// 		uni.navigateBack({animationDuration:0,success:()=>{ setTimeout(()=>{
-		// 			uni.navigateTo({url:url})
-		// 		},300); }});
-		// 	}
-		// }
-		// ,evalExecClick(){
-		// 	if(!this.evalExecCode){
-		// 		console.log("请填写要执行的代码",1);
-		// 		return;
-		// 	}
-		// 	// #ifdef APP || H5
-		// 	try{
-		// 		new Function("Recorder,RecordApp",this.evalExecCode).call(this,Recorder,RecordApp);
-		// 		console.log("代码已执行",2);
-		// 	}catch(e){
-		// 		console.log("代码执行异常："+e.message,1);
-		// 	}
-		// 	// #endif
-		// }
-		// ,loadVConsole(){
-		// 	var isApp=false, isH5=false;
-		// 	/*#ifdef APP*/ isApp=true; /*#endif*/
-		// 	/*#ifdef H5*/ isH5=true; /*#endif*/
-		// 	var jsCode=`(function(){
-		// 		var isApp=${isApp}, isH5=${isH5};
-		// 		var ok=function(){
-		// 			if(isApp){
-		// 				This.$ownerInstance.callMethod("reclog","vConsole已加载");
-		// 			}else{
-		// 				console.log("vConsole已加载");
-		// 			}
-		// 		}
-		// 		if(window.VConsole)return ok();
-		// 		var elem=document.createElement("script");
-		// 		elem.setAttribute("type","text/javascript");
-		// 		elem.setAttribute("src","https://xiangyuecn.gitee.io/recorder/assets/ztest-vconsole.js");
-		// 		document.body.appendChild(elem);
-		// 		elem.onload=function(){
-		// 			new VConsole(); ok()
-		// 		};
-		// 	})()`;
-		// 	console.log("正在renderjs中加载vConsole...");
-		// 	if(isApp){
-		// 		RecordApp.UniWebViewVueCall(this,jsCode);
-		// 	}else if(isH5){// #ifdef H5
-		// 		eval("var This=this;"+jsCode); // #endif
-		// 	}else{
-		// 		console.log("非app环境，不加载vConsole",1)
-		// 	}
-		// }
 	}
 }
 </script>
@@ -525,10 +389,6 @@ export default {
 	mounted(){
 		//App的renderjs必须调用的函数，传入当前模块this
 		RecordApp.UniRenderjsRegister(this);
-		
-		this.$ownerInstance.callMethod("reclog","renderjs mounted"
-			+"，WebViewId="+window.__WebVieW_Id__
-			+"，ComponentId=_$id:"+(this._$id||"?")+"/$vm.ownerId:"+(this.$ownerInstance.$vm.ownerId||"?"));
 	},
 	methods: {
 		//这里定义的方法，在逻辑层中可通过 RecordApp.UniWebViewVueCall(this,'this.xxxFunc()') 直接调用

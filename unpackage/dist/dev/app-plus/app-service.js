@@ -7261,16 +7261,10 @@ if (uni.restoreGlobal) {
           formatAppLog("log", "at components/micphone/micphone.vue:322", "结束录音失败：" + msg, 1);
         });
       },
-      recTypeClick(e) {
-        var type = e.target.dataset.type;
-        if (type) {
-          this.recType = type;
-        }
-      },
       appUseH5RecClick() {
         this.appUseH5Rec = !this.appUseH5Rec;
         RecordApp$1.Current = null;
-        formatAppLog("log", "at components/micphone/micphone.vue:344", "切换了appUseH5Rec=" + this.appUseH5Rec + "，重新请求录音权限后生效", "#f60");
+        formatAppLog("log", "at components/micphone/micphone.vue:329", "切换了appUseH5Rec=" + this.appUseH5Rec + "，重新请求录音权限后生效", "#f60");
       },
       formatTime(ms, showSS) {
         var ss = ms % 1e3;
@@ -7295,61 +7289,6 @@ if (uni.restoreGlobal) {
         }
         return "/" + url;
       }
-      // ,reloadPage(){
-      // 	var url=this.getRouteStr();
-      // 	__f__('log','at components/micphone/micphone.vue:431',"刷新页面 url="+url);
-      // 	if(getCurrentPages().length==1){
-      // 		uni.reLaunch({ url:url })
-      // 	}else{
-      // 		uni.navigateBack({animationDuration:0,success:()=>{ setTimeout(()=>{
-      // 			uni.navigateTo({url:url})
-      // 		},300); }});
-      // 	}
-      // }
-      // ,evalExecClick(){
-      // 	if(!this.evalExecCode){
-      // 		__f__('log','at components/micphone/micphone.vue:442',"请填写要执行的代码",1);
-      // 		return;
-      // 	}
-      //
-      // 	try{
-      // 		new Function("Recorder,RecordApp",this.evalExecCode).call(this,Recorder,RecordApp);
-      // 		__f__('log','at components/micphone/micphone.vue:448',"代码已执行",2);
-      // 	}catch(e){
-      // 		__f__('log','at components/micphone/micphone.vue:450',"代码执行异常："+e.message,1);
-      // 	}
-      //
-      // }
-      // ,loadVConsole(){
-      // 	var isApp=false, isH5=false;
-      // isApp=true;
-      //
-      // 	var jsCode=`(function(){
-      // 		var isApp=${isApp}, isH5=${isH5};
-      // 		var ok=function(){
-      // 			if(isApp){
-      // 				This.$ownerInstance.callMethod("reclog","vConsole已加载");
-      // 			}else{
-      // 				__f__('log','at components/micphone/micphone.vue:464',"vConsole已加载");
-      // 			}
-      // 		}
-      // 		if(window.VConsole)return ok();
-      // 		var elem=document.createElement("script");
-      // 		elem.setAttribute("type","text/javascript");
-      // 		elem.setAttribute("src","https://xiangyuecn.gitee.io/recorder/assets/ztest-vconsole.js");
-      // 		document.body.appendChild(elem);
-      // 		elem.onload=function(){
-      // 			new VConsole(); ok()
-      // 		};
-      // 	})()`;
-      // 	__f__('log','at components/micphone/micphone.vue:476',"正在renderjs中加载vConsole...");
-      // 	if(isApp){
-      // 		RecordApp.UniWebViewVueCall(this,jsCode);
-      // 	}else if(isH5){
-      // 	}else{
-      // 		__f__('log','at components/micphone/micphone.vue:482',"非app环境，不加载vConsole",1)
-      // 	}
-      // }
     }
   };
   function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
