@@ -14,12 +14,14 @@
 
 <style>
 	/*每个页面公共css */
+	/* #ifdef H5 */
 	*{
 		padding: 0;
 		margin: 0;
 	}
-		
+
 	uni-page-body,html,body{  
 		height: 100%;  
 	}  
+	/* #endif */
 </style>

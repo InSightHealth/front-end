@@ -1,0 +1,117 @@
+
+.micphone[data-v-609587ba] {
+		max-height: 3.125rem;
+		max-width: 3.125rem;
+}
+
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+uni-view[data-v-94ba6231], uni-button[data-v-94ba6231], uni-text[data-v-94ba6231], uni-input[data-v-94ba6231], uni-textarea[data-v-94ba6231] {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 聊天消息 */
+.chat[data-v-94ba6231] {
+  /* 底部聊天发送栏 */
+}
+.chat .scroll-view[data-v-94ba6231] {
+  background-color: #F6F6F6;
+}
+.chat .scroll-view[data-v-94ba6231] ::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+  height: 0 !important;
+  -webkit-appearance: none;
+  background: transparent;
+  color: transparent;
+}
+.chat .scroll-view .chat-body[data-v-94ba6231] {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.71875rem;
+}
+.chat .scroll-view .chat-body .self[data-v-94ba6231] {
+  justify-content: flex-end;
+}
+.chat .scroll-view .chat-body .item[data-v-94ba6231] {
+  display: flex;
+  padding: 0.71875rem 0.15625rem;
+}
+.chat .scroll-view .chat-body .item .right[data-v-94ba6231] {
+  background-color: #ACEC9C;
+}
+.chat .scroll-view .chat-body .item .left[data-v-94ba6231] {
+  background-color: #FFFFFF;
+}
+.chat .scroll-view .chat-body .item .right[data-v-94ba6231]::after {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  width: 0;
+  height: 0;
+  left: 100%;
+  top: 10px;
+  border: 0.375rem solid transparent;
+  border-left: 0.46875rem solid #ACEC9C;
+  transform: translate(-0.125rem);
+}
+.chat .scroll-view .chat-body .item .left[data-v-94ba6231]::after {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  width: 0;
+  height: 0;
+  top: 10px;
+  right: 100%;
+  border: 0.375rem solid transparent;
+  border-right: 0.46875rem solid #FFFFFF;
+  transform: translate(0.125rem);
+}
+.chat .scroll-view .chat-body .item .content[data-v-94ba6231] {
+  position: relative;
+  max-width: 14.0625rem;
+  border-radius: 0.25rem;
+  word-wrap: break-word;
+  padding: 0.3125rem 0.625rem;
+  margin: 0 0.75rem;
+  border-radius: 12px;
+  font-size: 0.625rem;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333333;
+  line-height: 1rem;
+}
+.chat .chat-bottom[data-v-94ba6231] {
+  width: 100%;
+  height: 5.53125rem;
+  background: #F4F5F7;
+  padding-bottom: 0.625rem;
+  transition: all 0.1s ease;
+  display: flex;
+  justify-content: center;
+}

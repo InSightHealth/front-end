@@ -27,9 +27,10 @@
         padding: 10px 20px; /* Padding around the content */
         display: flex; /* Use flexbox for layout */
         align-items: center; /* Center items vertically */
-        background: url("/static/homepage/top.png")  no-repeat center center;
+		background-color: #08DF86;
         background-size: 100% 100%;
-        height: 100px;
+        height: 120rpx;
+		border-radius: 0 0 40rpx 40rpx;
     }
 
     .avatar {
@@ -43,7 +44,7 @@
         justify-content: center; /* Center the icon horizontally */
         align-items: center; /* Center the icon vertically */
 
-        background-image: url("/static/homepage/avatar.jpg");
+        background-image: url("https://img-insight.oss-cn-chengdu.aliyuncs.com/avatar.jpg");
         background-size: 100% 100%;
     }
 

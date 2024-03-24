@@ -3,17 +3,17 @@
 		<footer class="footer-container">
 		    <div class = "footer-parter">
 		        <!-- Replace with your actual home icon SVG or image -->
-		        <img src="/static/homepage/home-icon.png" class="icon-footer" id="icon home-icon">
+		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/home-icon.png" class="icon-footer" id="icon home-icon">
 		        <div class = "footer-words" style="color: #08DF86;"> 首页 </div>
 		    </div>
 		    <div class = "footer-parter-center">
-		        <img src="/static/homepage/segment.png" class="icon-footer-center" @click="TestPage()">
+		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/segment.png" class="icon-footer-center" @click="TestPage()">
 				<div class = "footer-words-center"> 测试音频 </div>
 		        <!-- <img src="path_to_microphone_icon.png" class="icon-footer" id="icon microphone-icon"> -->
 		    </div>
 		    <div class = "footer-parter">
 		        <!-- Replace with your actual user profile icon SVG or image -->
-		        <img src="/static/homepage/user.png" class="icon-footer" id="icon user-icon">
+		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/user.png" class="icon-footer" id="icon user-icon">
 		        <div class = "footer-words"> 个人 </div>
 		    </div>
 		</footer>

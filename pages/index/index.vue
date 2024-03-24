@@ -3,17 +3,17 @@
 		<home-head></home-head>
 		<div class="content">
 			<div class="content-first-row">
-				<a id="link-to-smart-travel">
+				<navigator id="link-to-smart-travel" url="/pages/smart-travel/smart-travel">
 					智能出行
-				</a>
+				</navigator>
 				<a id="link-to-snap-recognize">
-					<img src="/static/homepage/snap-icon.png">
+					<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/snap-icon.png">
 					拍照识图
 				</a>
 			</div>
 			<div class="content-second-row">
 				<a id="link-to-health-assistant">
-					<img src="/static/homepage/poe.png">
+					<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/poe.png">
 					智能健康助手
 				</a>
 			</div>
