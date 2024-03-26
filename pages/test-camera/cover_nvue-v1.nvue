@@ -1,0 +1,400 @@
+<template>
+	<view class="pengke-camera" :style="{ width: windowWidth, height: windowHeight }">
+		<live-pusher
+			id="livePusher"
+			ref="livePusher"
+			class="livePusher"
+			mode="FHD"
+			beauty="0"
+			whiteness="0"
+			:aspect="aspect"
+			min-bitrate="1000"
+			audio-quality="16KHz"
+			device-position="back"
+			:auto-focus="true"
+			:muted="true"
+			:enable-camera="true"
+			:enable-mic="false"
+			:zoom="false"
+			@statechange="statechange"
+			:style="{ width: windowWidth, height: windowHeight }"
+		></live-pusher>
+
+		<cover-view class="menu">
+			<scroll-view  :style="{height: `${windowHeight-inputHeight}rpx`}"
+			id="scrollview"
+			scroll-y="true" 
+			:scroll-top="scrollTop"
+			class="scroll-view"
+			>
+				<!-- 聊天主体 -->
+				<view id="msglistview" class="chat-body">
+					<!-- 聊天记录 -->
+					<view v-for="(item,index) in msgList" :key="index">
+						<!-- 自己发的消息 -->
+						<view class="item self" v-if="item.userContent != ''" >
+							<!-- 文字内容 -->
+							<view class="content right">
+							{{item.userContent}}
+							</view>
+						</view>
+						<!-- 机器人发的消息 -->
+						<view class="item Ai" v-if="item.botContent != ''">
+							<!-- 文字内容 -->
+							<view class="content left">
+								{{item.botContent}}
+							</view>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+			<!-- 底部消息发送栏 -->
+			<!-- 用来占位，防止聊天消息被发送框遮挡 -->
+			<view class="chat-bottom">
+				<micphone :StopHandler="handleSend"></micphone>
+			</view>
+		</cover-view>
+	</view>
+</template>
+
+<script>
+let _this = null;
+export default {
+	data() {
+		return {
+			poenCarmeInterval:null,//打开相机的轮询
+			aspect: '2:3', //比例
+			windowWidth: '', //屏幕可用宽度
+			windowHeight: '', //屏幕可用高度
+			camerastate: false, //相机准备好了
+			livePusher: null, //流视频对象
+			snapshotsrc: null, //快照
+			
+			keyboardHeight:0,
+			//底部消息发送高度
+			bottomHeight: 0,
+			//滚动距离
+			scrollTop: 0,
+			userId:'',
+			//发送的消息
+			chatMsg:"",
+			msgList:[
+				{
+				    botContent: "按住屏幕下方按钮讲话",
+				    recordId: 0,
+				    titleId: 0,
+				    userContent: "",
+				    userId: 0
+				},
+				{
+				    botContent: "",
+				    recordId: 0,
+				    titleId: 0,
+				    userContent: "我的前面有什么？",
+				    userId: 0
+				},
+				
+				{
+				    userContent: "",
+				    recordId: 0,
+				    titleId: 0,
+				    botContent: "您的正前方有一个指示牌，请注意安全",
+				    userId: 0
+				},
+			]
+		};
+	},
+	updated(){
+		//页面更新时调用聊天消息定位到最底部
+		this.scrollToBottom();
+	},
+	computed: {
+		windowHeight() {
+		    return this.rpxTopx(uni.getSystemInfoSync().windowHeight)
+		},
+		// 键盘弹起来的高度+发送框高度
+		inputHeight(){
+			return this.bottomHeight+this.keyboardHeight
+		}
+	},
+	onLoad(e) {
+		_this = this;
+		this.initCamera();
+	},
+	onUnload(){
+		uni.offKeyboardHeightChange()
+	},
+	onReady() {
+		this.livePusher = uni.createLivePusherContext('livePusher', this);
+		this.startPreview(); //开启预览并设置摄像头
+		this.poenCarme();
+	},
+	methods: {
+		
+		//轮询打开
+		poenCarme(){
+			//#ifdef APP-PLUS
+			if (plus.os.name == 'Android') {
+				this.poenCarmeInterval = setInterval(function() {
+					console.log(_this.camerastate);
+					if (!_this.camerastate) _this.startPreview();
+				}, 2500);
+			}
+			//#endif
+		},
+		//初始化相机
+		initCamera() {
+			uni.getSystemInfo({
+				success: function(res) {
+					_this.windowWidth = res.windowWidth;
+					_this.windowHeight = res.windowHeight;
+					let zcs = _this.aliquot(_this.windowWidth,_this.windowHeight);
+					_this.aspect = (_this.windowWidth/zcs)+':'+(_this.windowHeight/zcs);
+					// console.log('画面比例：'+_this.aspect);
+				}
+			});
+		},
+		
+		//整除数计算
+		aliquot(x, y) {
+			if (x % y == 0) return y;
+			return this.aliquot(y, x % y);
+		},
+
+		//开始预览
+		startPreview() {
+			this.livePusher.startPreview({
+				success: a => {
+					console.log(a)
+				}
+			});
+		},
+		
+		//停止预览
+		stopPreview() {
+			this.livePusher.stopPreview({
+				success: a => {
+					_this.camerastate = false;
+				}
+			});
+		},
+		
+		//状态
+		statechange(e) {
+			//状态改变
+			console.log(e);
+			if (e.detail.code == 1007) {
+				_this.camerastate = true;
+			} else if (e.detail.code == -1301) {
+				_this.camerastate = false;
+			}
+		},
+		
+
+		//返回
+		back() {
+			uni.navigateBack();
+		},
+
+		//抓拍
+		snapshot() {
+			//震动
+			uni.vibrateShort({
+			    success: function () {
+			        console.log('success');
+			    }
+			});
+			//拍照
+			this.livePusher.snapshot({
+				success: e => {
+					_this.snapshotsrc = e.message.tempImagePath;
+					_this.stopPreview();
+					_this.setImage();
+					uni.navigateBack();
+				}
+			});
+		},
+
+		//反转
+		flip() {
+			this.livePusher.switchCamera();
+		},
+
+		//设置
+		setImage() {
+			let pages = getCurrentPages();
+			let prevPage = pages[pages.length - 2];
+			prevPage.$vm.setImage({ path: _this.snapshotsrc});
+		},
+		// SMART TRAVEL
+		focus(){
+			this.scrollToBottom()
+		},
+		blur(){
+			this.scrollToBottom()
+		},
+		// px转换成rpx
+		rpxTopx(px){
+			let deviceWidth = wx.getSystemInfoSync().windowWidth
+			let rpx = ( 750 / deviceWidth ) * Number(px)
+			return Math.floor(rpx)
+		},
+		// 监视聊天发送栏高度
+		sendHeight(){
+			setTimeout(()=>{
+				let query = uni.createSelectorQuery();
+				query.select('.send-msg').boundingClientRect()
+				query.exec(res =>{
+					this.bottomHeight = this.rpxTopx(res[0].height)
+				})
+			},10)
+		},
+		// 滚动至聊天底部
+		scrollToBottom(e){
+			setTimeout(()=>{
+				let query = uni.createSelectorQuery().in(this);
+				query.select('#scrollview').boundingClientRect();
+				query.select('#msglistview').boundingClientRect();
+				query.exec((res) =>{
+					if(res[1].height > res[0].height){
+						this.scrollTop = this.rpxTopx(res[1].height - res[0].height)
+					}
+				})
+			},15)
+		},
+		// 发送消息
+		handleSend() {
+			//如果消息不为空
+			// if(!this.chatMsg||!/^\s+$/.test(this.chatMsg)){
+			// 	let obj = {
+			// 		botContent: "",
+			// 		recordId: 0,
+			// 		titleId: 0,
+			// 		userContent: this.chatMsg,
+			// 		userId: 0
+			// 	}
+			// 	this.msgList.push(obj);
+			// 	this.chatMsg = '';
+			// 	this.scrollToBottom()
+			// }else {
+			// 	this.$modal.showToast('不能发送空白消息')
+			// }
+			console.log("Here");
+		},
+	}
+};
+</script>
+
+<style lang="scss">
+
+$chatContentbgc: #C2DCFF;
+view {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.pengke-camera {
+	justify-content: center;
+	align-items: center;
+	.menu {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 750rpx;
+		height: 100%;
+		z-index: 98;
+		align-items: center;
+		justify-content: center;
+		.scroll-view {
+			::-webkit-scrollbar {
+					    display: none;
+					    width: 0 !important;
+					    height: 0 !important;
+					    -webkit-appearance: none;
+					    background: transparent;
+					    color: transparent;
+					  }
+			
+			// background-color: orange;
+			background-color: #F6F6F6;
+			
+			.chat-body {
+				display: flex;
+				flex-direction: column;
+				padding-top: 23rpx;
+				// background-color:skyblue;
+				
+				.self {
+					justify-content: flex-end;
+				}
+				.item {
+					display: flex;
+					padding: 23rpx 5rpx;
+					// background-color: greenyellow;
+		
+					.right {
+						// background-color: $chatContentbgc;
+						background-color: #ACEC9C;
+					}
+					.left {
+						background-color: #FFFFFF;
+					}
+		            // 聊天消息的三角形
+					.right::after {
+						position: absolute;
+						display: inline-block;
+						content: '';
+						width: 0;
+						height: 0;
+						left: 100%;
+						top: 10px;
+						border: 12rpx solid transparent;
+						border-left: 15rpx solid #ACEC9C;
+						transform: translate(-4rpx);
+					}
+		
+					.left::after {
+						position: absolute;
+						display: inline-block;
+						content: '';
+						width: 0;
+						height: 0;
+						top: 10px;
+						right: 100%;
+						border: 12rpx solid transparent;
+						border-right: 15rpx solid #FFFFFF;
+						transform: translate(4rpx);
+					}
+		
+					.content {
+						position: relative;
+						max-width: 450rpx;
+						border-radius: 8rpx;
+						word-wrap: break-word;
+						padding: 10rpx 20rpx;
+						margin: 0 24rpx;
+						border-radius: 12px;
+						font-size: 20rpx;
+						font-family: PingFang SC;
+						font-weight: 500;
+						color: #333333;
+						line-height: 32rpx;
+					}
+				}
+			}
+		}
+		
+		/* 底部聊天发送栏 */
+		.chat-bottom {
+			width: 100%;
+			height: 177rpx;
+			background: #F4F5F7;
+			padding-bottom: 20rpx;
+			transition: all 0.1s ease;
+			display: flex;
+			justify-content: center;
+		}
+	}
+}
+</style>

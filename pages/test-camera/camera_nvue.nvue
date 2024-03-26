@@ -1,11 +1,28 @@
 <template>
 	<view class="pengke-camera" :style="{ width: windowWidth, height: windowHeight }">
-		
-		<cover-view class="iconfont iconbofang icon" @click="click"></cover-view>
+		<live-pusher
+			id="livePusher"
+			ref="livePusher"
+			class="livePusher"
+			mode="FHD"
+			beauty="0"
+			whiteness="0"
+			:aspect="aspect"
+			min-bitrate="1000"
+			audio-quality="16KHz"
+			device-position="back"
+			:auto-focus="true"
+			:muted="true"
+			:enable-camera="true"
+			:enable-mic="false"
+			:zoom="false"
+			@statechange="statechange"
+			:style="{ width: windowWidth, height: windowHeight }"
+		></live-pusher>
 
 		<view class="menu">
 			<!--底部菜单区域背景-->
-			<cover-image class="menu-mask"></cover-image>
+			<cover-image class="menu-mask" src="/static/camera/bar.png"></cover-image>
 
 			<!--返回键-->
 			<cover-image class="menu-back" @tap="back" src="/static/camera/back.png"></cover-image>
@@ -145,13 +162,8 @@ export default {
 
 <style lang="scss">
 .pengke-camera {
-	// display: flex; // My added
-	// flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	// .livePusher {
-	// 	flex: 1;
-	// }
 	.menu {
 		position: absolute;
 		left: 0;
@@ -161,7 +173,6 @@ export default {
 		z-index: 98;
 		align-items: center;
 		justify-content: center;
-		// background-color: black;
 		.menu-mask {
 			position: absolute;
 			left: 0;

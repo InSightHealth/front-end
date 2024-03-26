@@ -160,7 +160,6 @@
 <style lang="scss" scoped>
 	
 	$chatContentbgc: #C2DCFF;
-	// $sendBtnbgc: #4F7DF5;
 	
 	view,button,text,input,textarea {
 		margin: 0;
@@ -188,10 +187,10 @@
 				flex-direction: column;
 				padding-top: 23rpx;
 				// background-color:skyblue;
-				
 				.self {
-					justify-content: flex-end;
+					align-items: flex-end;
 				}
+				
 				.item {
 					display: flex;
 					padding: 23rpx 5rpx;
@@ -250,7 +249,7 @@
 		}
 
 		/* 底部聊天发送栏 */
-		.chat-bottom {
+		chat-bottom {
 			width: 100%;
 			height: 177rpx;
 			background: #F4F5F7;

@@ -38,13 +38,13 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$h = {
+  const _sfc_main$i = {
     name: "homeHead",
     data() {
       return {};
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("div", { class: "phone-container" }, [
         vue.createElementVNode("div", { class: "header" }, [
@@ -54,7 +54,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
       uni.__log__(type, filename, ...args);
@@ -65,7 +65,7 @@ if (uni.restoreGlobal) {
   function resolveEasycom(component, easycom) {
     return shared.isString(component) ? easycom : component;
   }
-  const _sfc_main$g = {
+  const _sfc_main$h = {
     name: "homeFoot",
     data() {
       return {};
@@ -77,7 +77,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("footer", { class: "footer-container" }, [
         vue.createElementVNode("div", { class: "footer-parter" }, [
@@ -113,9 +113,9 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
-  const _sfc_main$f = {};
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
+  const _sfc_main$g = {};
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_home_head = resolveEasycom(vue.resolveDynamicComponent("home-head"), __easycom_0$1);
     const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "main-container" }, [
@@ -132,7 +132,10 @@ if (uni.restoreGlobal) {
           ])
         ]),
         vue.createElementVNode("div", { class: "content-second-row" }, [
-          vue.createElementVNode("a", { id: "link-to-health-assistant" }, [
+          vue.createElementVNode("navigator", {
+            id: "link-to-health-assistant",
+            url: "/pages/smart-chat/smart-chat"
+          }, [
             vue.createElementVNode("img", { src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/poe.png" }),
             vue.createTextVNode(" 智能健康助手 ")
           ])
@@ -141,22 +144,26 @@ if (uni.restoreGlobal) {
       vue.createVNode(_component_home_foot)
     ]);
   }
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
-  const _sfc_main$e = {
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
+  const _sfc_main$f = {
     data() {
       return {
         pathList: [
           {
-            path: "/pages/recTest/my_test",
+            path: "/pages/recTest/native_test",
             lebal: "测试音频"
           },
           {
-            path: "/pages/test-camera/test_nvue",
+            path: "/pages/test-camera/cover_nvue",
             lebal: "测试摄像头"
           },
           {
-            path: "/pages/test_api/test_api",
+            path: "/pages/test-camera/camera_nvue",
             lebal: "测试API"
+          },
+          {
+            path: "/pages/smart-chat/smart-chat",
+            lebal: "测试Page"
           }
         ]
       };
@@ -169,7 +176,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("div", { class: "container" }, [
         (vue.openBlock(true), vue.createElementBlock(
@@ -187,9 +194,9 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
-  var RecordApp$2, $T$2;
-  const _sfc_main$d = {
+  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
+  var RecordApp$1, $T$1;
+  const _sfc_main$e = {
     data() {
       return {
         ...this.getTexts(),
@@ -232,16 +239,16 @@ if (uni.restoreGlobal) {
       },
       getTexts() {
         return {
-          T_pause: $T$2 ? $T$2("oozQ::暂停播放", ":Pause") : "",
-          T_play: $T$2 ? $T$2("PPxS::播放", ":Play") : "",
-          T_download: $T$2 ? $T$2("jtJH::下载保存", ":Download and save") : ""
+          T_pause: $T$1 ? $T$1("oozQ::暂停播放", ":Pause") : "",
+          T_play: $T$1 ? $T$1("PPxS::播放", ":Play") : "",
+          T_download: $T$1 ? $T$1("jtJH::下载保存", ":Download and save") : ""
         };
       },
       status(msg) {
-        msg = msg ? $T$2("w7J2::播放器创建中：", ":Player is being created: ") + msg : "";
+        msg = msg ? $T$1("w7J2::播放器创建中：", ":Player is being created: ") + msg : "";
         this.statusMsg = msg;
         if (msg)
-          RecordApp$2.CLog(msg);
+          RecordApp$1.CLog(msg);
       },
       formatTime(ms, showSS) {
         var ss = ms % 1e3;
@@ -271,19 +278,19 @@ if (uni.restoreGlobal) {
         var okEnd = () => {
           this.show = true;
           this.status("");
-          RecordApp$2.CLog($T$2("GXCV::播放器创建完成，可以播放了", ":The player is created and can be played"));
+          RecordApp$1.CLog($T$1("GXCV::播放器创建完成，可以播放了", ":The player is created and can be played"));
         };
         if (this.useNvuePlayer) {
           this.showControlUI = true;
           var saveBuf = (tag, sPath, sBuffer, next) => {
-            RecordApp$2.UniSaveLocalFile(sPath, sBuffer, (path2) => {
-              this.reclog(tag + $T$2("FtgC::文件已保存在：", ":File has been saved at: ") + path2);
+            RecordApp$1.UniSaveLocalFile(sPath, sBuffer, (path2) => {
+              this.reclog(tag + $T$1("FtgC::文件已保存在：", ":File has been saved at: ") + path2);
               next(path2);
             }, (err) => {
-              this.status(tag + $T$2("9AGy::保存文件失败，将无法播放：", ":Failed to save the file and will not be able to play it: ") + err);
+              this.status(tag + $T$1("9AGy::保存文件失败，将无法播放：", ":Failed to save the file and will not be able to play it: ") + err);
             });
           };
-          this.status($T$2("4xcp::正在将数据保存成本地文件以供播放...", ":Saving data to local file for playback..."));
+          this.status($T$1("4xcp::正在将数据保存成本地文件以供播放...", ":Saving data to local file for playback..."));
           var path = "", wavPath = "";
           var saveOk = () => {
             this.playUrl = path;
@@ -296,7 +303,7 @@ if (uni.restoreGlobal) {
               saveOk();
               return;
             }
-            saveBuf($T$2("fU7N::[转码成wav播放]", ":[Transcode to wav for playback]"), fileName + ".wav", aBuf, (p2) => {
+            saveBuf($T$1("fU7N::[转码成wav播放]", ":[Transcode to wav for playback]"), fileName + ".wav", aBuf, (p2) => {
               wavPath = p2;
               saveOk();
             });
@@ -326,7 +333,7 @@ if (uni.restoreGlobal) {
             this.audio.src = this.playUrl_wav || this.playUrl;
             this.audio.sid = sid;
             this.audio.onError((res) => {
-              this.reclog($T$2("JRu4::onError 播放错误：", ":onError Playback error: ") + res.errMsg, 1);
+              this.reclog($T$1("JRu4::onError 播放错误：", ":onError Playback error: ") + res.errMsg, 1);
             });
             this.audio.timer = setInterval(() => {
               if (this.playSid != sid)
@@ -345,7 +352,7 @@ if (uni.restoreGlobal) {
             this.audio.seek(0);
             this.audio.play();
             if (this.playUrl_wav) {
-              this.status($T$2("7ity::使用转码的wav播放", ":Play using transcoded wav"));
+              this.status($T$1("7ity::使用转码的wav播放", ":Play using transcoded wav"));
             }
           };
           this.stopFn = () => {
@@ -359,24 +366,24 @@ if (uni.restoreGlobal) {
             }
           };
           this.saveFileFn = () => {
-            this.reclog($T$2("OAiD::{1}字节文件已保存在：", ":The {1} byte file has been saved at: ", 0, aBuf0.byteLength) + path, 2);
+            this.reclog($T$1("OAiD::{1}字节文件已保存在：", ":The {1} byte file has been saved at: ", 0, aBuf0.byteLength) + path, 2);
           };
           return;
         }
-        RecordApp$2.UniWebViewVueCall(this.getPage(), `
+        RecordApp$1.UniWebViewVueCall(this.getPage(), `
 				if(this.playUrl)URL.revokeObjectURL(this.playUrl);
 				this.playUrl=URL.createObjectURL(new Blob([this.player_buffer],{type:"${mime}"}));
 				document.querySelector(".${this.Class} .h5Audio").innerHTML='<audio style="width:100%" />';
 				this.playEl=document.querySelector(".${this.Class} .h5Audio audio");
 				this.playEl.controls=true;
 				this.playEl.src=this.playUrl;
-				this.playEl.onerror=function(e){ This.$ownerInstance.callMethod("status","${$T$2("8NWB::播放发生错误：", ":An error occurred during playback: ")}"+e.message); }
+				this.playEl.onerror=function(e){ This.$ownerInstance.callMethod("status","${$T$1("8NWB::播放发生错误：", ":An error occurred during playback: ")}"+e.message); }
 				this.playEl.onpause=function(){ This.$ownerInstance.callMethod("player_stopFn",""); }
 			`);
         okEnd();
         this.playFn = () => {
           this.playing = true;
-          RecordApp$2.UniWebViewVueCall(this.getPage(), `
+          RecordApp$1.UniWebViewVueCall(this.getPage(), `
 					if(this.playEl.paused){
 						this.playEl.play();
 					}else{
@@ -386,13 +393,13 @@ if (uni.restoreGlobal) {
         };
         this.stopFn = () => {
           this.playing = false;
-          RecordApp$2.UniWebViewVueCall(this.getPage(), `this.playEl.pause();`);
+          RecordApp$1.UniWebViewVueCall(this.getPage(), `this.playEl.pause();`);
         };
         this.getPage().player_stopFn = this.stopFn;
         this.saveFileFn = () => {
-          this.reclog($T$2("2Hr1::正在保存文件...", ":Saving file..."));
-          RecordApp$2.UniSaveLocalFile(fileName, aBuf0, (path2) => {
-            this.reclog($T$2("GW1Q::{1}字节文件已保存在：", ":The {1} byte file has been saved at: ", 0, aBuf0.byteLength) + path2, 2);
+          this.reclog($T$1("2Hr1::正在保存文件...", ":Saving file..."));
+          RecordApp$1.UniSaveLocalFile(fileName, aBuf0, (path2) => {
+            this.reclog($T$1("GW1Q::{1}字节文件已保存在：", ":The {1} byte file has been saved at: ", 0, aBuf0.byteLength) + path2, 2);
           }, (err) => {
             this.reclog(err);
           });
@@ -408,8 +415,8 @@ if (uni.restoreGlobal) {
         if (!aBuf) {
           return;
         }
-        RecordApp$2 = Recorder2.RecordApp;
-        $T$2 = Recorder2.i18n.$T;
+        RecordApp$1 = Recorder2.RecordApp;
+        $T$1 = Recorder2.i18n.$T;
         var o = this.getTexts();
         for (var k in o) {
           this[k] = o[k];
@@ -417,28 +424,28 @@ if (uni.restoreGlobal) {
         var end = () => {
           this.createAudio(recSet.type, aBuf0, mime0, aBuf, duration, mime);
         };
-        if (!RecordApp$2.UniIsApp() || RecordApp$2.UniWithoutAppRenderjs) {
+        if (!RecordApp$1.UniIsApp() || RecordApp$1.UniWithoutAppRenderjs) {
           var wav = Recorder2[recSet.type + "2wav"], t1 = Date.now();
           if (!wav)
             return end();
           var wavData = aBuf;
           if (recSet.type == "pcm")
             wavData = { sampleRate: recSet.sampleRate, bitRate: recSet.bitRate, blob: aBuf };
-          this.status($T$2("bHhO::正在转码成wav...", ":Converting to wav..."));
+          this.status($T$1("bHhO::正在转码成wav...", ":Converting to wav..."));
           wav(wavData, (wavBuf, dur, mie) => {
             aBuf = wavBuf;
             duration = dur;
             mime = mie;
-            this.reclog($T$2("MhM5::已转码成wav以供播放，耗时{1}ms", ":Transcoded to wav for playback, takes {1}ms", 0, Date.now() - t1));
+            this.reclog($T$1("MhM5::已转码成wav以供播放，耗时{1}ms", ":Transcoded to wav for playback, takes {1}ms", 0, Date.now() - t1));
             end();
           }, (msg) => {
-            this.reclog($T$2("oSeh::转码成wav失败：", ":Transcoding to wav failed: ") + msg, 1);
+            this.reclog($T$1("oSeh::转码成wav失败：", ":Transcoding to wav failed: ") + msg, 1);
             end();
           });
         } else {
-          var cb = RecordApp$2.UniMainCallBack((val) => {
+          var cb = RecordApp$1.UniMainCallBack((val) => {
             if (val.errMsg) {
-              this.reclog($T$2("LU2T::转码成wav失败：", ":Transcoding to wav failed: ") + val.errMsg, 1);
+              this.reclog($T$1("LU2T::转码成wav失败：", ":Transcoding to wav failed: ") + val.errMsg, 1);
               end();
               return;
             }
@@ -446,8 +453,8 @@ if (uni.restoreGlobal) {
               end();
               return;
             }
-            this.reclog($T$2("65fk::已转码成wav以供播放，耗时{1}ms", ":Transcoded to wav for playback, takes {1}ms", 0, Date.now() - cbT1));
-            aBuf = RecordApp$2.UniMainTakeBigBytes(val.dataId);
+            this.reclog($T$1("65fk::已转码成wav以供播放，耗时{1}ms", ":Transcoded to wav for playback, takes {1}ms", 0, Date.now() - cbT1));
+            aBuf = RecordApp$1.UniMainTakeBigBytes(val.dataId);
             duration = val.dur;
             mime = val.mie;
             end();
@@ -457,10 +464,10 @@ if (uni.restoreGlobal) {
             bigBytes = aBuf0;
             bt1 = Date.now();
             aBuf_renderjs = "BigBytes";
-            RecordApp$2.CLog("[播放器]正在将" + aBuf0.byteLength + "字节音频数据发送到renderjs，因为可能需要转码成wav，可能会比较慢");
+            RecordApp$1.CLog("[播放器]正在将" + aBuf0.byteLength + "字节音频数据发送到renderjs，因为可能需要转码成wav，可能会比较慢");
           }
-          this.status($T$2("XkoT::正在调用renderjs处理音频数据，此格式如果提供了{1}2wav，将会转码成wav，会比较耗时...", ":Renderjs is being called to process audio data. If {1}2wav is provided in this format, it will be transcoded into wav, which will be more time-consuming...", 0, recSet.type));
-          RecordApp$2.UniWebViewVueCall(this.getPage(), `
+          this.status($T$1("XkoT::正在调用renderjs处理音频数据，此格式如果提供了{1}2wav，将会转码成wav，会比较耗时...", ":Renderjs is being called to process audio data. If {1}2wav is provided in this format, it will be transcoded into wav, which will be more time-consuming...", 0, recSet.type));
+          RecordApp$1.UniWebViewVueCall(this.getPage(), `
 					if(${bt1})RecordApp.CLog("[播放器]完成传输${aBuf0.byteLength}字节的数据到renderjs，耗时"+(Date.now()-${bt1})+"ms");
 					var recSet=${JSON.stringify(recSet)}, aBuf0=${aBuf_renderjs}, aBuf=aBuf0, duration, mime;
 					var end=function(err){
@@ -481,14 +488,14 @@ if (uni.restoreGlobal) {
 						aBuf=wavBuf; duration=dur; mime=mie;
 						end();
 					},function(msg){
-						end("${$T$2("mzxq::转码成wav失败：", ":Transcoding to wav failed: ")}"+msg);
+						end("${$T$1("mzxq::转码成wav失败：", ":Transcoding to wav failed: ")}"+msg);
 					});
 				`, bigBytes);
         }
       }
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode(
         "view",
@@ -569,7 +576,7 @@ if (uni.restoreGlobal) {
       )
     ]);
   }
-  const TestPlayer$1 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/test_player___.vue"]]);
+  const TestPlayer = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/test_player___.vue"]]);
   var recorderCoreExports = {};
   var recorderCore = {
     get exports() {
@@ -2453,7 +2460,7 @@ if (uni.restoreGlobal) {
       };
     });
   })(app);
-  const RecordApp$1 = appExports;
+  const RecordApp = appExports;
   !function(e) {
     var n = "object" == typeof window && !!window.document, t = n ? window : Object, i = "https://github.com/xiangyuecn/Recorder/tree/master/app-support-sample/demo_UniApp";
     if (t.RecordApp) {
@@ -3115,14 +3122,14 @@ if (uni.restoreGlobal) {
     } else
       formatAppLog("error", "at uni_modules/Recorder-UniCore/app-uni-support.js:36", "需要先引入RecordApp，请按下面代码引入：\n1. 项目根目录 npm install recorder-core\n2. 页面中按顺序import\nimport Recorder from 'recorder-core'\nimport RecordApp from 'recorder-core/src/app-support/app.js'\nimport 你需要的音频格式编码器、可视化插件\n参考文档：" + i);
   }();
-  const block0$7 = (Comp) => {
+  const block0$6 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("testMainVue");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["testMainVue"] = "3bcf15e4";
   };
-  var disableOgg$2 = false;
-  var RecUtsPlugin$2 = null;
-  const _sfc_main$c = {
-    components: { TestPlayer: TestPlayer$1 },
+  var disableOgg$1 = false;
+  var RecUtsPlugin$1 = null;
+  const _sfc_main$d = {
+    components: { TestPlayer },
     data() {
       return {
         recType: "mp3",
@@ -3136,7 +3143,7 @@ if (uni.restoreGlobal) {
         recpowert: "",
         pageDeep: 0,
         pageNewPath: "main_recTest",
-        disableOgg: disableOgg$2,
+        disableOgg: disableOgg$1,
         evalExecCode: "",
         reclogs: []
       };
@@ -3152,14 +3159,14 @@ if (uni.restoreGlobal) {
       var v2 = (((this.$root || {}).constructor || {}).super || {}).version;
       if (v2)
         vueVer.push("constructor.super:" + v2);
-      this.reclog("页面mounted(" + getCurrentPages().length + "层)，Vue=" + vueVer.join("/") + "，WebViewId=" + (this.$root.$page && this.$root.$page.id || "?") + "，ComponentId=_$id:" + (this._$id || "?") + "/$.uid:" + (this.$ && this.$.uid || "?") + "，Recorder.LM=" + Recorder.LM + "，RecordApp.LM=" + RecordApp$1.LM + "，UniSupportLM=" + RecordApp$1.UniSupportLM + "，UniJsSource=" + RecordApp$1.UniJsSource.IsSource);
+      this.reclog("页面mounted(" + getCurrentPages().length + "层)，Vue=" + vueVer.join("/") + "，WebViewId=" + (this.$root.$page && this.$root.$page.id || "?") + "，ComponentId=_$id:" + (this._$id || "?") + "/$.uid:" + (this.$ && this.$.uid || "?") + "，Recorder.LM=" + Recorder.LM + "，RecordApp.LM=" + RecordApp.LM + "，UniSupportLM=" + RecordApp.UniSupportLM + "，UniJsSource=" + RecordApp.UniJsSource.IsSource);
       this.pageDeep = getCurrentPages().length;
       this.pageNewPath = /main_recTest/.test(this.getRouteStr()) ? "page_index2" : "main_recTest";
       this.isMounted = true;
       this.uniPage__onShow();
       this.reclog("正在执行Install，请勿操作...", "#f60");
-      RecordApp$1.UniNativeUtsPlugin = RecUtsPlugin$2;
-      RecordApp$1.Install(() => {
+      RecordApp.UniNativeUtsPlugin = RecUtsPlugin$1;
+      RecordApp.Install(() => {
         this.reclog("Install成功，环境：" + this.currentKeyTag(), 2);
         this.reclog("请先请求录音权限，然后再开始录音");
       }, (err) => {
@@ -3167,7 +3174,7 @@ if (uni.restoreGlobal) {
       });
     },
     unmounted() {
-      RecordApp$1.Stop();
+      RecordApp.Stop();
     },
     onShow() {
       if (this.isMounted)
@@ -3175,28 +3182,28 @@ if (uni.restoreGlobal) {
     },
     methods: {
       uniPage__onShow() {
-        RecordApp$1.UniPageOnShow(this);
+        RecordApp.UniPageOnShow(this);
       },
       currentKeyTag() {
-        if (!RecordApp$1.Current)
+        if (!RecordApp.Current)
           return "[?]";
         var tag2 = "Renderjs+H5";
-        if (RecordApp$1.UniNativeUtsPlugin) {
-          tag2 = RecordApp$1.UniNativeUtsPlugin.nativePlugin ? "NativePlugin" : "UtsPlugin";
+        if (RecordApp.UniNativeUtsPlugin) {
+          tag2 = RecordApp.UniNativeUtsPlugin.nativePlugin ? "NativePlugin" : "UtsPlugin";
         }
-        return RecordApp$1.Current.Key + "(" + tag2 + ")";
+        return RecordApp.Current.Key + "(" + tag2 + ")";
       },
       recReq() {
-        RecordApp$1.UniNativeUtsPlugin = RecUtsPlugin$2;
+        RecordApp.UniNativeUtsPlugin = RecUtsPlugin$1;
         if (this.appUseH5Rec) {
-          RecordApp$1.UniNativeUtsPlugin = null;
+          RecordApp.UniNativeUtsPlugin = null;
         }
-        if (RecordApp$1.UniIsApp() && !RecordApp$1.UniNativeUtsPlugin) {
+        if (RecordApp.UniIsApp() && !RecordApp.UniNativeUtsPlugin) {
           this.reclog("当前是在App的renderjs中使用H5进行录音，iOS上只支持14.3以上版本，且iOS上每次进入页面后第一次请求录音权限时、或长时间无操作再请求录音权限时WebView均会弹出录音权限对话框，不同旧iOS版本（低于iOS17）下H5录音可能存在的问题在App中同样会存在；使用配套的原生录音插件或uts插件时无以上问题和版本限制，Android也无以上问题", "#f60");
         }
         this.reclog("正在请求录音权限...");
-        RecordApp$1.UniWebViewActivate(this);
-        RecordApp$1.RequestPermission(() => {
+        RecordApp.UniWebViewActivate(this);
+        RecordApp.RequestPermission(() => {
           this.reclog(this.currentKeyTag() + " 已获得录音权限，可以开始录音了", 2);
         }, (msg, isUserNotAllow) => {
           this.reclog(this.currentKeyTag() + " " + (isUserNotAllow ? "isUserNotAllow," : "") + "请求录音权限失败：" + msg, 1);
@@ -3208,8 +3215,8 @@ if (uni.restoreGlobal) {
         var takeEcCount = 0, takeEcSize = 0;
         this.takeEcChunks = this.takeoffEncodeChunkSet ? [] : null;
         this.reclog(this.currentKeyTag() + " 正在打开...");
-        RecordApp$1.UniWebViewActivate(this);
-        RecordApp$1.Start({
+        RecordApp.UniWebViewActivate(this);
+        RecordApp.Start({
           type: this.recType,
           sampleRate: this.recSampleRate,
           bitRate: this.recBitRate,
@@ -3250,19 +3257,19 @@ if (uni.restoreGlobal) {
         });
       },
       recPause() {
-        if (RecordApp$1.GetCurrentRecOrNull()) {
-          RecordApp$1.Pause();
+        if (RecordApp.GetCurrentRecOrNull()) {
+          RecordApp.Pause();
           this.reclog("已暂停");
         }
       },
       recResume() {
-        if (RecordApp$1.GetCurrentRecOrNull()) {
-          RecordApp$1.Resume();
+        if (RecordApp.GetCurrentRecOrNull()) {
+          RecordApp.Resume();
           this.reclog("继续录音中...");
         }
       },
       recStopX() {
-        RecordApp$1.Stop(
+        RecordApp.Stop(
           null,
           (msg) => {
             this.reclog("已清理，错误信息：" + msg);
@@ -3271,8 +3278,8 @@ if (uni.restoreGlobal) {
       },
       recStop() {
         this.reclog("正在结束录音...");
-        RecordApp$1.Stop((aBuf, duration, mime) => {
-          var recSet = (RecordApp$1.GetCurrentRecOrNull() || { set: { type: this.recType } }).set;
+        RecordApp.Stop((aBuf, duration, mime) => {
+          var recSet = (RecordApp.GetCurrentRecOrNull() || { set: { type: this.recType } }).set;
           this.reclog("已录制[" + mime + "]：" + this.formatTime(duration, 1) + " " + aBuf.byteLength + "字节 " + recSet.sampleRate + "hz " + recSet.bitRate + "kbps", 2);
           var aBuf_renderjs = "this.audioData";
           if (this.takeEcChunks) {
@@ -3310,7 +3317,7 @@ if (uni.restoreGlobal) {
       },
       appUseH5RecClick() {
         this.appUseH5Rec = !this.appUseH5Rec;
-        RecordApp$1.Current = null;
+        RecordApp.Current = null;
         this.reclog("切换了appUseH5Rec=" + this.appUseH5Rec + "，重新请求录音权限后生效", "#f60");
       },
       initWaveStore() {
@@ -3319,22 +3326,22 @@ if (uni.restoreGlobal) {
         var store = this.waveStore = this.waveStore || {};
         var webStore = `var store=this.waveStore=this.waveStore||{};`;
         webStore += `this.recwaveChoiceKey="${this.recwaveChoiceKey}";`;
-        RecordApp$1.UniFindCanvas(this, [".recwave-WaveView"], `${webStore}
+        RecordApp.UniFindCanvas(this, [".recwave-WaveView"], `${webStore}
 				store.WaveView=Recorder.WaveView({compatibleCanvas:canvas1, width:300, height:100});
 			`, (canvas1) => {
           store.WaveView = Recorder.WaveView({ compatibleCanvas: canvas1, width: 300, height: 100 });
         });
-        RecordApp$1.UniFindCanvas(this, [".recwave-SurferView", ".recwave-SurferView-2x"], `${webStore}
+        RecordApp.UniFindCanvas(this, [".recwave-SurferView", ".recwave-SurferView-2x"], `${webStore}
 				store.SurferView=Recorder.WaveSurferView({compatibleCanvas:canvas1,compatibleCanvas_2x:canvas2, width:300, height:100});
 			`, (canvas1, canvas2) => {
           store.SurferView = Recorder.WaveSurferView({ compatibleCanvas: canvas1, compatibleCanvas_2x: canvas2, width: 300, height: 100 });
         });
-        RecordApp$1.UniFindCanvas(this, [".recwave-Histogram1"], `${webStore}
+        RecordApp.UniFindCanvas(this, [".recwave-Histogram1"], `${webStore}
 				store.Histogram1=Recorder.FrequencyHistogramView({compatibleCanvas:canvas1, width:300, height:100});
 			`, (canvas1) => {
           store.Histogram1 = Recorder.FrequencyHistogramView({ compatibleCanvas: canvas1, width: 300, height: 100 });
         });
-        RecordApp$1.UniFindCanvas(this, [".recwave-Histogram2"], `${webStore}
+        RecordApp.UniFindCanvas(this, [".recwave-Histogram2"], `${webStore}
 				store.Histogram2=Recorder.FrequencyHistogramView({compatibleCanvas:canvas1, width:300, height:100
 					,lineCount:200,widthRatio:1,position:0,minHeight:1
 					,fallDuration:600,stripeEnable:false,mirrorEnable:true});
@@ -3352,7 +3359,7 @@ if (uni.restoreGlobal) {
             mirrorEnable: true
           });
         });
-        RecordApp$1.UniFindCanvas(this, [".recwave-Histogram3"], `${webStore}
+        RecordApp.UniFindCanvas(this, [".recwave-Histogram3"], `${webStore}
 				store.Histogram3=Recorder.FrequencyHistogramView({compatibleCanvas:canvas1, width:300, height:100
 					,lineCount:20,position:0,minHeight:1,fallDuration:400,stripeEnable:false,mirrorEnable:true
 					,linear:[0,"#0ac",1,"#0ac"]});
@@ -3378,19 +3385,19 @@ if (uni.restoreGlobal) {
             this.reclog("已切换波形显示为：" + key);
           }
           this.recwaveChoiceKey = key;
-          if (RecordApp$1.UniIsApp()) {
-            RecordApp$1.UniWebViewVueCall(this, 'this.recwaveChoiceKey="' + key + '"');
+          if (RecordApp.UniIsApp()) {
+            RecordApp.UniWebViewVueCall(this, 'this.recwaveChoiceKey="' + key + '"');
           }
         }
       },
       recEnvIn60() {
-        var rec = RecordApp$1.GetCurrentRecOrNull();
+        var rec = RecordApp.GetCurrentRecOrNull();
         if (!rec) {
           this.reclog("未开始录音，无法注入", 1);
           return;
         }
-        if (RecordApp$1.UniIsApp()) {
-          RecordApp$1.UniWebViewVueCall(this, `
+        if (RecordApp.UniIsApp()) {
+          RecordApp.UniWebViewVueCall(this, `
 					var rec=RecordApp.GetCurrentRecOrNull();
 					var sampleRate=rec.srcSampleRate,t1=Date.now();
 					var canon=Recorder.NMN2PCM.GetExamples().Canon.get(sampleRate).pcm;
@@ -3454,7 +3461,7 @@ if (uni.restoreGlobal) {
           return;
         }
         try {
-          new Function("Recorder,RecordApp", this.evalExecCode).call(this, Recorder, RecordApp$1);
+          new Function("Recorder,RecordApp", this.evalExecCode).call(this, Recorder, RecordApp);
           this.reclog("代码已执行", 2);
         } catch (e) {
           this.reclog("代码执行异常：" + e.message, 1);
@@ -3483,14 +3490,14 @@ if (uni.restoreGlobal) {
 			})()`;
         this.reclog("正在renderjs中加载vConsole...");
         if (isApp2) {
-          RecordApp$1.UniWebViewVueCall(this, jsCode);
+          RecordApp.UniWebViewVueCall(this, jsCode);
         } else {
           this.reclog("非app环境，不加载vConsole", 1);
         }
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_TestPlayer = vue.resolveComponent("TestPlayer");
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { style: { "padding": "5px 10px 0" } }, [
@@ -3960,14 +3967,14 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  if (typeof block0$7 === "function")
-    block0$7(_sfc_main$c);
-  const PagesRecTestMain_recTest = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/main_recTest.vue"]]);
-  const block0$6 = (Comp) => {
+  if (typeof block0$6 === "function")
+    block0$6(_sfc_main$d);
+  const PagesRecTestMain_recTest = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/main_recTest.vue"]]);
+  const block0$5 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("testPerfRJs");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["testPerfRJs"] = "876c306c";
   };
-  const _sfc_main$b = {
+  const _sfc_main$c = {
     data() {
       return {
         canTest,
@@ -4141,7 +4148,7 @@ if (uni.restoreGlobal) {
     var webview = pages[pages.length - 1].$getAppWebview();
     return webview;
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { style: { "padding": "0 5px" } }, [
       vue.createElementVNode("view", {
         evalrjs0: vue.wp($data.evalRJs0),
@@ -4273,10 +4280,10 @@ if (uni.restoreGlobal) {
       ]))
     ]);
   }
-  if (typeof block0$6 === "function")
-    block0$6(_sfc_main$b);
-  const testPerfRenderjs = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/test_perf_renderjs___.vue"]]);
-  const _sfc_main$a = {
+  if (typeof block0$5 === "function")
+    block0$5(_sfc_main$c);
+  const testPerfRenderjs = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/test_perf_renderjs___.vue"]]);
+  const _sfc_main$b = {
     components: {
       testMain: PagesRecTestMain_recTest,
       testPerfRenderjs
@@ -4290,7 +4297,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_testMain = vue.resolveComponent("testMain");
     const _component_testPerfRenderjs = vue.resolveComponent("testPerfRenderjs");
     return vue.openBlock(), vue.createElementBlock("view", null, [
@@ -4310,8 +4317,8 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { style: { "padding-top": "80px" } })
     ]);
   }
-  const PagesRecTestPage_index = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/page_index.vue"]]);
-  const _sfc_main$9 = {
+  const PagesRecTestPage_index = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/page_index.vue"]]);
+  const _sfc_main$a = {
     components: {
       testMain: PagesRecTestMain_recTest,
       testPerfRenderjs
@@ -4325,7 +4332,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_testMain = vue.resolveComponent("testMain");
     const _component_testPerfRenderjs = vue.resolveComponent("testPerfRenderjs");
     return vue.openBlock(), vue.createElementBlock("view", null, [
@@ -4341,7 +4348,7 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { style: { "padding-top": "80px" } })
     ]);
   }
-  const PagesRecTestPage_index2 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/page_index2.vue"]]);
+  const PagesRecTestPage_index2 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/page_index2.vue"]]);
   (function(factory) {
     var browser = typeof window == "object" && !!window.document;
     var win = browser ? window : Object;
@@ -5018,12 +5025,12 @@ if (uni.restoreGlobal) {
     }
     Recorder2[ASR_Aliyun_ShortTxt] = ASR_Aliyun_Short;
   });
-  const block0$5 = (Comp) => {
+  const block0$4 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("testMainVue");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["testMainVue"] = "14839750";
   };
-  const _sfc_main$8 = {
-    components: { TestPlayer: TestPlayer$1 },
+  const _sfc_main$9 = {
+    components: { TestPlayer },
     data() {
       return {
         asrTokenApi: "",
@@ -5038,27 +5045,27 @@ if (uni.restoreGlobal) {
     },
     mounted() {
       this.isMounted = true;
-      RecordApp$1.UniPageOnShow(this);
+      RecordApp.UniPageOnShow(this);
       this.reclog("本测试页面只提供阿里云版的语音识别（Recorder插件：/src/extensions/asr.aliyun.short.js），如果需要腾讯云一句话语音识别（不支持实时特性），前端基本上没有什么需要做的，仅需让后端提供一个录音文件上传接口（很容易，H5也能用），前端将录制好1分钟内的语音文件直接上传给服务器，由后端调用腾讯云语一句话音识别接口，然后返回结果即可，或者App里面直接前端调用腾讯云语音识别接口。其他厂家的语音识别接口请自行参考对接，如需定制开发请联系作者。");
       var defaultApi = "http://你电脑局域网ip:9527/token";
       this.asrTokenApi = uni.getStorageSync("page_asr_asrTokenApi") || defaultApi;
     },
     unmounted() {
-      RecordApp$1.Stop();
+      RecordApp.Stop();
     },
     onShow() {
       if (this.isMounted)
-        RecordApp$1.UniPageOnShow(this);
+        RecordApp.UniPageOnShow(this);
     },
     methods: {
       currentKeyTag() {
-        if (!RecordApp$1.Current)
+        if (!RecordApp.Current)
           return "[?]";
         var tag2 = "Renderjs+H5";
-        if (RecordApp$1.UniNativeUtsPlugin) {
-          tag2 = RecordApp$1.UniNativeUtsPlugin.nativePlugin ? "NativePlugin" : "UtsPlugin";
+        if (RecordApp.UniNativeUtsPlugin) {
+          tag2 = RecordApp.UniNativeUtsPlugin.nativePlugin ? "NativePlugin" : "UtsPlugin";
         }
-        return RecordApp$1.Current.Key + "(" + tag2 + ")";
+        return RecordApp.Current.Key + "(" + tag2 + ")";
       },
       recStart() {
         var sid = ++this.SyncID;
@@ -5071,8 +5078,8 @@ if (uni.restoreGlobal) {
           return;
         }
         this.reclog("正在请求录音权限...");
-        RecordApp$1.UniWebViewActivate(this);
-        RecordApp$1.RequestPermission(() => {
+        RecordApp.UniWebViewActivate(this);
+        RecordApp.RequestPermission(() => {
           this.reclog(this.currentKeyTag() + " 已获得录音权限", 2);
           this.recStart__asrStart(sid);
         }, (msg, isUserNotAllow) => {
@@ -5085,8 +5092,8 @@ if (uni.restoreGlobal) {
           return;
         }
         this.reclog(this.currentKeyTag() + " 正在打开录音...");
-        RecordApp$1.UniWebViewActivate(this);
-        RecordApp$1.Start({
+        RecordApp.UniWebViewActivate(this);
+        RecordApp.Start({
           type: "wav",
           bitRate: 16,
           sampleRate: 16e3,
@@ -5111,7 +5118,7 @@ if (uni.restoreGlobal) {
 				}`
         }, () => {
           this.reclog(this.currentKeyTag() + " 已开始录音，请讲话（asrProcess中已限制最多识别60*2-5*(2-1)=115秒）...", 2);
-          RecordApp$1.UniFindCanvas(this, [".recwave-WaveView"], `
+          RecordApp.UniFindCanvas(this, [".recwave-WaveView"], `
 					this.waveView=Recorder.WaveView({compatibleCanvas:canvas1, width:300, height:100});
 				`, (canvas1) => {
             this.waveView = Recorder.WaveView({ compatibleCanvas: canvas1, width: 300, height: 100 });
@@ -5177,8 +5184,8 @@ if (uni.restoreGlobal) {
             this.reclog("语音识别" + (cancelMsg ? "被取消" : "结束失败") + "：" + errMsg, 1);
           });
         }
-        RecordApp$1.Stop((aBuf, duration, mime) => {
-          var recSet = (RecordApp$1.GetCurrentRecOrNull() || { set: { type: "wav" } }).set;
+        RecordApp.Stop((aBuf, duration, mime) => {
+          var recSet = (RecordApp.GetCurrentRecOrNull() || { set: { type: "wav" } }).set;
           this.reclog("已录制[" + mime + "]：" + this.formatTime(duration, 1) + " " + aBuf.byteLength + "字节 " + recSet.sampleRate + "hz " + recSet.bitRate + "kbps", 2);
           var aBuf_renderjs = "this.audioData";
           this.$refs.player.setPlayBytes(aBuf, aBuf_renderjs, duration, mime, recSet, Recorder);
@@ -5301,7 +5308,7 @@ if (uni.restoreGlobal) {
     };
     return ws;
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_TestPlayer = vue.resolveComponent("TestPlayer");
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { style: { "color": "#f60", "font-weight": "bold", "padding": "10px" } }, "实时语音识别 [阿里云版] - /src/extensions/asr.aliyun.short.js"),
@@ -5444,9 +5451,9 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  if (typeof block0$5 === "function")
-    block0$5(_sfc_main$8);
-  const PagesRecTestPage_asr = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/page_asr.vue"]]);
+  if (typeof block0$4 === "function")
+    block0$4(_sfc_main$9);
+  const PagesRecTestPage_asr = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/page_asr.vue"]]);
   (function(factory) {
     var browser = typeof window == "object" && !!window.document;
     var win = browser ? window : Object;
@@ -5804,13 +5811,13 @@ if (uni.restoreGlobal) {
       ]
     );
   });
-  const block0$4 = (Comp) => {
+  const block0$3 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("testMainVue");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["testMainVue"] = "698ca624";
   };
-  var $T$1 = Recorder.i18n.$T;
-  const _sfc_main$7 = {
-    components: { TestPlayer: TestPlayer$1 },
+  var $T = Recorder.i18n.$T;
+  const _sfc_main$8 = {
+    components: { TestPlayer },
     data() {
       return {
         ...this.getTexts(),
@@ -5830,19 +5837,19 @@ if (uni.restoreGlobal) {
       }
       lang = lang || (/\b(zh|cn)\b/i.test(uni.getLocale().replace(/_/g, " ")) ? "zh-CN" : "en-US");
       this.setLang(lang);
-      this.reclog($T$1("I2MO::页面mounted", ":Page mounted ") + "(" + $T$1("t795::{1}层", ":{1} pages", 0, getCurrentPages().length) + ")，Recorder.LM=" + Recorder.LM + "，RecordApp.LM=" + RecordApp$1.LM + "，UniSupportLM=" + RecordApp$1.UniSupportLM + "，UniJsSource=" + RecordApp$1.UniJsSource.IsSource);
+      this.reclog($T("I2MO::页面mounted", ":Page mounted ") + "(" + $T("t795::{1}层", ":{1} pages", 0, getCurrentPages().length) + ")，Recorder.LM=" + Recorder.LM + "，RecordApp.LM=" + RecordApp.LM + "，UniSupportLM=" + RecordApp.UniSupportLM + "，UniJsSource=" + RecordApp.UniJsSource.IsSource);
       this.isMounted = true;
       this.uniPage__onShow();
-      this.reclog($T$1("ry5v::正在执行Install，请勿操作...", ":Install is in progress, please do not operate..."), "#f60");
-      RecordApp$1.Install(() => {
-        this.reclog($T$1("Cix5::Install成功，环境：", ":Install successfully, environment: ") + this.currentKeyTag(), 2);
-        this.reclog($T$1("K0HW::请先请求录音权限，然后再开始录音", ":Please request recording permission before starting recording"));
+      this.reclog($T("ry5v::正在执行Install，请勿操作...", ":Install is in progress, please do not operate..."), "#f60");
+      RecordApp.Install(() => {
+        this.reclog($T("Cix5::Install成功，环境：", ":Install successfully, environment: ") + this.currentKeyTag(), 2);
+        this.reclog($T("K0HW::请先请求录音权限，然后再开始录音", ":Please request recording permission before starting recording"));
       }, (err) => {
-        this.reclog("RecordApp.Install" + $T$1("qrjB::出错：", ": error: ") + err, 1);
+        this.reclog("RecordApp.Install" + $T("qrjB::出错：", ": error: ") + err, 1);
       });
     },
     unmounted() {
-      RecordApp$1.Stop();
+      RecordApp.Stop();
       Recorder.i18n.lang = "zh-CN";
     },
     onShow() {
@@ -5851,31 +5858,31 @@ if (uni.restoreGlobal) {
     },
     methods: {
       uniPage__onShow() {
-        RecordApp$1.UniPageOnShow(this);
+        RecordApp.UniPageOnShow(this);
       },
       currentKeyTag() {
-        if (!RecordApp$1.Current)
+        if (!RecordApp.Current)
           return "[?]";
         var tag2 = "Renderjs+H5";
-        if (RecordApp$1.UniNativeUtsPlugin) {
-          tag2 = RecordApp$1.UniNativeUtsPlugin.nativePlugin ? "NativePlugin" : "UtsPlugin";
+        if (RecordApp.UniNativeUtsPlugin) {
+          tag2 = RecordApp.UniNativeUtsPlugin.nativePlugin ? "NativePlugin" : "UtsPlugin";
         }
-        return RecordApp$1.Current.Key + "(" + tag2 + ")";
+        return RecordApp.Current.Key + "(" + tag2 + ")";
       },
       recReq() {
-        this.reclog($T$1("k6jG::正在请求录音权限...", ":Requesting recording permission..."));
-        RecordApp$1.UniWebViewActivate(this);
-        RecordApp$1.RequestPermission(() => {
-          this.reclog(this.currentKeyTag() + " " + $T$1("ueCL::已获得录音权限，可以开始录音了", ":The recording permission has been obtained and you can start recording."), 2);
+        this.reclog($T("k6jG::正在请求录音权限...", ":Requesting recording permission..."));
+        RecordApp.UniWebViewActivate(this);
+        RecordApp.RequestPermission(() => {
+          this.reclog(this.currentKeyTag() + " " + $T("ueCL::已获得录音权限，可以开始录音了", ":The recording permission has been obtained and you can start recording."), 2);
         }, (msg, isUserNotAllow) => {
-          this.reclog(this.currentKeyTag() + " " + (isUserNotAllow ? "isUserNotAllow," : "") + $T$1("cZuo::请求录音权限失败：", ":Requesting recording permission failed: ") + msg, 1);
+          this.reclog(this.currentKeyTag() + " " + (isUserNotAllow ? "isUserNotAllow," : "") + $T("cZuo::请求录音权限失败：", ":Requesting recording permission failed: ") + msg, 1);
         });
       },
       recStart() {
         this.$refs.player.setPlayBytes(null);
-        this.reclog(this.currentKeyTag() + " " + $T$1("HbiG::正在打开...", ":Starting..."));
-        RecordApp$1.UniWebViewActivate(this);
-        RecordApp$1.Start({
+        this.reclog(this.currentKeyTag() + " " + $T("HbiG::正在打开...", ":Starting..."));
+        RecordApp.UniWebViewActivate(this);
+        RecordApp.Start({
           type: this.recType,
           sampleRate: this.recSampleRate,
           bitRate: this.recBitRate,
@@ -5904,37 +5911,37 @@ if (uni.restoreGlobal) {
 					this.audioData=aBuf; //留着给Stop时进行转码成wav播放
 				}`
         }, () => {
-          this.reclog(this.currentKeyTag() + " " + $T$1("jCWZ::录制中：", ":Recording: ") + this.recType + " " + this.recSampleRate + " " + this.recBitRate + "kbps", 2);
-          RecordApp$1.UniFindCanvas(this, [".recwave-WaveView"], `
+          this.reclog(this.currentKeyTag() + " " + $T("jCWZ::录制中：", ":Recording: ") + this.recType + " " + this.recSampleRate + " " + this.recBitRate + "kbps", 2);
+          RecordApp.UniFindCanvas(this, [".recwave-WaveView"], `
 					this.waveView=Recorder.WaveView({compatibleCanvas:canvas1, width:300, height:100});
 				`, (canvas1) => {
             this.waveView = Recorder.WaveView({ compatibleCanvas: canvas1, width: 300, height: 100 });
           });
         }, (msg) => {
-          this.reclog(this.currentKeyTag() + " " + $T$1("hgDD::开始录音失败：", ":Failed to start recording: ") + msg, 1);
+          this.reclog(this.currentKeyTag() + " " + $T("hgDD::开始录音失败：", ":Failed to start recording: ") + msg, 1);
         });
       },
       recPause() {
-        if (RecordApp$1.GetCurrentRecOrNull()) {
-          RecordApp$1.Pause();
-          this.reclog($T$1("BuDV::已暂停", ":Paused"));
+        if (RecordApp.GetCurrentRecOrNull()) {
+          RecordApp.Pause();
+          this.reclog($T("BuDV::已暂停", ":Paused"));
         }
       },
       recResume() {
-        if (RecordApp$1.GetCurrentRecOrNull()) {
-          RecordApp$1.Resume();
-          this.reclog($T$1("eWM8::继续录音中...", ":Resumed"));
+        if (RecordApp.GetCurrentRecOrNull()) {
+          RecordApp.Resume();
+          this.reclog($T("eWM8::继续录音中...", ":Resumed"));
         }
       },
       recStop() {
-        this.reclog($T$1("xmjS::正在结束录音...", ":Stopping recording..."));
-        RecordApp$1.Stop((aBuf, duration, mime) => {
-          var recSet = (RecordApp$1.GetCurrentRecOrNull() || { set: { type: this.recType } }).set;
-          this.reclog($T$1("nIyX::已录制[{1}]：{2} {3}字节", ":Recorded [{1}]: {2} {3}bytes", 0, mime, this.formatTime(duration, 1), aBuf.byteLength) + " " + recSet.sampleRate + "hz " + recSet.bitRate + "kbps", 2);
+        this.reclog($T("xmjS::正在结束录音...", ":Stopping recording..."));
+        RecordApp.Stop((aBuf, duration, mime) => {
+          var recSet = (RecordApp.GetCurrentRecOrNull() || { set: { type: this.recType } }).set;
+          this.reclog($T("nIyX::已录制[{1}]：{2} {3}字节", ":Recorded [{1}]: {2} {3}bytes", 0, mime, this.formatTime(duration, 1), aBuf.byteLength) + " " + recSet.sampleRate + "hz " + recSet.bitRate + "kbps", 2);
           var aBuf_renderjs = "this.audioData";
           this.$refs.player.setPlayBytes(aBuf, aBuf_renderjs, duration, mime, recSet, Recorder);
         }, (msg) => {
-          this.reclog($T$1("5VqK::结束录音失败：", ":Failed to end recording:") + msg, 1);
+          this.reclog($T("5VqK::结束录音失败：", ":Failed to end recording:") + msg, 1);
         });
       },
       reclog(msg, color) {
@@ -5962,18 +5969,18 @@ if (uni.restoreGlobal) {
       },
       getTexts() {
         uni.setNavigationBarTitle({
-          title: $T$1("IkUi::RecordApp国际化多语言", ":RecordApp internationalization in multiple languages") + " - uni-app"
+          title: $T("IkUi::RecordApp国际化多语言", ":RecordApp internationalization in multiple languages") + " - uni-app"
         });
         return {
-          moreLangs: $T$1("hAh0::其他语言支持办法：复制Recorder和插件的i18n目录内的Template.js文件，改个文件名，然后翻译成对应的语言，然后在页面中引入此文件即可", ":Other language support methods: Copy the Template.js file in the i18n directory of the Recorder and plug-in, change the file name, then translate it into the corresponding language, and then import this file into the page."),
-          T_Type: $T$1("hLSC::类型", ":Type"),
-          T_SampleRate: $T$1("3EHL::采样率", ":SampleRate"),
-          T_BitRate: $T$1("L2Co::比特率", ":BitRate"),
-          T_req: $T$1("9bU5::请求录音权限", ":Request recording permission"),
-          T_start: $T$1("JUOj::开始录音", ":Start recording"),
-          T_stop: $T$1("aod9::停止录音", ":Stop recording"),
-          T_pause: $T$1("J45w::暂停", ":Pause"),
-          T_resume: $T$1("npYY::继续", ":Resume")
+          moreLangs: $T("hAh0::其他语言支持办法：复制Recorder和插件的i18n目录内的Template.js文件，改个文件名，然后翻译成对应的语言，然后在页面中引入此文件即可", ":Other language support methods: Copy the Template.js file in the i18n directory of the Recorder and plug-in, change the file name, then translate it into the corresponding language, and then import this file into the page."),
+          T_Type: $T("hLSC::类型", ":Type"),
+          T_SampleRate: $T("3EHL::采样率", ":SampleRate"),
+          T_BitRate: $T("L2Co::比特率", ":BitRate"),
+          T_req: $T("9bU5::请求录音权限", ":Request recording permission"),
+          T_start: $T("JUOj::开始录音", ":Start recording"),
+          T_stop: $T("aod9::停止录音", ":Stop recording"),
+          T_pause: $T("J45w::暂停", ":Pause"),
+          T_resume: $T("npYY::继续", ":Resume")
         };
       },
       langClick(e) {
@@ -5982,15 +5989,15 @@ if (uni.restoreGlobal) {
           var old = this.lang;
           this.setLang(val);
           if (val != old) {
-            this.reclog($T$1("7nbd::已切换语言为：", ":The language has been switched to: ") + val);
+            this.reclog($T("7nbd::已切换语言为：", ":The language has been switched to: ") + val);
           }
         }
       },
       setLang(val) {
         uni.setStorageSync("test_page_lang", val);
         Recorder.i18n.lang = val;
-        if (RecordApp$1.UniIsApp()) {
-          RecordApp$1.UniWebViewEval(this, 'Recorder.i18n.lang="' + val + '"');
+        if (RecordApp.UniIsApp()) {
+          RecordApp.UniWebViewEval(this, 'Recorder.i18n.lang="' + val + '"');
         }
         this.lang = val;
         var o = this.getTexts();
@@ -6000,7 +6007,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_TestPlayer = vue.resolveComponent("TestPlayer");
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createCommentVNode(" 语言选择 "),
@@ -6209,14 +6216,14 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  if (typeof block0$4 === "function")
-    block0$4(_sfc_main$7);
-  const PagesRecTestPage_i18n = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/page_i18n.vue"]]);
-  const block0$3 = (Comp) => {
+  if (typeof block0$3 === "function")
+    block0$3(_sfc_main$8);
+  const PagesRecTestPage_i18n = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/page_i18n.vue"]]);
+  const block0$2 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("test_1");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["test_1"] = "39e68e20";
   };
-  const _sfc_main$6 = {
+  const _sfc_main$7 = {
     methods: {
       renderjsCallThis(data) {
         var aBuf = uni.base64ToArrayBuffer(data.base64), duration = data.duration, mime = data.mime;
@@ -6224,20 +6231,20 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "mainView" });
   }
-  if (typeof block0$3 === "function")
-    block0$3(_sfc_main$6);
-  const PagesRecTestPage_renderjsOnly = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/page_renderjsOnly.vue"]]);
-  const block0$2 = (Comp) => {
+  if (typeof block0$2 === "function")
+    block0$2(_sfc_main$7);
+  const PagesRecTestPage_renderjsOnly = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/page_renderjsOnly.vue"]]);
+  const block0$1 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("testMainVue");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["testMainVue"] = "21815b52";
   };
-  var disableOgg$1 = false;
-  var RecUtsPlugin$1 = null;
-  const _sfc_main$5 = {
-    components: { TestPlayer: TestPlayer$1 },
+  var disableOgg = false;
+  var RecUtsPlugin = null;
+  const _sfc_main$6 = {
+    components: { TestPlayer },
     data() {
       return {
         recType: "mp3",
@@ -6251,7 +6258,7 @@ if (uni.restoreGlobal) {
         recpowert: "",
         pageDeep: 0,
         pageNewPath: "main_recTest",
-        disableOgg: disableOgg$1,
+        disableOgg,
         evalExecCode: "",
         reclogs: [],
         recogText: "recogText"
@@ -6268,14 +6275,14 @@ if (uni.restoreGlobal) {
       var v2 = (((this.$root || {}).constructor || {}).super || {}).version;
       if (v2)
         vueVer.push("constructor.super:" + v2);
-      this.reclog("页面mounted(" + getCurrentPages().length + "层)，Vue=" + vueVer.join("/") + "，WebViewId=" + (this.$root.$page && this.$root.$page.id || "?") + "，ComponentId=_$id:" + (this._$id || "?") + "/$.uid:" + (this.$ && this.$.uid || "?") + "，Recorder.LM=" + Recorder.LM + "，RecordApp.LM=" + RecordApp$1.LM + "，UniSupportLM=" + RecordApp$1.UniSupportLM + "，UniJsSource=" + RecordApp$1.UniJsSource.IsSource);
+      this.reclog("页面mounted(" + getCurrentPages().length + "层)，Vue=" + vueVer.join("/") + "，WebViewId=" + (this.$root.$page && this.$root.$page.id || "?") + "，ComponentId=_$id:" + (this._$id || "?") + "/$.uid:" + (this.$ && this.$.uid || "?") + "，Recorder.LM=" + Recorder.LM + "，RecordApp.LM=" + RecordApp.LM + "，UniSupportLM=" + RecordApp.UniSupportLM + "，UniJsSource=" + RecordApp.UniJsSource.IsSource);
       this.pageDeep = getCurrentPages().length;
       this.pageNewPath = /main_recTest/.test(this.getRouteStr()) ? "page_index2" : "main_recTest";
       this.isMounted = true;
       this.uniPage__onShow();
       this.reclog("正在执行Install，请勿操作...", "#f60");
-      RecordApp$1.UniNativeUtsPlugin = RecUtsPlugin$1;
-      RecordApp$1.Install(() => {
+      RecordApp.UniNativeUtsPlugin = RecUtsPlugin;
+      RecordApp.Install(() => {
         this.reclog("Install成功，环境：" + this.currentKeyTag(), 2);
         this.reclog("请先请求录音权限，然后再开始录音");
       }, (err) => {
@@ -6283,7 +6290,7 @@ if (uni.restoreGlobal) {
       });
     },
     unmounted() {
-      RecordApp$1.Stop();
+      RecordApp.Stop();
     },
     onShow() {
       if (this.isMounted)
@@ -6291,28 +6298,28 @@ if (uni.restoreGlobal) {
     },
     methods: {
       uniPage__onShow() {
-        RecordApp$1.UniPageOnShow(this);
+        RecordApp.UniPageOnShow(this);
       },
       currentKeyTag() {
-        if (!RecordApp$1.Current)
+        if (!RecordApp.Current)
           return "[?]";
         var tag2 = "Renderjs+H5";
-        if (RecordApp$1.UniNativeUtsPlugin) {
-          tag2 = RecordApp$1.UniNativeUtsPlugin.nativePlugin ? "NativePlugin" : "UtsPlugin";
+        if (RecordApp.UniNativeUtsPlugin) {
+          tag2 = RecordApp.UniNativeUtsPlugin.nativePlugin ? "NativePlugin" : "UtsPlugin";
         }
-        return RecordApp$1.Current.Key + "(" + tag2 + ")";
+        return RecordApp.Current.Key + "(" + tag2 + ")";
       },
       recReq() {
-        RecordApp$1.UniNativeUtsPlugin = RecUtsPlugin$1;
+        RecordApp.UniNativeUtsPlugin = RecUtsPlugin;
         if (this.appUseH5Rec) {
-          RecordApp$1.UniNativeUtsPlugin = null;
+          RecordApp.UniNativeUtsPlugin = null;
         }
-        if (RecordApp$1.UniIsApp() && !RecordApp$1.UniNativeUtsPlugin) {
+        if (RecordApp.UniIsApp() && !RecordApp.UniNativeUtsPlugin) {
           this.reclog("当前是在App的renderjs中使用H5进行录音，iOS上只支持14.3以上版本，且iOS上每次进入页面后第一次请求录音权限时、或长时间无操作再请求录音权限时WebView均会弹出录音权限对话框，不同旧iOS版本（低于iOS17）下H5录音可能存在的问题在App中同样会存在；使用配套的原生录音插件或uts插件时无以上问题和版本限制，Android也无以上问题", "#f60");
         }
         this.reclog("正在请求录音权限...");
-        RecordApp$1.UniWebViewActivate(this);
-        RecordApp$1.RequestPermission(() => {
+        RecordApp.UniWebViewActivate(this);
+        RecordApp.RequestPermission(() => {
           this.reclog(this.currentKeyTag() + " 已获得录音权限，可以开始录音了", 2);
         }, (msg, isUserNotAllow) => {
           this.reclog(this.currentKeyTag() + " " + (isUserNotAllow ? "isUserNotAllow," : "") + "请求录音权限失败：" + msg, 1);
@@ -6324,8 +6331,8 @@ if (uni.restoreGlobal) {
         var takeEcCount = 0, takeEcSize = 0;
         this.takeEcChunks = this.takeoffEncodeChunkSet ? [] : null;
         this.reclog(this.currentKeyTag() + " 正在打开...");
-        RecordApp$1.UniWebViewActivate(this);
-        RecordApp$1.Start({
+        RecordApp.UniWebViewActivate(this);
+        RecordApp.Start({
           type: this.recType,
           sampleRate: this.recSampleRate,
           bitRate: this.recBitRate,
@@ -6366,19 +6373,19 @@ if (uni.restoreGlobal) {
         });
       },
       recPause() {
-        if (RecordApp$1.GetCurrentRecOrNull()) {
-          RecordApp$1.Pause();
+        if (RecordApp.GetCurrentRecOrNull()) {
+          RecordApp.Pause();
           this.reclog("已暂停");
         }
       },
       recResume() {
-        if (RecordApp$1.GetCurrentRecOrNull()) {
-          RecordApp$1.Resume();
+        if (RecordApp.GetCurrentRecOrNull()) {
+          RecordApp.Resume();
           this.reclog("继续录音中...");
         }
       },
       recStopX() {
-        RecordApp$1.Stop(
+        RecordApp.Stop(
           null,
           (msg) => {
             this.reclog("已清理，错误信息：" + msg);
@@ -6387,8 +6394,8 @@ if (uni.restoreGlobal) {
       },
       recStop() {
         this.reclog("正在结束录音...");
-        RecordApp$1.Stop((aBuf, duration, mime) => {
-          var recSet = (RecordApp$1.GetCurrentRecOrNull() || { set: { type: this.recType } }).set;
+        RecordApp.Stop((aBuf, duration, mime) => {
+          var recSet = (RecordApp.GetCurrentRecOrNull() || { set: { type: this.recType } }).set;
           this.reclog("已录制[" + mime + "]：" + this.formatTime(duration, 1) + " " + aBuf.byteLength + "字节 " + recSet.sampleRate + "hz " + recSet.bitRate + "kbps", 2);
           var aBuf_renderjs = "this.audioData";
           if (this.takeEcChunks) {
@@ -6407,7 +6414,7 @@ if (uni.restoreGlobal) {
             this.reclog("takeoffEncodeChunk接收到的音频片段，已合并成一个音频文件 " + aBuf.byteLength + "字节");
           }
           this.$refs.player.setPlayBytes(aBuf, aBuf_renderjs, duration, mime, recSet, Recorder);
-          RecordApp$1.UniSaveLocalFile("recorder.mp3", aBuf, (savePath) => {
+          RecordApp.UniSaveLocalFile("recorder.mp3", aBuf, (savePath) => {
             uni.uploadFile({
               url: "http://127.0.0.1:8000/speechtotext",
               filePath: savePath,
@@ -6443,7 +6450,7 @@ if (uni.restoreGlobal) {
       },
       appUseH5RecClick() {
         this.appUseH5Rec = !this.appUseH5Rec;
-        RecordApp$1.Current = null;
+        RecordApp.Current = null;
         this.reclog("切换了appUseH5Rec=" + this.appUseH5Rec + "，重新请求录音权限后生效", "#f60");
       },
       initWaveStore() {
@@ -6452,22 +6459,22 @@ if (uni.restoreGlobal) {
         var store = this.waveStore = this.waveStore || {};
         var webStore = `var store=this.waveStore=this.waveStore||{};`;
         webStore += `this.recwaveChoiceKey="${this.recwaveChoiceKey}";`;
-        RecordApp$1.UniFindCanvas(this, [".recwave-WaveView"], `${webStore}
+        RecordApp.UniFindCanvas(this, [".recwave-WaveView"], `${webStore}
 				store.WaveView=Recorder.WaveView({compatibleCanvas:canvas1, width:300, height:100});
 			`, (canvas1) => {
           store.WaveView = Recorder.WaveView({ compatibleCanvas: canvas1, width: 300, height: 100 });
         });
-        RecordApp$1.UniFindCanvas(this, [".recwave-SurferView", ".recwave-SurferView-2x"], `${webStore}
+        RecordApp.UniFindCanvas(this, [".recwave-SurferView", ".recwave-SurferView-2x"], `${webStore}
 				store.SurferView=Recorder.WaveSurferView({compatibleCanvas:canvas1,compatibleCanvas_2x:canvas2, width:300, height:100});
 			`, (canvas1, canvas2) => {
           store.SurferView = Recorder.WaveSurferView({ compatibleCanvas: canvas1, compatibleCanvas_2x: canvas2, width: 300, height: 100 });
         });
-        RecordApp$1.UniFindCanvas(this, [".recwave-Histogram1"], `${webStore}
+        RecordApp.UniFindCanvas(this, [".recwave-Histogram1"], `${webStore}
 				store.Histogram1=Recorder.FrequencyHistogramView({compatibleCanvas:canvas1, width:300, height:100});
 			`, (canvas1) => {
           store.Histogram1 = Recorder.FrequencyHistogramView({ compatibleCanvas: canvas1, width: 300, height: 100 });
         });
-        RecordApp$1.UniFindCanvas(this, [".recwave-Histogram2"], `${webStore}
+        RecordApp.UniFindCanvas(this, [".recwave-Histogram2"], `${webStore}
 				store.Histogram2=Recorder.FrequencyHistogramView({compatibleCanvas:canvas1, width:300, height:100
 					,lineCount:200,widthRatio:1,position:0,minHeight:1
 					,fallDuration:600,stripeEnable:false,mirrorEnable:true});
@@ -6485,7 +6492,7 @@ if (uni.restoreGlobal) {
             mirrorEnable: true
           });
         });
-        RecordApp$1.UniFindCanvas(this, [".recwave-Histogram3"], `${webStore}
+        RecordApp.UniFindCanvas(this, [".recwave-Histogram3"], `${webStore}
 				store.Histogram3=Recorder.FrequencyHistogramView({compatibleCanvas:canvas1, width:300, height:100
 					,lineCount:20,position:0,minHeight:1,fallDuration:400,stripeEnable:false,mirrorEnable:true
 					,linear:[0,"#0ac",1,"#0ac"]});
@@ -6511,8 +6518,8 @@ if (uni.restoreGlobal) {
             this.reclog("已切换波形显示为：" + key);
           }
           this.recwaveChoiceKey = key;
-          if (RecordApp$1.UniIsApp()) {
-            RecordApp$1.UniWebViewVueCall(this, 'this.recwaveChoiceKey="' + key + '"');
+          if (RecordApp.UniIsApp()) {
+            RecordApp.UniWebViewVueCall(this, 'this.recwaveChoiceKey="' + key + '"');
           }
         }
       },
@@ -6558,7 +6565,7 @@ if (uni.restoreGlobal) {
           return;
         }
         try {
-          new Function("Recorder,RecordApp", this.evalExecCode).call(this, Recorder, RecordApp$1);
+          new Function("Recorder,RecordApp", this.evalExecCode).call(this, Recorder, RecordApp);
           this.reclog("代码已执行", 2);
         } catch (e) {
           this.reclog("代码执行异常：" + e.message, 1);
@@ -6587,14 +6594,14 @@ if (uni.restoreGlobal) {
 			})()`;
         this.reclog("正在renderjs中加载vConsole...");
         if (isApp2) {
-          RecordApp$1.UniWebViewVueCall(this, jsCode);
+          RecordApp.UniWebViewVueCall(this, jsCode);
         } else {
           this.reclog("非app环境，不加载vConsole", 1);
         }
       }
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_TestPlayer = vue.resolveComponent("TestPlayer");
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("button", {
@@ -6617,38 +6624,38 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  if (typeof block0$2 === "function")
-    block0$2(_sfc_main$5);
-  const PagesRecTestMy_test = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/my_test.vue"]]);
-  const block0$1 = (Comp) => {
+  if (typeof block0$1 === "function")
+    block0$1(_sfc_main$6);
+  const PagesRecTestMy_test = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/my_test.vue"]]);
+  const block0 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("yourModuleName");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["yourModuleName"] = "425f6c57";
   };
-  const _sfc_main$4 = {
+  const _sfc_main$5 = {
     data() {
       return {};
     },
     mounted() {
       this.isMounted = true;
-      RecordApp$1.UniPageOnShow(this);
+      RecordApp.UniPageOnShow(this);
     },
     onShow() {
       if (this.isMounted)
-        RecordApp$1.UniPageOnShow(this);
+        RecordApp.UniPageOnShow(this);
     },
     methods: {
       //请求录音权限
       recReq() {
-        RecordApp$1.UniWebViewActivate(this);
-        RecordApp$1.RequestPermission(() => {
+        RecordApp.UniWebViewActivate(this);
+        RecordApp.RequestPermission(() => {
           formatAppLog("log", "at pages/test_api/test_api.vue:60", "已获得录音权限，可以开始录音了");
         }, (msg, isUserNotAllow) => {
           formatAppLog("error", "at pages/test_api/test_api.vue:65", "请求录音权限失败：" + msg);
         });
       },
       recStart() {
-        RecordApp$1.UniWebViewActivate(this);
-        RecordApp$1.RequestPermission(() => {
+        RecordApp.UniWebViewActivate(this);
+        RecordApp.RequestPermission(() => {
           formatAppLog("log", "at pages/test_api/test_api.vue:74", "已获得录音权限，可以开始录音了");
         }, (msg, isUserNotAllow) => {
           formatAppLog("error", "at pages/test_api/test_api.vue:79", "请求录音权限失败：" + msg);
@@ -6675,10 +6682,10 @@ if (uni.restoreGlobal) {
 	                //放一些仅在renderjs中才生效的事情，不提供也行
 	            }`
         };
-        RecordApp$1.UniWebViewActivate(this);
-        RecordApp$1.Start(set, () => {
+        RecordApp.UniWebViewActivate(this);
+        RecordApp.Start(set, () => {
           formatAppLog("log", "at pages/test_api/test_api.vue:120", "已开始录音");
-          RecordApp$1.UniFindCanvas(this, [".recwave-WaveView"], `
+          RecordApp.UniFindCanvas(this, [".recwave-WaveView"], `
 	                this.waveView=Recorder.WaveView({compatibleCanvas:canvas1, width:300, height:100});
 	            `, (canvas1) => {
             this.waveView = Recorder.WaveView({ compatibleCanvas: canvas1, width: 300, height: 100 });
@@ -6688,19 +6695,19 @@ if (uni.restoreGlobal) {
         });
       },
       recPause() {
-        if (RecordApp$1.GetCurrentRecOrNull()) {
-          RecordApp$1.Pause();
+        if (RecordApp.GetCurrentRecOrNull()) {
+          RecordApp.Pause();
           formatAppLog("log", "at pages/test_api/test_api.vue:139", "已暂停");
         }
       },
       recResume() {
-        if (RecordApp$1.GetCurrentRecOrNull()) {
-          RecordApp$1.Resume();
+        if (RecordApp.GetCurrentRecOrNull()) {
+          RecordApp.Resume();
           formatAppLog("log", "at pages/test_api/test_api.vue:146", "继续录音中...");
         }
       },
       recStop() {
-        RecordApp$1.Stop((arrayBuffer, duration, mime) => {
+        RecordApp.Stop((arrayBuffer, duration, mime) => {
           if (typeof Blob != "undefined" && typeof window == "object") {
             new Blob([arrayBuffer], { type: mime });
           }
@@ -6722,7 +6729,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("button", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.recReq && $options.recReq(...args))
@@ -6744,583 +6751,61 @@ if (uni.restoreGlobal) {
       }, "语音识别")
     ]);
   }
-  if (typeof block0$1 === "function")
-    block0$1(_sfc_main$4);
-  const PagesTest_apiTest_api = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test_api.vue"]]);
-  var RecordApp, $T;
-  const _sfc_main$3 = {
-    data() {
-      return {
-        ...this.getTexts(),
-        show: false,
-        statusMsg: "",
-        Class: ("a" + Math.random()).replace(".", ""),
-        showControlUI: false,
-        useNvuePlayer: false,
-        playing: false,
-        player_position: 0,
-        player_currentTime: "00:00",
-        player_duration: "00:00",
-        player_durationNum: 0
-      };
-    },
-    methods: {
-      shareFile() {
-        this.saveFileFn();
-      },
-      playStart() {
-        this.playFn();
-      },
-      playStop() {
-        this.stopFn && this.stopFn();
-      },
-      setPlayerPosition(e) {
-        this.setPosFn(e);
-      },
-      getPage() {
-        var p = this.$parent;
-        while (p) {
-          if (p.reclog)
-            break;
-          p = p.$parent;
-        }
-        return p;
-      },
-      reclog() {
-        this.getPage().reclog.apply(this.$parent, arguments);
-      },
-      getTexts() {
-        return {
-          T_pause: $T ? $T("oozQ::暂停播放", ":Pause") : "",
-          T_play: $T ? $T("PPxS::播放", ":Play") : "",
-          T_download: $T ? $T("jtJH::下载保存", ":Download and save") : ""
-        };
-      },
-      status(msg) {
-        msg = msg ? $T("w7J2::播放器创建中：", ":Player is being created: ") + msg : "";
-        this.statusMsg = msg;
-        if (msg)
-          RecordApp.CLog(msg);
-      },
-      formatTime(ms, showSS) {
-        var ss = ms % 1e3;
-        ms = (ms - ss) / 1e3;
-        var s = ms % 60;
-        ms = (ms - s) / 60;
-        var m = ms % 60;
-        ms = (ms - m) / 60;
-        var h = ms, v = "";
-        if (h > 0)
-          v += (h < 10 ? "0" : "") + h + ":";
-        v += (m < 10 ? "0" : "") + m + ":";
-        v += (s < 10 ? "0" : "") + s;
-        if (showSS)
-          v += "″" + ("00" + ss).substr(-3);
-        return v;
-      },
-      createAudio(type, aBuf0, mime0, aBuf, duration, mime) {
-        this.show = false;
-        this.status("");
-        this.playing = false;
-        this.player_durationNum = duration;
-        this.player_duration = this.formatTime(duration);
-        this.player_currentTime = "00:00";
-        this.player_position = 0;
-        var fileName = "recordapp-" + Date.now() + "." + type;
-        var okEnd = () => {
-          this.show = true;
-          this.status("");
-          RecordApp.CLog($T("GXCV::播放器创建完成，可以播放了", ":The player is created and can be played"));
-        };
-        if (this.useNvuePlayer) {
-          this.showControlUI = true;
-          var saveBuf = (tag, sPath, sBuffer, next) => {
-            RecordApp.UniSaveLocalFile(sPath, sBuffer, (path2) => {
-              this.reclog(tag + $T("FtgC::文件已保存在：", ":File has been saved at: ") + path2);
-              next(path2);
-            }, (err) => {
-              this.status(tag + $T("9AGy::保存文件失败，将无法播放：", ":Failed to save the file and will not be able to play it: ") + err);
-            });
-          };
-          this.status($T("4xcp::正在将数据保存成本地文件以供播放...", ":Saving data to local file for playback..."));
-          var path = "", wavPath = "";
-          var saveOk = () => {
-            this.playUrl = path;
-            this.playUrl_wav = wavPath;
-            okEnd();
-          };
-          saveBuf("", fileName, aBuf0, (p) => {
-            path = p;
-            if (aBuf == aBuf0) {
-              saveOk();
-              return;
-            }
-            saveBuf($T("fU7N::[转码成wav播放]", ":[Transcode to wav for playback]"), fileName + ".wav", aBuf, (p2) => {
-              wavPath = p2;
-              saveOk();
-            });
-          });
-          this.setPosFn = (e) => {
-            var val = e.detail.value;
-            if (!this.audio)
-              this.playFn();
-            var time = Math.round(this.player_durationNum * val / 100);
-            this.audio.seek(time / 1e3);
-            this.audio.play();
-          };
-          this.playFn = () => {
-            var sid = this.playSid;
-            if (this.audio) {
-              if (this.audio.sid == sid) {
-                if (this.audio.paused) {
-                  this.audio.play();
-                } else {
-                  this.audio.pause();
-                }
-                return;
-              }
-              this.stopFn();
-            }
-            this.audio = uni.createInnerAudioContext();
-            this.audio.src = this.playUrl_wav || this.playUrl;
-            this.audio.sid = sid;
-            this.audio.onError((res) => {
-              this.reclog($T("JRu4::onError 播放错误：", ":onError Playback error: ") + res.errMsg, 1);
-            });
-            this.audio.timer = setInterval(() => {
-              if (this.playSid != sid)
-                return;
-              if (!this.audio.duration)
-                return;
-              var dur = Math.round(this.audio.duration * 1e3);
-              var cur = Math.round(this.audio.currentTime * 1e3);
-              var pos = !dur ? 0 : Math.min(100, Math.round(cur / dur * 100));
-              this.playing = !this.audio.paused;
-              this.player_durationNum = dur;
-              this.player_duration = this.formatTime(dur);
-              this.player_currentTime = this.formatTime(cur);
-              this.player_position = pos;
-            }, 100);
-            this.audio.seek(0);
-            this.audio.play();
-            if (this.playUrl_wav) {
-              this.status($T("7ity::使用转码的wav播放", ":Play using transcoded wav"));
-            }
-          };
-          this.stopFn = () => {
-            if (this.audio) {
-              clearInterval(this.audio.timer);
-              try {
-                this.audio.stop();
-              } catch (e) {
-              }
-              this.audio.destroy();
-            }
-          };
-          this.saveFileFn = () => {
-            this.reclog($T("OAiD::{1}字节文件已保存在：", ":The {1} byte file has been saved at: ", 0, aBuf0.byteLength) + path, 2);
-          };
-          return;
-        }
-        RecordApp.UniWebViewVueCall(this.getPage(), `
-				if(this.playUrl)URL.revokeObjectURL(this.playUrl);
-				this.playUrl=URL.createObjectURL(new Blob([this.player_buffer],{type:"${mime}"}));
-				document.querySelector(".${this.Class} .h5Audio").innerHTML='<audio style="width:100%" />';
-				this.playEl=document.querySelector(".${this.Class} .h5Audio audio");
-				this.playEl.controls=true;
-				this.playEl.src=this.playUrl;
-				this.playEl.onerror=function(e){ This.$ownerInstance.callMethod("status","${$T("8NWB::播放发生错误：", ":An error occurred during playback: ")}"+e.message); }
-				this.playEl.onpause=function(){ This.$ownerInstance.callMethod("player_stopFn",""); }
-			`);
-        okEnd();
-        this.playFn = () => {
-          this.playing = true;
-          RecordApp.UniWebViewVueCall(this.getPage(), `
-					if(this.playEl.paused){
-						this.playEl.play();
-					}else{
-						this.playEl.onpause();
-					}
-				`);
-        };
-        this.stopFn = () => {
-          this.playing = false;
-          RecordApp.UniWebViewVueCall(this.getPage(), `this.playEl.pause();`);
-        };
-        this.getPage().player_stopFn = this.stopFn;
-        this.saveFileFn = () => {
-          this.reclog($T("2Hr1::正在保存文件...", ":Saving file..."));
-          RecordApp.UniSaveLocalFile(fileName, aBuf0, (path2) => {
-            this.reclog($T("GW1Q::{1}字节文件已保存在：", ":The {1} byte file has been saved at: ", 0, aBuf0.byteLength) + path2, 2);
-          }, (err) => {
-            this.reclog(err);
-          });
-        };
-        return;
-      },
-      setPlayBytes(aBuf, aBuf_renderjs, duration, mime, recSet, Recorder2) {
-        this.show = false;
-        this.playStop();
-        this.playSid = (this.playSid || 0) + 1;
-        this.status("");
-        var aBuf0 = aBuf, mime0 = mime;
-        if (!aBuf) {
-          return;
-        }
-        RecordApp = Recorder2.RecordApp;
-        $T = Recorder2.i18n.$T;
-        var o = this.getTexts();
-        for (var k in o) {
-          this[k] = o[k];
-        }
-        var end = () => {
-          this.createAudio(recSet.type, aBuf0, mime0, aBuf, duration, mime);
-        };
-        if (!RecordApp.UniIsApp() || RecordApp.UniWithoutAppRenderjs) {
-          var wav = Recorder2[recSet.type + "2wav"], t1 = Date.now();
-          if (!wav)
-            return end();
-          var wavData = aBuf;
-          if (recSet.type == "pcm")
-            wavData = { sampleRate: recSet.sampleRate, bitRate: recSet.bitRate, blob: aBuf };
-          this.status($T("bHhO::正在转码成wav...", ":Converting to wav..."));
-          wav(wavData, (wavBuf, dur, mie) => {
-            aBuf = wavBuf;
-            duration = dur;
-            mime = mie;
-            this.reclog($T("MhM5::已转码成wav以供播放，耗时{1}ms", ":Transcoded to wav for playback, takes {1}ms", 0, Date.now() - t1));
-            end();
-          }, (msg) => {
-            this.reclog($T("oSeh::转码成wav失败：", ":Transcoding to wav failed: ") + msg, 1);
-            end();
-          });
-        } else {
-          var cb = RecordApp.UniMainCallBack((val) => {
-            if (val.errMsg) {
-              this.reclog($T("LU2T::转码成wav失败：", ":Transcoding to wav failed: ") + val.errMsg, 1);
-              end();
-              return;
-            }
-            if (val.ok == 2) {
-              end();
-              return;
-            }
-            this.reclog($T("65fk::已转码成wav以供播放，耗时{1}ms", ":Transcoded to wav for playback, takes {1}ms", 0, Date.now() - cbT1));
-            aBuf = RecordApp.UniMainTakeBigBytes(val.dataId);
-            duration = val.dur;
-            mime = val.mie;
-            end();
-          });
-          var bigBytes = null, bt1 = 0, cbT1 = Date.now();
-          if (!aBuf_renderjs) {
-            bigBytes = aBuf0;
-            bt1 = Date.now();
-            aBuf_renderjs = "BigBytes";
-            RecordApp.CLog("[播放器]正在将" + aBuf0.byteLength + "字节音频数据发送到renderjs，因为可能需要转码成wav，可能会比较慢");
-          }
-          this.status($T("XkoT::正在调用renderjs处理音频数据，此格式如果提供了{1}2wav，将会转码成wav，会比较耗时...", ":Renderjs is being called to process audio data. If {1}2wav is provided in this format, it will be transcoded into wav, which will be more time-consuming...", 0, recSet.type));
-          RecordApp.UniWebViewVueCall(this.getPage(), `
-					if(${bt1})RecordApp.CLog("[播放器]完成传输${aBuf0.byteLength}字节的数据到renderjs，耗时"+(Date.now()-${bt1})+"ms");
-					var recSet=${JSON.stringify(recSet)}, aBuf0=${aBuf_renderjs}, aBuf=aBuf0, duration, mime;
-					var end=function(err){
-						This.player_buffer=aBuf,t1=Date.now();
-						if(err) return RecordApp.UniWebViewSendToMain({action:"${cb}",errMsg:err});
-						if(aBuf==aBuf0) return RecordApp.UniWebViewSendToMain({action:"${cb}",ok:2});
-						RecordApp.CLog("[播放器]开始传输"+aBuf.byteLength+"字节的数据回逻辑层，可能会比较慢");
-						RecordApp.UniWebViewSendBigBytesToMain(aBuf,function(dataId){//数据可能很大
-							RecordApp.CLog("[播放器]完成传输"+aBuf.byteLength+"字节的数据回逻辑层，耗时"+(Date.now()-t1)+"ms");
-							RecordApp.UniWebViewSendToMain({action:"${cb}",ok:1,dataId:dataId,dur:duration,mie:mime});
-						},end);
-					};
-					var wav=Recorder[recSet.type+"2wav"];
-					if(!wav) return end();
-					var wavData=aBuf;
-					if(recSet.type=="pcm") wavData={ sampleRate:recSet.sampleRate,bitRate:recSet.bitRate,blob:aBuf };
-					wav(wavData,function(wavBuf,dur,mie){
-						aBuf=wavBuf; duration=dur; mime=mie;
-						end();
-					},function(msg){
-						end("${$T("mzxq::转码成wav失败：", ":Transcoding to wav failed: ")}"+msg);
-					});
-				`, bigBytes);
-        }
-      }
-    }
-  };
-  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.createCommentVNode(`<view>\r
-<view :class="Class" :style="{display:show?'':'none'}">\r
- 	<view v-if="show" style="padding:0 10px;display:flex;flex-direction:row;">\r
-		<view>\r
-			<button size="mini" @click="playStart">{{playing?T_pause:T_play}}</button>\r
-		</view>\r
-		<view style="flex:1"></view>\r
-		<view>\r
-			<button size="mini" @click="shareFile">{{T_download}}</button>\r
-		</view>\r
-	</view>\r
-	<view class="shareFileMsg"></view>\r
-	\r
-	<view v-if="show && showControlUI">\r
-		<view style="padding-top:10px">\r
-			<slider :value="player_position" @change="setPlayerPosition" step="1" max="100" min="0"></slider>\r
-		</view>\r
-		<view style="padding:0 10px;display:flex;flex-direction:row;">\r
-			<view style="flex:1">{{player_currentTime}}</view>\r
-			<view style="flex:1;text-align: right;">{{player_duration}}</view>\r
-		</view>\r
-	</view>\r
-	\r
-	<view class="h5Audio"></view>\r
-</view>\r
-<view style="color:#f60">{{statusMsg}}</view>\r
-</view> `);
-  }
-  const TestPlayer = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "E:/fuchuang/learn/demo1/components/micphone/test_player___.vue"]]);
-  const block0 = (Comp) => {
-    (Comp.$renderjs || (Comp.$renderjs = [])).push("testMainVue");
-    (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["testMainVue"] = "5d771a22";
-  };
-  var disableOgg = false;
-  var RecUtsPlugin = null;
-  const _sfc_main$2 = {
-    components: { TestPlayer },
-    props: {
-      // 检测类型 + 其他验证
-      StopHandler: {
-        type: Function,
-        default: function(value) {
-          formatAppLog("log", "at components/micphone/micphone.vue:88", "default handler");
-        },
-        required: true
-      }
-    },
-    data() {
-      return {
-        recType: "mp3",
-        recSampleRate: 16e3,
-        recBitRate: 16,
-        takeoffEncodeChunkSet: false,
-        takeoffEncodeChunkMsg: "",
-        appUseH5Rec: false,
-        recwaveChoiceKey: "WaveView",
-        recpowerx: 0,
-        recpowert: "",
-        pageDeep: 0,
-        pageNewPath: "main_recTest",
-        disableOgg,
-        evalExecCode: "",
-        reclogs: [],
-        recogText: "recogText"
-      };
-    },
-    mounted() {
-      var vueVer = [];
-      var vv = typeof Vue != "undefined" && Vue && Vue.version;
-      if (vv)
-        vueVer.push("Vue.version:" + vv);
-      var v3 = (((this.$ || {}).appContext || {}).app || {}).version;
-      if (v3)
-        vueVer.push("appContext.app.version:" + v3);
-      var v2 = (((this.$root || {}).constructor || {}).super || {}).version;
-      if (v2)
-        vueVer.push("constructor.super:" + v2);
-      formatAppLog("log", "at components/micphone/micphone.vue:119", "页面mounted(" + getCurrentPages().length + "层)，Vue=" + vueVer.join("/") + "，WebViewId=" + (this.$root.$page && this.$root.$page.id || "?") + "，ComponentId=_$id:" + (this._$id || "?") + "/$.uid:" + (this.$ && this.$.uid || "?") + "，Recorder.LM=" + Recorder.LM + "，RecordApp.LM=" + RecordApp$1.LM + "，UniSupportLM=" + RecordApp$1.UniSupportLM + "，UniJsSource=" + RecordApp$1.UniJsSource.IsSource);
-      this.pageDeep = getCurrentPages().length;
-      this.pageNewPath = /main_recTest/.test(this.getRouteStr()) ? "page_index2" : "main_recTest";
-      this.isMounted = true;
-      this.uniPage__onShow();
-      formatAppLog("log", "at components/micphone/micphone.vue:133", "正在执行Install，请勿操作...", "#f60");
-      RecordApp$1.UniNativeUtsPlugin = RecUtsPlugin;
-      RecordApp$1.Install(() => {
-        formatAppLog("log", "at components/micphone/micphone.vue:136", "Install成功，环境：" + this.currentKeyTag(), 2);
-        formatAppLog("log", "at components/micphone/micphone.vue:137", "请先请求录音权限，然后再开始录音");
-        this.recReq();
-      }, (err) => {
-        formatAppLog("log", "at components/micphone/micphone.vue:140", "RecordApp.Install出错：" + err, 1);
-      });
-    },
-    unmounted() {
-      RecordApp$1.Stop();
-    },
-    onShow() {
-      if (this.isMounted)
-        this.uniPage__onShow();
-    },
-    methods: {
-      uniPage__onShow() {
-        RecordApp$1.UniPageOnShow(this);
-      },
-      currentKeyTag() {
-        if (!RecordApp$1.Current)
-          return "[?]";
-        var tag2 = "Renderjs+H5";
-        if (RecordApp$1.UniNativeUtsPlugin) {
-          tag2 = RecordApp$1.UniNativeUtsPlugin.nativePlugin ? "NativePlugin" : "UtsPlugin";
-        }
-        return RecordApp$1.Current.Key + "(" + tag2 + ")";
-      },
-      recReq() {
-        RecordApp$1.UniNativeUtsPlugin = RecUtsPlugin;
-        if (this.appUseH5Rec) {
-          RecordApp$1.UniNativeUtsPlugin = null;
-        }
-        if (RecordApp$1.UniIsApp() && !RecordApp$1.UniNativeUtsPlugin) {
-          formatAppLog("log", "at components/micphone/micphone.vue:180", "当前是在App的renderjs中使用H5进行录音，iOS上只支持14.3以上版本，且iOS上每次进入页面后第一次请求录音权限时、或长时间无操作再请求录音权限时WebView均会弹出录音权限对话框，不同旧iOS版本（低于iOS17）下H5录音可能存在的问题在App中同样会存在；使用配套的原生录音插件或uts插件时无以上问题和版本限制，Android也无以上问题", "#f60");
-        }
-        formatAppLog("log", "at components/micphone/micphone.vue:183", "正在请求录音权限...");
-        RecordApp$1.UniWebViewActivate(this);
-        RecordApp$1.RequestPermission(() => {
-          formatAppLog("log", "at components/micphone/micphone.vue:186", this.currentKeyTag() + " 已获得录音权限，可以开始录音了", 2);
-        }, (msg, isUserNotAllow) => {
-          formatAppLog("log", "at components/micphone/micphone.vue:191", this.currentKeyTag() + " " + (isUserNotAllow ? "isUserNotAllow," : "") + "请求录音权限失败：" + msg, 1);
-        });
-      },
-      recStart() {
-        this.$refs.player.setPlayBytes(null);
-        this.takeoffEncodeChunkMsg = "";
-        var takeEcCount = 0, takeEcSize = 0;
-        this.takeEcChunks = this.takeoffEncodeChunkSet ? [] : null;
-        RecordApp$1.UniWebViewActivate(this);
-        RecordApp$1.Start({
-          type: this.recType,
-          sampleRate: this.recSampleRate,
-          bitRate: this.recBitRate,
-          onProcess: (buffers, powerLevel, duration, sampleRate, newBufferIdx, asyncEnd) => {
-            this.recpowerx = powerLevel;
-            this.recpowert = this.formatTime(duration, 1) + " / " + powerLevel;
-          },
-          onProcess_renderjs: `function(buffers,powerLevel,duration,sampleRate,newBufferIdx,asyncEnd){
-					//App中在这里修改buffers才会改变生成的音频文件
-					//App中是在renderjs中进行的可视化图形绘制，因此需要写在这里，this是renderjs模块的this（也可以用This变量）；如果代码比较复杂，请直接在renderjs的methods里面放个方法xxxFunc，这里直接使用this.xxxFunc(args)进行调用
-					var wave=this.waveStore&&this.waveStore[this.recwaveChoiceKey];
-					if(wave){
-						wave.input(buffers[buffers.length-1],powerLevel,sampleRate);
-					}
-				}`,
-          takeoffEncodeChunk: !this.takeoffEncodeChunkSet ? null : (chunkBytes) => {
-            takeEcCount++;
-            takeEcSize += chunkBytes.byteLength;
-            this.takeoffEncodeChunkMsg = "已接收到" + takeEcCount + "块，共" + takeEcSize + "字节";
-            this.takeEcChunks.push(chunkBytes);
-          },
-          takeoffEncodeChunk_renderjs: !this.takeoffEncodeChunkSet ? null : `function(chunkBytes){
-					//App中这里可以做一些仅在renderjs中才生效的事情，不提供也行，this是renderjs模块的this（也可以用This变量）
-				}`,
-          start_renderjs: `function(){
-					//App中可以放一个函数，在Start成功时renderjs中会先调用这里的代码，this是renderjs模块的this（也可以用This变量）
-					//放一些仅在renderjs中才生效的事情，比如初始化，不提供也行
-				}`,
-          stop_renderjs: `function(aBuf,duration,mime){
-					//App中可以放一个函数，在Stop成功时renderjs中会先调用这里的代码，this是renderjs模块的this（也可以用This变量）
-					this.audioData=aBuf; //留着给Stop时进行转码成wav播放
-				}`
-        }, () => {
-          formatAppLog("log", "at components/micphone/micphone.vue:254", this.currentKeyTag() + " 录制中：" + this.recType + " " + this.recSampleRate + " " + this.recBitRate + "kbps" + (this.takeoffEncodeChunkSet ? " takeoffEncodeChunk" : "") + (this.appUseH5Rec ? " appUseH5Rec" : ""));
-        }, (msg) => {
-          formatAppLog("log", "at components/micphone/micphone.vue:261", this.currentKeyTag() + " 开始录音失败：" + msg);
-        });
-      },
-      recStop() {
-        formatAppLog("log", "at components/micphone/micphone.vue:265", "正在结束录音...");
-        RecordApp$1.Stop((aBuf, duration, mime) => {
-          var recSet = (RecordApp$1.GetCurrentRecOrNull() || { set: { type: this.recType } }).set;
-          formatAppLog("log", "at components/micphone/micphone.vue:271", "已录制[" + mime + "]：" + this.formatTime(duration, 1) + " " + aBuf.byteLength + "字节 " + recSet.sampleRate + "hz " + recSet.bitRate + "kbps", 2);
-          if (this.takeEcChunks) {
-            formatAppLog("log", "at components/micphone/micphone.vue:277", "启用takeoffEncodeChunk后Stop返回的blob长度为0不提供音频数据");
-            var len = 0;
-            for (var i = 0; i < this.takeEcChunks.length; i++)
-              len += this.takeEcChunks[i].length;
-            var chunkData = new Uint8Array(len);
-            for (var i = 0, idx = 0; i < this.takeEcChunks.length; i++) {
-              var itm = this.takeEcChunks[i];
-              chunkData.set(itm, idx);
-              idx += itm.length;
-            }
-            aBuf = chunkData.buffer;
-            formatAppLog("log", "at components/micphone/micphone.vue:286", "takeoffEncodeChunk接收到的音频片段，已合并成一个音频文件 " + aBuf.byteLength + "字节");
-          }
-          RecordApp$1.UniSaveLocalFile("recorder.mp3", aBuf, (savePath) => {
-            uni.uploadFile({
-              url: "http://127.0.0.1:8000/speechtotext",
-              filePath: savePath,
-              name: "mp3",
-              formData: {},
-              success: (res) => {
-                formatAppLog("log", "at components/micphone/micphone.vue:314", "上传成功：" + res.data);
-                this.StopHandler();
-              },
-              fail: (err) => {
-                formatAppLog("error", "at components/micphone/micphone.vue:317", "上传录音失败：" + err);
-              }
-            });
-          }, (err) => {
-            formatAppLog("error", "at components/micphone/micphone.vue:319", "保存录音失败：" + err);
-          });
-        }, (msg) => {
-          formatAppLog("log", "at components/micphone/micphone.vue:322", "结束录音失败：" + msg, 1);
-        });
-      },
-      appUseH5RecClick() {
-        this.appUseH5Rec = !this.appUseH5Rec;
-        RecordApp$1.Current = null;
-        formatAppLog("log", "at components/micphone/micphone.vue:329", "切换了appUseH5Rec=" + this.appUseH5Rec + "，重新请求录音权限后生效", "#f60");
-      },
-      formatTime(ms, showSS) {
-        var ss = ms % 1e3;
-        ms = (ms - ss) / 1e3;
-        var s = ms % 60;
-        ms = (ms - s) / 60;
-        var m = ms % 60;
-        ms = (ms - m) / 60;
-        var h = ms, v = "";
-        if (h > 0)
-          v += (h < 10 ? "0" : "") + h + ":";
-        v += (m < 10 ? "0" : "") + m + ":";
-        v += (s < 10 ? "0" : "") + s;
-        if (showSS)
-          v += "″" + ("00" + ss).substr(-3);
-        return v;
-      },
-      getRouteStr() {
-        var url = this.$page && this.$page.route || this.$root.route;
-        if (!url && this.$root.$scope) {
-          url = this.$root.$scope.route;
-        }
-        return "/" + url;
-      }
-    }
-  };
-  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_TestPlayer = vue.resolveComponent("TestPlayer");
-    return vue.openBlock(), vue.createElementBlock("view", null, [
-      vue.createElementVNode(
-        "img",
-        {
-          src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/micphone/mic1.png",
-          onTouchstart: _cache[0] || (_cache[0] = (...args) => $options.recStart && $options.recStart(...args)),
-          onTouchend: _cache[1] || (_cache[1] = (...args) => $options.recStop && $options.recStop(...args)),
-          class: "micphone"
-        },
-        null,
-        32
-        /* HYDRATE_EVENTS */
-      ),
-      vue.createElementVNode("view", { style: { "padding-top": "10px" } }, [
-        vue.createVNode(
-          _component_TestPlayer,
-          { ref: "player" },
-          null,
-          512
-          /* NEED_PATCH */
-        )
-      ])
-    ]);
-  }
   if (typeof block0 === "function")
-    block0(_sfc_main$2);
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__scopeId", "data-v-609587ba"], ["__file", "E:/fuchuang/learn/demo1/components/micphone/micphone.vue"]]);
-  const _sfc_main$1 = {
+    block0(_sfc_main$5);
+  const PagesTest_apiTest_api = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test_api.vue"]]);
+  const recorderManager$1 = uni.getRecorderManager();
+  const innerAudioContext$1 = uni.createInnerAudioContext();
+  innerAudioContext$1.autoplay = true;
+  const _sfc_main$4 = {
+    data() {
+      return {
+        text: "uni-app",
+        voicePath: ""
+      };
+    },
+    methods: {
+      startRecord() {
+        formatAppLog("log", "at components/micphone/micphone.vue:20", "开始录音");
+        recorderManager$1.start();
+      },
+      endRecord() {
+        formatAppLog("log", "at components/micphone/micphone.vue:24", "录音结束");
+        recorderManager$1.stop();
+        recorderManager$1.onStop(function(res) {
+          formatAppLog("log", "at components/micphone/micphone.vue:27", JSON.stringify(res));
+          uni.uploadFile({
+            url: "http://127.0.0.1:8000/speechtotext",
+            filePath: res.tempFilePath,
+            name: "mp3",
+            formData: {},
+            success: (res2) => {
+              formatAppLog("log", "at components/micphone/micphone.vue:34", "上传成功：" + JSON.stringify(res2));
+            },
+            fail: (err) => {
+              formatAppLog("error", "at components/micphone/micphone.vue:36", "上传录音失败：" + err);
+            }
+          });
+        });
+      }
+    }
+  };
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "image",
+      {
+        onTouchstart: _cache[0] || (_cache[0] = (...args) => $options.startRecord && $options.startRecord(...args)),
+        onTouchend: _cache[1] || (_cache[1] = (...args) => $options.endRecord && $options.endRecord(...args)),
+        src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/micphone/mic1.png",
+        class: "mic"
+      },
+      null,
+      32
+      /* HYDRATE_EVENTS */
+    );
+  }
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-609587ba"], ["__file", "E:/fuchuang/learn/demo1/components/micphone/micphone.vue"]]);
+  const _sfc_main$3 = {
     data() {
       return {
         //键盘高度
@@ -7416,7 +6901,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_micphone = resolveEasycom(vue.resolveDynamicComponent("micphone"), __easycom_0);
     return vue.openBlock(), vue.createElementBlock("view", { class: "chat" }, [
       vue.createElementVNode("scroll-view", {
@@ -7479,7 +6964,157 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesSmartTravelSmartTravel = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__scopeId", "data-v-94ba6231"], ["__file", "E:/fuchuang/learn/demo1/pages/smart-travel/smart-travel.vue"]]);
+  const PagesSmartTravelSmartTravel = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__scopeId", "data-v-94ba6231"], ["__file", "E:/fuchuang/learn/demo1/pages/smart-travel/smart-travel.vue"]]);
+  const recorderManager = uni.getRecorderManager();
+  const innerAudioContext = uni.createInnerAudioContext();
+  innerAudioContext.autoplay = true;
+  const _sfc_main$2 = {
+    data() {
+      return {
+        text: "uni-app",
+        voicePath: ""
+      };
+    },
+    onLoad() {
+      recorderManager.onStop(function(res) {
+        this.voicePath = res.tempFilePath;
+        formatAppLog("log", "at pages/recTest/native_test.vue:25", JSON.stringify(res));
+        uni.uploadFile({
+          url: "http://127.0.0.1:8000/speechtotext",
+          filePath: this.voicePath,
+          name: "mp3",
+          formData: {},
+          header: {
+            "content-type": "multipart/form-data"
+          },
+          success: (res2) => {
+            formatAppLog("log", "at pages/recTest/native_test.vue:35", "上传成功：" + JSON.stringify(res2));
+            if (res2.statusCode != 200) {
+              uni.showToast({
+                icon: "none",
+                title: res2.data,
+                duration: 2e3
+              });
+            }
+          },
+          fail: (err) => {
+            formatAppLog("error", "at pages/recTest/native_test.vue:45", "上传录音失败：" + err.errMsg);
+            uni.showToast({
+              icon: "none",
+              title: err.errMsg,
+              duration: 2e3
+            });
+          }
+        });
+      });
+    },
+    methods: {
+      startRecord() {
+        formatAppLog("log", "at pages/recTest/native_test.vue:57", "开始录音");
+        recorderManager.start();
+      },
+      endRecord() {
+        formatAppLog("log", "at pages/recTest/native_test.vue:62", "录音结束");
+        recorderManager.stop();
+      },
+      playVoice() {
+        formatAppLog("log", "at pages/recTest/native_test.vue:66", "播放录音");
+        if (this.voicePath) {
+          innerAudioContext.src = this.voicePath;
+          innerAudioContext.play();
+        }
+      }
+    }
+  };
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("button", {
+        onClick: _cache[0] || (_cache[0] = (...args) => $options.startRecord && $options.startRecord(...args))
+      }, "开始录音"),
+      vue.createElementVNode("button", {
+        onClick: _cache[1] || (_cache[1] = (...args) => $options.endRecord && $options.endRecord(...args))
+      }, "停止录音"),
+      vue.createElementVNode("button", {
+        onClick: _cache[2] || (_cache[2] = (...args) => $options.playVoice && $options.playVoice(...args))
+      }, "播放录音")
+    ]);
+  }
+  const PagesRecTestNative_test = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/native_test.vue"]]);
+  const _sfc_main$1 = {
+    data() {
+      return {};
+    },
+    methods: {}
+  };
+  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "wholeview" }, [
+      vue.createElementVNode("view", { class: "topbar" }, [
+        vue.createElementVNode("view", { class: "topbarleft" }, [
+          vue.createElementVNode("text", { class: "topbarlefttitle" }, " 健康助手 "),
+          vue.createElementVNode("view", { class: "topbarlefticon" }, [
+            vue.createElementVNode("text", { class: "topbarlefticontext" }, "Λ")
+          ])
+        ]),
+        vue.createElementVNode("image", {
+          class: "topbarright",
+          src: "/static/smart-chat/manage.png"
+        })
+      ]),
+      vue.createElementVNode("scroll-view", {
+        style: vue.normalizeStyle({ height: `${_ctx.windowHeight - 300}rpx` }),
+        id: "scrollview",
+        "scroll-y": "true",
+        "scroll-top": _ctx.scrollTop,
+        class: "scroll-view"
+      }, [
+        vue.createElementVNode("view"),
+        vue.createElementVNode("view", { class: "middlebox" }),
+        vue.createElementVNode("view", null, [
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br")
+        ])
+      ], 12, ["scroll-top"])
+    ]);
+  }
+  const PagesSmartChatSmartChat = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "E:/fuchuang/learn/demo1/pages/smart-chat/smart-chat.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
   __definePage("pages/test/test", PagesTestTest);
   __definePage("pages/recTest/page_index", PagesRecTestPage_index);
@@ -7491,6 +7126,8 @@ if (uni.restoreGlobal) {
   __definePage("pages/recTest/my_test", PagesRecTestMy_test);
   __definePage("pages/test_api/test_api", PagesTest_apiTest_api);
   __definePage("pages/smart-travel/smart-travel", PagesSmartTravelSmartTravel);
+  __definePage("pages/recTest/native_test", PagesRecTestNative_test);
+  __definePage("pages/smart-chat/smart-chat", PagesSmartChatSmartChat);
   const _sfc_main = {
     onLaunch: function() {
       formatAppLog("log", "at App.vue:4", "App Launch");

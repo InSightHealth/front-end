@@ -1,369 +1,5 @@
-import { _ as _export_sfc, f as formatAppLog } from "../../_plugin-vue_export-helper.js";
-import { resolveComponent, openBlock, createElementBlock, createElementVNode, normalizeClass, normalizeStyle, createVNode, withCtx, createTextVNode, toDisplayString, createCommentVNode, Fragment, renderList } from "vue";
-var RecordApp$1, $T;
-const _sfc_main$1 = {
-  data() {
-    return {
-      ...this.getTexts(),
-      show: false,
-      statusMsg: "",
-      Class: ("a" + Math.random()).replace(".", ""),
-      showControlUI: false,
-      useNvuePlayer: false,
-      playing: false,
-      player_position: 0,
-      player_currentTime: "00:00",
-      player_duration: "00:00",
-      player_durationNum: 0
-    };
-  },
-  methods: {
-    shareFile() {
-      this.saveFileFn();
-    },
-    playStart() {
-      this.playFn();
-    },
-    playStop() {
-      this.stopFn && this.stopFn();
-    },
-    setPlayerPosition(e) {
-      this.setPosFn(e);
-    },
-    getPage() {
-      var p = this.$parent;
-      while (p) {
-        if (p.reclog)
-          break;
-        p = p.$parent;
-      }
-      return p;
-    },
-    reclog() {
-      this.getPage().reclog.apply(this.$parent, arguments);
-    },
-    getTexts() {
-      return {
-        T_pause: $T ? $T("oozQ::暂停播放", ":Pause") : "",
-        T_play: $T ? $T("PPxS::播放", ":Play") : "",
-        T_download: $T ? $T("jtJH::下载保存", ":Download and save") : ""
-      };
-    },
-    status(msg) {
-      msg = msg ? $T("w7J2::播放器创建中：", ":Player is being created: ") + msg : "";
-      this.statusMsg = msg;
-      if (msg)
-        RecordApp$1.CLog(msg);
-    },
-    formatTime(ms, showSS) {
-      var ss = ms % 1e3;
-      ms = (ms - ss) / 1e3;
-      var s = ms % 60;
-      ms = (ms - s) / 60;
-      var m = ms % 60;
-      ms = (ms - m) / 60;
-      var h = ms, v = "";
-      if (h > 0)
-        v += (h < 10 ? "0" : "") + h + ":";
-      v += (m < 10 ? "0" : "") + m + ":";
-      v += (s < 10 ? "0" : "") + s;
-      if (showSS)
-        v += "″" + ("00" + ss).substr(-3);
-      return v;
-    },
-    createAudio(type, aBuf0, mime0, aBuf, duration, mime) {
-      this.show = false;
-      this.status("");
-      this.playing = false;
-      this.player_durationNum = duration;
-      this.player_duration = this.formatTime(duration);
-      this.player_currentTime = "00:00";
-      this.player_position = 0;
-      var fileName = "recordapp-" + Date.now() + "." + type;
-      var okEnd = () => {
-        this.show = true;
-        this.status("");
-        RecordApp$1.CLog($T("GXCV::播放器创建完成，可以播放了", ":The player is created and can be played"));
-      };
-      if (this.useNvuePlayer) {
-        this.showControlUI = true;
-        var saveBuf = (tag, sPath, sBuffer, next) => {
-          RecordApp$1.UniSaveLocalFile(sPath, sBuffer, (path2) => {
-            this.reclog(tag + $T("FtgC::文件已保存在：", ":File has been saved at: ") + path2);
-            next(path2);
-          }, (err) => {
-            this.status(tag + $T("9AGy::保存文件失败，将无法播放：", ":Failed to save the file and will not be able to play it: ") + err);
-          });
-        };
-        this.status($T("4xcp::正在将数据保存成本地文件以供播放...", ":Saving data to local file for playback..."));
-        var path = "", wavPath = "";
-        var saveOk = () => {
-          this.playUrl = path;
-          this.playUrl_wav = wavPath;
-          okEnd();
-        };
-        saveBuf("", fileName, aBuf0, (p) => {
-          path = p;
-          if (aBuf == aBuf0) {
-            saveOk();
-            return;
-          }
-          saveBuf($T("fU7N::[转码成wav播放]", ":[Transcode to wav for playback]"), fileName + ".wav", aBuf, (p2) => {
-            wavPath = p2;
-            saveOk();
-          });
-        });
-        this.setPosFn = (e) => {
-          var val = e.detail.value;
-          if (!this.audio)
-            this.playFn();
-          var time = Math.round(this.player_durationNum * val / 100);
-          this.audio.seek(time / 1e3);
-          this.audio.play();
-        };
-        this.playFn = () => {
-          var sid = this.playSid;
-          if (this.audio) {
-            if (this.audio.sid == sid) {
-              if (this.audio.paused) {
-                this.audio.play();
-              } else {
-                this.audio.pause();
-              }
-              return;
-            }
-            this.stopFn();
-          }
-          this.audio = uni.createInnerAudioContext();
-          this.audio.src = this.playUrl_wav || this.playUrl;
-          this.audio.sid = sid;
-          this.audio.onError((res) => {
-            this.reclog($T("JRu4::onError 播放错误：", ":onError Playback error: ") + res.errMsg, 1);
-          });
-          this.audio.timer = setInterval(() => {
-            if (this.playSid != sid)
-              return;
-            if (!this.audio.duration)
-              return;
-            var dur = Math.round(this.audio.duration * 1e3);
-            var cur = Math.round(this.audio.currentTime * 1e3);
-            var pos = !dur ? 0 : Math.min(100, Math.round(cur / dur * 100));
-            this.playing = !this.audio.paused;
-            this.player_durationNum = dur;
-            this.player_duration = this.formatTime(dur);
-            this.player_currentTime = this.formatTime(cur);
-            this.player_position = pos;
-          }, 100);
-          this.audio.seek(0);
-          this.audio.play();
-          if (this.playUrl_wav) {
-            this.status($T("7ity::使用转码的wav播放", ":Play using transcoded wav"));
-          }
-        };
-        this.stopFn = () => {
-          if (this.audio) {
-            clearInterval(this.audio.timer);
-            try {
-              this.audio.stop();
-            } catch (e) {
-            }
-            this.audio.destroy();
-          }
-        };
-        this.saveFileFn = () => {
-          this.reclog($T("OAiD::{1}字节文件已保存在：", ":The {1} byte file has been saved at: ", 0, aBuf0.byteLength) + path, 2);
-        };
-        return;
-      }
-      RecordApp$1.UniWebViewVueCall(this.getPage(), `
-				if(this.playUrl)URL.revokeObjectURL(this.playUrl);
-				this.playUrl=URL.createObjectURL(new Blob([this.player_buffer],{type:"${mime}"}));
-				document.querySelector(".${this.Class} .h5Audio").innerHTML='<audio style="width:100%" />';
-				this.playEl=document.querySelector(".${this.Class} .h5Audio audio");
-				this.playEl.controls=true;
-				this.playEl.src=this.playUrl;
-				this.playEl.onerror=function(e){ This.$ownerInstance.callMethod("status","${$T("8NWB::播放发生错误：", ":An error occurred during playback: ")}"+e.message); }
-				this.playEl.onpause=function(){ This.$ownerInstance.callMethod("player_stopFn",""); }
-			`);
-      okEnd();
-      this.playFn = () => {
-        this.playing = true;
-        RecordApp$1.UniWebViewVueCall(this.getPage(), `
-					if(this.playEl.paused){
-						this.playEl.play();
-					}else{
-						this.playEl.onpause();
-					}
-				`);
-      };
-      this.stopFn = () => {
-        this.playing = false;
-        RecordApp$1.UniWebViewVueCall(this.getPage(), `this.playEl.pause();`);
-      };
-      this.getPage().player_stopFn = this.stopFn;
-      this.saveFileFn = () => {
-        this.reclog($T("2Hr1::正在保存文件...", ":Saving file..."));
-        RecordApp$1.UniSaveLocalFile(fileName, aBuf0, (path2) => {
-          this.reclog($T("GW1Q::{1}字节文件已保存在：", ":The {1} byte file has been saved at: ", 0, aBuf0.byteLength) + path2, 2);
-        }, (err) => {
-          this.reclog(err);
-        });
-      };
-      return;
-    },
-    setPlayBytes(aBuf, aBuf_renderjs, duration, mime, recSet, Recorder2) {
-      this.show = false;
-      this.playStop();
-      this.playSid = (this.playSid || 0) + 1;
-      this.status("");
-      var aBuf0 = aBuf, mime0 = mime;
-      if (!aBuf) {
-        return;
-      }
-      RecordApp$1 = Recorder2.RecordApp;
-      $T = Recorder2.i18n.$T;
-      var o = this.getTexts();
-      for (var k in o) {
-        this[k] = o[k];
-      }
-      var end = () => {
-        this.createAudio(recSet.type, aBuf0, mime0, aBuf, duration, mime);
-      };
-      if (!RecordApp$1.UniIsApp() || RecordApp$1.UniWithoutAppRenderjs) {
-        var wav = Recorder2[recSet.type + "2wav"], t1 = Date.now();
-        if (!wav)
-          return end();
-        var wavData = aBuf;
-        if (recSet.type == "pcm")
-          wavData = { sampleRate: recSet.sampleRate, bitRate: recSet.bitRate, blob: aBuf };
-        this.status($T("bHhO::正在转码成wav...", ":Converting to wav..."));
-        wav(wavData, (wavBuf, dur, mie) => {
-          aBuf = wavBuf;
-          duration = dur;
-          mime = mie;
-          this.reclog($T("MhM5::已转码成wav以供播放，耗时{1}ms", ":Transcoded to wav for playback, takes {1}ms", 0, Date.now() - t1));
-          end();
-        }, (msg) => {
-          this.reclog($T("oSeh::转码成wav失败：", ":Transcoding to wav failed: ") + msg, 1);
-          end();
-        });
-      } else {
-        var cb = RecordApp$1.UniMainCallBack((val) => {
-          if (val.errMsg) {
-            this.reclog($T("LU2T::转码成wav失败：", ":Transcoding to wav failed: ") + val.errMsg, 1);
-            end();
-            return;
-          }
-          if (val.ok == 2) {
-            end();
-            return;
-          }
-          this.reclog($T("65fk::已转码成wav以供播放，耗时{1}ms", ":Transcoded to wav for playback, takes {1}ms", 0, Date.now() - cbT1));
-          aBuf = RecordApp$1.UniMainTakeBigBytes(val.dataId);
-          duration = val.dur;
-          mime = val.mie;
-          end();
-        });
-        var bigBytes = null, bt1 = 0, cbT1 = Date.now();
-        if (!aBuf_renderjs) {
-          bigBytes = aBuf0;
-          bt1 = Date.now();
-          aBuf_renderjs = "BigBytes";
-          RecordApp$1.CLog("[播放器]正在将" + aBuf0.byteLength + "字节音频数据发送到renderjs，因为可能需要转码成wav，可能会比较慢");
-        }
-        this.status($T("XkoT::正在调用renderjs处理音频数据，此格式如果提供了{1}2wav，将会转码成wav，会比较耗时...", ":Renderjs is being called to process audio data. If {1}2wav is provided in this format, it will be transcoded into wav, which will be more time-consuming...", 0, recSet.type));
-        RecordApp$1.UniWebViewVueCall(this.getPage(), `
-					if(${bt1})RecordApp.CLog("[播放器]完成传输${aBuf0.byteLength}字节的数据到renderjs，耗时"+(Date.now()-${bt1})+"ms");
-					var recSet=${JSON.stringify(recSet)}, aBuf0=${aBuf_renderjs}, aBuf=aBuf0, duration, mime;
-					var end=function(err){
-						This.player_buffer=aBuf,t1=Date.now();
-						if(err) return RecordApp.UniWebViewSendToMain({action:"${cb}",errMsg:err});
-						if(aBuf==aBuf0) return RecordApp.UniWebViewSendToMain({action:"${cb}",ok:2});
-						RecordApp.CLog("[播放器]开始传输"+aBuf.byteLength+"字节的数据回逻辑层，可能会比较慢");
-						RecordApp.UniWebViewSendBigBytesToMain(aBuf,function(dataId){//数据可能很大
-							RecordApp.CLog("[播放器]完成传输"+aBuf.byteLength+"字节的数据回逻辑层，耗时"+(Date.now()-t1)+"ms");
-							RecordApp.UniWebViewSendToMain({action:"${cb}",ok:1,dataId:dataId,dur:duration,mie:mime});
-						},end);
-					};
-					var wav=Recorder[recSet.type+"2wav"];
-					if(!wav) return end();
-					var wavData=aBuf;
-					if(recSet.type=="pcm") wavData={ sampleRate:recSet.sampleRate,bitRate:recSet.bitRate,blob:aBuf };
-					wav(wavData,function(wavBuf,dur,mie){
-						aBuf=wavBuf; duration=dur; mime=mie;
-						end();
-					},function(msg){
-						end("${$T("mzxq::转码成wav失败：", ":Transcoding to wav failed: ")}"+msg);
-					});
-				`, bigBytes);
-      }
-    }
-  }
-};
-function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_button = resolveComponent("button");
-  const _component_u_slider = resolveComponent("u-slider");
-  return openBlock(), createElementBlock("view", { renderWhole: true }, [
-    createElementVNode("view", {
-      class: normalizeClass($data.Class),
-      style: normalizeStyle({ display: $data.show ? "" : "none" })
-    }, [
-      $data.show ? (openBlock(), createElementBlock("view", {
-        key: 0,
-        style: { "padding": "0 10px", "display": "flex", "flex-direction": "row" }
-      }, [
-        createElementVNode("view", null, [
-          createVNode(_component_button, {
-            size: "mini",
-            onClick: $options.playStart
-          }, {
-            default: withCtx(() => [
-              createTextVNode(toDisplayString($data.playing ? _ctx.T_pause : _ctx.T_play), 1)
-            ]),
-            _: 1
-          }, 8, ["onClick"])
-        ]),
-        createElementVNode("view", { style: { "flex": "1" } }),
-        createElementVNode("view", null, [
-          createVNode(_component_button, {
-            size: "mini",
-            onClick: $options.shareFile
-          }, {
-            default: withCtx(() => [
-              createTextVNode(toDisplayString(_ctx.T_download), 1)
-            ]),
-            _: 1
-          }, 8, ["onClick"])
-        ])
-      ])) : createCommentVNode("", true),
-      createElementVNode("view", { class: "shareFileMsg" }),
-      $data.show && $data.showControlUI ? (openBlock(), createElementBlock("view", { key: 1 }, [
-        createElementVNode("view", { style: { "padding-top": "10px" } }, [
-          createVNode(_component_u_slider, {
-            value: $data.player_position,
-            onChange: $options.setPlayerPosition,
-            step: "1",
-            max: "100",
-            min: "0"
-          }, null, 8, ["value", "onChange"])
-        ]),
-        createElementVNode("view", { style: { "padding": "0 10px", "display": "flex", "flex-direction": "row" } }, [
-          createElementVNode("view", { style: { "flex": "1" } }, [
-            createElementVNode("u-text", null, toDisplayString($data.player_currentTime), 1)
-          ]),
-          createElementVNode("view", { style: { "flex": "1", "text-align": "right" } }, [
-            createElementVNode("u-text", null, toDisplayString($data.player_duration), 1)
-          ])
-        ])
-      ])) : createCommentVNode("", true),
-      createElementVNode("view", { class: "h5Audio" })
-    ], 6),
-    createElementVNode("view", { style: { "color": "#f60" } }, [
-      createElementVNode("u-text", null, toDisplayString($data.statusMsg), 1)
-    ])
-  ]);
-}
-const TestPlayer = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1]]);
+import { f as formatAppLog, _ as _export_sfc } from "../../_plugin-vue_export-helper.js";
+import { resolveComponent, openBlock, createElementBlock, createElementVNode, toDisplayString, createVNode, withCtx, createTextVNode, normalizeStyle, Fragment, renderList } from "vue";
 var recorderCoreExports = {};
 var recorderCore = {
   get exports() {
@@ -490,13 +126,13 @@ var recorderCore = {
             break;
           }
         }
-        CLog($T2("mSxV::剩{1}个GetContext未close", 0, L + "-1=" + arr.length), arr.length ? 3 : 0);
+        CLog($T("mSxV::剩{1}个GetContext未close", 0, L + "-1=" + arr.length), arr.length ? 3 : 0);
       }
     };
     var CtxState = function(ctx) {
       var v = ctx.state, msg = "ctx.state=" + v;
       if (v == "suspended")
-        msg += $T2("nMIy::（注意：ctx不是running状态，rec.open和start至少要有一个在用户操作(触摸、点击等)时进行调用，否则将在rec.start时尝试进行ctx.resume，可能会产生兼容性问题(仅iOS)，请参阅文档中runningContext配置）");
+        msg += $T("nMIy::（注意：ctx不是running状态，rec.open和start至少要有一个在用户操作(触摸、点击等)时进行调用，否则将在rec.start时尝试进行ctx.resume，可能会产生兼容性问题(仅iOS)，请参阅文档中runningContext配置）");
       return msg;
     };
     var ConnectEnableWebM = "ConnectEnableWebM";
@@ -543,12 +179,12 @@ var recorderCore = {
       var MediaRecorderTxt = "MediaRecorder";
       var MRWebMPCM = MediaRecorderTxt + ".WebM.PCM";
       var oldFn = ctx.createScriptProcessor || ctx.createJavaScriptNode;
-      var oldIsBest = $T2("ZGlf::。由于{1}内部1秒375次回调，在移动端可能会有性能问题导致回调丢失录音变短，PC端无影响，暂不建议开启{1}。", 0, audioWorklet);
+      var oldIsBest = $T("ZGlf::。由于{1}内部1秒375次回调，在移动端可能会有性能问题导致回调丢失录音变短，PC端无影响，暂不建议开启{1}。", 0, audioWorklet);
       var oldScript = function() {
         isWorklet = stream.isWorklet = false;
         _Disconn_n(stream);
-        CLog($T2("7TU0::Connect采用老的{1}，", 0, scriptProcessor) + i18n.get(
-          Recorder2[ConnectEnableWorklet] ? $T2("JwCL::但已设置{1}尝试启用{2}", 2) : $T2("VGjB::可设置{1}尝试启用{2}", 2),
+        CLog($T("7TU0::Connect采用老的{1}，", 0, scriptProcessor) + i18n.get(
+          Recorder2[ConnectEnableWorklet] ? $T("JwCL::但已设置{1}尝试启用{2}", 2) : $T("VGjB::可设置{1}尝试启用{2}", 2),
           [RecTxt + "." + ConnectEnableWorklet + "=true", audioWorklet]
         ) + webMTips + oldIsBest, 3);
         var process = stream._p = oldFn.call(ctx, bufferSize, 1, 1);
@@ -619,7 +255,7 @@ var recorderCore = {
             badInt = setTimeout(function() {
               badInt = 0;
               if (awNext()) {
-                CLog($T2("MxX1::{1}未返回任何音频，恢复使用{2}", 0, audioWorklet, scriptProcessor), 3);
+                CLog($T("MxX1::{1}未返回任何音频，恢复使用{2}", 0, audioWorklet, scriptProcessor), 3);
                 oldFn && oldScript();
               }
             }, 500);
@@ -640,10 +276,10 @@ var recorderCore = {
             if (awNext()) {
               onReceive(e.data.val);
             } else if (!isWorklet) {
-              CLog($T2("XUap::{1}多余回调", 0, audioWorklet), 3);
+              CLog($T("XUap::{1}多余回调", 0, audioWorklet), 3);
             }
           };
-          CLog($T2("yOta::Connect采用{1}，设置{2}可恢复老式{3}", 0, audioWorklet, RecTxt + "." + ConnectEnableWorklet + "=false", scriptProcessor) + webMTips + oldIsBest, 3);
+          CLog($T("yOta::Connect采用{1}，设置{2}可恢复老式{3}", 0, audioWorklet, RecTxt + "." + ConnectEnableWorklet + "=false", scriptProcessor) + webMTips + oldIsBest, 3);
         };
         ctx.resume()[calls && "finally"](function() {
           if (!awNext())
@@ -673,7 +309,7 @@ var recorderCore = {
         var webmType = "audio/webm; codecs=pcm";
         isWebM = stream.isWebM = Recorder2[ConnectEnableWebM];
         var supportMR = MR && onData in MR.prototype && MR.isTypeSupported(webmType);
-        webMTips = supportMR ? "" : $T2("VwPd::（此浏览器不支持{1}）", 0, MRWebMPCM);
+        webMTips = supportMR ? "" : $T("VwPd::（此浏览器不支持{1}）", 0, MRWebMPCM);
         if (!isUserMedia || !isWebM || !supportMR) {
           connWorklet();
           return;
@@ -686,7 +322,7 @@ var recorderCore = {
             clearTimeout(badInt);
             badInt = setTimeout(function() {
               if (mrNext()) {
-                CLog($T2("vHnb::{1}未返回任何音频，降级使用{2}", 0, MediaRecorderTxt, audioWorklet), 3);
+                CLog($T("vHnb::{1}未返回任何音频，降级使用{2}", 0, MediaRecorderTxt, audioWorklet), 3);
                 connWorklet();
               }
             }, 500);
@@ -712,13 +348,13 @@ var recorderCore = {
               }
               onReceive(f32arr);
             } else if (!isWebM) {
-              CLog($T2("O9P7::{1}多余回调", 0, MediaRecorderTxt), 3);
+              CLog($T("O9P7::{1}多余回调", 0, MediaRecorderTxt), 3);
             }
           };
           reader.readAsArrayBuffer(e.data);
         };
         mr.start(~~(bufferSize / 48));
-        CLog($T2("LMEm::Connect采用{1}，设置{2}可恢复使用{3}或老式{4}", 0, MRWebMPCM, RecTxt + "." + ConnectEnableWebM + "=false", audioWorklet, scriptProcessor));
+        CLog($T("LMEm::Connect采用{1}，设置{2}可恢复使用{3}或老式{4}", 0, MRWebMPCM, RecTxt + "." + ConnectEnableWebM + "=false", audioWorklet, scriptProcessor));
       };
       connWebM();
     };
@@ -789,7 +425,7 @@ var recorderCore = {
       var filter = prevChunkInfo.filter;
       if (filter && filter.fn && filter.sr != pcmSampleRate) {
         filter = null;
-        CLog($T2("d48C::{1}的filter采样率变了，重设滤波", 0, Txt), 3);
+        CLog($T("d48C::{1}的filter采样率变了，重设滤波", 0, Txt), 3);
       }
       if (!filter) {
         var freq = newSampleRate > pcmSampleRate * 3 / 4 ? 0 : newSampleRate / 2 * 3 / 4;
@@ -805,7 +441,7 @@ var recorderCore = {
       }
       var nLen = pcmDatas.length;
       if (index > nLen + 1) {
-        CLog($T2("tlbC::{1}似乎传入了未重置chunk {2}", 0, Txt, index + ">" + nLen), 3);
+        CLog($T("tlbC::{1}似乎传入了未重置chunk {2}", 0, Txt, index + ">" + nLen), 3);
       }
       var size = 0;
       for (var i = index; i < nLen; i++) {
@@ -990,7 +626,7 @@ var recorderCore = {
       This.set = o;
       var vB = o[bitRateTxt], vS = o[sampleRateTxt];
       if (vB && !IsNum(vB) || vS && !IsNum(vS)) {
-        This.CLog($T2.G("IllegalArgs-1", [$T2("VtS4::{1}和{2}必须是数值", 0, sampleRateTxt, bitRateTxt)]), 1, set);
+        This.CLog($T.G("IllegalArgs-1", [$T("VtS4::{1}和{2}必须是数值", 0, sampleRateTxt, bitRateTxt)]), 1, set);
       }
       o[bitRateTxt] = +vB || 16;
       o[sampleRateTxt] = +vS || 16e3;
@@ -1022,7 +658,7 @@ var recorderCore = {
         True = True || NOOP;
         var failCall = function(errMsg, isUserNotAllow) {
           isUserNotAllow = !!isUserNotAllow;
-          This.CLog($T2("5tWi::录音open失败：") + errMsg + ",isUserNotAllow:" + isUserNotAllow, 1);
+          This.CLog($T("5tWi::录音open失败：") + errMsg + ",isUserNotAllow:" + isUserNotAllow, 1);
           if (newCtx)
             Recorder2.CloseNewCtx(newCtx);
           False && False(errMsg, isUserNotAllow);
@@ -1039,29 +675,29 @@ var recorderCore = {
         This._SO = This._S;
         var lockFail = function() {
           if (lockClose != Lock.C || !This._O) {
-            var err = $T2("dFm8::open被取消");
+            var err = $T("dFm8::open被取消");
             if (lockOpen == Lock.O) {
               This.close();
             } else {
-              err = $T2("VtJO::open被中断");
+              err = $T("VtJO::open被中断");
             }
             failCall(err);
             return true;
           }
         };
         if (!isBrowser) {
-          failCall($T2.G("NonBrowser-1", ["open"]) + $T2("EMJq::，可尝试使用RecordApp解决方案") + "(" + GitUrl + "/tree/master/app-support-sample)");
+          failCall($T.G("NonBrowser-1", ["open"]) + $T("EMJq::，可尝试使用RecordApp解决方案") + "(" + GitUrl + "/tree/master/app-support-sample)");
           return;
         }
         var checkMsg = This.envCheck({ envName: "H5", canProcess: true });
         if (checkMsg) {
-          failCall($T2("A5bm::不能录音：") + checkMsg);
+          failCall($T("A5bm::不能录音：") + checkMsg);
           return;
         }
         if (set.sourceStream) {
           This._streamTag = "set.sourceStream";
           if (!Recorder2.GetContext()) {
-            failCall($T2("1iU7::不支持此浏览器从流中获取录音"));
+            failCall($T("1iU7::不支持此浏览器从流中获取录音"));
             return;
           }
           Disconnect(streamStore);
@@ -1072,7 +708,7 @@ var recorderCore = {
             Connect(streamStore);
           } catch (e) {
             Disconnect(streamStore);
-            failCall($T2("BTW2::从流中打开录音失败：") + e.message);
+            failCall($T("BTW2::从流中打开录音失败：") + e.message);
             return;
           }
           ok();
@@ -1082,15 +718,15 @@ var recorderCore = {
           try {
             window.top.a;
           } catch (e) {
-            failCall($T2("Nclz::无权录音(跨域，请尝试给iframe添加麦克风访问策略，如{1})", 0, 'allow="camera;microphone"'));
+            failCall($T("Nclz::无权录音(跨域，请尝试给iframe添加麦克风访问策略，如{1})", 0, 'allow="camera;microphone"'));
             return;
           }
           if (/Permission|Allow/i.test(code)) {
-            failCall($T2("gyO5::用户拒绝了录音权限"), true);
+            failCall($T("gyO5::用户拒绝了录音权限"), true);
           } else if (window.isSecureContext === false) {
-            failCall($T2("oWNo::浏览器禁止不安全页面录音，可开启https解决"));
+            failCall($T("oWNo::浏览器禁止不安全页面录音，可开启https解决"));
           } else if (/Found/i.test(code)) {
-            failCall(msg + $T2("jBa9::，无可用麦克风"));
+            failCall(msg + $T("jBa9::，无可用麦克风"));
           } else {
             failCall(msg);
           }
@@ -1100,7 +736,7 @@ var recorderCore = {
           return;
         }
         if (!Recorder2.Support()) {
-          codeFail("", $T2("COxc::此浏览器不支持录音"));
+          codeFail("", $T("COxc::此浏览器不支持录音"));
           return;
         }
         var ctx = set.runningContext;
@@ -1121,18 +757,18 @@ var recorderCore = {
               return;
             if (Recorder2.IsOpen()) {
               if (oldStream)
-                This.CLog($T2("upb8::发现同时多次调用open"), 1);
+                This.CLog($T("upb8::发现同时多次调用open"), 1);
               Connect(streamStore, 1);
               ok();
             } else {
-              failCall($T2("Q1GA::录音功能无效：无音频流"));
+              failCall($T("Q1GA::录音功能无效：无音频流"));
             }
           }, 100);
         };
         var f2 = function(e) {
           var code = e.name || e.message || e.code + ":" + e;
-          This.CLog($T2("xEQR::请求录音权限错误"), 1, e);
-          codeFail(code, $T2("bDOG::无法录音：") + code);
+          This.CLog($T("xEQR::请求录音权限错误"), 1, e);
+          codeFail(code, $T("bDOG::无法录音：") + code);
         };
         var trackSet = set.audioTrackSet || {};
         trackSet[sampleRateTxt] = ctx[sampleRateTxt];
@@ -1144,7 +780,7 @@ var recorderCore = {
           mSet = { audio: true };
           pro = Recorder2.Scope[getUserMediaTxt](mSet, f1, f2);
         }
-        This.CLog(getUserMediaTxt + "(" + JSON.stringify(mSet) + ") " + CtxState(ctx) + $T2("RiWe::，未配置noiseSuppression和echoCancellation时浏览器可能会自动打开降噪和回声消除，移动端可能会降低系统播放音量（关闭录音后可恢复），请参阅文档中audioTrackSet配置") + "(" + GitUrl + ") LM:" + LM + " UA:" + navigator.userAgent);
+        This.CLog(getUserMediaTxt + "(" + JSON.stringify(mSet) + ") " + CtxState(ctx) + $T("RiWe::，未配置noiseSuppression和echoCancellation时浏览器可能会自动打开降噪和回声消除，移动端可能会降低系统播放音量（关闭录音后可恢复），请参阅文档中audioTrackSet配置") + "(" + GitUrl + ") LM:" + LM + " UA:" + navigator.userAgent);
         if (pro && pro.then) {
           pro.then(f1)[CatchTxt](f2);
         }
@@ -1157,7 +793,7 @@ var recorderCore = {
         var Lock = streamStore.Sync;
         This._O = 0;
         if (This._O_ != Lock.O) {
-          This.CLog($T2("hWVz::close被忽略（因为同时open了多个rec，只有最后一个会真正close）") + sTag, 3);
+          This.CLog($T("hWVz::close被忽略（因为同时open了多个rec，只有最后一个会真正close）") + sTag, 3);
           call();
           return;
         }
@@ -1186,22 +822,22 @@ var recorderCore = {
           setSr = 0;
         }
         This[srcSampleRateTxt] = sampleRate;
-        This.CLog(srcSampleRateTxt + ": " + sampleRate + " set." + sampleRateTxt + ": " + set[sampleRateTxt] + (setSr ? " " + $T2("UHvm::忽略") + ": " + setSr : ""), setSr ? 3 : 0);
+        This.CLog(srcSampleRateTxt + ": " + sampleRate + " set." + sampleRateTxt + ": " + set[sampleRateTxt] + (setSr ? " " + $T("UHvm::忽略") + ": " + setSr : ""), setSr ? 3 : 0);
       },
       envCheck: function(envInfo) {
         var errMsg, This = this, set = This.set;
         var tag = "CPU_BE";
         if (!errMsg && !Recorder2[tag] && typeof Int8Array == "function" && !new Int8Array(new Int32Array([1]).buffer)[0]) {
           Traffic(tag);
-          errMsg = $T2("Essp::不支持{1}架构", 0, tag);
+          errMsg = $T("Essp::不支持{1}架构", 0, tag);
         }
         if (!errMsg) {
           var type = set.type, hasFn = This[type + "_envCheck"];
           if (set.takeoffEncodeChunk) {
             if (!hasFn) {
-              errMsg = $T2("2XBl::{1}类型不支持设置takeoffEncodeChunk", 0, type) + (This[type] ? "" : $T2("LG7e::(未加载编码器)"));
+              errMsg = $T("2XBl::{1}类型不支持设置takeoffEncodeChunk", 0, type) + (This[type] ? "" : $T("LG7e::(未加载编码器)"));
             } else if (!envInfo.canProcess) {
-              errMsg = $T2("7uMV::{1}环境不支持实时处理", 0, envInfo.envName);
+              errMsg = $T("7uMV::{1}环境不支持实时处理", 0, envInfo.envName);
             }
           }
           if (!errMsg && hasFn) {
@@ -1277,7 +913,7 @@ var recorderCore = {
           var addTime = now - tsInPrev.t - pcmTime;
           if (addTime > pcmTime / 5) {
             var fixOpen = !set.disableEnvInFix;
-            This.CLog("[" + now + "]" + i18n.get(fixOpen ? $T2("4Kfd::补偿{1}ms", 1) : $T2("bM5i::未补偿{1}ms", 1), [addTime]), 3);
+            This.CLog("[" + now + "]" + i18n.get(fixOpen ? $T("4Kfd::补偿{1}ms", 1) : $T("bM5i::未补偿{1}ms", 1), [addTime]), 3);
             This.envInFix += addTime;
             if (fixOpen) {
               var addPcm = new Int16Array(addTime * bufferSampleRate / 1e3);
@@ -1341,11 +977,11 @@ var recorderCore = {
         try {
           asyncBegin = set.onProcess(buffers, powerLevel, duration, bufferSampleRate, bufferFirstIdx, asyncEnd);
         } catch (e) {
-          formatAppLog("error", "at node_modules/recorder-core/src/recorder-core.js:1197", procTxt + $T2("gFUF::回调出错是不允许的，需保证不会抛异常"), e);
+          formatAppLog("error", "at node_modules/recorder-core/src/recorder-core.js:1197", procTxt + $T("gFUF::回调出错是不允许的，需保证不会抛异常"), e);
         }
         var slowT = Date.now() - now;
         if (slowT > 10 && This.envInFirst - now > 1e3) {
-          This.CLog(procTxt + $T2("2ghS::低性能，耗时{1}ms", 0, slowT), 3);
+          This.CLog(procTxt + $T("2ghS::低性能，耗时{1}ms", 0, slowT), 3);
         }
         if (asyncBegin === true) {
           var hasClear = 0;
@@ -1357,7 +993,7 @@ var recorderCore = {
             }
           }
           if (hasClear) {
-            This.CLog($T2("ufqH::未进入异步前不能清除buffers"), 3);
+            This.CLog($T("ufqH::未进入异步前不能清除buffers"), 3);
           } else {
             if (engineCtx) {
               engineCtx.pcmSize -= addSize;
@@ -1380,16 +1016,16 @@ var recorderCore = {
           isOpen = 0;
         }
         if (!isOpen) {
-          This.CLog($T2("6WmN::start失败：未open"), 1);
+          This.CLog($T("6WmN::start失败：未open"), 1);
           return;
         }
         var ctx = This._streamCtx();
-        This.CLog($T2("kLDN::start 开始录音，") + CtxState(ctx) + " stream:" + This._streamTag);
+        This.CLog($T("kLDN::start 开始录音，") + CtxState(ctx) + " stream:" + This._streamTag);
         This._stop();
         This.envStart(null, ctx[sampleRateTxt]);
         This.state = 3;
         if (This._SO && This._SO + 1 != This._S) {
-          This.CLog($T2("Bp2y::start被中断"), 3);
+          This.CLog($T("Bp2y::start被中断"), 3);
           return;
         }
         This._SO = 0;
@@ -1406,7 +1042,7 @@ var recorderCore = {
             This.CLog(tag + ctx.state);
             end();
           })[CatchTxt](function(e) {
-            This.CLog(tag + ctx.state + $T2("upkE::，可能无法录音：") + e.message, 1, e);
+            This.CLog(tag + ctx.state + $T("upkE::，可能无法录音：") + e.message, 1, e);
             end();
           });
         } else {
@@ -1455,7 +1091,7 @@ var recorderCore = {
       stop: function(True, False, autoClose) {
         var This = this, set = This.set, t1;
         var envInMS = This.envInLast - This.envInFirst, envInLen = envInMS && This.buffers.length;
-        This.CLog($T2("Xq4s::stop 和start时差:") + (envInMS ? envInMS + "ms " + $T2("3CQP::补偿:") + This.envInFix + "ms envIn:" + envInLen + " fps:" + (envInLen / envInMS * 1e3).toFixed(1) : "-") + " stream:" + This._streamTag + " (" + GitUrl + ") LM:" + LM);
+        This.CLog($T("Xq4s::stop 和start时差:") + (envInMS ? envInMS + "ms " + $T("3CQP::补偿:") + This.envInFix + "ms envIn:" + envInLen + " fps:" + (envInLen / envInMS * 1e3).toFixed(1) : "-") + " stream:" + This._streamTag + " (" + GitUrl + ") LM:" + LM);
         var end = function() {
           This._stop();
           if (autoClose) {
@@ -1463,7 +1099,7 @@ var recorderCore = {
           }
         };
         var err = function(msg) {
-          This.CLog($T2("u8JG::结束录音失败：") + msg, 1);
+          This.CLog($T("u8JG::结束录音失败：") + msg, 1);
           False && False(msg);
           end();
         };
@@ -1477,7 +1113,7 @@ var recorderCore = {
               dErr = 1;
           } else if (dType == tBlob) {
             if (typeof Blob != "function") {
-              dErr = $T2.G("NonBrowser-1", [dTag]) + $T2("1skY::，请设置{1}", 0, RecTxt + "." + tDDT + '="' + tABuf + '"');
+              dErr = $T.G("NonBrowser-1", [dTag]) + $T("1skY::，请设置{1}", 0, RecTxt + "." + tDDT + '="' + tABuf + '"');
             } else {
               if (isAB)
                 blob = new Blob([blob], { type: mime });
@@ -1486,17 +1122,17 @@ var recorderCore = {
               mime = blob.type || mime;
             }
           } else {
-            dErr = $T2.G("NotSupport-1", [dTag]);
+            dErr = $T.G("NotSupport-1", [dTag]);
           }
-          This.CLog($T2("Wv7l::结束录音 编码花{1}ms 音频时长{2}ms 文件大小{3}b", 0, Date.now() - t1, duration2, dLen) + " " + dTag + "," + mime);
+          This.CLog($T("Wv7l::结束录音 编码花{1}ms 音频时长{2}ms 文件大小{3}b", 0, Date.now() - t1, duration2, dLen) + " " + dTag + "," + mime);
           if (dErr) {
-            err(dErr != 1 ? dErr : $T2("Vkbd::{1}编码器返回的不是{2}", 0, set.type, dType) + ", " + dTag);
+            err(dErr != 1 ? dErr : $T("Vkbd::{1}编码器返回的不是{2}", 0, set.type, dType) + ", " + dTag);
             return;
           }
           if (set.takeoffEncodeChunk) {
-            This.CLog($T2("QWnr::启用takeoffEncodeChunk后stop返回的blob长度为0不提供音频数据"), 3);
+            This.CLog($T("QWnr::启用takeoffEncodeChunk后stop返回的blob长度为0不提供音频数据"), 3);
           } else if (dLen < Math.max(50, duration2 / 5)) {
-            err($T2("Sz2H::生成的{1}无效", 0, set.type));
+            err($T("Sz2H::生成的{1}无效", 0, set.type));
             return;
           }
           True && True(blob, duration2, mime);
@@ -1505,24 +1141,24 @@ var recorderCore = {
         if (!This.isMock) {
           var isCtxWait = This.state == 3;
           if (!This.state || isCtxWait) {
-            err($T2("wf9t::未开始录音") + (isCtxWait ? $T2("Dl2c::，开始录音前无用户交互导致AudioContext未运行") : ""));
+            err($T("wf9t::未开始录音") + (isCtxWait ? $T("Dl2c::，开始录音前无用户交互导致AudioContext未运行") : ""));
             return;
           }
         }
         This._stop(true);
         var size = This.recSize;
         if (!size) {
-          err($T2("Ltz3::未采集到录音"));
+          err($T("Ltz3::未采集到录音"));
           return;
         }
         if (!This[set.type]) {
-          err($T2("xGuI::未加载{1}编码器，请尝试到{2}的src/engine内找到{1}的编码器并加载", 0, set.type, RecTxt));
+          err($T("xGuI::未加载{1}编码器，请尝试到{2}的src/engine内找到{1}的编码器并加载", 0, set.type, RecTxt));
           return;
         }
         if (This.isMock) {
           var checkMsg = This.envCheck(This.mockEnvInfo || { envName: "mock", canProcess: false });
           if (checkMsg) {
-            err($T2("AxOH::录音错误：") + checkMsg);
+            err($T("AxOH::录音错误：") + checkMsg);
             return;
           }
         }
@@ -1537,14 +1173,14 @@ var recorderCore = {
         }
         t1 = Date.now();
         if (!This.buffers[0]) {
-          err($T2("xkKd::音频buffers被释放"));
+          err($T("xkKd::音频buffers被释放"));
           return;
         }
         var chunk = Recorder2.SampleData(This.buffers, This[srcSampleRateTxt], set[sampleRateTxt]);
         set[sampleRateTxt] = chunk[sampleRateTxt];
         var res = chunk.data;
         var duration = Math.round(res.length / set[sampleRateTxt] * 1e3);
-        This.CLog($T2("CxeT::采样:{1} 花:{2}ms", 0, size + "->" + res.length, Date.now() - t1));
+        This.CLog($T("CxeT::采样:{1} 花:{2}ms", 0, size + "->" + res.length, Date.now() - t1));
         setTimeout(function() {
           t1 = Date.now();
           This[set.type](res, function(blob, mime) {
@@ -1860,12 +1496,12 @@ var recorderCore = {
         return i18n.v_G(key, args);
       }
     };
-    var $T2 = i18n.$T;
-    $T2.G = i18n.get;
-    $T2("NonBrowser-1::非浏览器环境，不支持{1}", 1);
-    $T2("IllegalArgs-1::参数错误：{1}", 1);
-    $T2("NeedImport-2::调用{1}需要先导入{2}", 2);
-    $T2("NotSupport-1::不支持：{1}", 1);
+    var $T = i18n.$T;
+    $T.G = i18n.get;
+    $T("NonBrowser-1::非浏览器环境，不支持{1}", 1);
+    $T("IllegalArgs-1::参数错误：{1}", 1);
+    $T("NeedImport-2::调用{1}需要先导入{2}", 2);
+    $T("NotSupport-1::不支持：{1}", 1);
     Recorder2.TrafficImgUrl = "//ia.51.la/go1?id=20469973&pvFlag=1";
     var Traffic = Recorder2.Traffic = function(report) {
       if (!isBrowser)
@@ -1896,7 +1532,7 @@ var recorderCore = {
       }
     };
     if (WRec2) {
-      CLog($T2("8HO5::覆盖导入{1}", 0, RecTxt), 1);
+      CLog($T("8HO5::覆盖导入{1}", 0, RecTxt), 1);
       WRec2.Destroy();
     }
     Export[RecTxt] = Recorder2;
@@ -1908,20 +1544,20 @@ const Recorder = recorderCoreExports;
   var win = browser ? window : Object;
   var rec = win.Recorder, ni = rec.i18n;
   factory(rec, ni, ni.$T, browser);
-})(function(Recorder2, i18n, $T2, isBrowser) {
+})(function(Recorder2, i18n, $T, isBrowser) {
   var SampleS = "48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000";
   var BitS = "8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 112, 128, 144, 160, 192, 224, 256, 320";
   Recorder2.prototype.enc_mp3 = {
     stable: true,
     takeEC: "full",
     getTestMsg: function() {
-      return $T2("Zm7L::采样率范围：{1}；比特率范围：{2}（不同比特率支持的采样率范围不同，小于32kbps时采样率需小于32000）", 0, SampleS, BitS);
+      return $T("Zm7L::采样率范围：{1}；比特率范围：{2}（不同比特率支持的采样率范围不同，小于32kbps时采样率需小于32000）", 0, SampleS, BitS);
     }
   };
   var NormalizeSet = function(set) {
     var bS = set.bitRate, sS = set.sampleRate, s = sS;
     if ((" " + BitS + ",").indexOf(" " + bS + ",") == -1) {
-      Recorder2.CLog($T2("eGB9::{1}不在mp3支持的取值范围：{2}", 0, "bitRate=" + bS, BitS), 3);
+      Recorder2.CLog($T("eGB9::{1}不在mp3支持的取值范围：{2}", 0, "bitRate=" + bS, BitS), 3);
     }
     if ((" " + SampleS + ",").indexOf(" " + sS + ",") == -1) {
       var arr = SampleS.split(", "), vs = [];
@@ -1932,11 +1568,11 @@ const Recorder = recorderCoreExports;
       });
       s = vs[0].v;
       set.sampleRate = s;
-      Recorder2.CLog($T2("zLTa::sampleRate已更新为{1}，因为{2}不在mp3支持的取值范围：{3}", 0, s, sS, SampleS), 3);
+      Recorder2.CLog($T("zLTa::sampleRate已更新为{1}，因为{2}不在mp3支持的取值范围：{3}", 0, s, sS, SampleS), 3);
     }
   };
   var ImportEngineErr = function() {
-    return $T2.G("NeedImport-2", ["mp3.js", "src/engine/mp3-engine.js"]);
+    return $T.G("NeedImport-2", ["mp3.js", "src/engine/mp3-engine.js"]);
   };
   var HasWebWorker = isBrowser && typeof Worker == "function";
   Recorder2.prototype.mp3 = function(res, True, False) {
@@ -2008,7 +1644,7 @@ const Recorder = recorderCoreExports;
     var errMsg = "";
     if (set.takeoffEncodeChunk) {
       if (!newContext()) {
-        errMsg = $T2("yhUs::当前浏览器版本太低，无法实时处理");
+        errMsg = $T("yhUs::当前浏览器版本太低，无法实时处理");
       }
     }
     if (!errMsg && !Recorder2.lamejs) {
@@ -2145,7 +1781,7 @@ const Recorder = recorderCoreExports;
     };
     var scope, worker = mp3Worker;
     if (_badW || !HasWebWorker) {
-      Recorder2.CLog($T2("k9PT::当前环境不支持Web Worker，mp3实时编码器运行在主线程中"), 3);
+      Recorder2.CLog($T("k9PT::当前环境不支持Web Worker，mp3实时编码器运行在主线程中"), 3);
       worker = { postMessage: function(ed) {
         run({ data: ed });
       } };
@@ -2196,7 +1832,7 @@ const Recorder = recorderCoreExports;
         opens++;
       }
       if (opens) {
-        Recorder2.CLog($T2("fT6M::mp3 worker剩{1}个未stop", 0, opens), 3);
+        Recorder2.CLog($T("fT6M::mp3 worker剩{1}个未stop", 0, opens), 3);
       }
     }
   };
@@ -2228,7 +1864,7 @@ const Recorder = recorderCoreExports;
         id: startCtx.id
       });
     } else {
-      False($T2("mPxH::mp3编码器未start"));
+      False($T("mPxH::mp3编码器未start"));
     }
   };
   Recorder2.mp3ReadMeta = function(mp3Buffers, length) {
@@ -2344,15 +1980,15 @@ const Recorder = recorderCoreExports;
   var mp3TrimFixSetMeta = function(meta, set) {
     var tag = "MP3 Info: ";
     if (meta.sampleRate && meta.sampleRate != set.sampleRate || meta.bitRate && meta.bitRate != set.bitRate) {
-      Recorder2.CLog(tag + $T2("uY9i::和设置的不匹配{1}，已更新成{2}", 0, "set:" + set.bitRate + "kbps " + set.sampleRate + "hz", "set:" + meta.bitRate + "kbps " + meta.sampleRate + "hz"), 3, set);
+      Recorder2.CLog(tag + $T("uY9i::和设置的不匹配{1}，已更新成{2}", 0, "set:" + set.bitRate + "kbps " + set.sampleRate + "hz", "set:" + meta.bitRate + "kbps " + meta.sampleRate + "hz"), 3, set);
       set.sampleRate = meta.sampleRate;
       set.bitRate = meta.bitRate;
     }
     var trimFix = meta.trimFix;
     if (trimFix) {
-      tag += $T2("iMSm::Fix移除{1}帧", 0, trimFix.remove) + " " + trimFix.removeDuration + "ms -> " + trimFix.duration + "ms";
+      tag += $T("iMSm::Fix移除{1}帧", 0, trimFix.remove) + " " + trimFix.removeDuration + "ms -> " + trimFix.duration + "ms";
       if (trimFix.remove > 2) {
-        meta.err = (meta.err ? meta.err + ", " : "") + $T2("b9zm::移除帧数过多");
+        meta.err = (meta.err ? meta.err + ", " : "") + $T("b9zm::移除帧数过多");
       }
     } else {
       tag += (meta.duration || "-") + "ms";
@@ -13681,7 +13317,7 @@ var app = {
     if (module.exports) {
       module.exports = win.RecordApp;
     }
-  })(function(Export, Recorder2, i18n, $T2, isBrowser) {
+  })(function(Export, Recorder2, i18n, $T, isBrowser) {
     var App = {
       LM: "2023-12-01 20:18",
       Current: 0,
@@ -13693,7 +13329,7 @@ var app = {
     var RegTxt = "RegisterPlatform";
     var WApp2 = Export[AppTxt];
     if (WApp2 && WApp2.LM == App.LM) {
-      WApp2.CLog($T2("uXtA::重复导入{1}", 0, AppTxt), 3);
+      WApp2.CLog($T("uXtA::重复导入{1}", 0, AppTxt), 3);
       return;
     }
     Export[AppTxt] = App;
@@ -13705,7 +13341,7 @@ var app = {
     var Sync = App.__Sync = function(sid, tag, err) {
       if (App.__SID_ != sid) {
         if (tag) {
-          CLog($T2("kIBu::同时多次调用：{1}，旧的回调被丢弃", 0, tag) + (err ? ", error: " + err : ""), 3);
+          CLog($T("kIBu::同时多次调用：{1}，旧的回调被丢弃", 0, tag) + (err ? ", error: " + err : ""), 3);
         }
         return false;
       }
@@ -13720,12 +13356,12 @@ var app = {
     App[RegTxt] = function(key, config) {
       config.Key = key;
       if (Platforms[key]) {
-        CLog($T2("ha2K::重复注册{1}", 0, key), 3);
+        CLog($T("ha2K::重复注册{1}", 0, key), 3);
       }
       Platforms[key] = config;
     };
     App.__StopOnlyClearMsg = function() {
-      return $T2("wpTL::仅清理资源");
+      return $T("wpTL::仅清理资源");
     };
     var KeyH5 = "Default-H5";
     (function() {
@@ -13773,7 +13409,7 @@ var app = {
             appRec.open();
             appRec.close();
           }
-          fail($T2("bpvP::未开始录音") + (clearMsg ? " (" + clearMsg + ")" : ""));
+          fail($T("bpvP::未开始录音") + (clearMsg ? " (" + clearMsg + ")" : ""));
           return;
         }
         var end = function() {
@@ -13827,7 +13463,7 @@ var app = {
       var cur = App.Current;
       if (cur && cur.CanProcess())
         return 1;
-      CLog($T2("fLJD::当前环境不支持实时回调，无法进行{1}", 0, tag), 3);
+      CLog($T("fLJD::当前环境不支持实时回调，无法进行{1}", 0, tag), 3);
     };
     App.Install = function(success, fail) {
       var cur = App.Current;
@@ -13887,7 +13523,7 @@ var app = {
         var msg = errMsg + ", isUserNotAllow:" + isUserNotAllow;
         if (!Sync(sid, tag, msg))
           return;
-        CLog($T2("YnzX::录音权限请求失败：") + msg, 1);
+        CLog($T("YnzX::录音权限请求失败：") + msg, 1);
         fail && fail(errMsg, isUserNotAllow);
       };
       CLog(ReqTxt + "...");
@@ -13908,12 +13544,12 @@ var app = {
       }, failCall);
     };
     var NeedReqMsg = function() {
-      return $T2("nwKR::需先调用{1}", 0, ReqTxt);
+      return $T("nwKR::需先调用{1}", 0, ReqTxt);
     };
     var CheckH5 = function() {
       var msg = "";
       if (App.Current.Key == KeyH5 && !isBrowser) {
-        msg = $T2("citA::当前不是浏览器环境，需引入针对此平台的支持文件（{1}），或调用{2}自行实现接入", 0, "src/app-support/app-xxx-support.js", AppTxt + "." + RegTxt);
+        msg = $T("citA::当前不是浏览器环境，需引入针对此平台的支持文件（{1}），或调用{2}自行实现接入", 0, "src/app-support/app-xxx-support.js", AppTxt + "." + RegTxt);
       }
       return msg;
     };
@@ -13922,7 +13558,7 @@ var app = {
       var failCall = function(msg) {
         if (!Sync(sid, tag, msg))
           return;
-        CLog($T2("ecp9::开始录音失败：") + msg, 1);
+        CLog($T("ecp9::开始录音失败：") + msg, 1);
         fail && fail(msg);
       };
       CLog("Start...");
@@ -13959,14 +13595,14 @@ var app = {
           checkMsg = CheckH5();
       }
       if (checkMsg) {
-        failCall($T2("EKmS::不能录音：") + checkMsg);
+        failCall($T("EKmS::不能录音：") + checkMsg);
         return;
       }
       App._SRec = 0;
       cur.Start(sid, set, function() {
         if (!Sync(sid, tag))
           return;
-        CLog($T2("k7Qo::已开始录音"), set);
+        CLog($T("k7Qo::已开始录音"), set);
         App._STime = Date.now();
         success && success();
       }, failCall);
@@ -13976,7 +13612,7 @@ var app = {
       var failCall = function(msg) {
         if (!Sync(sid, tag, msg))
           return;
-        CLog($T2("Douz::结束录音失败：") + msg, success ? 1 : 0);
+        CLog($T("Douz::结束录音失败：") + msg, success ? 1 : 0);
         try {
           fail && fail(msg);
         } finally {
@@ -13987,7 +13623,7 @@ var app = {
         App._SRec = App.__Rec;
         App.__Rec = null;
       };
-      CLog("Stop... " + $T2("wqSH::和Start时差：{1}ms", 0, App._STime ? Date.now() - App._STime : -1) + " Recorder.LM:" + Recorder2.LM + " " + AppTxt + ".LM:" + App.LM);
+      CLog("Stop... " + $T("wqSH::和Start时差：{1}ms", 0, App._STime ? Date.now() - App._STime : -1) + " Recorder.LM:" + Recorder2.LM + " " + AppTxt + ".LM:" + App.LM);
       var t1 = Date.now();
       var cur = App.Current;
       if (!cur) {
@@ -13997,7 +13633,7 @@ var app = {
       cur.Stop(sid, !success ? null : function(arrayBuffer, duration, mime) {
         if (!Sync(sid, tag))
           return;
-        CLog($T2("g3VX::结束录音 耗时{1}ms 音频时长{2}ms 文件大小{3}b {4}", 0, Date.now() - t1, duration, arrayBuffer.byteLength, mime));
+        CLog($T("g3VX::结束录音 耗时{1}ms 音频时长{2}ms 文件大小{3}b {4}", 0, Date.now() - t1, duration, arrayBuffer.byteLength, mime));
         try {
           success(arrayBuffer, duration, mime);
         } finally {
@@ -14671,7 +14307,7 @@ const RecordApp = appExports;
 }();
 var RecUtsPlugin = null;
 const _sfc_main = {
-  components: { TestPlayer },
+  // components: { TestPlayer },
   data() {
     return {
       recType: "mp3",
@@ -14784,7 +14420,6 @@ const _sfc_main = {
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_button = resolveComponent("button");
-  const _component_TestPlayer = resolveComponent("TestPlayer");
   return openBlock(), createElementBlock("scroll-view", {
     scrollY: true,
     showScrollbar: true,
@@ -14913,9 +14548,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         createElementVNode("view", { class: "recwave" }, [
           createElementVNode("u-text", { style: { "color": "#999", "font-size": "12px" } }, "不能显示可视化波形，因为需要提供兼容H5的canvas，nvue里面没有这种canvas")
         ])
-      ]),
-      createElementVNode("view", { style: { "padding-top": "10px" } }, [
-        createVNode(_component_TestPlayer, { ref: "player" }, null, 512)
       ]),
       createElementVNode("view", { style: { "padding-top": "10px" } }, [
         (openBlock(true), createElementBlock(Fragment, null, renderList($data.reclogs, (obj) => {

@@ -12,16 +12,20 @@
 			return {
 				pathList:[
 					{
-						path: "/pages/recTest/my_test",
+						path: "/pages/recTest/native_test",
 						lebal: "测试音频"
 					},
 					{
-						path: "/pages/test-camera/test_nvue",
+						path: "/pages/test-camera/cover_nvue",
 						lebal: "测试摄像头"
 					},
 					{
-						path: "/pages/test_api/test_api",
+						path: "/pages/test-camera/camera_nvue",
 						lebal: "测试API"
+					},
+					{
+						path: "/pages/smart-chat/smart-chat",
+						lebal: "测试Page"
 					}
 				]
 			}

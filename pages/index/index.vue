@@ -12,10 +12,10 @@
 				</a>
 			</div>
 			<div class="content-second-row">
-				<a id="link-to-health-assistant">
+				<navigator id="link-to-health-assistant" url="/pages/smart-chat/smart-chat">
 					<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/poe.png">
 					智能健康助手
-				</a>
+				</navigator>
 			</div>
 		</div>
 		<home-foot></home-foot>

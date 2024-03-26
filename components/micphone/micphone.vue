@@ -1,407 +1,52 @@
 <template>
-	<view>
-		<!-- #ifdef H5 -->
-		<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/micphone/mic1.png" @mousedown="recStart" @mouseup="recStop" class="micphone">
-		<!-- #endif -->
-		
-		<!-- #ifdef APP || MP-WEIXIN-->
-		<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/micphone/mic1.png" @touchstart="recStart" @touchend="recStop" class="micphone">
-		<!-- #endif -->
-		
-		<view style="padding-top:10px">
-			<TestPlayer ref="player" />
-		</view>
-	</view>
+	<image @touchstart="startRecord" @touchend="endRecord" src="https://img-insight.oss-cn-chengdu.aliyuncs.com/micphone/mic1.png" class="mic"></image>
 </template>
 
-
 <script>
-import TestPlayer from './test_player___.vue'; //手撸的一个跨平台播放器
-
-
-/** 先引入Recorder （ 需先 npm install recorder-core ）**/
-import Recorder from 'recorder-core';
-
-/** H5、小程序环境中：引入需要的格式编码器、可视化插件，App环境中在renderjs中引入 **/
-// #ifdef H5 || MP-WEIXIN
-	//按需引入需要的录音格式编码器，用不到的不需要引入，减少程序体积；H5、renderjs中可以把编码器放到static文件夹里面用动态创建script来引入，免得这些文件太大
-	import 'recorder-core/src/engine/mp3.js'
-	import 'recorder-core/src/engine/mp3-engine.js'
-	import 'recorder-core/src/engine/wav.js'
-	import 'recorder-core/src/engine/pcm.js'
-	import 'recorder-core/src/engine/g711x'
-
-	//可选引入可视化插件
-	import 'recorder-core/src/extensions/waveview.js'
-	import 'recorder-core/src/extensions/wavesurfer.view.js'
-
-	import 'recorder-core/src/extensions/frequency.histogram.view.js'
-	import 'recorder-core/src/extensions/lib.fft.js'
+	const recorderManager = uni.getRecorderManager();
+	const innerAudioContext = uni.createInnerAudioContext();
 	
-	//测试用根据简谱生成一段音乐
-	import 'recorder-core/src/extensions/create-audio.nmn2pcm.js'
-// #endif
-
-/** 引入RecordApp **/
-import RecordApp from 'recorder-core/src/app-support/app.js'
-//【所有平台必须引入】uni-app支持文件
-import '/uni_modules/Recorder-UniCore/app-uni-support.js'
-
-var disableOgg=false;
-// #ifdef MP-WEIXIN
-	//可选引入微信小程序支持文件
-	import 'recorder-core/src/app-support/app-miniProgram-wx-support.js'
-	disableOgg=true; //小程序不测试ogg js文件太大
-// #endif
-
-
-// #ifdef H5 || MP-WEIXIN
-	//H5、renderjs中可以把编码器放到static文件夹里面用动态创建script来引入，免得这些文件太大
-	import 'recorder-core/src/engine/beta-amr'
-	import 'recorder-core/src/engine/beta-amr-engine'
-// #endif
-// #ifdef H5
-	//app、h5测试ogg，小程序不测试ogg js文件太大
-	import 'recorder-core/src/engine/beta-ogg'
-	import 'recorder-core/src/engine/beta-ogg-engine'
-// #endif
-
-/** 可选：App中引入原生录音插件来进行录音，兼容性和体验更好 **/
-var RecNativePlugin=null;
-// #ifdef APP
-	var RecUtsPlugin=null; //【使用uts插件时先删除这句再解开下一句的注释】
-	// import * as RecUtsPlugin from "../../uni_modules/Recorder-UtsPlugin" 【uts插件开发中，暂不支持解开这行注释】
-	// var RecNativePlugin={nativePlugin:true}; //使用原生录音插件就解开这个注释，跟uts插件二选一
-// #endif
-// #ifndef APP
-	var RecUtsPlugin=null; //非App，给个变量
-// #endif
-
-
-export default {
-	components: {TestPlayer},
-	props: {
-		// 检测类型 + 其他验证
-		StopHandler: {
-			type: Function,
-			default: function(value) {
-				console.log("default handler");
-			},
-			required: true,
+	innerAudioContext.autoplay = true;
+	
+	export default {
+		data() {
+			return {
+				text: 'uni-app',
+				voicePath: ''
+			}
 		},
-	},
-	data() {
-		return {
-			recType:"mp3"
-			,recSampleRate:16000
-			,recBitRate:16
-			
-			,takeoffEncodeChunkSet:false
-			,takeoffEncodeChunkMsg:""
-			,appUseH5Rec:false
-	
-			,recwaveChoiceKey:"WaveView"
-			,recpowerx:0
-			,recpowert:""
-			,pageDeep:0,pageNewPath:"main_recTest"
-			,disableOgg:disableOgg
-			,evalExecCode:""
-			,reclogs:[],
-			
-			recogText: "recogText",
-		}
-	},
-	mounted() {
-		var vueVer=[];
-		var vv=typeof(Vue)!="undefined" && Vue && Vue.version; if(vv) vueVer.push("Vue.version:"+vv);
-		var v3=(((this.$||{}).appContext||{}).app||{}).version; if(v3) vueVer.push("appContext.app.version:"+v3);
-		var v2=(((this.$root||{}).constructor||{}).super||{}).version; if(v2) vueVer.push("constructor.super:"+v2);
-		console.log("页面mounted("+getCurrentPages().length+"层)"
-			+"，Vue="+vueVer.join("/")
-			+"，WebViewId="+(this.$root.$page&&this.$root.$page.id||"?")
-			+"，ComponentId=_$id:"+(this._$id||"?")+"/"+"$.uid:"+(this.$&&this.$.uid||"?")
-			+"，Recorder.LM="+Recorder.LM
-			+"，RecordApp.LM="+RecordApp.LM
-			+"，UniSupportLM="+RecordApp.UniSupportLM
-			+"，UniJsSource="+RecordApp.UniJsSource.IsSource);
-		this.pageDeep=getCurrentPages().length;
-		this.pageNewPath=/main_recTest/.test(this.getRouteStr())?"page_index2":"main_recTest";
-		
-		this.isMounted=true; this.uniPage__onShow(); //onShow可能比mounted先执行，页面准备好了时再执行一次
-		
-		//可选，立即显示出环境信息
-		console.log("正在执行Install，请勿操作...","#f60");
-		RecordApp.UniNativeUtsPlugin=RecNativePlugin||RecUtsPlugin; //提取设置一下，仅用于打日志
-		RecordApp.Install(()=>{
-			console.log("Install成功，环境："+this.currentKeyTag(),2);
-			console.log("请先请求录音权限，然后再开始录音");
-			this.recReq();
-		},(err)=>{
-			console.log("RecordApp.Install出错："+err,1);
-		});
-	},
-	/*#ifdef VUE3*/unmounted()/*#endif*/ /*#ifndef VUE3*/destroyed()/*#endif*/ {
-		RecordApp.Stop(); //清理资源，如果打开了录音没有关闭，这里将会进行关闭
-	},
-	onShow() { //当组件用时没这个回调
-		if(this.isMounted) this.uniPage__onShow(); //onShow可能比mounted先执行，页面可能还未准备好
-	},
-	methods:{
-		uniPage__onShow(){ //页面onShow时【必须调用】的函数，传入当前组件this
-			RecordApp.UniPageOnShow(this);
-		}
-		,currentKeyTag(){
-			if(!RecordApp.Current) return "[?]";
-			// #ifdef APP
-			var tag2="Renderjs+H5";
-			if(RecordApp.UniNativeUtsPlugin){
-				tag2=RecordApp.UniNativeUtsPlugin.nativePlugin?"NativePlugin":"UtsPlugin";
-			}
-			return RecordApp.Current.Key+"("+tag2+")";
-			// #endif
-			return RecordApp.Current.Key;
-		}
-		
-		,recReq(){
-			//默认尝试启用原生录音插件支持，可以判断一下只在iOS上或Android上启用，不判断就都启用，比如判断iOS：RecordApp.UniIsApp()==2
-			RecordApp.UniNativeUtsPlugin=RecNativePlugin||RecUtsPlugin;
-			
-			if(this.appUseH5Rec){//明确使用h5录音
-				RecordApp.UniNativeUtsPlugin=null;
-			}
-			
-			/****【在App内使用app-uni-support.js的授权许可】编译到App平台时仅供测试用（App平台包括：Android App、iOS App），不可用于正式发布或商用，正式发布或商用需先联系作者获得授权许可（编译到其他平台时无此授权限制，比如：H5、小程序，均为免费授权）
-			获得授权许可后，请解开下面这行注释，并且将**部分改成你的uniapp项目的appid，即可解除所有限制；使用配套的原生录音插件或uts插件时可不进行此配置
-			****/
-			//RecordApp.UniAppUseLicense='我已获得UniAppID=*****的商用授权';
-			
-			//使用renderjs时提示一下iOS有弹框
-			if(RecordApp.UniIsApp() && !RecordApp.UniNativeUtsPlugin){
-				console.log("当前是在App的renderjs中使用H5进行录音，iOS上只支持14.3以上版本，且iOS上每次进入页面后第一次请求录音权限时、或长时间无操作再请求录音权限时WebView均会弹出录音权限对话框，不同旧iOS版本（低于iOS17）下H5录音可能存在的问题在App中同样会存在；使用配套的原生录音插件或uts插件时无以上问题和版本限制，Android也无以上问题","#f60");
-			}
-			
-			console.log("正在请求录音权限...");
-			RecordApp.UniWebViewActivate(this); //App环境下必须先切换成当前页面WebView
-			RecordApp.RequestPermission(()=>{
-				console.log(this.currentKeyTag()+" 已获得录音权限，可以开始录音了",2);
-			},(msg,isUserNotAllow)=>{
-				if(isUserNotAllow){//用户拒绝了录音权限
-					//这里你应当编写代码进行引导用户给录音权限，不同平台分别进行编写
-				}
-				console.log(this.currentKeyTag()+" "
-					+(isUserNotAllow?"isUserNotAllow,":"")+"请求录音权限失败："+msg,1);
-			});
-		}
-		,recStart(){
-			
-			this.$refs.player.setPlayBytes(null);
-			this.takeoffEncodeChunkMsg="";var takeEcCount=0,takeEcSize=0;
-			this.takeEcChunks=this.takeoffEncodeChunkSet?[]:null;
-			
-			// console.log(this.currentKeyTag()+" 正在打开...");
-			RecordApp.UniWebViewActivate(this); //App环境下必须先切换成当前页面WebView
-			RecordApp.Start({
-				type:this.recType
-				,sampleRate:this.recSampleRate
-				,bitRate:this.recBitRate
-				
-				,onProcess:(buffers,powerLevel,duration,sampleRate,newBufferIdx,asyncEnd)=>{
-					//全平台通用：可实时上传（发送）数据，配合Recorder.SampleData方法，将buffers中的新数据连续的转换成pcm上传，或使用mock方法将新数据连续的转码成其他格式上传，可以参考Recorder文档里面的：Demo片段列表 -> 实时转码并上传-通用版；基于本功能可以做到：实时转发数据、实时保存数据、实时语音识别（ASR）等
-					
-					//注意：App里面是在renderjs中进行实际的音频格式编码操作，此处的buffers数据是renderjs实时转发过来的，修改此处的buffers数据不会改变renderjs中buffers，所以不会改变生成的音频文件，可在onProcess_renderjs中进行修改操作就没有此问题了；如需清理buffers内存，此处和onProcess_renderjs中均需要进行清理，H5、小程序中无此限制
-					//注意：如果你要用只支持在浏览器中使用的Recorder扩展插件，App里面请在renderjs中引入此扩展插件，然后在onProcess_renderjs中调用这个插件；H5可直接在这里进行调用，小程序不支持这类插件；如果调用插件的逻辑比较复杂，建议封装成js文件，这样逻辑层、renderjs中直接import，不需要重复编写
-					
-					this.recpowerx=powerLevel;
-					this.recpowert=this.formatTime(duration,1)+" / "+powerLevel;
-					
-					//H5、小程序等可视化图形绘制，直接运行在逻辑层；App里面需要在onProcess_renderjs中进行这些操作
-					// #ifdef H5 || MP-WEIXIN
-					var wave=this.waveStore&&this.waveStore[this.recwaveChoiceKey];
-					if(wave){
-						wave.input(buffers[buffers.length-1],powerLevel,sampleRate);
-					}
-					// #endif
-				}
-				,onProcess_renderjs:`function(buffers,powerLevel,duration,sampleRate,newBufferIdx,asyncEnd){
-					//App中在这里修改buffers才会改变生成的音频文件
-					//App中是在renderjs中进行的可视化图形绘制，因此需要写在这里，this是renderjs模块的this（也可以用This变量）；如果代码比较复杂，请直接在renderjs的methods里面放个方法xxxFunc，这里直接使用this.xxxFunc(args)进行调用
-					var wave=this.waveStore&&this.waveStore[this.recwaveChoiceKey];
-					if(wave){
-						wave.input(buffers[buffers.length-1],powerLevel,sampleRate);
-					}
-				}`
-				
-				,takeoffEncodeChunk:!this.takeoffEncodeChunkSet?null:(chunkBytes)=>{
-					//全平台通用：实时接收到编码器编码出来的音频片段数据，chunkBytes是Uint8Array二进制数据，可以实时上传（发送）出去
-					//App中如果未配置Recorder.UniWithoutAppRenderjs时，建议提供此回调，因为录音结束后会将整个录音文件从renderjs传回逻辑层，由于uni-app的逻辑层和renderjs层数据交互性能实在太拉跨了，大点的文件传输会比较慢，提供此回调后可避免Stop时产生超大数据回传
-					takeEcCount++; takeEcSize+=chunkBytes.byteLength;
-					this.takeoffEncodeChunkMsg="已接收到"+takeEcCount+"块，共"+takeEcSize+"字节";
-					this.takeEcChunks.push(chunkBytes);
-				}
-				,takeoffEncodeChunk_renderjs:!this.takeoffEncodeChunkSet?null:`function(chunkBytes){
-					//App中这里可以做一些仅在renderjs中才生效的事情，不提供也行，this是renderjs模块的this（也可以用This变量）
-				}`
-				
-				,start_renderjs:`function(){
-					//App中可以放一个函数，在Start成功时renderjs中会先调用这里的代码，this是renderjs模块的this（也可以用This变量）
-					//放一些仅在renderjs中才生效的事情，比如初始化，不提供也行
-				}`
-				,stop_renderjs:`function(aBuf,duration,mime){
-					//App中可以放一个函数，在Stop成功时renderjs中会先调用这里的代码，this是renderjs模块的this（也可以用This变量）
-					this.audioData=aBuf; //留着给Stop时进行转码成wav播放
-				}`
-			},()=>{
-				console.log(this.currentKeyTag()+" 录制中："+this.recType
-					+" "+this.recSampleRate+" "+this.recBitRate+"kbps"
-					+(this.takeoffEncodeChunkSet?" takeoffEncodeChunk":"")
-					+(this.appUseH5Rec?" appUseH5Rec":""));
-				//创建音频可视化图形绘制
-				// this.initWaveStore();
-			},(msg)=>{
-				console.log(this.currentKeyTag()+" 开始录音失败："+msg);
-			});
-		}
-		,recStop(){
-			console.log("正在结束录音...");
-			RecordApp.Stop((aBuf,duration,mime)=>{
-				//全平台通用：aBuf是ArrayBuffer音频文件二进制数据，可以保存成文件或者发送给服务器
-				//App中如果在Start参数中提供了stop_renderjs，renderjs中的函数会比这个函数先执行
-				
-				var recSet=(RecordApp.GetCurrentRecOrNull()||{set:{type:this.recType}}).set;
-				console.log("已录制["+mime+"]："+this.formatTime(duration,1)+" "+aBuf.byteLength+"字节 "
-						+recSet.sampleRate+"hz "+recSet.bitRate+"kbps",2);
-				
-				var aBuf_renderjs="this.audioData";
-				if(this.takeEcChunks){
-					aBuf_renderjs=""; //renderjs的数据是空的
-					console.log("启用takeoffEncodeChunk后Stop返回的blob长度为0不提供音频数据");
-					var len=0; for(var i=0;i<this.takeEcChunks.length;i++)len+=this.takeEcChunks[i].length;
-					var chunkData=new Uint8Array(len);
-					for(var i=0,idx=0;i<this.takeEcChunks.length;i++){
-						var itm=this.takeEcChunks[i];
-						chunkData.set(itm,idx);
-						idx+=itm.length;
-					};
-					aBuf=chunkData.buffer;
-					console.log("takeoffEncodeChunk接收到的音频片段，已合并成一个音频文件 "+aBuf.byteLength+"字节");
-				}
-				
-				//播放，部分格式会转码成wav播放
-				// this.$refs.player.setPlayBytes(aBuf,aBuf_renderjs,duration,mime,recSet,Recorder);
-				// #ifdef H5
+		methods: {
+			startRecord() {
+				console.log('开始录音');
+				recorderManager.start();
+			},
+			endRecord() {
+				console.log('录音结束');
+				recorderManager.stop();
+				recorderManager.onStop(function (res) {
+					console.log(JSON.stringify(res));
 					uni.uploadFile({
-					    url: "http://127.0.0.1:8000/speechtotext"
-					    ,file: new File([aBuf], "recorder.mp3")
-					    ,name: "mp3"
-					    ,formData: {}
-					    ,success: (res) => { 
-							console.log("上传成功："+res.data); 
-							this.StopHandler();
+						url: "http://127.0.0.1:8000/speechtotext"
+						,filePath: res.tempFilePath
+						,name: "mp3"
+						,formData: { }
+						,success: (res) => { 
+							console.log("上传成功："+JSON.stringify(res)); 
 						}
-					    ,fail: (err)=>{ console.error("上传录音失败："+err); }
+						,fail: (err)=>{ console.error("上传录音失败："+err); }
 					});
-				// #endif
-				
-				// #ifdef APP
-					//App中直接将二进制数据保存到本地文件，然后再上传
-					RecordApp.UniSaveLocalFile("recorder.mp3", aBuf,(savePath)=>{
-						uni.uploadFile({
-							url: "http://127.0.0.1:8000/speechtotext"
-							,filePath: savePath
-							,name: "mp3"
-							,formData: { }
-							,success: (res) => { 
-								console.log("上传成功："+res.data); 
-								this.StopHandler();
-							}
-							,fail: (err)=>{ console.error("上传录音失败："+err); }
-						});
-					},(err)=>{ console.error("保存录音失败："+err); });
-				// #endif
-			},(msg)=>{
-				console.log("结束录音失败："+msg,1);
-			});
-		}
-		
-		,appUseH5RecClick(){
-			this.appUseH5Rec=!this.appUseH5Rec;
-			RecordApp.Current=null;
-			console.log('切换了appUseH5Rec='+this.appUseH5Rec+'，重新请求录音权限后生效',"#f60");
-		}
-		,formatTime(ms,showSS){
-			var ss=ms%1000;ms=(ms-ss)/1000;
-			var s=ms%60;ms=(ms-s)/60;
-			var m=ms%60;ms=(ms-m)/60;
-			var h=ms, v="";
-			if(h>0) v+=(h<10?"0":"")+h+":";
-			v+=(m<10?"0":"")+m+":";
-			v+=(s<10?"0":"")+s;
-			if(showSS)v+="″"+("00"+ss).substr(-3);;
-			return v;
-		}
-		,getRouteStr(){
-			var url=this.$page&&this.$page.route||this.$root.route; //vue2 || vue3
-			if(!url && this.$root.$scope){//wx
-				url=this.$root.$scope.route;
+				});
 			}
-			return "/"+url;
 		}
 	}
-}
+
 </script>
-
-
-
-
-<!-- #ifdef APP -->
-<script module="testMainVue" lang="renderjs">
-/**============= App中在renderjs中引入RecordApp，这样App中也能使用H5录音、音频可视化 =============**/
-/** 先引入Recorder **/
-import Recorder from 'recorder-core';
-
-//按需引入需要的录音格式编码器，用不到的不需要引入，减少程序体积；H5、renderjs中可以把编码器放到static文件夹里面用动态创建script来引入，免得这些文件太大
-import 'recorder-core/src/engine/mp3.js'
-import 'recorder-core/src/engine/mp3-engine.js'
-import 'recorder-core/src/engine/wav.js'
-import 'recorder-core/src/engine/pcm.js'
-import 'recorder-core/src/engine/g711x'
-import 'recorder-core/src/engine/beta-amr'
-import 'recorder-core/src/engine/beta-amr-engine'
-import 'recorder-core/src/engine/beta-ogg'
-import 'recorder-core/src/engine/beta-ogg-engine'
-
-//可选引入可视化插件
-import 'recorder-core/src/extensions/waveview.js'
-import 'recorder-core/src/extensions/wavesurfer.view.js'
-
-import 'recorder-core/src/extensions/frequency.histogram.view.js'
-import 'recorder-core/src/extensions/lib.fft.js'
-
-//测试用根据简谱生成一段音乐
-import 'recorder-core/src/extensions/create-audio.nmn2pcm.js'
-
-/** 引入RecordApp **/
-import RecordApp from 'recorder-core/src/app-support/app.js'
-//【必须引入】uni-app支持文件
-import '../../uni_modules/Recorder-UniCore/app-uni-support.js'
-
-export default {
-	mounted(){
-		//App的renderjs必须调用的函数，传入当前模块this
-		RecordApp.UniRenderjsRegister(this);
-	},
-	methods: {
-		//这里定义的方法，在逻辑层中可通过 RecordApp.UniWebViewVueCall(this,'this.xxxFunc()') 直接调用
-		//调用逻辑层的方法，请直接用 this.$ownerInstance.callMethod("xxxFunc",{args}) 调用，二进制数据需转成base64来传递
-	}
-}
-</script>
-<!-- #endif -->
 
 
 <style>
-	.micphone {
-		max-height: 100rpx;
-		max-width: 100rpx;
+	.mic {
+		width: 100rpx; /* 定义按钮的宽度 */
+		height: 100rpx; /* 定义按钮的高度 */
 	}
 </style>
+
