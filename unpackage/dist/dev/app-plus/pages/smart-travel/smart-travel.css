@@ -56,7 +56,7 @@ uni-view[data-v-94ba6231], uni-button[data-v-94ba6231], uni-text[data-v-94ba6231
   padding-top: 0.71875rem;
 }
 .chat .scroll-view .chat-body .self[data-v-94ba6231] {
-  align-items: flex-end;
+  justify-content: flex-end;
 }
 .chat .scroll-view .chat-body .item[data-v-94ba6231] {
   display: flex;

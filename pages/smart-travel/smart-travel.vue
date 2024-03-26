@@ -188,7 +188,7 @@
 				padding-top: 23rpx;
 				// background-color:skyblue;
 				.self {
-					align-items: flex-end;
+					justify-content: flex-end;
 				}
 				
 				.item {

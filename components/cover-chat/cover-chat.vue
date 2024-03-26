@@ -14,7 +14,7 @@
 					<view class="item self" v-if="item.userContent != ''" >
 						<!-- 文字内容 -->
 						<view class="content right">
-						{{item.userContent}}
+							{{item.userContent}}
 						</view>
 					</view>
 					<!-- 机器人发的消息 -->
@@ -190,23 +190,8 @@
 					})
 				},15)
 			},
-			// 发送消息
+			
 			handleSend() {
-				//如果消息不为空
-				// if(!this.chatMsg||!/^\s+$/.test(this.chatMsg)){
-				// 	let obj = {
-				// 		botContent: "",
-				// 		recordId: 0,
-				// 		titleId: 0,
-				// 		userContent: this.chatMsg,
-				// 		userId: 0
-				// 	}
-				// 	this.msgList.push(obj);
-				// 	this.chatMsg = '';
-				// 	this.scrollToBottom()
-				// }else {
-				// 	this.$modal.showToast('不能发送空白消息')
-				// }
 				console.log("Here");
 			},
 		}
@@ -225,6 +210,7 @@
 
 	/* 聊天消息 */
 	.chat {
+		width: 750rpx;
 		.scroll-view {
 			width: 750rpx;
 			::-webkit-scrollbar {

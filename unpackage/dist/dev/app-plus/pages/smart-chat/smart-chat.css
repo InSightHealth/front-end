@@ -27,6 +27,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #F1F1F1;
 }
 .wholeview .topbar {
   width: 23.4375rem;
@@ -35,6 +36,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: fixed;
+  z-index: 99;
 }
 .wholeview .topbar .topbarleft {
   position: absolute;
@@ -77,12 +80,116 @@
 .wholeview .scroll-view {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: 4.53125rem;
+  z-index: 0;
 }
-.wholeview .scroll-view .middlebox {
+.wholeview .scroll-view .polygon1 {
+  position: absolute;
+  top: 0;
+  left: 8.4375rem;
+  height: 1.75rem;
+  width: 1.75rem;
+  z-index: 1;
+}
+.wholeview .scroll-view .middlebox1 {
   position: relative;
-  translate: 0 -3.125rem;
-  left: 1.84375rem;
+  margin-top: 0.78125rem;
+  margin-left: 1.8125rem;
   width: 19.78125rem;
   height: 16.96875rem;
   background-color: #DBF4E4;
+  border: 0.0625rem solid white;
+  border-radius: 1.25rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wholeview .scroll-view .middlebox1 .row11 {
+  margin-top: 0.625rem;
+  width: 18.3125rem;
+  height: 2.875rem;
+  font-size: 1.1875rem;
+  line-height: 100%;
+  font-weight: 600;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wholeview .scroll-view .middlebox1 .row12 {
+  margin-top: 0.15625rem;
+  width: 18.3125rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 150%;
+  color: #9aaba0;
+}
+.wholeview .scroll-view .middlebox1 .row13 {
+  margin-top: 1.5625rem;
+  width: 17.34375rem;
+  height: 2.46875rem;
+  background-color: white;
+  border-radius: 0.59375rem;
+}
+.wholeview .scroll-view .middlebox1 .row14 {
+  margin-top: 0.9375rem;
+  width: 17.34375rem;
+  height: 2.46875rem;
+  background-color: white;
+  border-radius: 0.59375rem;
+}
+.wholeview .scroll-view .polygon2 {
+  position: absolute;
+  top: 0;
+  left: 19.40625rem;
+  height: 1.75rem;
+  width: 1.75rem;
+  z-index: 1;
+}
+.wholeview .scroll-view .middlebox2 {
+  position: relative;
+  margin-top: 0.78125rem;
+  margin-left: 1.8125rem;
+  width: 19.78125rem;
+  height: 16.96875rem;
+  background-color: #DBF4E4;
+  border: 0.0625rem solid white;
+  z-index: 2;
+  border-radius: 1.25rem;
+  display: flex;
+  flex-direction: row;
+}
+.wholeview .scroll-view .middlebox2 .col21 {
+  margin-top: 1.875rem;
+  margin-left: 1.25rem;
+  height: 6.25rem;
+  width: 6.25rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.wholeview .scroll-view .middlebox2 .col21 .row211 {
+  height: 3.84375rem;
+  width: 3.84375rem;
+}
+.wholeview .scroll-view .middlebox2 .col21 .row212 {
+  font-size: 0.9375rem;
+}
+.wholeview .scroll-view .middlebox2 .col22 {
+  height: 6.25rem;
+  width: 6.25rem;
+  margin-top: 1.875rem;
+  margin-left: 1.25rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.wholeview .scroll-view .middlebox2 .col22 .row221 {
+  height: 3.84375rem;
+  width: 3.84375rem;
+}
+.wholeview .scroll-view .middlebox2 .col22 .row222 {
+  font-size: 0.9375rem;
 }
