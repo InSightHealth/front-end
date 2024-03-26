@@ -10,7 +10,7 @@
 			<image class="topbarright" src="/static/smart-chat/manage.png" @tap="toggle2">
 			</image>
 		</view>
-		<scroll-view :style="{height: `${windowHeight-300}rpx`}"
+		<scroll-view :style="{height: `${windowHeight-keyboardHeight}rpx`}"
 		id="scrollview"
 		scroll-y="true" 
 		:scroll-top="scrollTop"
@@ -35,36 +35,30 @@
 				</view>
 			</view>
 			<view>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
+				aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br>
+				aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br>
+				aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br>
 				aaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				aaaaaaaaa<br>
-				bbbbbbbbb<br>
-				bbbbbbbbb<br>
-				bbbbbbbbb<br>
-				bbbbbbbbb<br>
-				bbbbbbbbb<br>
-				bbbbbbbbb<br>
-				bbbbbbbbb<br>
-				bbbbbbbbb<br>
+				aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br>
+				aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br>
+				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
+				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
+				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
+				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
 			</view>
 		</scroll-view>
+		<view class="chat-bottom">
+			<view class="send-msg">
+		        <view class="uni-textarea">
+					<textarea v-model="chatMsg"
+						maxlength="300"
+						:show-confirm-bar="false"
+						auto-height></textarea>
+				</view>
+				<!-- <button @click="handleSend" class="send-btn">发送</button> -->
+				<image src="/static/smart-chat/send.png" class="send-btn"></image>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -72,9 +66,16 @@
 	export default {
 		data() {
 			return {
+				keyboardHeight:100,
 				showbox1: true,
-				showbox2: false
+				showbox2: false,
+				chatMsg: '请输入你想问的...'
 			}
+		},
+		onLoad(){
+		},
+		onUnload(){
+			uni.offKeyboardHeightChange()//如果不传入监听的对象，则移除所有监听函数
 		},
 		methods: {
 			toggle1() {
@@ -84,7 +85,12 @@
 			toggle2() {
 				this.showbox1 = false;
 				this.showbox2 = !this.showbox2;
-			}
+			},
+			pxTorpx(px){
+				let deviceWidth = wx.getSystemInfoSync().windowWidth
+				let rpx = ( 750 / deviceWidth ) * Number(px)
+				return Math.floor(rpx)
+			},
 		}
 	}
 </script>
@@ -104,6 +110,7 @@
 		align-items: center;
 		position: fixed;
 		z-index: 99;
+		
 		.topbarleft {
 			position: absolute;
 			left: 30rpx;
@@ -149,6 +156,7 @@
 		position: absolute;
 		top: 145rpx;
 		z-index: 0;
+		background-color: #F1F1F1;
 		.polygon1 {
 			position: absolute;
 			top: 0rpx;
@@ -268,6 +276,50 @@
 					font-size: 30rpx;
 				}
 			}
+		}
+	}
+	.chat-bottom {
+		position: fixed;
+		bottom: 0rpx;
+		width: 750rpx;
+		height: 190rpx;
+		background-color: white; 
+		border-radius: 38rpx 38rpx 0 0;
+
+		.send-msg {
+			display: flex;
+			align-items: flex-end;
+			padding: 16rpx 30rpx;
+			width: 100%;
+			min-height: 177rpx;
+			position: fixed;
+			bottom: 0;
+		}
+
+		.uni-textarea {
+			padding-bottom: 70rpx;
+                
+				textarea {
+					width: 500rpx; 
+					height: 98rpx; 
+					border-radius: 48rpx; 
+					border: 2rpx solid black;
+					min-height: 75rpx;
+					max-height: 500rpx;
+					background: #FFFFFF;
+					font-size: 32rpx;
+					font-family: PingFang SC;
+					color: #333333;
+					line-height: 43rpx;
+					padding: 5rpx 8rpx;
+				}
+		}
+            
+		.send-btn {
+			margin-bottom: 70rpx;
+			margin-left: 25rpx;
+			width: 69rpx;
+			height: 69rpx;
 		}
 	}
 }

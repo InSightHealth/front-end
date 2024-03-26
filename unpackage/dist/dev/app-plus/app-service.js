@@ -38,13 +38,13 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$9 = {
+  const _sfc_main$8 = {
     name: "homeHead",
     data() {
       return {};
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("div", { class: "phone-container" }, [
         vue.createElementVNode("div", { class: "header" }, [
@@ -54,7 +54,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
       uni.__log__(type, filename, ...args);
@@ -65,7 +65,7 @@ if (uni.restoreGlobal) {
   function resolveEasycom(component, easycom) {
     return shared.isString(component) ? easycom : component;
   }
-  const _sfc_main$8 = {
+  const _sfc_main$7 = {
     name: "homeFoot",
     data() {
       return {};
@@ -77,7 +77,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("footer", { class: "footer-container" }, [
         vue.createElementVNode("div", { class: "footer-parter" }, [
@@ -113,10 +113,10 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
-  const _sfc_main$7 = {};
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_home_head = resolveEasycom(vue.resolveDynamicComponent("home-head"), __easycom_0$1);
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
+  const _sfc_main$6 = {};
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_home_head = resolveEasycom(vue.resolveDynamicComponent("home-head"), __easycom_0);
     const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "main-container" }, [
       vue.createVNode(_component_home_head),
@@ -144,8 +144,8 @@ if (uni.restoreGlobal) {
       vue.createVNode(_component_home_foot)
     ]);
   }
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
-  const _sfc_main$6 = {
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
+  const _sfc_main$5 = {
     data() {
       return {
         pathList: [
@@ -176,7 +176,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("div", { class: "container" }, [
         (vue.openBlock(true), vue.createElementBlock(
@@ -194,7 +194,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
+  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
   var recorderCoreExports = {};
   var recorderCore = {
     get exports() {
@@ -2744,7 +2744,7 @@ if (uni.restoreGlobal) {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("yourModuleName");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["yourModuleName"] = "425f6c57";
   };
-  const _sfc_main$5 = {
+  const _sfc_main$4 = {
     data() {
       return {};
     },
@@ -2842,7 +2842,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("button", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.recReq && $options.recReq(...args))
@@ -2865,66 +2865,11 @@ if (uni.restoreGlobal) {
     ]);
   }
   if (typeof block0 === "function")
-    block0(_sfc_main$5);
-  const PagesTest_apiTest_api = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test_api.vue"]]);
-  const recorderManager$1 = uni.getRecorderManager();
-  const innerAudioContext$1 = uni.createInnerAudioContext();
-  innerAudioContext$1.autoplay = true;
-  const _sfc_main$4 = {
-    data() {
-      return {
-        text: "uni-app",
-        voicePath: ""
-      };
-    },
-    methods: {
-      startRecord() {
-        formatAppLog("log", "at components/micphone/micphone.vue:20", "开始录音");
-        recorderManager$1.start();
-      },
-      endRecord() {
-        formatAppLog("log", "at components/micphone/micphone.vue:24", "录音结束");
-        recorderManager$1.stop();
-        recorderManager$1.onStop(function(res) {
-          formatAppLog("log", "at components/micphone/micphone.vue:27", JSON.stringify(res));
-          uni.uploadFile({
-            url: "http://127.0.0.1:8000/speechtotext",
-            filePath: res.tempFilePath,
-            name: "mp3",
-            formData: {},
-            success: (res2) => {
-              formatAppLog("log", "at components/micphone/micphone.vue:34", "上传成功：" + JSON.stringify(res2));
-            },
-            fail: (err) => {
-              formatAppLog("error", "at components/micphone/micphone.vue:36", "上传录音失败：" + err);
-            }
-          });
-        });
-      }
-    }
-  };
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock(
-      "image",
-      {
-        onTouchstart: _cache[0] || (_cache[0] = (...args) => $options.startRecord && $options.startRecord(...args)),
-        onTouchend: _cache[1] || (_cache[1] = (...args) => $options.endRecord && $options.endRecord(...args)),
-        src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/micphone/mic1.png",
-        class: "mic"
-      },
-      null,
-      32
-      /* HYDRATE_EVENTS */
-    );
-  }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-609587ba"], ["__file", "E:/fuchuang/learn/demo1/components/micphone/micphone.vue"]]);
+    block0(_sfc_main$4);
+  const PagesTest_apiTest_api = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test_api.vue"]]);
   const _sfc_main$3 = {
     data() {
       return {
-        //键盘高度
-        keyboardHeight: 0,
-        //底部消息发送高度
-        bottomHeight: 0,
         //滚动距离
         scrollTop: 0,
         userId: "",
@@ -2932,7 +2877,7 @@ if (uni.restoreGlobal) {
         chatMsg: "",
         msgList: [
           {
-            botContent: "按住屏幕下方按钮讲话",
+            botContent: "hello，请问我有什么可以帮助你的吗？",
             recordId: 0,
             titleId: 0,
             userContent: "",
@@ -2942,61 +2887,26 @@ if (uni.restoreGlobal) {
             botContent: "",
             recordId: 0,
             titleId: 0,
-            userContent: "我的前面有什么？",
-            userId: 0
-          },
-          {
-            userContent: "",
-            recordId: 0,
-            titleId: 0,
-            botContent: "您的正前方有一个指示牌，请注意安全",
+            userContent: "你好呀我想问你一件事",
             userId: 0
           }
         ]
       };
     },
-    updated() {
-      this.scrollToBottom();
-    },
     computed: {
       windowHeight() {
         return this.rpxTopx(uni.getSystemInfoSync().windowHeight);
-      },
-      // 键盘弹起来的高度+发送框高度
-      inputHeight() {
-        return this.bottomHeight + this.keyboardHeight;
       }
     },
-    onLoad() {
-    },
-    onUnload() {
-      uni.offKeyboardHeightChange();
-    },
     methods: {
-      focus() {
-        this.scrollToBottom();
-      },
-      blur() {
-        this.scrollToBottom();
-      },
       // px转换成rpx
       rpxTopx(px) {
         let deviceWidth = wx.getSystemInfoSync().windowWidth;
         let rpx = 750 / deviceWidth * Number(px);
         return Math.floor(rpx);
       },
-      // 监视聊天发送栏高度
-      sendHeight() {
-        setTimeout(() => {
-          let query = uni.createSelectorQuery();
-          query.select(".send-msg").boundingClientRect();
-          query.exec((res) => {
-            this.bottomHeight = this.rpxTopx(res[0].height);
-          });
-        }, 10);
-      },
-      // 滚动至聊天底部
-      scrollToBottom(e) {
+      //滚动至聊天底部
+      scrollToBottom() {
         setTimeout(() => {
           let query = uni.createSelectorQuery().in(this);
           query.select("#scrollview").boundingClientRect();
@@ -3010,18 +2920,30 @@ if (uni.restoreGlobal) {
       },
       // 发送消息
       handleSend() {
-        formatAppLog("log", "at pages/smart-travel/smart-travel.vue:155", "Here");
+        if (!this.chatMsg || !/^\s+$/.test(this.chatMsg)) {
+          let obj = {
+            botContent: "",
+            recordId: 0,
+            titleId: 0,
+            userContent: this.chatMsg,
+            userId: 0
+          };
+          this.msgList.push(obj);
+          this.chatMsg = "";
+        } else {
+          this.$modal.showToast("不能发送空白消息");
+        }
       }
     }
   };
   function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_micphone = resolveEasycom(vue.resolveDynamicComponent("micphone"), __easycom_0);
     return vue.openBlock(), vue.createElementBlock("view", { class: "chat" }, [
       vue.createElementVNode("scroll-view", {
-        style: vue.normalizeStyle({ height: `${$options.windowHeight - $options.inputHeight}rpx` }),
+        style: vue.normalizeStyle({ height: `${$options.windowHeight}rpx` }),
         id: "scrollview",
         "scroll-y": "true",
         "scroll-top": $data.scrollTop,
+        "scroll-with-animation": true,
         class: "scroll-view"
       }, [
         vue.createCommentVNode(" 聊天主体 "),
@@ -3047,13 +2969,17 @@ if (uni.restoreGlobal) {
                     vue.toDisplayString(item.userContent),
                     1
                     /* TEXT */
-                  )
+                  ),
+                  vue.createCommentVNode(" 头像 "),
+                  vue.createElementVNode("view", { class: "avatar" })
                 ])) : vue.createCommentVNode("v-if", true),
                 vue.createCommentVNode(" 机器人发的消息 "),
                 item.botContent != "" ? (vue.openBlock(), vue.createElementBlock("view", {
                   key: 1,
                   class: "item Ai"
                 }, [
+                  vue.createCommentVNode(" 头像 "),
+                  vue.createElementVNode("view", { class: "avatar" }),
                   vue.createCommentVNode(" 文字内容 "),
                   vue.createElementVNode(
                     "view",
@@ -3073,7 +2999,28 @@ if (uni.restoreGlobal) {
       vue.createCommentVNode(" 底部消息发送栏 "),
       vue.createCommentVNode(" 用来占位，防止聊天消息被发送框遮挡 "),
       vue.createElementVNode("view", { class: "chat-bottom" }, [
-        vue.createVNode(_component_micphone, { StopHandler: $options.handleSend }, null, 8, ["StopHandler"])
+        vue.createElementVNode("view", { class: "send-msg" }, [
+          vue.createElementVNode("view", { class: "uni-textarea" }, [
+            vue.withDirectives(vue.createElementVNode(
+              "textarea",
+              {
+                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.chatMsg = $event),
+                maxlength: "300",
+                "show-confirm-bar": false,
+                "auto-height": ""
+              },
+              null,
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vModelText, $data.chatMsg]
+            ])
+          ]),
+          vue.createElementVNode("button", {
+            onClick: _cache[1] || (_cache[1] = (...args) => $options.handleSend && $options.handleSend(...args)),
+            class: "send-btn"
+          }, "发送")
+        ])
       ])
     ]);
   }
@@ -3156,9 +3103,16 @@ if (uni.restoreGlobal) {
   const _sfc_main$1 = {
     data() {
       return {
+        keyboardHeight: 100,
         showbox1: true,
-        showbox2: false
+        showbox2: false,
+        chatMsg: "请输入你想问的..."
       };
+    },
+    onLoad() {
+    },
+    onUnload() {
+      uni.offKeyboardHeightChange();
     },
     methods: {
       toggle1() {
@@ -3168,6 +3122,11 @@ if (uni.restoreGlobal) {
       toggle2() {
         this.showbox1 = false;
         this.showbox2 = !this.showbox2;
+      },
+      pxTorpx(px) {
+        let deviceWidth = wx.getSystemInfoSync().windowWidth;
+        let rpx = 750 / deviceWidth * Number(px);
+        return Math.floor(rpx);
       }
     }
   };
@@ -3190,7 +3149,7 @@ if (uni.restoreGlobal) {
         })
       ]),
       vue.createElementVNode("scroll-view", {
-        style: vue.normalizeStyle({ height: `${_ctx.windowHeight - 300}rpx` }),
+        style: vue.normalizeStyle({ height: `${_ctx.windowHeight - $data.keyboardHeight}rpx` }),
         id: "scrollview",
         "scroll-y": "true",
         "scroll-top": _ctx.scrollTop,
@@ -3275,6 +3234,24 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("br"),
           vue.createTextVNode(" aaaaaaaaa"),
           vue.createElementVNode("br"),
+          vue.createTextVNode(" aaaaaaaaa"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" bbbbbbbbb"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" bbbbbbbbb"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" bbbbbbbbb"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" bbbbbbbbb"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" bbbbbbbbb"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" bbbbbbbbb"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" bbbbbbbbb"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" bbbbbbbbb"),
+          vue.createElementVNode("br"),
           vue.createTextVNode(" bbbbbbbbb"),
           vue.createElementVNode("br"),
           vue.createTextVNode(" bbbbbbbbb"),
@@ -3292,7 +3269,32 @@ if (uni.restoreGlobal) {
           vue.createTextVNode(" bbbbbbbbb"),
           vue.createElementVNode("br")
         ])
-      ], 12, ["scroll-top"])
+      ], 12, ["scroll-top"]),
+      vue.createElementVNode("view", { class: "chat-bottom" }, [
+        vue.createElementVNode("view", { class: "send-msg" }, [
+          vue.createElementVNode("view", { class: "uni-textarea" }, [
+            vue.withDirectives(vue.createElementVNode(
+              "textarea",
+              {
+                "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.chatMsg = $event),
+                maxlength: "300",
+                "show-confirm-bar": false,
+                "auto-height": ""
+              },
+              null,
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vModelText, $data.chatMsg]
+            ])
+          ]),
+          vue.createCommentVNode(' <button @click="handleSend" class="send-btn">发送</button> '),
+          vue.createElementVNode("image", {
+            src: "/static/smart-chat/send.png",
+            class: "send-btn"
+          })
+        ])
+      ])
     ]);
   }
   const PagesSmartChatSmartChat = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "E:/fuchuang/learn/demo1/pages/smart-chat/smart-chat.vue"]]);
