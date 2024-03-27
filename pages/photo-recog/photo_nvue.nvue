@@ -20,19 +20,18 @@
 			:style="{ width: windowWidth, height: windowHeight }"
 		></live-pusher>
 
-		<view class="menu">
-			<!--底部菜单区域背景-->
-			<cover-view class="menu-mask"></cover-view>
-
+		<cover-view class="menu">
 			<!--返回键-->
 			<cover-image class="menu-back" @tap="back" src="/static/camera/back.png"></cover-image>
 
 			<!--快门键-->
-			<cover-image class="menu-snapshot" @tap="snapshot" src="/static/camera/shutter.png"></cover-image>
+			<cover-view class="menu-snapshot" @tap="snapshot">
+				<cover-view class="snapshot-button"></cover-view>
+			</cover-view>
 
 			<!--反转键-->
 			<cover-image class="menu-flip" @tap="flip" src="/static/camera/flip.png"></cover-image>
-		</view>
+		</cover-view>
 	</view>
 </template>
 
@@ -138,9 +137,16 @@ export default {
 			this.livePusher.snapshot({
 				success: e => {
 					_this.snapshotsrc = e.message.tempImagePath;
-					_this.stopPreview();
-					_this.setImage();
-					uni.navigateBack();
+					uni.navigateTo({
+						url: '/pages/photo-recog/photo-recog',
+						success: function(res) {
+						    res.eventChannel.emit('recieveFile', { filepath: e.message.tempImagePath })
+						},
+						fail: (e) => { console.log(e); } 
+					});
+					// _this.stopPreview();
+					// _this.setImage();
+					// uni.navigateBack();
 				}
 			});
 		},
@@ -160,7 +166,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .pengke-camera {
 	justify-content: center;
 	align-items: center;
@@ -169,23 +175,16 @@ export default {
 		left: 0;
 		bottom: 0;
 		width: 750rpx;
-		height: 180rpx;
+		height: 250rpx;
 		z-index: 97;
+		background-color: black;
+		
+		display: flex;
 		align-items: center;
-		justify-content: center;
-		.menu-mask {
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			width: 750rpx;
-			height: 180rpx;
-			z-index: 98; 
-			background-color: black;
-		}
+		justify-content: space-around;
+		flex-direction: row;
+		
 		.menu-back {
-			position: absolute;
-			left: 30rpx;
-			bottom: 50rpx;
 			width: 80rpx;
 			height: 80rpx;
 			z-index: 99;
@@ -193,14 +192,25 @@ export default {
 			justify-content: center;
 		}
 		.menu-snapshot {
-			width: 130rpx;
-			height: 130rpx;
+			width: 170rpx;
+			height: 170rpx;
 			z-index: 99;
+			background-color: white;
+			border-radius: 50%;
+			
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			.snapshot-button {
+				z-index: 100;
+				border: 4rpx solid black;
+				background-color: white;
+				width: 138rpx;
+				height: 138rpx;
+				border-radius: 50%;
+			}
 		}
 		.menu-flip {
-			position: absolute;
-			right: 30rpx;
-			bottom: 50rpx;
 			width: 80rpx;
 			height: 80rpx;
 			z-index: 99;

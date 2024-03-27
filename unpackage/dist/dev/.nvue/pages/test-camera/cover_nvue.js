@@ -442,7 +442,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 style: normalizeStyle({ width: $data.windowWidth, height: $data.windowHeight })
               },
               [
-                createVNode(_component_cover_chat)
+                createVNode(_component_cover_chat, {
+                  style: normalizeStyle({ width: $data.windowWidth, height: $data.windowHeight })
+                }, null, 8, ["style"])
               ],
               4
               /* STYLE */

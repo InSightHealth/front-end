@@ -80,9 +80,9 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     return target;
   };
 
-  // E:/fuchuang/learn/demo1/unpackage/dist/dev/.nvue/pages/test-camera/camera_nvue.js
+  // E:/fuchuang/learn/demo1/unpackage/dist/dev/.nvue/pages/photo-recog/photo_nvue.js
   var import_vue2 = __toESM(require_vue());
-  var _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "menu": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "width": "750rpx", "height": "180rpx", "zIndex": 97, "alignItems": "center", "justifyContent": "center" } }, "menu-mask": { ".pengke-camera .menu ": { "position": "absolute", "left": 0, "bottom": 0, "width": "750rpx", "height": "180rpx", "zIndex": 98, "backgroundColor": "#000000" } }, "menu-back": { ".pengke-camera .menu ": { "position": "absolute", "left": "30rpx", "bottom": "50rpx", "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } }, "menu-snapshot": { ".pengke-camera .menu ": { "width": "130rpx", "height": "130rpx", "zIndex": 99 } }, "menu-flip": { ".pengke-camera .menu ": { "position": "absolute", "right": "30rpx", "bottom": "50rpx", "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } } };
+  var _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "menu": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "width": "750rpx", "height": "250rpx", "zIndex": 97, "backgroundColor": "#000000", "display": "flex", "alignItems": "center", "justifyContent": "space-around", "flexDirection": "row" } }, "menu-back": { ".pengke-camera .menu ": { "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } }, "menu-snapshot": { ".pengke-camera .menu ": { "width": "170rpx", "height": "170rpx", "zIndex": 99, "backgroundColor": "#FFFFFF", "borderRadius": 50, "display": "flex", "alignItems": "center", "justifyContent": "center" } }, "snapshot-button": { ".pengke-camera .menu .menu-snapshot ": { "zIndex": 100, "borderWidth": "4rpx", "borderStyle": "solid", "borderColor": "#000000", "backgroundColor": "#FFFFFF", "width": "138rpx", "height": "138rpx", "borderRadius": 50 } }, "menu-flip": { ".pengke-camera .menu ": { "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } } };
   var _this = null;
   var _sfc_main = {
     data() {
@@ -117,7 +117,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       poenCarme() {
         if (plus.os.name == "Android") {
           this.poenCarmeInterval = setInterval(function() {
-            formatAppLog("log", "at pages/test-camera/camera_nvue.nvue:69", _this.camerastate);
+            formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:68", _this.camerastate);
             if (!_this.camerastate)
               _this.startPreview();
           }, 2500);
@@ -144,7 +144,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       startPreview() {
         this.livePusher.startPreview({
           success: (a) => {
-            formatAppLog("log", "at pages/test-camera/camera_nvue.nvue:98", a);
+            formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:97", a);
           }
         });
       },
@@ -158,7 +158,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       },
       //状态
       statechange(e) {
-        formatAppLog("log", "at pages/test-camera/camera_nvue.nvue:115", e);
+        formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:114", e);
         if (e.detail.code == 1007) {
           _this.camerastate = true;
         } else if (e.detail.code == -1301) {
@@ -173,15 +173,21 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       snapshot() {
         uni.vibrateShort({
           success: function() {
-            formatAppLog("log", "at pages/test-camera/camera_nvue.nvue:134", "success");
+            formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:133", "success");
           }
         });
         this.livePusher.snapshot({
           success: (e) => {
             _this.snapshotsrc = e.message.tempImagePath;
-            _this.stopPreview();
-            _this.setImage();
-            uni.navigateBack();
+            uni.navigateTo({
+              url: "/pages/photo-recog/photo-recog",
+              success: function(res) {
+                res.eventChannel.emit("recieveFile", { filepath: e.message.tempImagePath });
+              },
+              fail: (e2) => {
+                formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:145", e2);
+              }
+            });
           }
         });
       },
@@ -231,9 +237,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
             onStatechange: _cache[0] || (_cache[0] = (...args) => $options.statechange && $options.statechange(...args)),
             style: (0, import_vue2.normalizeStyle)({ width: $data.windowWidth, height: $data.windowHeight })
           }, null, 44, ["aspect"]),
-          (0, import_vue2.createElementVNode)("view", { class: "menu" }, [
-            (0, import_vue2.createCommentVNode)("\u5E95\u90E8\u83DC\u5355\u533A\u57DF\u80CC\u666F"),
-            (0, import_vue2.createElementVNode)("cover-view", { class: "menu-mask" }),
+          (0, import_vue2.createElementVNode)("cover-view", { class: "menu" }, [
             (0, import_vue2.createCommentVNode)("\u8FD4\u56DE\u952E"),
             (0, import_vue2.createElementVNode)("cover-image", {
               class: "menu-back",
@@ -241,11 +245,12 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
               src: "/static/camera/back.png"
             }),
             (0, import_vue2.createCommentVNode)("\u5FEB\u95E8\u952E"),
-            (0, import_vue2.createElementVNode)("cover-image", {
+            (0, import_vue2.createElementVNode)("cover-view", {
               class: "menu-snapshot",
-              onClick: _cache[2] || (_cache[2] = (...args) => $options.snapshot && $options.snapshot(...args)),
-              src: "/static/camera/shutter.png"
-            }),
+              onClick: _cache[2] || (_cache[2] = (...args) => $options.snapshot && $options.snapshot(...args))
+            }, [
+              (0, import_vue2.createElementVNode)("cover-view", { class: "snapshot-button" })
+            ]),
             (0, import_vue2.createCommentVNode)("\u53CD\u8F6C\u952E"),
             (0, import_vue2.createElementVNode)("cover-image", {
               class: "menu-flip",
@@ -259,21 +264,21 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       )
     ]);
   }
-  var camera_nvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "E:/fuchuang/learn/demo1/pages/test-camera/camera_nvue.nvue"]]);
+  var photo_nvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "E:/fuchuang/learn/demo1/pages/photo-recog/photo_nvue.nvue"]]);
 
   // <stdin>
   var webview = plus.webview.currentWebview();
   if (webview) {
     const __pageId = parseInt(webview.id);
-    const __pagePath = "pages/test-camera/camera_nvue";
+    const __pagePath = "pages/photo-recog/photo_nvue";
     let __pageQuery = {};
     try {
       __pageQuery = JSON.parse(webview.__query__);
     } catch (e) {
     }
-    camera_nvue.mpType = "page";
-    const app = Vue.createPageApp(camera_nvue, { $store: getApp({ allowDefault: true }).$store, __pageId, __pagePath, __pageQuery });
-    app.provide("__globalStyles", Vue.useCssStyles([...__uniConfig.styles, ...camera_nvue.styles || []]));
+    photo_nvue.mpType = "page";
+    const app = Vue.createPageApp(photo_nvue, { $store: getApp({ allowDefault: true }).$store, __pageId, __pagePath, __pageQuery });
+    app.provide("__globalStyles", Vue.useCssStyles([...__uniConfig.styles, ...photo_nvue.styles || []]));
     app.mount("#root");
   }
 })();

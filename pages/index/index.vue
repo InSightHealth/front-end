@@ -6,10 +6,10 @@
 				<navigator id="link-to-smart-travel" url="/pages/smart-travel/smart-travel">
 					智能出行
 				</navigator>
-				<a id="link-to-snap-recognize">
+				<navigator id="link-to-snap-recognize" url="/pages/photo-recog/tab-chat">
 					<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/snap-icon.png">
 					拍照识图
-				</a>
+				</navigator>
 			</div>
 			<div class="content-second-row">
 				<navigator id="link-to-health-assistant" url="/pages/smart-chat/smart-chat">

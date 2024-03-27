@@ -1,6 +1,6 @@
 import { _ as _export_sfc, f as formatAppLog } from "../../_plugin-vue_export-helper.js";
 import { openBlock, createElementBlock, createElementVNode, normalizeStyle, createCommentVNode } from "vue";
-const _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "menu": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "width": "750rpx", "height": "180rpx", "zIndex": 97, "alignItems": "center", "justifyContent": "center" } }, "menu-mask": { ".pengke-camera .menu ": { "position": "absolute", "left": 0, "bottom": 0, "width": "750rpx", "height": "180rpx", "zIndex": 98, "backgroundColor": "#000000" } }, "menu-back": { ".pengke-camera .menu ": { "position": "absolute", "left": "30rpx", "bottom": "50rpx", "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } }, "menu-snapshot": { ".pengke-camera .menu ": { "width": "130rpx", "height": "130rpx", "zIndex": 99 } }, "menu-flip": { ".pengke-camera .menu ": { "position": "absolute", "right": "30rpx", "bottom": "50rpx", "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } } };
+const _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "menu": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "width": "750rpx", "height": "250rpx", "zIndex": 97, "backgroundColor": "#000000", "display": "flex", "alignItems": "center", "justifyContent": "space-around", "flexDirection": "row" } }, "menu-back": { ".pengke-camera .menu ": { "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } }, "menu-snapshot": { ".pengke-camera .menu ": { "width": "170rpx", "height": "170rpx", "zIndex": 99, "backgroundColor": "#FFFFFF", "borderRadius": 50, "display": "flex", "alignItems": "center", "justifyContent": "center" } }, "snapshot-button": { ".pengke-camera .menu .menu-snapshot ": { "zIndex": 100, "borderWidth": "4rpx", "borderStyle": "solid", "borderColor": "#000000", "backgroundColor": "#FFFFFF", "width": "138rpx", "height": "138rpx", "borderRadius": 50 } }, "menu-flip": { ".pengke-camera .menu ": { "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } } };
 let _this = null;
 const _sfc_main = {
   data() {
@@ -35,7 +35,7 @@ const _sfc_main = {
     poenCarme() {
       if (plus.os.name == "Android") {
         this.poenCarmeInterval = setInterval(function() {
-          formatAppLog("log", "at pages/test-camera/camera_nvue.nvue:69", _this.camerastate);
+          formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:68", _this.camerastate);
           if (!_this.camerastate)
             _this.startPreview();
         }, 2500);
@@ -62,7 +62,7 @@ const _sfc_main = {
     startPreview() {
       this.livePusher.startPreview({
         success: (a) => {
-          formatAppLog("log", "at pages/test-camera/camera_nvue.nvue:98", a);
+          formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:97", a);
         }
       });
     },
@@ -76,7 +76,7 @@ const _sfc_main = {
     },
     //状态
     statechange(e) {
-      formatAppLog("log", "at pages/test-camera/camera_nvue.nvue:115", e);
+      formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:114", e);
       if (e.detail.code == 1007) {
         _this.camerastate = true;
       } else if (e.detail.code == -1301) {
@@ -91,15 +91,21 @@ const _sfc_main = {
     snapshot() {
       uni.vibrateShort({
         success: function() {
-          formatAppLog("log", "at pages/test-camera/camera_nvue.nvue:134", "success");
+          formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:133", "success");
         }
       });
       this.livePusher.snapshot({
         success: (e) => {
           _this.snapshotsrc = e.message.tempImagePath;
-          _this.stopPreview();
-          _this.setImage();
-          uni.navigateBack();
+          uni.navigateTo({
+            url: "/pages/photo-recog/photo-recog",
+            success: function(res) {
+              res.eventChannel.emit("recieveFile", { filepath: e.message.tempImagePath });
+            },
+            fail: (e2) => {
+              formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:145", e2);
+            }
+          });
         }
       });
     },
@@ -149,9 +155,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           onStatechange: _cache[0] || (_cache[0] = (...args) => $options.statechange && $options.statechange(...args)),
           style: normalizeStyle({ width: $data.windowWidth, height: $data.windowHeight })
         }, null, 44, ["aspect"]),
-        createElementVNode("view", { class: "menu" }, [
-          createCommentVNode("底部菜单区域背景"),
-          createElementVNode("cover-view", { class: "menu-mask" }),
+        createElementVNode("cover-view", { class: "menu" }, [
           createCommentVNode("返回键"),
           createElementVNode("cover-image", {
             class: "menu-back",
@@ -159,11 +163,12 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             src: "/static/camera/back.png"
           }),
           createCommentVNode("快门键"),
-          createElementVNode("cover-image", {
+          createElementVNode("cover-view", {
             class: "menu-snapshot",
-            onClick: _cache[2] || (_cache[2] = (...args) => $options.snapshot && $options.snapshot(...args)),
-            src: "/static/camera/shutter.png"
-          }),
+            onClick: _cache[2] || (_cache[2] = (...args) => $options.snapshot && $options.snapshot(...args))
+          }, [
+            createElementVNode("cover-view", { class: "snapshot-button" })
+          ]),
           createCommentVNode("反转键"),
           createElementVNode("cover-image", {
             class: "menu-flip",
@@ -177,7 +182,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     )
   ]);
 }
-const camera_nvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "E:/fuchuang/learn/demo1/pages/test-camera/camera_nvue.nvue"]]);
+const photo_nvue = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["styles", [_style_0]], ["__file", "E:/fuchuang/learn/demo1/pages/photo-recog/photo_nvue.nvue"]]);
 export {
-  camera_nvue as default
+  photo_nvue as default
 };

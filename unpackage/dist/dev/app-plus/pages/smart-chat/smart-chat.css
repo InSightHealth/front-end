@@ -81,13 +81,20 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 4.53125rem;
   z-index: 0;
   background-color: #F1F1F1;
 }
+.wholeview .scroll-view .placebox {
+  position: fixed;
+  background-color: #F1F1F1;
+  top: 0;
+  width: 23.4375rem;
+  height: 4.375rem;
+  z-index: 3;
+}
 .wholeview .scroll-view .polygon1 {
   position: absolute;
-  top: 0;
+  top: 4.53125rem;
   left: 8.4375rem;
   height: 1.75rem;
   width: 1.75rem;
@@ -95,7 +102,7 @@
 }
 .wholeview .scroll-view .middlebox1 {
   position: relative;
-  margin-top: 0.78125rem;
+  margin-top: 5.3125rem;
   margin-left: 1.8125rem;
   width: 19.78125rem;
   height: 16.96875rem;

@@ -24,7 +24,7 @@
 						lebal: "测试API"
 					},
 					{
-						path: "/pages/smart-chat/smart-chat",
+						path: "/pages/test-page/test-page",
 						lebal: "测试Page"
 					}
 				]

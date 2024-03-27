@@ -16,6 +16,7 @@
 		:scroll-top="scrollTop"
 		class="scroll-view"
 		>
+			<view class="placebox"></view>
 			<image class="polygon1" src="/static/smart-chat/polygon.png" v-if="showbox1"></image>
 			<image class="polygon2" src="/static/smart-chat/polygon.png" v-if="showbox2"></image>
 			<view class="middlebox1" v-if="showbox1">
@@ -41,6 +42,9 @@
 				aaaaaaaa<br>
 				aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br>
 				aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br>
+				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
+				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
+				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
 				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
 				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
 				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
@@ -154,12 +158,21 @@
 		display: flex;
 		flex-direction: column;
 		position: absolute;
-		top: 145rpx;
+		// top: 145rpx;
 		z-index: 0;
 		background-color: #F1F1F1;
+		.placebox {
+			position: fixed;
+			background-color: #F1F1F1;
+			top: 0rpx;
+			width: 750rpx;
+			height: 140rpx;
+			z-index: 3;
+		}
 		.polygon1 {
 			position: absolute;
-			top: 0rpx;
+			// top: 0rpx;
+			top: 145rpx;
 			left: 270rpx;
 			height: 56rpx;
 			width: 56rpx;
@@ -167,7 +180,8 @@
 		}
 		.middlebox1 {
 			position: relative;
-			margin-top: 25rpx;
+			// margin-top: 25rpx;
+			margin-top: 170rpx;
 			margin-left: 58rpx;
 			width: 633rpx;
 			height: 543rpx;

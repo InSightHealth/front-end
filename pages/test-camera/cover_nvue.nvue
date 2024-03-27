@@ -22,7 +22,7 @@
 		
 		<view class="chat" :style="{ width: windowWidth, height: windowHeight }">
 			<cover-view class="coverchat" :style="{ width: windowWidth, height: windowHeight }">
-				<cover-chat></cover-chat>
+				<cover-chat :style="{ width: windowWidth, height: windowHeight }"></cover-chat>
 			</cover-view>
 		</view>
 	</view>

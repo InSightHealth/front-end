@@ -528,7 +528,9 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                   style: (0, import_vue2.normalizeStyle)({ width: $data.windowWidth, height: $data.windowHeight })
                 },
                 [
-                  (0, import_vue2.createVNode)(_component_cover_chat)
+                  (0, import_vue2.createVNode)(_component_cover_chat, {
+                    style: (0, import_vue2.normalizeStyle)({ width: $data.windowWidth, height: $data.windowHeight })
+                  }, null, 8, ["style"])
                 ],
                 4
                 /* STYLE */
