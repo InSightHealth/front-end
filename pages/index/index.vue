@@ -16,6 +16,10 @@
 					<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/poe.png">
 					智能健康助手
 				</navigator>
+				<navigator id="link-to-assist-read" url="/pages/smart-chat/smart-chat">
+					<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/poe.png">
+					辅助阅读
+				</navigator>
 			</div>
 		</div>
 		<home-foot></home-foot>
@@ -45,29 +49,28 @@
 	}
 	
 	.content {
-		flex: 1; 
+		position: fixed;
+		top: 300rpx;
+		width: 750rpx;
 		
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		
-		a {
-			display: block;
-		}
-		
 		.content-first-row {
 			margin: 0px;
-			height: 370rpx;
-			width: 600rpx;
+			height: 380rpx;
+			width: 630rpx;
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
+			align-items: flex-start;
 			padding-top: 55rpx;
 			padding-bottom: 15rpx;
 			
 			#link-to-smart-travel {
-				width: 300rpx;
-				height: 300rpx;
+				width: 355rpx;
+				height: 355rpx;
 				
 				display: flex;
 				align-items: center;
@@ -81,8 +84,8 @@
 			}
 			
 			#link-to-snap-recognize {
-				width: 210rpx;
-				height: 300rpx;
+				width: 230rpx;
+				height: 355rpx;
 				
 				display: flex;
 				align-items: center;
@@ -104,15 +107,37 @@
 		}
 		
 		.content-second-row {
-			height: 200rpx;
-			width: 600rpx;
+			height: 265rpx; /* 277 */
+			width: 630rpx; /*660*/
 			display: flex;
 			flex-direction: row;
-			justify-content: space-around;
+			align-items: flex-start;
+			justify-content: space-between;
 			
 			#link-to-health-assistant {
-				width: 600rpx;
-				height: 200rpx;
+				width: 290rpx; /* 305 */
+				height: 263rpx; /* 277 */
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-evenly;
+				
+				color: white;
+				font-size: 1.2rem;
+				font-weight: 600;
+				-webkit-text-stroke: 0.3px black;
+				background-color: #DBF4E4;
+				border-radius: 10%;
+				border: 0.7px solid #BFD4C6;
+				
+				img {
+					height: 44%;
+				}
+			}
+			
+			#link-to-assist-read {
+				width: 290rpx;
+				height: 263rpx;
 				display: flex;
 				flex-direction: row;
 				align-items: center;

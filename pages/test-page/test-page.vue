@@ -20,6 +20,7 @@
 				},
 				moveY: 0,
 				touch: {},
+				state: 0,
 			}
 		},
 		methods: {
@@ -27,32 +28,36 @@
 			    this.startData.clientY = e.changedTouches[0].clientY;
 			},
 			end(e){ 
-				//触摸事件结束恢复原状
-				this.moveY = 0;
-				
-				if(Math.abs(this.touch.clientY-this.startData.clientY) > 100) {  //在事件结束时，判断滑动的距离是否达到出发需要执行事件的要求
-					console.log('执行查看跳转事件');
-					// this.touch = {};
+				//触摸事件结束
+				console.log("this.moveY = ", this.touch.clientY - this.startData.clientY);
+				if (this.touch.clientY - this.startData.clientY < -300) {
+					this.state = 1;
+					this.moveY = 0;
+				}
+				else if(this.touch.clientY - this.startData.clientY > 300) {
+					this.state = 0;
+					this.moveY = 350;
 				} else {
-					console.log('滑动距离不够，不执行跳转')
-					// this.touch = {};
+					this.moveY = 0;
 				}
 			},
-			move(event) {  //@touchmove触摸移动
-				let touch = event.touches[0];  //滑动过程中，手指滑动的坐标信息 返回的是Objcet对象
+			move(event) {
+				let touch = event.touches[0];
 				this.touch = touch;
-				let data = touch.clientY - this.startData.clientY;
-				if(touch.clientY > this.startData.clientY) {  //向上移动
-					if(data > 250) {
-						data = 250;
+				let data = 0;
+				if(touch.clientY > this.startData.clientY && this.state === 0) {  //向上移动
+					data = touch.clientY - this.startData.clientY;
+					if(data > 1000) {
+						data = 1000;
 					}
 				}
-				if(touch.clientY < this.startData.clientY) {  //向右移动
-					if(this.moveY == 0) {
+				if(touch.clientY < this.startData.clientY && this.state === 1) {  //向下移动
+					if(this.moveY === 0) {
 						data = 0
 					} else {
-						if(data < -50) {
-							data = 50;
+						data = touch.clientY - this.startData.clientY;
+						if(data < -1000) {
+							data = -1000;
 						}
 					}
 				}

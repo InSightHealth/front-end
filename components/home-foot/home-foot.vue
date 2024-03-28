@@ -1,20 +1,20 @@
 <template>
 	<view>
 		<footer class="footer-container">
-		    <div class = "footer-parter">
+		    <div class = "footer-parter-left">
 		        <!-- Replace with your actual home icon SVG or image -->
-		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/home-icon.png" class="icon-footer" id="icon home-icon">
-		        <div class = "footer-words" style="color: #08DF86;"> 首页 </div>
+		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/home-icon.png" class="icon-footer" id="home-icon">
+		        <text class = "footer-words" style="color: #08DF86;"> 首页 </text>
 		    </div>
 		    <div class = "footer-parter-center">
 		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/segment.png" class="icon-footer-center" @click="TestPage()">
-				<div class = "footer-words-center"> 测试音频 </div>
+				<text class = "footer-words"> 测试音频 </text>
 		        <!-- <img src="path_to_microphone_icon.png" class="icon-footer" id="icon microphone-icon"> -->
 		    </div>
-		    <div class = "footer-parter">
+		    <div class = "footer-parter-right">
 		        <!-- Replace with your actual user profile icon SVG or image -->
-		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/user.png" class="icon-footer" id="icon user-icon">
-		        <div class = "footer-words"> 个人 </div>
+		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/user.png" class="icon-footer" id="user-icon">
+		        <text class = "footer-words"> 个人 </text>
 		    </div>
 		</footer>
 	</view>
@@ -38,61 +38,75 @@
 
 <style lang="scss">
 .footer-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+	position: fixed;
+	bottom: 0rpx;
+	
     background: url('/static/homepage/bottom.png') no-repeat center center;
     background-size: 100% 100%;
-    height: 150px;
-    width: 100%;
-}
-
-.footer-parter {
-  width: 30%;
-  height: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .footer-parter-center {
-	  height: 75%;
-	  display: flex;
-	  flex-direction: column;
-	  align-items: center;
-  }
-}
-
-// .icon {
-//     width: 24px; /* Adjust as needed */
-//     height: 24px; /* Adjust as needed */
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-// }
-
-/* Adjust the sizes as needed */
-.icon-footer {
-    margin-top: 20%;
-    height: auto;
-}
-
-.icon-footer-center {
-    height: auto;
-	transform:scale(0.9);
-}
-
-/* You might want to add :hover or :active states for the icons */
-.icon-footer:hover {
-    opacity: 0.7;
-}
-
-.footer-words {
-  margin-top: 12%;
-}
-
-.footer-words-center{
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    height: 260rpx;
+    width: 750rpx;
+	
+	.footer-parter-left{
+		position: absolute;
+		bottom: 15rpx;
+		left: 80rpx;
+		height: 130rpx;
+		width: 80rpx;
+			
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		#home-icon {
+			height: 77rpx;
+			width: 77rpx;
+		}
+			
+		.footer-words {
+			font-size: 25rpx;
+		}
+	}
+		
+	.footer-parter-center {
+		position: absolute;
+		bottom: 15rpx;
+		left: 225rpx;
+		height: 195rpx;
+		width: 300rpx;
+			
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		.icon-footer-center {
+			width: 250rpx;
+			height: 154rpx;
+		}
+		.footer-words {
+			font-size: 30rpx;
+		}
+	}
+	
+	.footer-parter-right{
+		position: absolute;
+		bottom: 15rpx;
+		right: 80rpx;
+		height: 130rpx;
+		width: 80rpx;
+			
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		
+		#user-icon {
+			height: 77rpx;
+			width: 67rpx;
+		}
+			
+		.footer-words {
+			font-size: 25rpx;
+		}
+	}
 }
 </style>

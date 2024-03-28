@@ -38,23 +38,24 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$b = {
+  const _sfc_main$d = {
     name: "homeHead",
     data() {
       return {};
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
-      vue.createElementVNode("div", { class: "phone-container" }, [
-        vue.createElementVNode("div", { class: "header" }, [
-          vue.createElementVNode("div", { class: "avatar" }),
-          vue.createElementVNode("div", { class: "user-name" }, " 张三 ")
-        ])
+      vue.createElementVNode("view", { class: "home-head" }, [
+        vue.createElementVNode("image", {
+          class: "home-icon",
+          src: "/static/homepage/image.png"
+        }),
+        vue.createElementVNode("text", { class: "home-title" }, "明道-掌上之眼助慧行")
       ])
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
       uni.__log__(type, filename, ...args);
@@ -65,7 +66,7 @@ if (uni.restoreGlobal) {
   function resolveEasycom(component, easycom) {
     return shared.isString(component) ? easycom : component;
   }
-  const _sfc_main$a = {
+  const _sfc_main$c = {
     name: "homeFoot",
     data() {
       return {};
@@ -77,17 +78,17 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("footer", { class: "footer-container" }, [
-        vue.createElementVNode("div", { class: "footer-parter" }, [
+        vue.createElementVNode("div", { class: "footer-parter-left" }, [
           vue.createCommentVNode(" Replace with your actual home icon SVG or image "),
           vue.createElementVNode("img", {
             src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/home-icon.png",
             class: "icon-footer",
-            id: "icon home-icon"
+            id: "home-icon"
           }),
-          vue.createElementVNode("div", {
+          vue.createElementVNode("text", {
             class: "footer-words",
             style: { "color": "#08DF86" }
           }, " 首页 ")
@@ -98,26 +99,26 @@ if (uni.restoreGlobal) {
             class: "icon-footer-center",
             onClick: _cache[0] || (_cache[0] = ($event) => $options.TestPage())
           }),
-          vue.createElementVNode("div", { class: "footer-words-center" }, " 测试音频 "),
+          vue.createElementVNode("text", { class: "footer-words" }, " 测试音频 "),
           vue.createCommentVNode(' <img src="path_to_microphone_icon.png" class="icon-footer" id="icon microphone-icon"> ')
         ]),
-        vue.createElementVNode("div", { class: "footer-parter" }, [
+        vue.createElementVNode("div", { class: "footer-parter-right" }, [
           vue.createCommentVNode(" Replace with your actual user profile icon SVG or image "),
           vue.createElementVNode("img", {
             src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/user.png",
             class: "icon-footer",
-            id: "icon user-icon"
+            id: "user-icon"
           }),
-          vue.createElementVNode("div", { class: "footer-words" }, " 个人 ")
+          vue.createElementVNode("text", { class: "footer-words" }, " 个人 ")
         ])
       ])
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
-  const _sfc_main$9 = {};
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_home_head = resolveEasycom(vue.resolveDynamicComponent("home-head"), __easycom_0$1);
-    const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_1);
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
+  const _sfc_main$b = {};
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_home_head = resolveEasycom(vue.resolveDynamicComponent("home-head"), __easycom_0$2);
+    const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_1$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "main-container" }, [
       vue.createVNode(_component_home_head),
       vue.createElementVNode("div", { class: "content" }, [
@@ -141,14 +142,21 @@ if (uni.restoreGlobal) {
           }, [
             vue.createElementVNode("img", { src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/poe.png" }),
             vue.createTextVNode(" 智能健康助手 ")
+          ]),
+          vue.createElementVNode("navigator", {
+            id: "link-to-assist-read",
+            url: "/pages/smart-chat/smart-chat"
+          }, [
+            vue.createElementVNode("img", { src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/poe.png" }),
+            vue.createTextVNode(" 辅助阅读 ")
           ])
         ])
       ]),
       vue.createVNode(_component_home_foot)
     ]);
   }
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
-  const _sfc_main$8 = {
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
+  const _sfc_main$a = {
     data() {
       return {
         pathList: [
@@ -179,7 +187,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("div", { class: "container" }, [
         (vue.openBlock(true), vue.createElementBlock(
@@ -197,7 +205,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
+  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
   var recorderCoreExports = {};
   var recorderCore = {
     get exports() {
@@ -2747,7 +2755,7 @@ if (uni.restoreGlobal) {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("yourModuleName");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["yourModuleName"] = "425f6c57";
   };
-  const _sfc_main$7 = {
+  const _sfc_main$9 = {
     data() {
       return {};
     },
@@ -2845,7 +2853,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("button", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.recReq && $options.recReq(...args))
@@ -2868,13 +2876,12 @@ if (uni.restoreGlobal) {
     ]);
   }
   if (typeof block0 === "function")
-    block0(_sfc_main$7);
-  const PagesTest_apiTest_api = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test_api.vue"]]);
-  const _sfc_main$6 = {
+    block0(_sfc_main$9);
+  const PagesTest_apiTest_api = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test_api.vue"]]);
+  const _sfc_main$8 = {
+    name: "bot-chat",
     data() {
       return {
-        //滚动距离
-        scrollTop: 0,
         userId: "",
         //发送的消息
         chatMsg: "",
@@ -2890,148 +2897,100 @@ if (uni.restoreGlobal) {
             botContent: "",
             recordId: 0,
             titleId: 0,
-            userContent: "你好呀我想问你一件事",
+            userContent: "你好呀我想问你一件事，可以吗？",
+            userId: 0
+          },
+          {
+            userContent: "",
+            recordId: 0,
+            titleId: 0,
+            botContent: "当然可以!",
+            userId: 0
+          },
+          {
+            botContent: "",
+            recordId: 0,
+            titleId: 0,
+            userContent: "我的问题是：blablabla...",
             userId: 0
           }
         ]
       };
-    },
-    computed: {
-      windowHeight() {
-        return this.rpxTopx(uni.getSystemInfoSync().windowHeight);
-      }
-    },
-    methods: {
-      // px转换成rpx
-      rpxTopx(px) {
-        let deviceWidth = wx.getSystemInfoSync().windowWidth;
-        let rpx = 750 / deviceWidth * Number(px);
-        return Math.floor(rpx);
-      },
-      //滚动至聊天底部
-      scrollToBottom() {
-        setTimeout(() => {
-          let query = uni.createSelectorQuery().in(this);
-          query.select("#scrollview").boundingClientRect();
-          query.select("#msglistview").boundingClientRect();
-          query.exec((res) => {
-            if (res[1].height > res[0].height) {
-              this.scrollTop = this.rpxTopx(res[1].height - res[0].height);
-            }
-          });
-        }, 15);
-      },
-      // 发送消息
-      handleSend() {
-        if (!this.chatMsg || !/^\s+$/.test(this.chatMsg)) {
-          let obj = {
-            botContent: "",
-            recordId: 0,
-            titleId: 0,
-            userContent: this.chatMsg,
-            userId: 0
-          };
-          this.msgList.push(obj);
-          this.chatMsg = "";
-        } else {
-          this.$modal.showToast("不能发送空白消息");
-        }
-      }
     }
   };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "chat" }, [
-      vue.createElementVNode("scroll-view", {
-        style: vue.normalizeStyle({ height: `${$options.windowHeight}rpx` }),
-        id: "scrollview",
-        "scroll-y": "true",
-        "scroll-top": $data.scrollTop,
-        "scroll-with-animation": true,
-        class: "scroll-view"
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("view", {
+        id: "msglistview",
+        class: "chat-body"
       }, [
-        vue.createCommentVNode(" 聊天主体 "),
-        vue.createElementVNode("view", {
-          id: "msglistview",
-          class: "chat-body"
-        }, [
-          vue.createCommentVNode(" 聊天记录 "),
-          (vue.openBlock(true), vue.createElementBlock(
-            vue.Fragment,
-            null,
-            vue.renderList($data.msgList, (item, index) => {
-              return vue.openBlock(), vue.createElementBlock("view", { key: index }, [
-                vue.createCommentVNode(" 自己发的消息 "),
-                item.userContent != "" ? (vue.openBlock(), vue.createElementBlock("view", {
-                  key: 0,
-                  class: "item self"
-                }, [
-                  vue.createCommentVNode(" 文字内容 "),
-                  vue.createElementVNode(
-                    "view",
-                    { class: "content right" },
-                    vue.toDisplayString(item.userContent),
-                    1
-                    /* TEXT */
-                  ),
-                  vue.createCommentVNode(" 头像 "),
-                  vue.createElementVNode("view", { class: "avatar" })
-                ])) : vue.createCommentVNode("v-if", true),
-                vue.createCommentVNode(" 机器人发的消息 "),
-                item.botContent != "" ? (vue.openBlock(), vue.createElementBlock("view", {
-                  key: 1,
-                  class: "item Ai"
-                }, [
-                  vue.createCommentVNode(" 头像 "),
-                  vue.createElementVNode("view", { class: "avatar" }),
-                  vue.createCommentVNode(" 文字内容 "),
-                  vue.createElementVNode(
-                    "view",
-                    { class: "content left" },
-                    vue.toDisplayString(item.botContent),
-                    1
-                    /* TEXT */
-                  )
-                ])) : vue.createCommentVNode("v-if", true)
-              ]);
-            }),
-            128
-            /* KEYED_FRAGMENT */
-          ))
-        ])
-      ], 12, ["scroll-top"]),
-      vue.createCommentVNode(" 底部消息发送栏 "),
-      vue.createCommentVNode(" 用来占位，防止聊天消息被发送框遮挡 "),
-      vue.createElementVNode("view", { class: "chat-bottom" }, [
-        vue.createElementVNode("view", { class: "send-msg" }, [
-          vue.createElementVNode("view", { class: "uni-textarea" }, [
-            vue.withDirectives(vue.createElementVNode(
-              "textarea",
-              {
-                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.chatMsg = $event),
-                maxlength: "300",
-                "show-confirm-bar": false,
-                "auto-height": ""
-              },
-              null,
-              512
-              /* NEED_PATCH */
-            ), [
-              [vue.vModelText, $data.chatMsg]
-            ])
-          ]),
-          vue.createElementVNode("button", {
-            onClick: _cache[1] || (_cache[1] = (...args) => $options.handleSend && $options.handleSend(...args)),
-            class: "send-btn"
-          }, "发送")
-        ])
+        vue.createCommentVNode(" 聊天记录 "),
+        (vue.openBlock(true), vue.createElementBlock(
+          vue.Fragment,
+          null,
+          vue.renderList($data.msgList, (item, index) => {
+            return vue.openBlock(), vue.createElementBlock("view", { key: index }, [
+              vue.createCommentVNode(" 自己发的消息 "),
+              item.userContent != "" ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 0,
+                class: "item self"
+              }, [
+                vue.createCommentVNode(" 文字内容 "),
+                vue.createElementVNode(
+                  "view",
+                  { class: "content right" },
+                  vue.toDisplayString(item.userContent),
+                  1
+                  /* TEXT */
+                ),
+                vue.createCommentVNode(" 头像 "),
+                vue.createElementVNode("view", { class: "avatar" }, [
+                  vue.createElementVNode("image", { src: "/static/smart-chat/icon-girl.png" })
+                ])
+              ])) : vue.createCommentVNode("v-if", true),
+              vue.createCommentVNode(" 机器人发的消息 "),
+              item.botContent != "" ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 1,
+                class: "item Ai"
+              }, [
+                vue.createCommentVNode(" 头像 "),
+                vue.createElementVNode("view", { class: "avatar" }, [
+                  vue.createElementVNode("image", { src: "/static/smart-chat/icon-bot.png" })
+                ]),
+                vue.createCommentVNode(" 文字内容 "),
+                vue.createElementVNode(
+                  "view",
+                  { class: "content left" },
+                  vue.toDisplayString(item.botContent),
+                  1
+                  /* TEXT */
+                )
+              ])) : vue.createCommentVNode("v-if", true)
+            ]);
+          }),
+          128
+          /* KEYED_FRAGMENT */
+        ))
       ])
     ]);
   }
-  const PagesSmartTravelSmartTravel = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-94ba6231"], ["__file", "E:/fuchuang/learn/demo1/pages/smart-travel/smart-travel.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-fb69b191"], ["__file", "E:/fuchuang/learn/demo1/components/bot-chat/bot-chat.vue"]]);
+  const _sfc_main$7 = {
+    data() {
+      return {};
+    }
+  };
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_bot_chat = resolveEasycom(vue.resolveDynamicComponent("bot-chat"), __easycom_0$1);
+    return vue.openBlock(), vue.createElementBlock("view", { style: { "background-color": "#F1F1F1" } }, [
+      vue.createVNode(_component_bot_chat, { style: { "margin-top": "40rpx" } })
+    ]);
+  }
+  const PagesSmartTravelSmartTravel = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "E:/fuchuang/learn/demo1/pages/smart-travel/smart-travel.vue"]]);
   const recorderManager = uni.getRecorderManager();
   const innerAudioContext = uni.createInnerAudioContext();
   innerAudioContext.autoplay = true;
-  const _sfc_main$5 = {
+  const _sfc_main$6 = {
     data() {
       return {
         text: "uni-app",
@@ -3089,7 +3048,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("button", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.startRecord && $options.startRecord(...args))
@@ -3102,14 +3061,30 @@ if (uni.restoreGlobal) {
       }, "播放录音")
     ]);
   }
-  const PagesRecTestNative_test = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/native_test.vue"]]);
+  const PagesRecTestNative_test = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/native_test.vue"]]);
+  const _sfc_main$5 = {
+    name: "press-mic",
+    data() {
+      return {};
+    }
+  };
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "speakarea" }, [
+      vue.createElementVNode("image", { src: "/static/smart-chat/press-mic.png" })
+    ]);
+  }
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-f48dac70"], ["__file", "E:/fuchuang/learn/demo1/components/press-mic/press-mic.vue"]]);
   const _sfc_main$4 = {
     data() {
       return {
         keyboardHeight: 100,
         showbox1: true,
         showbox2: false,
-        chatMsg: "请输入你想问的..."
+        showbox: true,
+        chatMsg: "请输入你想问的...",
+        speak_mode: true,
+        type_mode: false,
+        show_listen: false
       };
     },
     onLoad() {
@@ -3121,20 +3096,63 @@ if (uni.restoreGlobal) {
       toggle1() {
         this.showbox1 = !this.showbox1;
         this.showbox2 = false;
+        this.showbox = this.showbox1;
+        this.scrollTotop();
       },
       toggle2() {
         this.showbox1 = false;
         this.showbox2 = !this.showbox2;
+        this.showbox = this.showbox2;
+        this.scrollTotop();
       },
       pxTorpx(px) {
         let deviceWidth = wx.getSystemInfoSync().windowWidth;
         let rpx = 750 / deviceWidth * Number(px);
         return Math.floor(rpx);
+      },
+      scrollTotop() {
+        uni.createSelectorQuery().select(".scroll-view").boundingClientRect((res) => {
+          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:118", res);
+          const scrollH = res.top;
+          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:120", "scroll view selected!!");
+          uni.pageScrollTo({
+            duration: 100,
+            // 过渡时间
+            scrollTop: scrollH
+            // 滚动的实际距离
+          });
+        }).exec();
+      },
+      scrollTobottom() {
+        uni.createSelectorQuery().select(`.scroll-view`).boundingClientRect((res) => {
+          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:129", res);
+          const scrollH = res.bottom;
+          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:131", "scroll view selected!!");
+          uni.pageScrollTo({
+            duration: 100,
+            // 过渡时间
+            scrollTop: scrollH
+            // 滚动的实际距离
+          });
+        }).exec();
+      },
+      touchstart() {
+        this.show_listen = true;
+      },
+      touchend() {
+        this.show_listen = false;
+      },
+      togglemode() {
+        this.speak_mode = !this.speak_mode;
+        this.type_mode = !this.type_mode;
       }
     }
   };
   function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_bot_chat = resolveEasycom(vue.resolveDynamicComponent("bot-chat"), __easycom_0$1);
+    const _component_press_mic = resolveEasycom(vue.resolveDynamicComponent("press-mic"), __easycom_1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "wholeview" }, [
+      vue.createElementVNode("view", { class: "topview" }),
       vue.createElementVNode("view", { class: "topbar" }, [
         vue.createElementVNode("view", { class: "topbarleft" }, [
           vue.createElementVNode("text", { class: "topbarlefttitle" }, " 健康助手 "),
@@ -3152,13 +3170,14 @@ if (uni.restoreGlobal) {
         })
       ]),
       vue.createElementVNode("scroll-view", {
-        style: vue.normalizeStyle({ height: `${_ctx.windowHeight - $data.keyboardHeight}rpx` }),
+        style: vue.normalizeStyle({ height: `${_ctx.windowHeight}rpx` }),
         id: "scrollview",
         "scroll-y": "true",
         "scroll-top": _ctx.scrollTop,
         class: "scroll-view"
       }, [
         vue.createElementVNode("view", { class: "placebox" }),
+        vue.createElementVNode("view", { class: "placebox-bottom" }),
         $data.showbox1 ? (vue.openBlock(), vue.createElementBlock("image", {
           key: 0,
           class: "polygon1",
@@ -3197,131 +3216,76 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("view", { class: "row222" }, " 完善个人信息 ")
           ])
         ])) : vue.createCommentVNode("v-if", true),
-        vue.createElementVNode("view", null, [
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" aaaaaaaaa"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br"),
-          vue.createTextVNode(" bbbbbbbbb"),
-          vue.createElementVNode("br")
-        ])
+        vue.createElementVNode(
+          "view",
+          {
+            class: vue.normalizeClass([$data.showbox ? "content-box" : "content"])
+          },
+          [
+            vue.createVNode(_component_bot_chat)
+          ],
+          2
+          /* CLASS */
+        ),
+        $data.show_listen ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 4,
+          class: "show-listen"
+        }, [
+          vue.createElementVNode("text", { class: "listen-title" }, "正在听，请说出您的问题"),
+          vue.createElementVNode("image", { src: "/static/smart-chat/wave.png" })
+        ])) : vue.createCommentVNode("v-if", true),
+        $data.show_listen ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 5,
+          class: "listen-place"
+        })) : vue.createCommentVNode("v-if", true)
       ], 12, ["scroll-top"]),
       vue.createElementVNode("view", { class: "chat-bottom" }, [
-        vue.createElementVNode("view", { class: "send-msg" }, [
+        $data.type_mode ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
+          class: "send-msg"
+        }, [
+          vue.createElementVNode("image", {
+            src: "/static/smart-chat/keyboard.png",
+            class: "send-btn",
+            onClick: _cache[2] || (_cache[2] = (...args) => $options.togglemode && $options.togglemode(...args))
+          }),
           vue.createElementVNode("view", { class: "uni-textarea" }, [
-            vue.withDirectives(vue.createElementVNode(
-              "textarea",
-              {
-                "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.chatMsg = $event),
-                maxlength: "300",
-                "show-confirm-bar": false,
-                "auto-height": ""
-              },
-              null,
-              512
-              /* NEED_PATCH */
-            ), [
-              [vue.vModelText, $data.chatMsg]
-            ])
+            vue.createElementVNode("textarea", {
+              placeholder: "请输入你想问的...",
+              "placeholder-style": "display:flex; align-items:center; justify-content:center;",
+              maxlength: "300",
+              "show-confirm-bar": false,
+              "auto-height": "",
+              class: "textarea"
+            })
           ]),
-          vue.createCommentVNode(' <button @click="handleSend" class="send-btn">发送</button> '),
           vue.createElementVNode("image", {
             src: "/static/smart-chat/send.png",
-            class: "send-btn"
+            class: "send-btn",
+            onClick: _cache[3] || (_cache[3] = (...args) => $options.scrollTobottom && $options.scrollTobottom(...args))
           })
-        ])
+        ])) : vue.createCommentVNode("v-if", true),
+        $data.speak_mode ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 1,
+          class: "send-msg"
+        }, [
+          vue.createElementVNode("image", {
+            src: "/static/smart-chat/chat-mic.png",
+            class: "send-btn",
+            onClick: _cache[4] || (_cache[4] = (...args) => $options.togglemode && $options.togglemode(...args))
+          }),
+          vue.createElementVNode("view", { class: "uni-textarea" }, [
+            vue.createVNode(_component_press_mic, {
+              onTouchstart: $options.touchstart,
+              onTouchend: $options.touchend
+            }, null, 8, ["onTouchstart", "onTouchend"])
+          ]),
+          vue.createElementVNode("image", {
+            src: "/static/smart-chat/send.png",
+            class: "send-btn",
+            onClick: _cache[5] || (_cache[5] = (...args) => $options.scrollTobottom && $options.scrollTobottom(...args))
+          })
+        ])) : vue.createCommentVNode("v-if", true)
       ])
     ]);
   }
@@ -3421,7 +3385,8 @@ if (uni.restoreGlobal) {
           clientY: ""
         },
         moveY: 0,
-        touch: {}
+        touch: {},
+        state: 0
       };
     },
     methods: {
@@ -3429,28 +3394,34 @@ if (uni.restoreGlobal) {
         this.startData.clientY = e.changedTouches[0].clientY;
       },
       end(e) {
-        this.moveY = 0;
-        if (Math.abs(this.touch.clientY - this.startData.clientY) > 100) {
-          formatAppLog("log", "at pages/test-page/test-page.vue:34", "执行查看跳转事件");
+        formatAppLog("log", "at pages/test-page/test-page.vue:32", "this.moveY = ", this.touch.clientY - this.startData.clientY);
+        if (this.touch.clientY - this.startData.clientY < -300) {
+          this.state = 1;
+          this.moveY = 0;
+        } else if (this.touch.clientY - this.startData.clientY > 300) {
+          this.state = 0;
+          this.moveY = 350;
         } else {
-          formatAppLog("log", "at pages/test-page/test-page.vue:37", "滑动距离不够，不执行跳转");
+          this.moveY = 0;
         }
       },
       move(event) {
         let touch = event.touches[0];
         this.touch = touch;
-        let data = touch.clientY - this.startData.clientY;
-        if (touch.clientY > this.startData.clientY) {
-          if (data > 250) {
-            data = 250;
+        let data = 0;
+        if (touch.clientY > this.startData.clientY && this.state === 0) {
+          data = touch.clientY - this.startData.clientY;
+          if (data > 1e3) {
+            data = 1e3;
           }
         }
-        if (touch.clientY < this.startData.clientY) {
-          if (this.moveY == 0) {
+        if (touch.clientY < this.startData.clientY && this.state === 1) {
+          if (this.moveY === 0) {
             data = 0;
           } else {
-            if (data < -50) {
-              data = 50;
+            data = touch.clientY - this.startData.clientY;
+            if (data < -1e3) {
+              data = -1e3;
             }
           }
         }

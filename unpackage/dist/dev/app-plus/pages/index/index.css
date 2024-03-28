@@ -23,47 +23,31 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.header[data-v-fe552612] {
-  padding: 10px 20px;
-  /* Padding around the content */
+.home-head[data-v-fe552612] {
+  width: 23.4375rem;
+  height: 9.96875rem;
+  background-image: linear-gradient(180deg, #acec9c, rgba(172, 236, 156, 0));
+  border-radius: 8px;
   display: flex;
-  /* Use flexbox for layout */
-  align-items: center;
-  /* Center items vertically */
-  background-color: #08DF86;
-  background-size: 100% 100%;
-  height: 3.75rem;
-  border-radius: 0 0 1.25rem 1.25rem;
+  flex-direction: row;
+  justify-content: flex-start;
 }
-.avatar[data-v-fe552612] {
-  width: 64px;
-  /* Avatar width */
-  height: 64px;
-  /* Avatar height */
-  border-radius: 50%;
-  /* Make it round */
-  background-color: #fff;
-  /* Background color of the avatar */
-  margin-right: 15px;
-  /* Space between avatar and name */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-  /* Shadow below the avatar */
-  display: flex;
-  /* Use flexbox for positioning the icon */
-  justify-content: center;
-  /* Center the icon horizontally */
-  align-items: center;
-  /* Center the icon vertically */
-  background-image: url("https://img-insight.oss-cn-chengdu.aliyuncs.com/avatar.jpg");
-  background-size: 100% 100%;
+.home-head .home-icon[data-v-fe552612] {
+  position: absolute;
+  height: 2.625rem;
+  width: 2.8125rem;
+  left: 1.25rem;
+  top: 4.25rem;
 }
-.user-name[data-v-fe552612] {
-  font-size: 1.2em;
-  /* Size of the username */
-  font-weight: 500;
+.home-head .home-title[data-v-fe552612] {
+  position: absolute;
+  top: 4.84375rem;
+  left: 4.84375rem;
+  width: auto;
+  height: 2.71875rem;
+  font-size: 1.4375rem;
+  line-height: 100%;
   color: black;
-  font-family: "SimHei";
-  padding-bottom: 18px;
 }
 /**
  * 这里是uni-app内置的常用样式变量
@@ -91,50 +75,66 @@
 /* 透明度 */
 /* 文章场景相关 */
 .footer-container[data-v-5c189880] {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  position: fixed;
+  bottom: 0;
   background: url("../../static/homepage/bottom.png") no-repeat center center;
   background-size: 100% 100%;
-  height: 150px;
-  width: 100%;
+  height: 8.125rem;
+  width: 23.4375rem;
 }
-.footer-parter[data-v-5c189880] {
-  width: 30%;
-  height: 60%;
+.footer-container .footer-parter-left[data-v-5c189880] {
+  position: absolute;
+  bottom: 0.46875rem;
+  left: 2.5rem;
+  height: 4.0625rem;
+  width: 2.5rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
-.footer-parter .footer-parter-center[data-v-5c189880] {
-  height: 75%;
+.footer-container .footer-parter-left #home-icon[data-v-5c189880] {
+  height: 2.40625rem;
+  width: 2.40625rem;
+}
+.footer-container .footer-parter-left .footer-words[data-v-5c189880] {
+  font-size: 0.78125rem;
+}
+.footer-container .footer-parter-center[data-v-5c189880] {
+  position: absolute;
+  bottom: 0.46875rem;
+  left: 7.03125rem;
+  height: 6.09375rem;
+  width: 9.375rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
-
-/* Adjust the sizes as needed */
-.icon-footer[data-v-5c189880] {
-  margin-top: 20%;
-  height: auto;
+.footer-container .footer-parter-center .icon-footer-center[data-v-5c189880] {
+  width: 7.8125rem;
+  height: 4.8125rem;
 }
-.icon-footer-center[data-v-5c189880] {
-  height: auto;
-  transform: scale(0.9);
+.footer-container .footer-parter-center .footer-words[data-v-5c189880] {
+  font-size: 0.9375rem;
 }
-
-/* You might want to add :hover or :active states for the icons */
-.icon-footer[data-v-5c189880]:hover {
-  opacity: 0.7;
-}
-.footer-words[data-v-5c189880] {
-  margin-top: 12%;
-}
-.footer-words-center[data-v-5c189880] {
+.footer-container .footer-parter-right[data-v-5c189880] {
+  position: absolute;
+  bottom: 0.46875rem;
+  right: 2.5rem;
+  height: 4.0625rem;
+  width: 2.5rem;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+}
+.footer-container .footer-parter-right #user-icon[data-v-5c189880] {
+  height: 2.40625rem;
+  width: 2.09375rem;
+}
+.footer-container .footer-parter-right .footer-words[data-v-5c189880] {
+  font-size: 0.78125rem;
 }
 /**
  * 这里是uni-app内置的常用样式变量
@@ -176,27 +176,27 @@ body {
   height: 100%;
 }
 .content {
-  flex: 1;
+  position: fixed;
+  top: 9.375rem;
+  width: 23.4375rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.content a {
-  display: block;
-}
 .content .content-first-row {
   margin: 0px;
-  height: 11.5625rem;
-  width: 18.75rem;
+  height: 11.875rem;
+  width: 19.6875rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-start;
   padding-top: 1.71875rem;
   padding-bottom: 0.46875rem;
 }
 .content .content-first-row #link-to-smart-travel {
-  width: 9.375rem;
-  height: 9.375rem;
+  width: 11.09375rem;
+  height: 11.09375rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -208,8 +208,8 @@ body {
   background-size: 100% 100%;
 }
 .content .content-first-row #link-to-snap-recognize {
-  width: 6.5625rem;
-  height: 9.375rem;
+  width: 7.1875rem;
+  height: 11.09375rem;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -226,15 +226,20 @@ body {
   width: 50%;
 }
 .content .content-second-row {
-  height: 6.25rem;
-  width: 18.75rem;
+  height: 8.28125rem;
+  /* 277 */
+  width: 19.6875rem;
+  /*660*/
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 .content .content-second-row #link-to-health-assistant {
-  width: 18.75rem;
-  height: 6.25rem;
+  width: 9.0625rem;
+  /* 305 */
+  height: 8.21875rem;
+  /* 277 */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -248,5 +253,23 @@ body {
   border: 0.7px solid #BFD4C6;
 }
 .content .content-second-row #link-to-health-assistant img {
+  height: 44%;
+}
+.content .content-second-row #link-to-assist-read {
+  width: 9.0625rem;
+  height: 8.21875rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  -webkit-text-stroke: 0.3px black;
+  background-color: #DBF4E4;
+  border-radius: 10%;
+  border: 0.7px solid #BFD4C6;
+}
+.content .content-second-row #link-to-assist-read img {
   height: 44%;
 }

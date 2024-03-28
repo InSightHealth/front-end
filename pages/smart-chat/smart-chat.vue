@@ -1,5 +1,7 @@
 <template>
 	<view class="wholeview">
+		<view class="topview">
+		</view>
 		<view class="topbar">
 			<view class="topbarleft">
 				<text class="topbarlefttitle"> 健康助手 </text>
@@ -10,13 +12,14 @@
 			<image class="topbarright" src="/static/smart-chat/manage.png" @tap="toggle2">
 			</image>
 		</view>
-		<scroll-view :style="{height: `${windowHeight-keyboardHeight}rpx`}"
+		<scroll-view :style="{height: `${windowHeight}rpx`}"
 		id="scrollview"
 		scroll-y="true" 
 		:scroll-top="scrollTop"
 		class="scroll-view"
 		>
 			<view class="placebox"></view>
+			<view class="placebox-bottom"></view>
 			<image class="polygon1" src="/static/smart-chat/polygon.png" v-if="showbox1"></image>
 			<image class="polygon2" src="/static/smart-chat/polygon.png" v-if="showbox2"></image>
 			<view class="middlebox1" v-if="showbox1">
@@ -35,32 +38,39 @@
 					<view class="row222"> 完善个人信息 </view>
 				</view>
 			</view>
-			<view>
-				aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br>
-				aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br>
-				aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br>
-				aaaaaaaa<br>
-				aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br>
-				aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br> aaaaaaaaa<br>
-				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
-				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
-				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
-				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
-				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
-				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
-				bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br> bbbbbbbbb<br>
+			<view :class="[showbox?'content-box':'content']">
+				<bot-chat></bot-chat>
 			</view>
+			<view class="show-listen" v-if="show_listen">
+				<text class="listen-title">正在听，请说出您的问题</text>
+				<image src="/static/smart-chat/wave.png"></image>
+			</view>
+			<view class="listen-place" v-if="show_listen"></view>
 		</scroll-view>
 		<view class="chat-bottom">
-			<view class="send-msg">
-		        <view class="uni-textarea">
-					<textarea v-model="chatMsg"
+			<view class="send-msg" v-if="type_mode">
+				<image src="/static/smart-chat/keyboard.png" class="send-btn" @tap="togglemode">
+				</image>
+				<view class="uni-textarea">
+					<textarea placeholder="请输入你想问的..."
+						placeholder-style="display:flex; align-items:center; justify-content:center;"
 						maxlength="300"
 						:show-confirm-bar="false"
-						auto-height></textarea>
+						auto-height
+						class="textarea"></textarea>
 				</view>
-				<!-- <button @click="handleSend" class="send-btn">发送</button> -->
-				<image src="/static/smart-chat/send.png" class="send-btn"></image>
+				<image src="/static/smart-chat/send.png" class="send-btn" @tap="scrollTobottom">
+				</image>
+			</view>
+			
+			<view class="send-msg" v-if="speak_mode">
+				<image src="/static/smart-chat/chat-mic.png" class="send-btn" @tap="togglemode">
+				</image>
+				<view class="uni-textarea" >
+					<press-mic @touchstart="touchstart" @touchend="touchend"></press-mic>
+				</view>
+				<image src="/static/smart-chat/send.png" class="send-btn" @tap="scrollTobottom">
+				</image>
 			</view>
 		</view>
 	</view>
@@ -73,7 +83,11 @@
 				keyboardHeight:100,
 				showbox1: true,
 				showbox2: false,
-				chatMsg: '请输入你想问的...'
+				showbox: true,
+				chatMsg: '请输入你想问的...',
+				speak_mode: true,
+				type_mode: false,
+				show_listen: false
 			}
 		},
 		onLoad(){
@@ -85,16 +99,52 @@
 			toggle1() {
 				this.showbox1 = !this.showbox1;
 				this.showbox2 = false;
+				this.showbox = this.showbox1;
+				this.scrollTotop();
 			},
 			toggle2() {
 				this.showbox1 = false;
 				this.showbox2 = !this.showbox2;
+				this.showbox = this.showbox2;
+				this.scrollTotop();
 			},
 			pxTorpx(px){
 				let deviceWidth = wx.getSystemInfoSync().windowWidth
 				let rpx = ( 750 / deviceWidth ) * Number(px)
 				return Math.floor(rpx)
 			},
+			scrollTotop() {
+				uni.createSelectorQuery().select(".scroll-view").boundingClientRect((res)=>{
+				    console.log(res)
+				    const scrollH = res.top;
+					console.log("scroll view selected!!");
+					uni.pageScrollTo({
+				    	duration: 100,// 过渡时间
+				    	scrollTop: scrollH,// 滚动的实际距离
+					})
+				}).exec();
+			},
+			scrollTobottom() {
+				uni.createSelectorQuery().select(`.scroll-view`).boundingClientRect(res => {
+					console.log(res)
+					const scrollH = res.bottom;
+					console.log("scroll view selected!!");
+					uni.pageScrollTo({
+						duration: 100,// 过渡时间
+						scrollTop: scrollH,// 滚动的实际距离
+					})
+				}).exec();
+			},
+			touchstart() {
+				this.show_listen = true;
+			},
+			touchend() {
+				this.show_listen = false;
+			}, 
+			togglemode() {
+				this.speak_mode = !this.speak_mode;
+				this.type_mode = !this.type_mode;
+			}
 		}
 	}
 </script>
@@ -105,6 +155,15 @@
 	flex-direction: column;
 	align-items: center;
 	background-color: #F1F1F1;
+	height: 100%;
+	.topview {
+		height: 60rpx; 
+		background-color: rgba(172, 236, 156, 1); 
+		width: 750rpx;
+		position: fixed;
+		top: 0rpx;
+		z-index: 100;
+	}
 	.topbar {
 		width: 750rpx; 
 		height: 300rpx;
@@ -114,6 +173,7 @@
 		align-items: center;
 		position: fixed;
 		z-index: 99;
+		top: 50rpx;
 		
 		.topbarleft {
 			position: absolute;
@@ -133,7 +193,7 @@
 			.topbarlefticon {
 				width: 58rpx; 
 				height: 58rpx; 
-				background-color: rgba(255, 254.75, 254.75, 1); 
+				background-color: white; 
 				border-radius: 20rpx;
 				display: flex;
 				align-items: center;
@@ -166,13 +226,21 @@
 			background-color: #F1F1F1;
 			top: 0rpx;
 			width: 750rpx;
-			height: 140rpx;
+			height: 190rpx;
+			z-index: 3;
+		}
+		.placebox-bottom{
+			position: fixed;
+			background-color: #F1F1F1;
+			bottom: 0rpx;
+			width: 750rpx;
+			height: 195rpx;
 			z-index: 3;
 		}
 		.polygon1 {
 			position: absolute;
 			// top: 0rpx;
-			top: 145rpx;
+			top: 195rpx;
 			left: 270rpx;
 			height: 56rpx;
 			width: 56rpx;
@@ -181,7 +249,7 @@
 		.middlebox1 {
 			position: relative;
 			// margin-top: 25rpx;
-			margin-top: 170rpx;
+			margin-top: 220rpx;
 			margin-left: 58rpx;
 			width: 633rpx;
 			height: 543rpx;
@@ -228,13 +296,13 @@
 				margin-top: 30rpx;
 				width: 555rpx;
 				height: 79rpx;
-				background-color: white; 
+				background-color: white;
 				border-radius: 19rpx;
 			}
 		}
 		.polygon2 {
 			position: absolute;
-			top: 0rpx;
+			top: 195rpx;
 			left: 621rpx;
 			height: 56rpx;
 			width: 56rpx;
@@ -242,7 +310,8 @@
 		}
 		.middlebox2 {
 			position: relative;
-			margin-top: 25rpx;
+			// margin-top: 25rpx;
+			margin-top: 220rpx;
 			margin-left: 58rpx;
 			width: 633rpx;
 			height: 543rpx;
@@ -291,6 +360,48 @@
 				}
 			}
 		}
+		.content {
+			padding-top: 220rpx;
+			padding-bottom: 200rpx;
+			background-color: #F1F1F1;
+		}
+		
+		.content-box {
+			padding-top: 50rpx;
+			padding-bottom: 200rpx;
+		}
+		
+		.listen-place {
+			width: 750rpx; 
+			height: 358rpx; 
+			background-color: #F1F1F1;
+		}
+		.show-listen {
+			position: fixed;
+			left: 86rpx;
+			bottom: 230rpx;
+			width: 577rpx; 
+			height: 358rpx; 
+			background-color: white; 
+			box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
+			border-radius: 38rpx;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			
+			.listen-title {
+				font-size: 46rpx; 
+				line-height: 100%; 
+				text-align: center; 
+				color: rgba(0, 0, 0, 0.59);
+			}
+			
+			image {
+				width: 298rpx;
+				height: 149rpx;
+			}
+		}
 	}
 	.chat-bottom {
 		position: fixed;
@@ -298,40 +409,39 @@
 		width: 750rpx;
 		height: 190rpx;
 		background-color: white; 
-		border-radius: 38rpx 38rpx 0 0;
+		border-radius: 50rpx 50rpx 0 0;
+		z-index: 99;
 
 		.send-msg {
 			display: flex;
-			align-items: flex-end;
-			padding: 16rpx 30rpx;
-			width: 100%;
+			align-items: center;
+			justify-content: space-evenly;
+			width: 750rpx;
 			min-height: 177rpx;
 			position: fixed;
 			bottom: 0;
+			padding-bottom: 15rpx;
 		}
 
 		.uni-textarea {
-			padding-bottom: 70rpx;
                 
-				textarea {
-					width: 500rpx; 
-					height: 98rpx; 
-					border-radius: 48rpx; 
-					border: 2rpx solid black;
-					min-height: 75rpx;
-					max-height: 500rpx;
-					background: #FFFFFF;
-					font-size: 32rpx;
-					font-family: PingFang SC;
-					color: #333333;
-					line-height: 43rpx;
-					padding: 5rpx 8rpx;
-				}
+			.textarea {
+				width: 500rpx; 
+				height: 98rpx;
+				border-radius: 48rpx; 
+				border: 2rpx solid black;
+				min-height: 75rpx;
+				max-height: 500rpx;
+				background: #FFFFFF;
+				font-size: 32rpx;
+				font-family: PingFang SC;
+				color: #333333;
+				line-height: 43rpx;
+				padding: 5rpx 8rpx;
+			}
 		}
             
 		.send-btn {
-			margin-bottom: 70rpx;
-			margin-left: 25rpx;
 			width: 69rpx;
 			height: 69rpx;
 		}

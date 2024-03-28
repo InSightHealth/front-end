@@ -3,7 +3,9 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"app-plus": {
+					"titleNView":  false
+				}
 			}
 		},
 		{
@@ -64,7 +66,9 @@
 			"path" : "pages/smart-chat/smart-chat",
 			"style" : 
 			{
-				"navigationBarTitleText" : "",
+				"app-plus": {
+					"titleNView":  false
+				},
 				"enablePullDownRefresh" : false
 			}
 		},
