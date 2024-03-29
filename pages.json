@@ -97,6 +97,32 @@
 				"navigationBarTitleText" : "",
 				"enablePullDownRefresh" : false
 			}
+		},
+		{
+			"path" : "pages/assist-read/assist-read",
+			"style" : 
+			{
+				"navigationBarTitleText" : "辅助阅读",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/assist-read/photo-recog",
+			"style" : 
+			{
+				"app-plus": {
+					"titleNView":  false
+				},
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/assist-read/photo_nvue",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {

@@ -49,11 +49,14 @@
 		</scroll-view>
 		<view class="chat-bottom">
 			<view class="send-msg" v-if="type_mode">
-				<image src="/static/smart-chat/keyboard.png" class="send-btn" @tap="togglemode">
+				<image src="/static/smart-chat/chat-mic.png" class="send-btn" @tap="togglemode">
 				</image>
 				<view class="uni-textarea">
-					<textarea placeholder="请输入你想问的..."
+					<textarea 
+						v-model="chatMsg"
+						placeholder="请输入你想问的..."
 						placeholder-style="display:flex; align-items:center; justify-content:center;"
+						@input="keyboardInput"
 						maxlength="300"
 						:show-confirm-bar="false"
 						auto-height
@@ -64,7 +67,7 @@
 			</view>
 			
 			<view class="send-msg" v-if="speak_mode">
-				<image src="/static/smart-chat/chat-mic.png" class="send-btn" @tap="togglemode">
+				<image src="/static/smart-chat/keyboard.png" class="send-btn" @tap="togglemode">
 				</image>
 				<view class="uni-textarea" >
 					<press-mic @touchstart="touchstart" @touchend="touchend"></press-mic>
@@ -77,6 +80,8 @@
 </template>
 
 <script>
+	const recorderManager = uni.getRecorderManager();
+	
 	export default {
 		data() {
 			return {
@@ -84,10 +89,11 @@
 				showbox1: true,
 				showbox2: false,
 				showbox: true,
-				chatMsg: '请输入你想问的...',
+				chatMsg: '',
 				speak_mode: true,
 				type_mode: false,
-				show_listen: false
+				show_listen: false,
+				placeholder: '请输入你想问的'
 			}
 		},
 		onLoad(){
@@ -135,15 +141,41 @@
 					})
 				}).exec();
 			},
+			keyboardInput() {
+				this.placeholder = ''; 
+			},
 			touchstart() {
 				this.show_listen = true;
+				this.startRecord();
 			},
 			touchend() {
 				this.show_listen = false;
+				this.endRecord();
 			}, 
 			togglemode() {
 				this.speak_mode = !this.speak_mode;
 				this.type_mode = !this.type_mode;
+			},
+			startRecord() {
+				console.log('开始录音');
+				recorderManager.start();
+			},
+			endRecord() {
+				console.log('录音结束');
+				recorderManager.stop();
+				recorderManager.onStop(function (res) {
+					console.log(JSON.stringify(res));
+					uni.uploadFile({
+						url: "http://127.0.0.1:8000/speechtotext"
+						,filePath: res.tempFilePath
+						,name: "mp3"
+						,formData: { }
+						,success: (res) => { 
+							console.log("上传成功："+JSON.stringify(res)); 
+						}
+						,fail: (err)=>{ console.error("上传录音失败："+err); }
+					});
+				});
 			}
 		}
 	}

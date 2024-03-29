@@ -118,11 +118,11 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.root-view[data-v-3abb26b1] {
+.root-view[data-v-fb8e82d4] {
   background-color: grey;
   height: 100%;
 }
-.root-view .back-icon[data-v-3abb26b1] {
+.root-view .back-icon[data-v-fb8e82d4] {
   position: fixed;
   top: 3.125rem;
   left: 2.1875rem;
@@ -130,25 +130,25 @@
   height: 2.40625rem;
   width: 2.40625rem;
 }
-.root-view .recog-view[data-v-3abb26b1] {
+.root-view .recog-view[data-v-fb8e82d4] {
   background-color: grey;
   height: 100%;
 }
-.root-view .recog-view .preview-img[data-v-3abb26b1] {
+.root-view .recog-view .preview-img[data-v-fb8e82d4] {
   position: absolute;
   top: 2.4375rem;
   left: 2.03125rem;
   height: 37.5rem;
   width: 19.34375rem;
 }
-.root-view .recog-view .preview-img-thumb[data-v-3abb26b1] {
+.root-view .recog-view .preview-img-thumb[data-v-fb8e82d4] {
   position: absolute;
   top: -10.8125rem;
   left: 0;
   height: 45.4375rem;
   width: 23.4375rem;
 }
-.root-view .recog-view .menu[data-v-3abb26b1] {
+.root-view .recog-view .menu[data-v-fb8e82d4] {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -161,26 +161,26 @@
   justify-content: space-around;
   flex-direction: row;
 }
-.root-view .recog-view .menu .row[data-v-3abb26b1] {
+.root-view .recog-view .menu .row[data-v-fb8e82d4] {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
-.root-view .recog-view .menu .row .row-side[data-v-3abb26b1] {
+.root-view .recog-view .menu .row .row-side[data-v-fb8e82d4] {
   height: 2.40625rem;
   width: 2.40625rem;
   margin-bottom: 0.3125rem;
 }
-.root-view .recog-view .menu .row .row-middle[data-v-3abb26b1] {
+.root-view .recog-view .menu .row .row-middle[data-v-fb8e82d4] {
   height: 4.3125rem;
   width: 4.3125rem;
 }
-.root-view .recog-view .menu .row .row-text[data-v-3abb26b1] {
+.root-view .recog-view .menu .row .row-text[data-v-fb8e82d4] {
   font-size: 0.9375rem;
   color: white;
 }
-.root-view .thumb-view[data-v-3abb26b1] {
+.root-view .thumb-view[data-v-fb8e82d4] {
   transition: all 0.5s;
   background-color: white;
 }

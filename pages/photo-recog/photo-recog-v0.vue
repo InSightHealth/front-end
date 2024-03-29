@@ -5,30 +5,22 @@
 			<image :class="[thumbnail ? 'preview-img-thumb':'preview-img']" 
 				src="https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/image.png"></image>
 			<view class="menu">
-				<navigator class="row" url="/pages/photo-recog/photo_nvue">
+					<navigator class="row" url="/pages/photo-recog/photo_nvue">
 					<image src="/static/recog/back.png" class="row-side"></image>
 					<text class="row-text"> 返回 </text>
 				</navigator>
 			
-				<view class="row" @tap="showThumb">
+				<navigator class="row" url="/pages/photo-recog/photo_nvue">
 					<image src="/static/recog/ok.png" class="row-middle"></image>
-				</view>
+				</navigator>
 			
-				<view class="row" url="/pages/photo-recog/photo_nvue">
+				<navigator class="row" url="/pages/photo-recog/photo_nvue">
 					<image src="/static/recog/rotate.png" class="row-side"></image>
 					<text class="row-text"> 旋转 </text>
-				</view>
+				</navigator>
 			</view>
 		</view>
-		<tab-chat v-if="thumbnail"
-			class="showMore-box"
-			:style="{
-				transform: 'translateY('+moveY+'px)', 
-			}" 
-			@touchstart="start" 
-			@touchend="end" 
-			@touchmove="move">
-		</tab-chat>
+		<view v-if="thumbnail"></view>
 	</view>
 </template>
 
@@ -38,12 +30,7 @@ export default {
 		return {
 			photoPath: '',
 			heightRatio: 1,
-			thumbnail: false,
-			startData: {
-				clientY: '',
-			},
-			moveY: 0,
-			state: 0
+			thumbnail: false
 		};
 	},
 	onLoad: function (option) { 
@@ -80,45 +67,7 @@ export default {
 				uni.navigateBack();
 			}
 		},
-		showThumb() {
-			this.thumbnail = true;
-			this.moveY = 0;
-			this.state = 0;
-		},
-		start(e){
-		    this.startData.clientY = e.changedTouches[0].clientY;
-		},
-		end(e){ 
-			//触摸事件结束
-			console.log("this.moveY = ", this.touch.clientY - this.startData.clientY);
-			if(this.touch.clientY - this.startData.clientY > 300) {
-				this.state = 1;
-				this.moveY = 350;
-				this.thumbnail = false;
-			} else {
-				this.state = 0;
-				this.moveY = 0;
-			}
-		},
-		move(event) {
-			let touch = event.touches[0];
-			this.touch = touch;
-			let data = 0;
-			if(touch.clientY > this.startData.clientY && this.state === 0) {  //向下移动
-				data = touch.clientY - this.startData.clientY;
-				if(data > 1000) {
-					data = 1000;
-				}
-				this.moveY = data;
-			}
-			if(touch.clientY < this.startData.clientY && this.state === 1) {  //向上移动
-				data = this.startData.clientY - touch.clientY;
-				if(data > 1000) {
-					data = -1000;
-				}
-				this.moveY = 350-data;
-			}
-		},
+		
 	}
 };
 </script>
@@ -188,11 +137,59 @@ export default {
 					color: white;
 				}
 			}
+			
+			
 		}
 	}
+	
 	.thumb-view {
-		transition: all .5s;
-		background-color: white;
+		background-color: grey;
+		height: 100%;
+			
+		.preview-img {
+			position: absolute;
+			top: -346rpx;
+			left: 0rpx;
+			height: 1454rpx; // 1200
+			width: 750rpx;  // 619
+		}
+		
+		.menu {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 750rpx;
+			height: 250rpx;
+			z-index: 97;
+			background-color: black;
+			
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+			flex-direction: row;
+			
+			.row {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: flex-start;
+				.row-side {
+					height: 77rpx;
+					width: 77rpx;
+					margin-bottom: 10rpx;
+				}
+				.row-middle {
+					height: 138rpx;
+					width: 138rpx;
+				}
+				.row-text {
+					font-size: 30rpx;
+					color: white;
+				}
+			}
+			
+			
+		}
 	}
 }
 </style>
