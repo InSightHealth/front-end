@@ -41,6 +41,7 @@ uni-view[data-v-fb69b191] {
 }
 .chat-body .item[data-v-fb69b191] {
   display: flex;
+  width: 23.4375rem;
   padding: 1.40625rem 0.9375rem;
 }
 .chat-body .item .right[data-v-fb69b191] {

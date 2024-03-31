@@ -20,7 +20,7 @@
 						lebal: "测试摄像头"
 					},
 					{
-						path: "/pages/test-camera/camera_nvue",
+						path: "/pages/test_api/test-upload",
 						lebal: "测试API"
 					},
 					{

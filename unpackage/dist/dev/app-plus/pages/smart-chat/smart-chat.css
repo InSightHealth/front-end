@@ -41,6 +41,7 @@ uni-view[data-v-fb69b191] {
 }
 .chat-body .item[data-v-fb69b191] {
   display: flex;
+  width: 23.4375rem;
   padding: 1.40625rem 0.9375rem;
 }
 .chat-body .item .right[data-v-fb69b191] {
@@ -417,18 +418,19 @@ uni-view[data-v-fb69b191] {
   padding-bottom: 0.46875rem;
 }
 .wholeview .chat-bottom .uni-textarea .textarea {
+  box-sizing: border-box;
   width: 15.625rem;
   height: 3.0625rem;
   border-radius: 1.5rem;
   border: 0.0625rem solid black;
-  min-height: 2.34375rem;
-  max-height: 15.625rem;
   background: #FFFFFF;
-  font-size: 1rem;
+  font-size: 1.3125rem;
   font-family: PingFang SC;
   color: #333333;
-  line-height: 1.34375rem;
-  padding: 0.15625rem 0.25rem;
+  line-height: 100%;
+  padding: 0.8125rem 0.6875rem;
+  display: table-cell;
+  vertical-align: middle;
 }
 .wholeview .chat-bottom .send-btn {
   width: 2.15625rem;

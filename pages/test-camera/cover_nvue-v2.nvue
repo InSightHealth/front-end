@@ -22,21 +22,7 @@
 		
 		<view class="chat" :style="{ width: windowWidth, height: windowHeight }">
 			<cover-view class="coverchat" :style="{ width: windowWidth, height: windowHeight }">
-				<scroll-view  :style="{height: `${windowHeight * 0.8}px`}"
-				id="scrollview"
-				scroll-y="true" 
-				:scroll-top="scrollTop"
-				class="scroll-view"
-				enable-flex="true"
-				>
-				<!-- {{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
-				{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
-				{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
-				{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
-				{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br> -->
-				<cover-chat></cover-chat>
-				
-				</scroll-view>
+				<cover-chat :style="{ width: windowWidth, height: windowHeight }"></cover-chat>
 			</cover-view>
 		</view>
 	</view>
@@ -54,7 +40,6 @@ export default {
 			camerastate: false, //相机准备好了
 			livePusher: null, //流视频对象
 			snapshotsrc: null, //快照
-			randstr: 'ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl'
 		};
 	},
 	onLoad(e) {
@@ -192,10 +177,6 @@ view {
 		justify-content: center;
 		.coverchat{
 			z-index: 99;
-			.scroll-view {
-				height: 100%;
-				width: 750rpx;
-			}
 		}
 	}
 }

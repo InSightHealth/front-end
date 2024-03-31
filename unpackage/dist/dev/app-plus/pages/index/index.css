@@ -201,8 +201,8 @@ body {
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 2.15625rem;
+  font-weight: 700;
   -webkit-text-stroke: 0.5px black;
   background-image: url("../../static/homepage/smart-travel.png");
   background-size: 100% 100%;
@@ -215,15 +215,16 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   color: white;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.4375rem;
+  font-weight: 700;
   -webkit-text-stroke: 0.3px black;
   background-color: #DBF4E4;
   border-radius: 8%;
   border: 0.7px solid #BFD4C6;
 }
 .content .content-first-row #link-to-snap-recognize img {
-  width: 50%;
+  height: 3.84375rem;
+  width: 3.84375rem;
 }
 .content .content-second-row {
   height: 8.28125rem;
@@ -237,39 +238,45 @@ body {
 }
 .content .content-second-row #link-to-health-assistant {
   width: 9.0625rem;
-  /* 305 */
   height: 8.21875rem;
-  /* 277 */
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
   justify-content: space-evenly;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 600;
-  -webkit-text-stroke: 0.3px black;
   background-color: #DBF4E4;
   border-radius: 10%;
   border: 0.7px solid #BFD4C6;
 }
-.content .content-second-row #link-to-health-assistant img {
-  height: 44%;
+.content .content-second-row #link-to-health-assistant uni-image {
+  height: 3.84375rem;
+  width: 3.84375rem;
+}
+.content .content-second-row #link-to-health-assistant uni-text {
+  color: white;
+  font-size: 1.4375rem;
+  font-weight: 700;
+  -webkit-text-stroke: 0.3px black;
+  align-self: center;
 }
 .content .content-second-row #link-to-assist-read {
   width: 9.0625rem;
   height: 8.21875rem;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
   justify-content: space-evenly;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 600;
-  -webkit-text-stroke: 0.3px black;
   background-color: #DBF4E4;
   border-radius: 10%;
   border: 0.7px solid #BFD4C6;
 }
-.content .content-second-row #link-to-assist-read img {
-  height: 44%;
+.content .content-second-row #link-to-assist-read uni-image {
+  height: 3.84375rem;
+  width: 3.84375rem;
+}
+.content .content-second-row #link-to-assist-read uni-text {
+  color: white;
+  font-size: 1.4375rem;
+  font-weight: 700;
+  -webkit-text-stroke: 0.3px black;
+  align-self: center;
 }

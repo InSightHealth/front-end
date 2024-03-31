@@ -54,12 +54,11 @@
 				<view class="uni-textarea">
 					<textarea 
 						v-model="chatMsg"
-						placeholder="请输入你想问的..."
+						:placeholder="placeholder"
 						placeholder-style="display:flex; align-items:center; justify-content:center;"
 						@input="keyboardInput"
 						maxlength="300"
 						:show-confirm-bar="false"
-						auto-height
 						class="textarea"></textarea>
 				</view>
 				<image src="/static/smart-chat/send.png" class="send-btn" @tap="scrollTobottom">
@@ -93,7 +92,14 @@
 				speak_mode: true,
 				type_mode: false,
 				show_listen: false,
-				placeholder: '请输入你想问的'
+				placeholder: '请输入你想问的...'
+			}
+		},
+		updated() {
+			if (this.chatMsg != '') {
+				this.placeholder = '';
+			} else {
+				this.placeholder = '请输入你想问的...'
 			}
 		},
 		onLoad(){
@@ -102,6 +108,13 @@
 			uni.offKeyboardHeightChange()//如果不传入监听的对象，则移除所有监听函数
 		},
 		methods: {
+			keyboardInput() {
+				if (this.chatMsg != '') {
+					this.placeholder = '';
+				} else {
+					this.placeholder = '请输入你想问的...'
+				}
+			},
 			toggle1() {
 				this.showbox1 = !this.showbox1;
 				this.showbox2 = false;
@@ -458,18 +471,20 @@
 		.uni-textarea {
                 
 			.textarea {
+				box-sizing: border-box;
 				width: 500rpx; 
 				height: 98rpx;
 				border-radius: 48rpx; 
 				border: 2rpx solid black;
-				min-height: 75rpx;
-				max-height: 500rpx;
 				background: #FFFFFF;
-				font-size: 32rpx;
+				font-size: 42rpx;
 				font-family: PingFang SC;
 				color: #333333;
-				line-height: 43rpx;
-				padding: 5rpx 8rpx;
+				line-height: 100%;
+				padding: 26rpx 22rpx;
+				
+				display: table-cell;
+				vertical-align: middle;
 			}
 		}
             

@@ -98,7 +98,7 @@ const _sfc_main = {
         success: (e) => {
           _this.snapshotsrc = e.message.tempImagePath;
           uni.navigateTo({
-            url: "/pages/photo-recog/photo-recog",
+            url: "/pages/assist-read/photo-recog",
             success: function(res) {
               res.eventChannel.emit("recieveFile", { filepath: e.message.tempImagePath });
             },

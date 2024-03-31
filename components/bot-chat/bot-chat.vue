@@ -94,6 +94,7 @@ view {
 	
 	.item {
 		display: flex;
+		width: 750rpx;
 		padding: 45rpx 30rpx;
 		
 		.right {
