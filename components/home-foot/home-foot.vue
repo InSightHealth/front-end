@@ -3,8 +3,8 @@
 		<footer class="footer-container">
 		    <div class = "footer-parter-left">
 		        <!-- Replace with your actual home icon SVG or image -->
-		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/home-icon.png" class="icon-footer" id="home-icon">
-		        <text class = "footer-words" style="color: #08DF86;"> 首页 </text>
+		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/home-icon.png" class="icon-footer" id="home-icon" @tap="navigateHome">
+				<text class = "footer-words" style="color: #08DF86;"> 首页 </text>
 		    </div>
 		    <div class = "footer-parter-center">
 		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/segment.png" class="icon-footer-center" @click="TestPage()">
@@ -13,8 +13,8 @@
 		    </div>
 		    <div class = "footer-parter-right">
 		        <!-- Replace with your actual user profile icon SVG or image -->
-		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/user.png" class="icon-footer" id="user-icon">
-		        <text class = "footer-words"> 个人 </text>
+				<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/user.png" class="icon-footer" id="user-icon" @tap="navigatePerson">
+				<text class = "footer-words"> 个人 </text>
 		    </div>
 		</footer>
 	</view>
@@ -31,6 +31,26 @@
 			TestPage() {
 				const url = "/pages/test/test";
 				uni.navigateTo({url});
+			},
+			navigateHome() {
+				let routes = getCurrentPages();
+				let curRoute = routes[routes.length - 1].route;
+				const url = "/pages/index/index";
+				console.log(curRoute, url);
+				
+				if (url != curRoute) {
+					uni.navigateTo({url});
+				}
+			},
+			navigatePerson() {
+				let routes = getCurrentPages();
+				let curRoute = routes[routes.length - 1].route;
+				const url = "/pages/personal/personal"
+				console.log(curRoute, url);
+				
+				if (url != curRoute) {
+					uni.navigateTo({url});
+				}
 			}
 		}
 	}

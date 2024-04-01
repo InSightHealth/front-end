@@ -131,6 +131,40 @@
 				"navigationBarTitleText" : "",
 				"enablePullDownRefresh" : false
 			}
+		},
+		{
+			"path" : "pages/personal/personal",
+			"style" : 
+			{
+				"app-plus": {
+					"titleNView":  false
+				},
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/personal/profile/profile",
+			"style" : 
+			{
+				"navigationBarTitleText" : "个人资料",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/personal/system/system",
+			"style" : 
+			{
+				"navigationBarTitleText" : "系统设置",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/personal/account/account",
+			"style" : 
+			{
+				"navigationBarTitleText" : "账号设置",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {

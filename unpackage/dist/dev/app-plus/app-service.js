@@ -38,13 +38,13 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$g = {
+  const _sfc_main$k = {
     name: "homeHead",
     data() {
       return {};
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "home-head" }, [
         vue.createElementVNode("image", {
@@ -55,7 +55,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
       uni.__log__(type, filename, ...args);
@@ -66,7 +66,7 @@ if (uni.restoreGlobal) {
   function resolveEasycom(component, easycom) {
     return shared.isString(component) ? easycom : component;
   }
-  const _sfc_main$f = {
+  const _sfc_main$j = {
     name: "homeFoot",
     data() {
       return {};
@@ -75,10 +75,28 @@ if (uni.restoreGlobal) {
       TestPage() {
         const url = "/pages/test/test";
         uni.navigateTo({ url });
+      },
+      navigateHome() {
+        let routes = getCurrentPages();
+        let curRoute = routes[routes.length - 1].route;
+        const url = "/pages/index/index";
+        formatAppLog("log", "at components/home-foot/home-foot.vue:39", curRoute, url);
+        if (url != curRoute) {
+          uni.navigateTo({ url });
+        }
+      },
+      navigatePerson() {
+        let routes = getCurrentPages();
+        let curRoute = routes[routes.length - 1].route;
+        const url = "/pages/personal/personal";
+        formatAppLog("log", "at components/home-foot/home-foot.vue:49", curRoute, url);
+        if (url != curRoute) {
+          uni.navigateTo({ url });
+        }
       }
     }
   };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("footer", { class: "footer-container" }, [
         vue.createElementVNode("div", { class: "footer-parter-left" }, [
@@ -86,7 +104,8 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("img", {
             src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/home-icon.png",
             class: "icon-footer",
-            id: "home-icon"
+            id: "home-icon",
+            onClick: _cache[0] || (_cache[0] = (...args) => $options.navigateHome && $options.navigateHome(...args))
           }),
           vue.createElementVNode("text", {
             class: "footer-words",
@@ -97,7 +116,7 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("img", {
             src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/segment.png",
             class: "icon-footer-center",
-            onClick: _cache[0] || (_cache[0] = ($event) => $options.TestPage())
+            onClick: _cache[1] || (_cache[1] = ($event) => $options.TestPage())
           }),
           vue.createElementVNode("text", { class: "footer-words" }, " 测试音频 "),
           vue.createCommentVNode(' <img src="path_to_microphone_icon.png" class="icon-footer" id="icon microphone-icon"> ')
@@ -107,18 +126,19 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("img", {
             src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/user.png",
             class: "icon-footer",
-            id: "user-icon"
+            id: "user-icon",
+            onClick: _cache[2] || (_cache[2] = (...args) => $options.navigatePerson && $options.navigatePerson(...args))
           }),
           vue.createElementVNode("text", { class: "footer-words" }, " 个人 ")
         ])
       ])
     ]);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
-  const _sfc_main$e = {};
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_home_head = resolveEasycom(vue.resolveDynamicComponent("home-head"), __easycom_0$2);
-    const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_1$1);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
+  const _sfc_main$i = {};
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_home_head = resolveEasycom(vue.resolveDynamicComponent("home-head"), __easycom_0$3);
+    const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_0$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "main-container" }, [
       vue.createVNode(_component_home_head),
       vue.createElementVNode("div", { class: "content" }, [
@@ -155,8 +175,8 @@ if (uni.restoreGlobal) {
       vue.createVNode(_component_home_foot)
     ]);
   }
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
-  const _sfc_main$d = {
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
+  const _sfc_main$h = {
     data() {
       return {
         pathList: [
@@ -187,7 +207,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("div", { class: "container" }, [
         (vue.openBlock(true), vue.createElementBlock(
@@ -205,7 +225,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
+  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
   var recorderCoreExports = {};
   var recorderCore = {
     get exports() {
@@ -2755,7 +2775,7 @@ if (uni.restoreGlobal) {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("yourModuleName");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["yourModuleName"] = "425f6c57";
   };
-  const _sfc_main$c = {
+  const _sfc_main$g = {
     data() {
       return {};
     },
@@ -2853,7 +2873,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("button", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.recReq && $options.recReq(...args))
@@ -2876,9 +2896,9 @@ if (uni.restoreGlobal) {
     ]);
   }
   if (typeof block0 === "function")
-    block0(_sfc_main$c);
-  const PagesTest_apiTest_api = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test_api.vue"]]);
-  const _sfc_main$b = {
+    block0(_sfc_main$g);
+  const PagesTest_apiTest_api = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test_api.vue"]]);
+  const _sfc_main$f = {
     name: "bot-chat",
     data() {
       return {
@@ -2918,7 +2938,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", {
         id: "msglistview",
@@ -2974,23 +2994,23 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-fb69b191"], ["__file", "E:/fuchuang/learn/demo1/components/bot-chat/bot-chat.vue"]]);
-  const _sfc_main$a = {
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-fb69b191"], ["__file", "E:/fuchuang/learn/demo1/components/bot-chat/bot-chat.vue"]]);
+  const _sfc_main$e = {
     data() {
       return {};
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_bot_chat = resolveEasycom(vue.resolveDynamicComponent("bot-chat"), __easycom_0$1);
     return vue.openBlock(), vue.createElementBlock("view", { style: { "background-color": "#F1F1F1" } }, [
       vue.createVNode(_component_bot_chat, { style: { "margin-top": "40rpx" } })
     ]);
   }
-  const PagesSmartTravelSmartTravel = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__file", "E:/fuchuang/learn/demo1/pages/smart-travel/smart-travel.vue"]]);
+  const PagesSmartTravelSmartTravel = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "E:/fuchuang/learn/demo1/pages/smart-travel/smart-travel.vue"]]);
   const recorderManager$1 = uni.getRecorderManager();
   const innerAudioContext = uni.createInnerAudioContext();
   innerAudioContext.autoplay = true;
-  const _sfc_main$9 = {
+  const _sfc_main$d = {
     data() {
       return {
         text: "uni-app",
@@ -3048,7 +3068,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("button", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.startRecord && $options.startRecord(...args))
@@ -3061,21 +3081,21 @@ if (uni.restoreGlobal) {
       }, "播放录音")
     ]);
   }
-  const PagesRecTestNative_test = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/native_test.vue"]]);
-  const _sfc_main$8 = {
+  const PagesRecTestNative_test = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/native_test.vue"]]);
+  const _sfc_main$c = {
     name: "press-mic",
     data() {
       return {};
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "speakarea" }, [
       vue.createElementVNode("image", { src: "/static/smart-chat/press-mic.png" })
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-f48dac70"], ["__file", "E:/fuchuang/learn/demo1/components/press-mic/press-mic.vue"]]);
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__scopeId", "data-v-f48dac70"], ["__file", "E:/fuchuang/learn/demo1/components/press-mic/press-mic.vue"]]);
   const recorderManager = uni.getRecorderManager();
-  const _sfc_main$7 = {
+  const _sfc_main$b = {
     data() {
       return {
         keyboardHeight: 100,
@@ -3192,7 +3212,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_bot_chat = resolveEasycom(vue.resolveDynamicComponent("bot-chat"), __easycom_0$1);
     const _component_press_mic = resolveEasycom(vue.resolveDynamicComponent("press-mic"), __easycom_1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "wholeview" }, [
@@ -3336,8 +3356,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesSmartChatSmartChat = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "E:/fuchuang/learn/demo1/pages/smart-chat/smart-chat.vue"]]);
-  const _sfc_main$6 = {
+  const PagesSmartChatSmartChat = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__file", "E:/fuchuang/learn/demo1/pages/smart-chat/smart-chat.vue"]]);
+  const _sfc_main$a = {
     data() {
       return {};
     },
@@ -3346,7 +3366,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "chat-view" }, [
       vue.createElementVNode("textarea", { class: "input-text" }),
       vue.createElementVNode("div", { class: "tap-mic" }, [
@@ -3360,8 +3380,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-6c9e0889"], ["__file", "E:/fuchuang/learn/demo1/components/tab-chat/tab-chat.vue"]]);
-  const _sfc_main$5 = {
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-6c9e0889"], ["__file", "E:/fuchuang/learn/demo1/components/tab-chat/tab-chat.vue"]]);
+  const _sfc_main$9 = {
     data() {
       return {
         photoPath: "",
@@ -3429,7 +3449,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_tab_chat = resolveEasycom(vue.resolveDynamicComponent("tab-chat"), __easycom_0);
     return vue.openBlock(), vue.createElementBlock("view", { class: "root-view" }, [
       vue.createElementVNode("image", {
@@ -3492,8 +3512,8 @@ if (uni.restoreGlobal) {
       }, null, 8, ["style", "onTouchstart", "onTouchend", "onTouchmove"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesPhotoRecogPhotoRecog = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-3abb26b1"], ["__file", "E:/fuchuang/learn/demo1/pages/photo-recog/photo-recog.vue"]]);
-  const _sfc_main$4 = {
+  const PagesPhotoRecogPhotoRecog = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-3abb26b1"], ["__file", "E:/fuchuang/learn/demo1/pages/photo-recog/photo-recog.vue"]]);
+  const _sfc_main$8 = {
     data() {
       return {
         startData: {
@@ -3539,7 +3559,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_tab_chat = resolveEasycom(vue.resolveDynamicComponent("tab-chat"), __easycom_0);
     return vue.openBlock(), vue.createElementBlock("view", { class: "root-view" }, [
       vue.createVNode(_component_tab_chat, {
@@ -3553,8 +3573,8 @@ if (uni.restoreGlobal) {
       }, null, 8, ["style", "onTouchstart", "onTouchend", "onTouchmove"])
     ]);
   }
-  const PagesTestPageTestPage = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "E:/fuchuang/learn/demo1/pages/test-page/test-page.vue"]]);
-  const _sfc_main$3 = {
+  const PagesTestPageTestPage = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "E:/fuchuang/learn/demo1/pages/test-page/test-page.vue"]]);
+  const _sfc_main$7 = {
     data() {
       return {};
     },
@@ -3571,7 +3591,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "root-view" }, [
       vue.createElementVNode("view", { class: "recog-view" }, [
         vue.createElementVNode("image", {
@@ -3594,8 +3614,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesAssistReadAssistRead = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__scopeId", "data-v-64b52ef9"], ["__file", "E:/fuchuang/learn/demo1/pages/assist-read/assist-read.vue"]]);
-  const _sfc_main$2 = {
+  const PagesAssistReadAssistRead = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-64b52ef9"], ["__file", "E:/fuchuang/learn/demo1/pages/assist-read/assist-read.vue"]]);
+  const _sfc_main$6 = {
     data() {
       return {
         photoPath: ""
@@ -3622,7 +3642,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "root-view" }, [
       vue.createElementVNode("view", { class: "recog-view" }, [
         vue.createElementVNode("image", {
@@ -3663,8 +3683,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesAssistReadPhotoRecog = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__scopeId", "data-v-fb8e82d4"], ["__file", "E:/fuchuang/learn/demo1/pages/assist-read/photo-recog.vue"]]);
-  const _sfc_main$1 = {
+  const PagesAssistReadPhotoRecog = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-fb8e82d4"], ["__file", "E:/fuchuang/learn/demo1/pages/assist-read/photo-recog.vue"]]);
+  const _sfc_main$5 = {
     methods: {
       clickUpload() {
         uni.chooseImage({
@@ -3687,12 +3707,129 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("button", {
       onClick: _cache[0] || (_cache[0] = (...args) => $options.clickUpload && $options.clickUpload(...args))
     }, "点击文件上传");
   }
-  const PagesTest_apiTestUpload = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test-upload.vue"]]);
+  const PagesTest_apiTestUpload = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test-upload.vue"]]);
+  const _sfc_main$4 = {
+    data() {
+      return {
+        gender: true
+      };
+    }
+  };
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_0$2);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "personal" }, [
+      vue.createElementVNode("view", { class: "content" }, [
+        vue.createElementVNode("view", { class: "home-head" }, [
+          vue.createElementVNode("view", { class: "head-left" }, [
+            vue.createElementVNode("image", {
+              class: "home-icon",
+              src: "/static/personal/girl.png"
+            }),
+            vue.createElementVNode("view", { class: "head-info" }, [
+              vue.createElementVNode("text", { class: "home-title" }, "张三"),
+              $data.gender ? (vue.openBlock(), vue.createElementBlock("text", {
+                key: 0,
+                class: "info-text"
+              }, [
+                vue.createElementVNode("span", { style: { "color": "#1fa6ea" } }, "♂"),
+                vue.createTextVNode(" 男 45岁")
+              ])) : (vue.openBlock(), vue.createElementBlock("text", {
+                key: 1,
+                class: "info-text"
+              }, [
+                vue.createElementVNode("span", { style: { "color": "#F49ED9" } }, "♀"),
+                vue.createTextVNode(" 女 45岁")
+              ]))
+            ])
+          ]),
+          vue.createElementVNode("view", { class: "edit-button" }, "编辑资料")
+        ]),
+        vue.createElementVNode("view", { class: "service" }, [
+          vue.createElementVNode("view", { class: "content-title" }, "推荐服务"),
+          vue.createElementVNode("view", { class: "service-container" }, [
+            vue.createElementVNode("view", { class: "service-box" }, "历史视图"),
+            vue.createElementVNode("view", { class: "service-box" }, "收藏地点"),
+            vue.createElementVNode("view", { class: "service-box" }, "健康档案")
+          ])
+        ]),
+        vue.createElementVNode("view", { class: "more-funcs" }, [
+          vue.createElementVNode("view", { class: "content-title" }, "更多功能"),
+          vue.createElementVNode("view", { class: "funcs-container" }, [
+            vue.createElementVNode("view", { class: "service-box" }, [
+              vue.createElementVNode("image", {
+                class: "item1",
+                src: "/static/personal/help.png"
+              }),
+              vue.createElementVNode("text", { class: "item2" }, "获取帮助"),
+              vue.createElementVNode("image", {
+                class: "item3",
+                src: "/static/personal/more1.png"
+              })
+            ]),
+            vue.createElementVNode("view", { class: "service-box" }, [
+              vue.createElementVNode("image", {
+                class: "item1",
+                src: "/static/personal/about.png"
+              }),
+              vue.createElementVNode("text", { class: "item2" }, "关于明道"),
+              vue.createElementVNode("image", {
+                class: "item3",
+                src: "/static/personal/more1.png"
+              })
+            ]),
+            vue.createElementVNode("view", { class: "service-box" }, [
+              vue.createElementVNode("image", {
+                class: "item1",
+                src: "/static/personal/setting.png"
+              }),
+              vue.createElementVNode("text", { class: "item2" }, "系统设置"),
+              vue.createElementVNode("image", {
+                class: "item3",
+                src: "/static/personal/more1.png"
+              })
+            ])
+          ])
+        ])
+      ]),
+      vue.createVNode(_component_home_foot)
+    ]);
+  }
+  const PagesPersonalPersonal = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "E:/fuchuang/learn/demo1/pages/personal/personal.vue"]]);
+  const _sfc_main$3 = {
+    data() {
+      return {};
+    },
+    methods: {}
+  };
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view");
+  }
+  const PagesPersonalProfileProfile = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "E:/fuchuang/learn/demo1/pages/personal/profile/profile.vue"]]);
+  const _sfc_main$2 = {
+    data() {
+      return {};
+    },
+    methods: {}
+  };
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view");
+  }
+  const PagesPersonalSystemSystem = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "E:/fuchuang/learn/demo1/pages/personal/system/system.vue"]]);
+  const _sfc_main$1 = {
+    data() {
+      return {};
+    },
+    methods: {}
+  };
+  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view");
+  }
+  const PagesPersonalAccountAccount = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "E:/fuchuang/learn/demo1/pages/personal/account/account.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
   __definePage("pages/test/test", PagesTestTest);
   __definePage("pages/test_api/test_api", PagesTest_apiTest_api);
@@ -3704,6 +3841,10 @@ if (uni.restoreGlobal) {
   __definePage("pages/assist-read/assist-read", PagesAssistReadAssistRead);
   __definePage("pages/assist-read/photo-recog", PagesAssistReadPhotoRecog);
   __definePage("pages/test_api/test-upload", PagesTest_apiTestUpload);
+  __definePage("pages/personal/personal", PagesPersonalPersonal);
+  __definePage("pages/personal/profile/profile", PagesPersonalProfileProfile);
+  __definePage("pages/personal/system/system", PagesPersonalSystemSystem);
+  __definePage("pages/personal/account/account", PagesPersonalAccountAccount);
   const _sfc_main = {
     onLaunch: function() {
       formatAppLog("log", "at App.vue:4", "App Launch");
