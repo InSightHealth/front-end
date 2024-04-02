@@ -165,6 +165,16 @@
 				"navigationBarTitleText" : "账号设置",
 				"enablePullDownRefresh" : false
 			}
+		},
+		{
+			"path" : "pages/test-page/login",
+			"style" : 
+			{
+				"app-plus": {
+					"titleNView":  false
+				},
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {

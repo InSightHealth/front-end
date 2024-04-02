@@ -1,0 +1,68 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.profile[data-v-b9418a0f] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile .item-high[data-v-b9418a0f] {
+  height: 5.40625rem;
+  width: 23.4375rem;
+}
+.profile .item[data-v-b9418a0f] {
+  height: 3.125rem;
+  width: 23.4375rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 0.90625rem;
+}
+.profile .item .item-left[data-v-b9418a0f] {
+  margin-left: 1.03125rem;
+  font-size: 1.3125rem;
+}
+.profile .item .item-right[data-v-b9418a0f] {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: 1.03125rem;
+}
+.profile .item .item-right .icon-right[data-v-b9418a0f] {
+  margin-right: 1.03125rem;
+  width: 0.59375rem;
+  height: 1.03125rem;
+  margin-bottom: 0.15625rem;
+}
+.profile .item .item-right .text-right[data-v-b9418a0f] {
+  margin-right: 1.34375rem;
+  font-size: 1.09375rem;
+  color: rgba(0, 0, 0, 0.46);
+}
+.profile .line[data-v-b9418a0f] {
+  height: 1px;
+  width: 21.8125rem;
+  background-color: rgba(0, 0, 0, 0.08);
+}

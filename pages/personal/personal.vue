@@ -10,7 +10,9 @@
 						<text class="info-text" v-else><span style="color: #F49ED9;">♀</span>  女   45岁</text>
 					</view>
 				</view>
-				<view class="edit-button">编辑资料</view>
+				<navigator class="edit-button" url="/pages/personal/profile/profile">
+					编辑资料
+				</navigator>
 			</view>
 			<view class="service">
 				<view class="content-title">推荐服务</view>
@@ -33,11 +35,11 @@
 						<text class="item2">关于明道</text>
 						<image class="item3" src="/static/personal/more1.png"></image>
 					</view>
-					<view class="service-box">
+					<navigator class="service-box" url="/pages/personal/system/system">
 						<image class="item1" src="/static/personal/setting.png"></image>
 						<text class="item2">系统设置</text>
 						<image class="item3" src="/static/personal/more1.png"></image>
-					</view>
+					</navigator>
 				</view>
 			</view>
 		</view>

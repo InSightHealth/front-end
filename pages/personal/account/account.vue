@@ -1,6 +1,8 @@
 <template>
-	<view>
-		
+	<view class="account">
+		<view class="phone"></view>
+		<view class="subtitle">第三方账号</view>
+		<view class="app"></view>
 	</view>
 </template>
 
@@ -15,7 +17,7 @@
 			
 		}
 	}
-</script>
+</script lang="scss" scoped>
 
 <style>
 

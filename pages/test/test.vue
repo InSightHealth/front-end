@@ -24,7 +24,7 @@
 						lebal: "测试API"
 					},
 					{
-						path: "/pages/test-page/test-page",
+						path: "/pages/test-page/login",
 						lebal: "测试Page"
 					}
 				]
