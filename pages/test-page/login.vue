@@ -10,15 +10,15 @@
 			<view class="subtitle">短信验证码登录</view>
 			<view class="hint">未注册的手机号验证后将自动登录</view>
 			
-			<input class="input1" placeholder="请输入手机号码"
+			<input class="input1" placeholder="请输入手机号码" v-model="phoneNumber"
 			placeholder-style="font-size: 30rpx; color: rgba(0, 0, 0, 0.26);">
 			
-			<input class="input2" placeholder="请输入验证码"
+			<input class="input2" placeholder="请输入验证码" v-model="verifyCode"
 			placeholder-style="font-size: 30rpx; color: rgba(0, 0, 0, 0.26);">
 			
-			<text class="verify-button"> 获取验证码 </text>
+			<text class="verify-button" @tap="getVeriCode"> 获取验证码 </text>
 			
-			<view class="login-button" :checked="checked"> 登录 </view>
+			<view class="login-button" :checked="checked" @tap="login"> 登录 </view>
 			
 			<checkbox-group @change="checkboxChange" class="agreement">
 				<label>
@@ -38,13 +38,60 @@
 	export default {
 		data() {
 			return {
-				state: false
+				state: false,
+				phoneNumber: '',
+				verifyCode: '',
 			}
 		},
 		methods:{
 			checkboxChange(e) {
 				this.state = !this.state;
 				console.log(this.state);
+			},
+			getVeriCode() {
+				const verifyUrl = getApp().globalData.BackEndUrl + '/user/api/v1/sendCode';
+				console.log("backEndUrl: " + verifyUrl);
+				console.log("phoneNumber: " + this.phoneNumber);
+				uni.request({
+					url: verifyUrl,
+					method: 'POST',
+					data: {
+						phone: this.phoneNumber
+					},
+					success: (res) => {
+						console.log(res.data);
+						this.text = 'request success';
+					},
+					fail(e) {
+						console.log(e);
+					}
+				})
+			},
+			
+			login(){
+				const loginUrl = getApp().globalData.BackEndUrl + '/user/api/v1/login';
+				console.log("backEndUrl: " + loginUrl);
+				console.log("phoneNumber: " + this.verifyCode);
+				uni.request({
+					url: loginUrl,
+					method: 'POST',
+					data: {
+						phone: this.phoneNumber,
+						code: this.verifyCode
+					},
+					success: (res) => {
+						console.log(res.data);
+						this.text = 'request success';
+						
+						getApp().globalData.token = res.data.token;
+						uni.navigateTo({
+							url: '/pages/index/index'
+						})
+					},
+					fail(e) {
+						console.log(e);
+					}
+				})
 			}
 		}
 	}

@@ -1,5 +1,5 @@
 <template>
-	<image @touchstart="startRecord" @touchend="endRecord" src="https://img-insight.oss-cn-chengdu.aliyuncs.com/micphone/mic1.png" class="mic"></image>
+	<image src="https://img-insight.oss-cn-chengdu.aliyuncs.com/micphone/mic1.png" class="mic"></image>
 </template>
 
 <script>
@@ -45,8 +45,8 @@
 
 <style>
 	.mic {
-		width: 100rpx; /* 定义按钮的宽度 */
-		height: 100rpx; /* 定义按钮的高度 */
+		width: 130rpx; /* 定义按钮的宽度 */
+		height: 130rpx; /* 定义按钮的高度 */
 	}
 </style>
 

@@ -28,6 +28,8 @@
 
 <script>
 	export default {
+		onLoad() {
+		}
 	}
 </script>
 

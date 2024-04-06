@@ -135,7 +135,10 @@ if (uni.restoreGlobal) {
     ]);
   }
   const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
-  const _sfc_main$j = {};
+  const _sfc_main$j = {
+    onLoad() {
+    }
+  };
   function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_home_head = resolveEasycom(vue.resolveDynamicComponent("home-head"), __easycom_0$3);
     const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_0$2);
@@ -3938,19 +3941,68 @@ if (uni.restoreGlobal) {
     methods: {}
   };
   function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view");
+    return vue.openBlock(), vue.createElementBlock("view", { class: "account" }, [
+      vue.createElementVNode("view", { class: "phone" }),
+      vue.createElementVNode("view", { class: "subtitle" }, "第三方账号"),
+      vue.createElementVNode("view", { class: "app" })
+    ]);
   }
   const PagesPersonalAccountAccount = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "E:/fuchuang/learn/demo1/pages/personal/account/account.vue"]]);
   const _sfc_main$1 = {
     data() {
       return {
-        state: false
+        state: false,
+        phoneNumber: "",
+        verifyCode: ""
       };
     },
     methods: {
       checkboxChange(e) {
         this.state = !this.state;
-        formatAppLog("log", "at pages/test-page/login.vue:47", this.state);
+        formatAppLog("log", "at pages/test-page/login.vue:49", this.state);
+      },
+      getVeriCode() {
+        const verifyUrl = getApp().globalData.BackEndUrl + "/user/api/v1/sendCode";
+        formatAppLog("log", "at pages/test-page/login.vue:53", "backEndUrl: " + verifyUrl);
+        formatAppLog("log", "at pages/test-page/login.vue:54", "phoneNumber: " + this.phoneNumber);
+        uni.request({
+          url: verifyUrl,
+          method: "POST",
+          data: {
+            phone: this.phoneNumber
+          },
+          success: (res) => {
+            formatAppLog("log", "at pages/test-page/login.vue:62", res.data);
+            this.text = "request success";
+          },
+          fail(e) {
+            formatAppLog("log", "at pages/test-page/login.vue:66", e);
+          }
+        });
+      },
+      login() {
+        const loginUrl = getApp().globalData.BackEndUrl + "/user/api/v1/login";
+        formatAppLog("log", "at pages/test-page/login.vue:73", "backEndUrl: " + loginUrl);
+        formatAppLog("log", "at pages/test-page/login.vue:74", "phoneNumber: " + this.verifyCode);
+        uni.request({
+          url: loginUrl,
+          method: "POST",
+          data: {
+            phone: this.phoneNumber,
+            code: this.verifyCode
+          },
+          success: (res) => {
+            formatAppLog("log", "at pages/test-page/login.vue:83", res.data);
+            this.text = "request success";
+            getApp().globalData.token = res.data.token;
+            uni.navigateTo({
+              url: "/pages/index/index"
+            });
+          },
+          fail(e) {
+            formatAppLog("log", "at pages/test-page/login.vue:92", e);
+          }
+        });
       }
     }
   };
@@ -3967,25 +4019,47 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "logbox" }, [
         vue.createElementVNode("view", { class: "subtitle" }, "短信验证码登录"),
         vue.createElementVNode("view", { class: "hint" }, "未注册的手机号验证后将自动登录"),
-        vue.createElementVNode("input", {
-          class: "input1",
-          placeholder: "请输入手机号码",
-          "placeholder-style": "font-size: 30rpx; color: rgba(0, 0, 0, 0.26);"
-        }),
-        vue.createElementVNode("input", {
-          class: "input2",
-          placeholder: "请输入验证码",
-          "placeholder-style": "font-size: 30rpx; color: rgba(0, 0, 0, 0.26);"
-        }),
-        vue.createElementVNode("text", { class: "verify-button" }, " 获取验证码 "),
+        vue.withDirectives(vue.createElementVNode(
+          "input",
+          {
+            class: "input1",
+            placeholder: "请输入手机号码",
+            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.phoneNumber = $event),
+            "placeholder-style": "font-size: 30rpx; color: rgba(0, 0, 0, 0.26);"
+          },
+          null,
+          512
+          /* NEED_PATCH */
+        ), [
+          [vue.vModelText, $data.phoneNumber]
+        ]),
+        vue.withDirectives(vue.createElementVNode(
+          "input",
+          {
+            class: "input2",
+            placeholder: "请输入验证码",
+            "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.verifyCode = $event),
+            "placeholder-style": "font-size: 30rpx; color: rgba(0, 0, 0, 0.26);"
+          },
+          null,
+          512
+          /* NEED_PATCH */
+        ), [
+          [vue.vModelText, $data.verifyCode]
+        ]),
+        vue.createElementVNode("text", {
+          class: "verify-button",
+          onClick: _cache[2] || (_cache[2] = (...args) => $options.getVeriCode && $options.getVeriCode(...args))
+        }, " 获取验证码 "),
         vue.createElementVNode("view", {
           class: "login-button",
-          checked: _ctx.checked
+          checked: _ctx.checked,
+          onClick: _cache[3] || (_cache[3] = (...args) => $options.login && $options.login(...args))
         }, " 登录 ", 8, ["checked"]),
         vue.createElementVNode(
           "checkbox-group",
           {
-            onChange: _cache[0] || (_cache[0] = (...args) => $options.checkboxChange && $options.checkboxChange(...args)),
+            onChange: _cache[4] || (_cache[4] = (...args) => $options.checkboxChange && $options.checkboxChange(...args)),
             class: "agreement"
           },
           [
@@ -4028,14 +4102,35 @@ if (uni.restoreGlobal) {
   __definePage("pages/personal/account/account", PagesPersonalAccountAccount);
   __definePage("pages/test-page/login", PagesTestPageLogin);
   const _sfc_main = {
+    globalData: {
+      BackEndUrl: "http://82.157.124.83:51603",
+      llmUrl: "http://127.0.0.1:8000",
+      token: "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAADWL0QrDIAwA_yXPFRprY-nfxCjFMUEWCxuj_770YW93HPeFx6iwA6UZcQmb45CjC5iiY6Tosi8iJFIkJ5ig8oAdI_qZFh9wAj2T3frRUdrdVU2PZ22tvMz5zObcu3F59_9L2_1Wa-v1A4M1H0WCAAAA.s39x3oTuAOX5dl7Zwv6jLGT1nqYWfx9k7g-1RUvjC9XlPxPmB1JyWw0scNsZXoC6digRclB3hAxTMAE86mSFBQ"
+    },
     onLaunch: function() {
-      formatAppLog("log", "at App.vue:4", "App Launch");
+      formatAppLog("log", "at App.vue:9", "App Launch");
+      let token = getApp().globalData.token;
+      formatAppLog("log", "at App.vue:14", "token is " + token);
+      if (token != "") {
+        plus.navigator.closeSplashscreen();
+      } else {
+        formatAppLog("log", "at App.vue:21", "Here we go!!!");
+        uni.reLaunch({
+          url: "/pages/test-page/login",
+          success: () => {
+            plus.navigator.closeSplashscreen();
+          },
+          fail(e) {
+            formatAppLog("log", "at App.vue:29", e);
+          }
+        });
+      }
     },
     onShow: function() {
-      formatAppLog("log", "at App.vue:7", "App Show");
+      formatAppLog("log", "at App.vue:36", "App Show");
     },
     onHide: function() {
-      formatAppLog("log", "at App.vue:10", "App Hide");
+      formatAppLog("log", "at App.vue:39", "App Hide");
     }
   };
   const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "E:/fuchuang/learn/demo1/App.vue"]]);

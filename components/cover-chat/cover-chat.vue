@@ -26,13 +26,10 @@
 <script>
 	export default {
 		name:"bot-chat",
-		data() {
-			return {
-				userId:'',
-				//发送的消息
-				chatMsg:"",
-				randstr: 'ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl',
-				msgList:[
+		props: {
+		    msgList: {
+				type: Array,
+				default: [
 					{
 					    botContent: "hello，请问我有什么可以帮助你的吗？",
 					    recordId: 0,
@@ -40,28 +37,36 @@
 					    userContent: "",
 					    userId: 0
 					},
-					{
-					    botContent: "",
-					    recordId: 0,
-					    titleId: 0,
-					    userContent: "你好呀我想问你一件事，可以吗？",
-					    userId: 0
-					},
-					{
-					    userContent: "",
-					    recordId: 0,
-					    titleId: 0,
-					    botContent: "当然可以!",
-					    userId: 0
-					},
-					{
-					    botContent: "",
-					    recordId: 0,
-					    titleId: 0,
-					    userContent: "我的问题是：blablabla...",
-					    userId: 0
-					},
-				]
+					// {
+					//     botContent: "",
+					//     recordId: 0,
+					//     titleId: 0,
+					//     userContent: "你好呀我想问你一件事，可以吗？",
+					//     userId: 0
+					// },
+					// {
+					//     userContent: "",
+					//     recordId: 0,
+					//     titleId: 0,
+					//     botContent: "当然可以!",
+					//     userId: 0
+					// },
+					// {
+					//     botContent: "",
+					//     recordId: 0,
+					//     titleId: 0,
+					//     userContent: "我的问题是：blablabla...",
+					//     userId: 0
+					// },
+				]//default 默认值，父组件不传值就显示默认
+		    }
+		},
+		data() {
+			return {
+				userId:'',
+				//发送的消息
+				chatMsg:"",
+				randstr: 'ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl',
 			};
 		}
 	}

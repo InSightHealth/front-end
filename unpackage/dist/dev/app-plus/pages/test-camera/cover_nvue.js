@@ -86,49 +86,55 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
 
   // E:/fuchuang/learn/demo1/unpackage/dist/dev/.nvue/pages/test-camera/cover_nvue.js
   var import_vue2 = __toESM(require_vue());
-  var _style_0$1 = { "chat-body": { "": { "display": "flex", "flexDirection": "column", "width": "750rpx", "height": "750rpx", "boxSizing": "content-box" } }, "self": { ".chat-body ": { "justifyContent": "flex-end" } }, "item": { ".chat-body ": { "width": "750rpx", "display": "flex", "paddingTop": "45rpx", "paddingRight": "30rpx", "paddingBottom": "45rpx", "paddingLeft": "30rpx" } }, "right": { ".chat-body .item ": { "backgroundColor": "#ACEC9C", "alignSelf": "flex-end" } }, "left": { ".chat-body .item ": { "backgroundColor": "#FFFFFF" } }, "poly-right": { ".chat-body .item ": { "position": "relative", "top": "-100rpx", "left": "-10rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-end" } }, "poly-left": { ".chat-body .item ": { "position": "relative", "top": "50rpx", "left": "10rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-start" } }, "content": { ".chat-body .item ": { "position": "relative", "wordWrap": "break-word", "paddingTop": "24rpx", "paddingRight": "24rpx", "paddingBottom": "24rpx", "paddingLeft": "24rpx", "marginTop": 0, "marginRight": "24rpx", "marginBottom": 0, "marginLeft": "24rpx", "borderRadius": "30rpx", "fontSize": "32rpx", "fontFamily": "PingFang SC", "fontWeight": "500", "color": "#333333", "lineHeight": "42rpx", "maxWidth": "380rpx" } }, "avatar": { ".chat-body .item ": { "display": "flex", "alignItems": "center", "justifyContent": "center", "width": "115rpx", "height": "115rpx", "overflow": "hidden" } } };
-  var _sfc_main$1 = {
+  var _style_0$2 = { "chat-body": { "": { "display": "flex", "flexDirection": "column", "width": "750rpx", "height": "750rpx", "boxSizing": "content-box" } }, "self": { ".chat-body ": { "justifyContent": "flex-end" } }, "item": { ".chat-body ": { "width": "750rpx", "display": "flex", "paddingTop": "45rpx", "paddingRight": "30rpx", "paddingBottom": "45rpx", "paddingLeft": "30rpx" } }, "right": { ".chat-body .item ": { "backgroundColor": "#ACEC9C", "alignSelf": "flex-end" } }, "left": { ".chat-body .item ": { "backgroundColor": "#FFFFFF" } }, "poly-right": { ".chat-body .item ": { "position": "relative", "top": "-100rpx", "left": "-10rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-end" } }, "poly-left": { ".chat-body .item ": { "position": "relative", "top": "50rpx", "left": "10rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-start" } }, "content": { ".chat-body .item ": { "position": "relative", "wordWrap": "break-word", "paddingTop": "24rpx", "paddingRight": "24rpx", "paddingBottom": "24rpx", "paddingLeft": "24rpx", "marginTop": 0, "marginRight": "24rpx", "marginBottom": 0, "marginLeft": "24rpx", "borderRadius": "30rpx", "fontSize": "32rpx", "fontFamily": "PingFang SC", "fontWeight": "500", "color": "#333333", "lineHeight": "42rpx", "maxWidth": "380rpx" } }, "avatar": { ".chat-body .item ": { "display": "flex", "alignItems": "center", "justifyContent": "center", "width": "115rpx", "height": "115rpx", "overflow": "hidden" } } };
+  var _sfc_main$2 = {
     name: "bot-chat",
-    data() {
-      return {
-        userId: "",
-        //发送的消息
-        chatMsg: "",
-        randstr: "ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl",
-        msgList: [
+    props: {
+      msgList: {
+        type: Array,
+        default: [
           {
             botContent: "hello\uFF0C\u8BF7\u95EE\u6211\u6709\u4EC0\u4E48\u53EF\u4EE5\u5E2E\u52A9\u4F60\u7684\u5417\uFF1F",
             recordId: 0,
             titleId: 0,
             userContent: "",
             userId: 0
-          },
-          {
-            botContent: "",
-            recordId: 0,
-            titleId: 0,
-            userContent: "\u4F60\u597D\u5440\u6211\u60F3\u95EE\u4F60\u4E00\u4EF6\u4E8B\uFF0C\u53EF\u4EE5\u5417\uFF1F",
-            userId: 0
-          },
-          {
-            userContent: "",
-            recordId: 0,
-            titleId: 0,
-            botContent: "\u5F53\u7136\u53EF\u4EE5!",
-            userId: 0
-          },
-          {
-            botContent: "",
-            recordId: 0,
-            titleId: 0,
-            userContent: "\u6211\u7684\u95EE\u9898\u662F\uFF1Ablablabla...",
-            userId: 0
           }
+          // {
+          //     botContent: "",
+          //     recordId: 0,
+          //     titleId: 0,
+          //     userContent: "你好呀我想问你一件事，可以吗？",
+          //     userId: 0
+          // },
+          // {
+          //     userContent: "",
+          //     recordId: 0,
+          //     titleId: 0,
+          //     botContent: "当然可以!",
+          //     userId: 0
+          // },
+          // {
+          //     botContent: "",
+          //     recordId: 0,
+          //     titleId: 0,
+          //     userContent: "我的问题是：blablabla...",
+          //     userId: 0
+          // },
         ]
+        //default 默认值，父组件不传值就显示默认
+      }
+    },
+    data() {
+      return {
+        userId: "",
+        //发送的消息
+        chatMsg: "",
+        randstr: "ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl"
       };
     }
   };
-  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     return (0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)(
       "view",
       {
@@ -142,7 +148,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
         ((0, import_vue2.openBlock)(true), (0, import_vue2.createElementBlock)(
           import_vue2.Fragment,
           null,
-          (0, import_vue2.renderList)($data.msgList, (item, index) => {
+          (0, import_vue2.renderList)($props.msgList, (item, index) => {
             return (0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)(
               "view",
               {
@@ -200,8 +206,52 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       /* STYLE */
     );
   }
-  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "E:/fuchuang/learn/demo1/components/cover-chat/cover-chat.vue"]]);
-  var _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "chat": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "zIndex": 98, "alignItems": "center", "justifyContent": "center" } }, "coverchat": { ".pengke-camera .chat ": { "zIndex": 99 } }, "scroll-view": { ".pengke-camera .chat .coverchat ": { "height": 100, "width": "750rpx" } } };
+  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["styles", [_style_0$2]], ["__file", "E:/fuchuang/learn/demo1/components/cover-chat/cover-chat.vue"]]);
+  var _style_0$1 = { "mic": { "": { "width": "130rpx", "height": "130rpx" } } };
+  var recorderManager = uni.getRecorderManager();
+  var innerAudioContext = uni.createInnerAudioContext();
+  innerAudioContext.autoplay = true;
+  var _sfc_main$1 = {
+    data() {
+      return {
+        text: "uni-app",
+        voicePath: ""
+      };
+    },
+    methods: {
+      startRecord() {
+        formatAppLog("log", "at components/micphone/micphone.vue:20", "\u5F00\u59CB\u5F55\u97F3");
+        recorderManager.start();
+      },
+      endRecord() {
+        formatAppLog("log", "at components/micphone/micphone.vue:24", "\u5F55\u97F3\u7ED3\u675F");
+        recorderManager.stop();
+        recorderManager.onStop(function(res) {
+          formatAppLog("log", "at components/micphone/micphone.vue:27", JSON.stringify(res));
+          uni.uploadFile({
+            url: "http://127.0.0.1:8000/speechtotext",
+            filePath: res.tempFilePath,
+            name: "mp3",
+            formData: {},
+            success: (res2) => {
+              formatAppLog("log", "at components/micphone/micphone.vue:34", "\u4E0A\u4F20\u6210\u529F\uFF1A" + JSON.stringify(res2));
+            },
+            fail: (err) => {
+              formatAppLog("error", "at components/micphone/micphone.vue:36", "\u4E0A\u4F20\u5F55\u97F3\u5931\u8D25\uFF1A" + err);
+            }
+          });
+        });
+      }
+    }
+  };
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+    return (0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)("u-image", {
+      src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/micphone/mic1.png",
+      class: "mic"
+    });
+  }
+  var __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "E:/fuchuang/learn/demo1/components/micphone/micphone.vue"]]);
+  var _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "chat": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "zIndex": 98, "alignItems": "center", "justifyContent": "center" } }, "coverchat": { ".pengke-camera .chat ": { "zIndex": 99, "display": "flex", "flexDirection": "column", "alignItems": "center", "justifyContent": "space-between" } }, "scroll-view": { ".pengke-camera .chat .coverchat ": { "height": 100, "width": "750rpx" } }, "mic-container": { ".pengke-camera .chat .coverchat ": { "height": "160rpx", "display": "flex", "alignItems": "center", "justifyContent": "center" } } };
   var _this = null;
   var _sfc_main = {
     data() {
@@ -220,6 +270,15 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
         //流视频对象
         snapshotsrc: null,
         //快照
+        msglist: [
+          {
+            botContent: "hello\uFF0C\u8BF7\u95EE\u6211\u6709\u4EC0\u4E48\u53EF\u4EE5\u5E2E\u52A9\u4F60\u7684\u5417\uFF1F",
+            recordId: 0,
+            titleId: 0,
+            userContent: "",
+            userId: 0
+          }
+        ],
         randstr: "ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl"
       };
     },
@@ -240,7 +299,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       poenCarme() {
         if (plus.os.name == "Android") {
           this.poenCarmeInterval = setInterval(function() {
-            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:79", _this.camerastate);
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:94", _this.camerastate);
             if (!_this.camerastate)
               _this.startPreview();
           }, 2500);
@@ -267,7 +326,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       startPreview() {
         this.livePusher.startPreview({
           success: (a) => {
-            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:108", a);
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:123", a);
           }
         });
       },
@@ -281,7 +340,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       },
       //状态
       statechange(e) {
-        formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:125", e);
+        formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:140", e);
         if (e.detail.code == 1007) {
           _this.camerastate = true;
         } else if (e.detail.code == -1301) {
@@ -296,7 +355,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       snapshot() {
         uni.vibrateShort({
           success: function() {
-            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:144", "success");
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:159", "success");
           }
         });
         this.livePusher.snapshot({
@@ -308,20 +367,23 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           }
         });
       },
-      //反转
-      flip() {
-        this.livePusher.switchCamera();
-      },
       //设置
       setImage() {
         let pages = getCurrentPages();
         let prevPage = pages[pages.length - 2];
         prevPage.$vm.setImage({ path: _this.snapshotsrc });
+      },
+      startMic() {
+        this.$refs.micphone.startRecord();
+      },
+      stopMic() {
+        this.$refs.micphone.endRecord();
       }
     }
   };
   function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_cover_chat = resolveEasycom((0, import_vue2.resolveDynamicComponent)("cover-chat"), __easycom_0);
+    const _component_micphone = resolveEasycom((0, import_vue2.resolveDynamicComponent)("micphone"), __easycom_1);
     return (0, import_vue2.openBlock)(), (0, import_vue2.createElementBlock)("scroll-view", {
       scrollY: true,
       showScrollbar: true,
@@ -377,9 +439,25 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                     class: "scroll-view",
                     enableFlex: "true"
                   }, [
-                    (0, import_vue2.createCommentVNode)(" {{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n				{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n				{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n				{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n				{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br> "),
-                    (0, import_vue2.createVNode)(_component_cover_chat)
-                  ], 12, ["scrollTop"])
+                    (0, import_vue2.createCommentVNode)(" \r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br> \r\n					"),
+                    (0, import_vue2.createVNode)(_component_cover_chat, { msgList: $data.msglist }, null, 8, ["msgList"])
+                  ], 12, ["scrollTop"]),
+                  (0, import_vue2.createElementVNode)(
+                    "cover-view",
+                    {
+                      class: "mic-container",
+                      style: (0, import_vue2.normalizeStyle)({ height: `${$data.windowHeight * 0.2}px` })
+                    },
+                    [
+                      (0, import_vue2.createVNode)(_component_micphone, {
+                        ref: "micphone",
+                        onTouchstart: $options.startMic,
+                        onTouchend: $options.stopMic
+                      }, null, 8, ["onTouchstart", "onTouchend"])
+                    ],
+                    4
+                    /* STYLE */
+                  )
                 ],
                 4
                 /* STYLE */

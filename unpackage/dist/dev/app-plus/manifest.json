@@ -40,7 +40,7 @@
       "id": "1",
       "kernel": "WKWebview"
     },
-    "usingComponents": true,
+    "usingComponents": false,
     "nvueStyleCompiler": "uni-app",
     "compilerVersion": 3,
     "distribute": {
