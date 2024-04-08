@@ -77,7 +77,22 @@
         }
       }
     },
-    "nativePlugins": {},
+    "nativePlugins": {
+      "Karma617-TTSSpeaker": {
+        "__plugin_info__": {
+          "name": "安卓原生TTS引擎文字转语音 - 应用商店版 - [试用版，仅用于自定义调试基座]",
+          "description": "原生tts，将文字转成真人语音播放，需手机搭配第三方语音引擎（讯飞等），文字生成真人语音音频",
+          "platforms": "Android",
+          "url": "https://ext.dcloud.net.cn/plugin?id=899",
+          "android_package_name": "",
+          "ios_bundle_id": "",
+          "isCloud": true,
+          "bought": 0,
+          "pid": "899",
+          "parameters": {}
+        }
+      }
+    },
     "statusbar": {
       "immersed": "supportedDevice",
       "style": "dark",

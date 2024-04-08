@@ -17,9 +17,9 @@
 			<view class="service">
 				<view class="content-title">推荐服务</view>
 				<view class="service-container">
-					<view class="service-box">历史视图</view>
-					<view class="service-box">收藏地点</view>
-					<view class="service-box">健康档案</view>
+					<view class="service-box">健康助手</view>
+					<view class="service-box">智能出行</view>
+					<view class="service-box">辅助阅读</view>
 				</view>
 			</view>
 			<view class="more-funcs">

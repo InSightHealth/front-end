@@ -21,21 +21,25 @@
 				recorderManager.start();
 			},
 			endRecord() {
+				let tmpfPath = '';
 				console.log('录音结束');
 				recorderManager.stop();
 				recorderManager.onStop(function (res) {
-					console.log(JSON.stringify(res));
-					uni.uploadFile({
-						url: "http://127.0.0.1:8000/speechtotext"
-						,filePath: res.tempFilePath
-						,name: "mp3"
-						,formData: { }
-						,success: (res) => { 
-							console.log("上传成功："+JSON.stringify(res)); 
-						}
-						,fail: (err)=>{ console.error("上传录音失败："+err); }
-					});
+					// console.log(res.tempFilePath);
+					this.voicePath = res.tempFilePath;
+					// uni.uploadFile({
+					// 	url: "http://127.0.0.1:8000/speechtotext"
+					// 	,name: "mp3"
+					// 	,filePath: res.tempFilePath
+					// 	,formData: { }
+					// 	,success: (res) => { 
+					// 		console.log("上传成功："+JSON.stringify(res)); 
+					// 	}
+					// 	,fail: (err)=>{ console.error("上传录音失败："+err.errMsg); }
+					// });
 				});
+				console.log("tmpfPath = " + this.voicePath);
+				return tmpfPath;
 			}
 		}
 	}

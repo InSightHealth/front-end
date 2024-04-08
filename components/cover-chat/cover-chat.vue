@@ -15,11 +15,7 @@
 					</view>
 				</view>
 			</view>
-<!-- 			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
-			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
-			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
-			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
-			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br> -->
+<!-- 			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>-->
 		</view>
 </template>
 
@@ -58,7 +54,7 @@
 					//     userContent: "我的问题是：blablabla...",
 					//     userId: 0
 					// },
-				]//default 默认值，父组件不传值就显示默认
+				]
 		    }
 		},
 		data() {
@@ -105,8 +101,8 @@ view {
 		}
 		.poly-right {
 			position: relative;
-			top: -100rpx;
-			left: -10rpx;
+			top: -50rpx;
+			left: -5rpx;
 			height: 30rpx;
 			width: 30rpx;
 			align-self: flex-end;
@@ -115,7 +111,7 @@ view {
 		.poly-left {
 			position: relative;
 			top: 50rpx;
-			left: 10rpx;
+			left: 5rpx;
 			height: 30rpx;
 			width: 30rpx;
 			align-self: flex-start;

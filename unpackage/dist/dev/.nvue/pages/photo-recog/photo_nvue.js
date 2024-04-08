@@ -97,13 +97,33 @@ const _sfc_main = {
       this.livePusher.snapshot({
         success: (e) => {
           _this.snapshotsrc = e.message.tempImagePath;
-          uni.navigateTo({
-            url: "/pages/photo-recog/photo-recog",
-            success: function(res) {
-              res.eventChannel.emit("recieveFile", { filepath: e.message.tempImagePath });
+          const token = getApp().globalData.token;
+          uni.uploadFile({
+            url: "http://82.157.124.83:51603/storage/api/v1/uploadImg/photo",
+            name: "multipartFile",
+            filePath: _this.snapshotsrc,
+            formData: {},
+            header: {
+              "token": token
             },
-            fail: (e2) => {
-              formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:145", e2);
+            success: (res) => {
+              formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:150", "上传成功：" + JSON.stringify(res));
+              const response = JSON.parse(res.data);
+              formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:152", response.data.image);
+              if (res.statusCode == 200) {
+                uni.navigateTo({
+                  url: "/pages/photo-recog/photo-recog",
+                  success: function(res2) {
+                    res2.eventChannel.emit("recieveFile", { filepath: response.data.image });
+                  },
+                  fail: (e2) => {
+                    formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:159", e2);
+                  }
+                });
+              }
+            },
+            fail: (err) => {
+              formatAppLog("error", "at pages/photo-recog/photo_nvue.nvue:163", "上传录音失败：" + err.errMsg);
             }
           });
         }

@@ -11,19 +11,19 @@ if (typeof Promise !== "undefined" && !Promise.prototype.finally) {
 }
 ;
 if (typeof uni !== "undefined" && uni && uni.requireGlobal) {
-  const global = uni.requireGlobal();
-  ArrayBuffer = global.ArrayBuffer;
-  Int8Array = global.Int8Array;
-  Uint8Array = global.Uint8Array;
-  Uint8ClampedArray = global.Uint8ClampedArray;
-  Int16Array = global.Int16Array;
-  Uint16Array = global.Uint16Array;
-  Int32Array = global.Int32Array;
-  Uint32Array = global.Uint32Array;
-  Float32Array = global.Float32Array;
-  Float64Array = global.Float64Array;
-  BigInt64Array = global.BigInt64Array;
-  BigUint64Array = global.BigUint64Array;
+  const global2 = uni.requireGlobal();
+  ArrayBuffer = global2.ArrayBuffer;
+  Int8Array = global2.Int8Array;
+  Uint8Array = global2.Uint8Array;
+  Uint8ClampedArray = global2.Uint8ClampedArray;
+  Int16Array = global2.Int16Array;
+  Uint16Array = global2.Uint16Array;
+  Int32Array = global2.Int32Array;
+  Uint32Array = global2.Uint32Array;
+  Float32Array = global2.Float32Array;
+  Float64Array = global2.Float64Array;
+  BigInt64Array = global2.BigInt64Array;
+  BigUint64Array = global2.BigUint64Array;
 }
 ;
 if (uni.restoreGlobal) {
@@ -38,13 +38,13 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$l = {
+  const _sfc_main$q = {
     name: "homeHead",
     data() {
       return {};
     }
   };
-  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "home-head" }, [
         vue.createElementVNode("image", {
@@ -55,7 +55,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
+  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
       uni.__log__(type, filename, ...args);
@@ -66,7 +66,7 @@ if (uni.restoreGlobal) {
   function resolveEasycom(component, easycom) {
     return shared.isString(component) ? easycom : component;
   }
-  const _sfc_main$k = {
+  const _sfc_main$p = {
     name: "homeFoot",
     data() {
       return {};
@@ -96,7 +96,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("footer", { class: "footer-container" }, [
         vue.createElementVNode("div", { class: "footer-parter-left" }, [
@@ -134,14 +134,14 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
-  const _sfc_main$j = {
+  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
+  const _sfc_main$o = {
     onLoad() {
     }
   };
-  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_home_head = resolveEasycom(vue.resolveDynamicComponent("home-head"), __easycom_0$3);
-    const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_0$2);
+  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_home_head = resolveEasycom(vue.resolveDynamicComponent("home-head"), __easycom_0$6);
+    const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_0$5);
     return vue.openBlock(), vue.createElementBlock("view", { class: "main-container" }, [
       vue.createVNode(_component_home_head),
       vue.createElementVNode("div", { class: "content" }, [
@@ -178,8 +178,8 @@ if (uni.restoreGlobal) {
       vue.createVNode(_component_home_foot)
     ]);
   }
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
-  const _sfc_main$i = {
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
+  const _sfc_main$n = {
     data() {
       return {
         pathList: [
@@ -196,7 +196,7 @@ if (uni.restoreGlobal) {
             lebal: "测试API"
           },
           {
-            path: "/pages/test-page/login",
+            path: "/pages/test-page/test-page",
             lebal: "测试Page"
           }
         ]
@@ -210,7 +210,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("div", { class: "container" }, [
         (vue.openBlock(true), vue.createElementBlock(
@@ -228,7 +228,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
+  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
   var recorderCoreExports = {};
   var recorderCore = {
     get exports() {
@@ -795,9 +795,9 @@ if (uni.restoreGlobal) {
         if (typeof console != "object")
           return;
         var now = /* @__PURE__ */ new Date();
-        var t = ("0" + now.getMinutes()).substr(-2) + ":" + ("0" + now.getSeconds()).substr(-2) + "." + ("00" + now.getMilliseconds()).substr(-3);
+        var t2 = ("0" + now.getMinutes()).substr(-2) + ":" + ("0" + now.getSeconds()).substr(-2) + "." + ("00" + now.getMilliseconds()).substr(-3);
         var recID = this && this.envIn && this.envCheck && this.id;
-        var arr = ["[" + t + " " + RecTxt + (recID ? ":" + recID : "") + "]" + msg];
+        var arr = ["[" + t2 + " " + RecTxt + (recID ? ":" + recID : "") + "]" + msg];
         var a = arguments, cwe = Recorder2.CLog;
         var i = 2, fn = cwe.log || console.log;
         if (IsNum(err)) {
@@ -2114,9 +2114,9 @@ if (uni.restoreGlobal) {
   })(app);
   const RecordApp = appExports;
   !function(e) {
-    var n = "object" == typeof window && !!window.document, t = n ? window : Object, i = "https://github.com/xiangyuecn/Recorder/tree/master/app-support-sample/demo_UniApp";
-    if (t.RecordApp) {
-      var r = t.Recorder, a = r.i18n;
+    var n = "object" == typeof window && !!window.document, t2 = n ? window : Object, i = "https://github.com/xiangyuecn/Recorder/tree/master/app-support-sample/demo_UniApp";
+    if (t2.RecordApp) {
+      var r = t2.Recorder, a = r.i18n;
       !function(m, g, e2, b, S) {
         var y = g.RecordApp, C = y.CLog, W = function() {
         };
@@ -2136,15 +2136,15 @@ if (uni.restoreGlobal) {
         var M = y.UniBtoa = function(e3) {
           if ("object" == typeof uni && uni.arrayBufferToBase64)
             return uni.arrayBufferToBase64(e3);
-          for (var n2 = new Uint8Array(e3), t2 = "", i2 = 0, r2 = n2.length; i2 < r2; i2++)
-            t2 += String.fromCharCode(n2[i2]);
-          return btoa(t2);
+          for (var n2 = new Uint8Array(e3), t3 = "", i2 = 0, r2 = n2.length; i2 < r2; i2++)
+            t3 += String.fromCharCode(n2[i2]);
+          return btoa(t3);
         }, N = y.UniAtob = function(e3) {
           if ("object" == typeof uni && uni.base64ToArrayBuffer)
             return uni.base64ToArrayBuffer(e3);
-          for (var n2 = atob(e3), t2 = new Uint8Array(n2.length), i2 = 0, r2 = n2.length; i2 < r2; i2++)
-            t2[i2] = n2.charCodeAt(i2);
-          return t2.buffer;
+          for (var n2 = atob(e3), t3 = new Uint8Array(n2.length), i2 = 0, r2 = n2.length; i2 < r2; i2++)
+            t3[i2] = n2.charCodeAt(i2);
+          return t3.buffer;
         };
         y.UniB64Enc = function(e3) {
           if ("object" == typeof uni && uni.arrayBufferToBase64) {
@@ -2159,23 +2159,23 @@ if (uni.restoreGlobal) {
           }
           return decodeURIComponent(escape(atob(e3)));
         }, y.UniStr2Buf = function(e3) {
-          for (var n2 = unescape(encodeURIComponent(e3)), t2 = new Uint8Array(n2.length), i2 = 0, r2 = n2.length; i2 < r2; i2++)
-            t2[i2] = n2.charCodeAt(i2);
-          return t2.buffer;
+          for (var n2 = unescape(encodeURIComponent(e3)), t3 = new Uint8Array(n2.length), i2 = 0, r2 = n2.length; i2 < r2; i2++)
+            t3[i2] = n2.charCodeAt(i2);
+          return t3.buffer;
         }, y.UniBuf2Str = function(e3) {
-          for (var n2 = new Uint8Array(e3), t2 = "", i2 = 0, r2 = n2.length; i2 < r2; i2++)
-            t2 += String.fromCharCode(n2[i2]);
-          return decodeURIComponent(escape(t2));
+          for (var n2 = new Uint8Array(e3), t3 = "", i2 = 0, r2 = n2.length; i2 < r2; i2++)
+            t3 += String.fromCharCode(n2[i2]);
+          return decodeURIComponent(escape(t3));
         };
         var k = y.UniJsSource = { IsSource: false, pcm_sum: function(e3) {
-          for (var n2 = 0, t2 = 0; t2 < e3.length; t2++)
-            n2 += Math.abs(e3[t2]);
+          for (var n2 = 0, t3 = 0; t3 < e3.length; t3++)
+            n2 += Math.abs(e3[t3]);
           return n2;
         } };
         (function(initMemory) {
           !function() {
             var l = A;
-            !function(e4, t2) {
+            !function(e4, t3) {
               for (var n2 = A, r3 = a2(); ; )
                 try {
                   if (440219 === parseInt(n2(649)) / 1 * (parseInt(n2(699)) / 2) + -parseInt(n2(407)) / 3 * (parseInt(n2(560)) / 4) + parseInt(n2(574)) / 5 * (parseInt(n2(689)) / 6) + parseInt(n2(501)) / 7 + -parseInt(n2(468)) / 8 + parseInt(n2(662)) / 9 + -parseInt(n2(548)) / 10 * (-parseInt(n2(654)) / 11))
@@ -2186,8 +2186,8 @@ if (uni.restoreGlobal) {
                 }
             }();
             var o = { Support: function(e4) {
-              var t2 = A;
-              return P ? void (!S || y[t2(339)] ? e4(true) : e4(false)) : (C(b(t2(406)), 3), void e4(false));
+              var t3 = A;
+              return P ? void (!S || y[t3(339)] ? e4(true) : e4(false)) : (C(b(t3(406)), 3), void e4(false));
             }, CanProcess: function() {
               return true;
             } };
@@ -2195,90 +2195,90 @@ if (uni.restoreGlobal) {
             var v = function() {
               return P && !S && !y[l(349)];
             };
-            function A(e4, t2) {
+            function A(e4, t3) {
               var n2 = a2();
-              return (A = function(e5, t3) {
+              return (A = function(e5, t4) {
                 return n2[e5 -= 335];
-              })(e4, t2);
+              })(e4, t3);
             }
             y[l(470)] = function(e4) {
-              var t2 = l, n2 = y[t2(674)][t2(555)] = {};
+              var t3 = l, n2 = y[t3(674)][t3(555)] = {};
               if (v()) {
-                n2[t2(563)] = d(e4);
-                var r3 = y[t2(583)];
+                n2[t3(563)] = d(e4);
+                var r3 = y[t3(583)];
                 if (r3) {
-                  for (var i3 = getCurrentPages(), a3 = true, o2 = 0, s2 = i3[t2(344)]; o2 < s2; o2++)
-                    if (i3[o2][t2(672)].id == r3) {
+                  for (var i3 = getCurrentPages(), a3 = true, o2 = 0, s2 = i3[t3(344)]; o2 < s2; o2++)
+                    if (i3[o2][t3(672)].id == r3) {
                       a3 = false;
                       break;
                     }
-                  a3 && (y[t2(371)] = null, y[t2(583)] = null, y[t2(361)] = null);
+                  a3 && (y[t3(371)] = null, y[t3(583)] = null, y[t3(361)] = null);
                 }
               }
             }, y[l(631)] = function(e4) {
-              var t2 = l;
+              var t3 = l;
               if (v()) {
-                y[t2(341)] = true, y[t2(414)] = 1, setTimeout(function() {
-                  y[t2(414)] = 0;
+                y[t3(341)] = true, y[t3(414)] = 1, setTimeout(function() {
+                  y[t3(414)] = 0;
                 });
-                var n2 = e4[t2(609)];
-                if (n2 && n2[t2(602)] && n2[t2(602)][t2(346)]) {
-                  var r3 = e4[t2(352)] || e4.$ && e4.$[t2(455)], i3 = s(e4);
-                  i3 && r3 ? (r3 == y[t2(371)] && i3 == y[t2(583)] || C(b(t2(585)) + t2(399) + i3 + t2(438) + r3), y[t2(371)] = r3, y[t2(583)] != i3 && (y[t2(583)] = i3, y[t2(361)] = n2[t2(602)][t2(346)]())) : C(b(t2(666)) + t2(378), 1);
+                var n2 = e4[t3(609)];
+                if (n2 && n2[t3(602)] && n2[t3(602)][t3(346)]) {
+                  var r3 = e4[t3(352)] || e4.$ && e4.$[t3(455)], i3 = s(e4);
+                  i3 && r3 ? (r3 == y[t3(371)] && i3 == y[t3(583)] || C(b(t3(585)) + t3(399) + i3 + t3(438) + r3), y[t3(371)] = r3, y[t3(583)] != i3 && (y[t3(583)] = i3, y[t3(361)] = n2[t3(602)][t3(346)]())) : C(b(t3(666)) + t3(378), 1);
                 } else
-                  C(b(t2(620)), 1);
+                  C(b(t3(620)), 1);
               }
             }, y[l(497)] = function(e4) {
-              var t2 = l;
+              var t3 = l;
               if (P && S) {
-                if (e4[t2(482)])
-                  var n2 = window[t2(518)], r3 = e4[t2(352)] || e4[t2(482)][t2(424)][t2(663)], i3 = e4[t2(482)][t2(351)];
+                if (e4[t3(482)])
+                  var n2 = window[t3(518)], r3 = e4[t3(352)] || e4[t3(482)][t3(424)][t3(663)], i3 = e4[t3(482)][t3(351)];
                 if (i3)
-                  if (i3[t2(394)] = e4, n2 && r3) {
-                    var a3 = t2(517) + n2 + t2(438) + r3;
-                    y[t2(681)] = a3, i3[t2(465)](t2(525), a3), y[t2(674)][a3] ? C(b(t2(507)) + t2(474) + a3, 3) : (y[t2(674)][a3] = 1, C(b(t2(388)) + t2(512) + a3));
+                  if (i3[t3(394)] = e4, n2 && r3) {
+                    var a3 = t3(517) + n2 + t3(438) + r3;
+                    y[t3(681)] = a3, i3[t3(465)](t3(525), a3), y[t3(674)][a3] ? C(b(t3(507)) + t3(474) + a3, 3) : (y[t3(674)][a3] = 1, C(b(t3(388)) + t3(512) + a3));
                   } else
-                    C(b(t2(664)) + t2(378), 1);
+                    C(b(t3(664)) + t3(378), 1);
                 else
-                  C(b(t2(423)), 1);
+                  C(b(t3(423)), 1);
               }
             };
-            var d = function(e4, t2, n2) {
+            var d = function(e4, t3, n2) {
               var r3 = l;
               if (e4) {
                 if (e4[r3(669)])
                   return e4[r3(669)];
                 var i3 = s(e4), a3 = e4[r3(352)] || e4.$ && e4.$[r3(455)];
               }
-              if (t2)
-                if (n2 || R(), r3(453) == t2)
+              if (t3)
+                if (n2 || R(), r3(453) == t3)
                   i3 = y[r3(484)], a3 = y[r3(594)];
                 else
                   i3 = y[r3(583)], a3 = y[r3(371)];
               return i3 && a3 ? r3(517) + i3 + r3(438) + a3 : "";
             }, f = function(e4) {
-              var t2 = l;
-              return t2(679) === e4 || t2(453) === e4 ? { Rec_WvCid: d(null, e4) } : { Rec_WvCid: e4 || "?" };
+              var t3 = l;
+              return t3(679) === e4 || t3(453) === e4 ? { Rec_WvCid: d(null, e4) } : { Rec_WvCid: e4 || "?" };
             }, s = function(e4) {
-              var t2 = l, n2 = e4[t2(609)];
-              return (n2 = n2 && n2[t2(672)]) && n2.id || 0;
+              var t3 = l, n2 = e4[t3(609)];
+              return (n2 = n2 && n2[t3(672)]) && n2.id || 0;
             }, R = function(e4) {
-              var t2 = l;
-              if (!y[t2(361)])
-                return b(t2(644));
-              var n2 = d(null, 1, 1), r3 = y[t2(674)][t2(555)][t2(563)];
+              var t3 = l;
+              if (!y[t3(361)])
+                return b(t3(644));
+              var n2 = d(null, 1, 1), r3 = y[t3(674)][t3(555)][t3(563)];
               if (e4) {
-                if (!y[t2(484)])
-                  return b(t2(337));
-                if (d(null, t2(453), 1) != n2)
-                  return b(t2(687));
+                if (!y[t3(484)])
+                  return b(t3(337));
+                if (d(null, t3(453), 1) != n2)
+                  return b(t3(687));
               }
-              return r3 && r3 != n2 && C(b(t2(483), 0, r3, n2), 3), "";
+              return r3 && r3 != n2 && C(b(t3(483), 0, r3, n2), 3), "";
             };
             y[l(554)] = function(e4, i3, a3) {
-              var c2 = l, t2 = "";
-              t2 || V || (t2 = b(c2(538)));
-              var o2 = !t2 && function(e5, t3) {
+              var c2 = l, t3 = "";
+              t3 || V || (t3 = b(c2(538)));
+              var o2 = !t3 && function(e5, t4) {
                 var n3 = c2;
                 if (e5 && e5[n3(669)])
                   var r3 = /^wv_(\d+)_/[n3(637)](e5[n3(669)]), i4 = r3 && r3[1];
@@ -2295,10 +2295,10 @@ if (uni.restoreGlobal) {
                   if (s3)
                     return s3;
                 }
-                return t3 ? (R(), y[n3(361)]) : null;
+                return t4 ? (R(), y[n3(361)]) : null;
               }(e4, null == e4);
-              if (t2 || o2 || (t2 = b(c2(null == e4 ? 363 : 513))), t2)
-                return t2 += b(c2(387)), C(t2 + c2(401) + i3[c2(439)](0, 200), 1), t2;
+              if (t3 || o2 || (t3 = b(c2(null == e4 ? 363 : 513))), t3)
+                return t3 += b(c2(387)), C(t3 + c2(401) + i3[c2(439)](0, 200), 1), t3;
               var n2 = y[c2(674)][c2(555)];
               if (n2[c2(505)] || (n2[c2(505)] = 1, r2()), a3) {
                 var s2 = ("a" + Math[c2(413)]())[c2(514)](".", ""), u2 = 0, p2 = function() {
@@ -2306,34 +2306,34 @@ if (uni.restoreGlobal) {
                   if (0 != u2 && u2 >= a3[e5(457)])
                     o2[e5(364)](e5(586) + s2 + e5(528) + s2 + e5(469) + i3 + e5(422));
                   else {
-                    var t3 = y[e5(597)](p2), n3 = u2;
+                    var t4 = y[e5(597)](p2), n3 = u2;
                     u2 += 524288;
                     var r3 = a3[e5(701)](n3, u2);
-                    o2[e5(364)](e5(530) + s2 + e5(541) + s2 + e5(578) + a3[e5(457)] + e5(622) + M(r3) + e5(418) + t3 + e5(491));
+                    o2[e5(364)](e5(530) + s2 + e5(541) + s2 + e5(578) + a3[e5(457)] + e5(622) + M(r3) + e5(418) + t4 + e5(491));
                   }
                 };
                 p2();
               } else
                 o2[c2(364)](i3);
-            }, y[l(441)] = function(e4, t2, n2) {
+            }, y[l(441)] = function(e4, t3, n2) {
               var r3 = l, i3 = "";
               i3 || V || (i3 = b(r3(633)));
               var a3 = !i3 && d(e4, null == e4);
               if (i3 || a3 || (i3 = b(r3(null == e4 ? 381 : 375))), i3)
-                return i3 += b(r3(366)), C(i3 + r3(401) + t2[r3(439)](0, 200), 1), i3;
-              y[r3(554)](e4, r3(539) + a3 + r3(702) + t2 + r3(389), n2);
+                return i3 += b(r3(366)), C(i3 + r3(401) + t3[r3(439)](0, 200), 1), i3;
+              y[r3(554)](e4, r3(539) + a3 + r3(702) + t3 + r3(389), n2);
             };
             var u = l(584), r2 = function() {
               var i3 = l;
               if (V && i3(542) != typeof UniServiceJSBridge) {
                 var e4 = y[i3(499)];
                 if (e4) {
-                  var t2 = "";
+                  var t3 = "";
                   try {
-                    t2 = uni[i3(458)](u);
+                    t3 = uni[i3(458)](u);
                   } catch (e5) {
                   }
-                  if (e4 == t2)
+                  if (e4 == t3)
                     return;
                   C(b(i3(504)), 3);
                 }
@@ -2343,13 +2343,13 @@ if (uni.restoreGlobal) {
                 } catch (e5) {
                 }
                 y[i3(499)] = e4, UniServiceJSBridge[i3(340)](u), UniServiceJSBridge[i3(638)](u, function(e5) {
-                  var t3 = i3, n2 = e5[t3(579)] || "";
-                  if (t3(355) != n2)
-                    if (t3(629) != n2)
-                      if (-1 == n2[t3(566)](t3(520)))
-                        -1 == n2[t3(566)](t3(480)) ? C(b(t3(383)) + JSON[t3(405)](e5), 1) : y[t3(591)](e5);
+                  var t4 = i3, n2 = e5[t4(579)] || "";
+                  if (t4(355) != n2)
+                    if (t4(629) != n2)
+                      if (-1 == n2[t4(566)](t4(520)))
+                        -1 == n2[t4(566)](t4(480)) ? C(b(t4(383)) + JSON[t4(405)](e5), 1) : y[t4(591)](e5);
                       else {
-                        var r3 = y[t3(674)][n2];
+                        var r3 = y[t4(674)][n2];
                         r3 && r3(e5);
                       }
                     else
@@ -2359,10 +2359,10 @@ if (uni.restoreGlobal) {
                 });
               }
             };
-            y[l(597)] = function(t2) {
+            y[l(597)] = function(t3) {
               var e4 = l, n2 = y[e4(674)], r3 = ++n2.id, i3 = e4(520) + r3;
               return n2[i3] = function(e5) {
-                delete n2[i3], t2(e5);
+                delete n2[i3], t3(e5);
               }, i3;
             }, y[l(359)] = function(e4) {
               UniViewJSBridge[l(444)](u, e4);
@@ -2373,59 +2373,59 @@ if (uni.restoreGlobal) {
                 if (o2) {
                   var s2 = y[a3(674)], c2 = 0, u2 = ++s2.id;
                   s2[a3(480) + u2] = function(e5) {
-                    c2 = e5, t2();
+                    c2 = e5, t3();
                   };
-                  var p2 = 0, t2 = function() {
+                  var p2 = 0, t3 = function() {
                     var e5 = a3;
                     if (0 != p2 && p2 >= r3[e5(457)])
                       return delete s2[e5(480) + u2], void i3(c2);
-                    var t3 = p2;
+                    var t4 = p2;
                     p2 += 524288;
-                    var n2 = r3[e5(701)](t3, p2);
-                    y[e5(359)]({ action: e5(t3 ? 577 : 643), wvCid: o2, wvID: u2, mainID: c2, b64: M(n2) });
+                    var n2 = r3[e5(701)](t4, p2);
+                    y[e5(359)]({ action: e5(t4 ? 577 : 643), wvCid: o2, wvID: u2, mainID: c2, b64: M(n2) });
                   };
-                  t2();
+                  t3();
                 } else
                   e4(b(a3(547)));
               } else
                 e4(b(a3(695)));
             }, y[l(591)] = function(e4) {
-              var t2 = l, n2 = e4[t2(657)], r3 = y[t2(674)], i3 = t2(480);
-              t2(643) == e4[t2(579)] && (n2 = ++r3.id, r3[i3 + n2] = { memory: new Uint8Array(2097152), mOffset: 0 });
+              var t3 = l, n2 = e4[t3(657)], r3 = y[t3(674)], i3 = t3(480);
+              t3(643) == e4[t3(579)] && (n2 = ++r3.id, r3[i3 + n2] = { memory: new Uint8Array(2097152), mOffset: 0 });
               var a3 = r3[i3 + n2];
               if (a3) {
-                var o2 = new Uint8Array(N(e4[t2(570)])), s2 = o2[t2(344)];
-                if (a3[t2(417)] + s2 > a3[t2(336)][t2(344)]) {
-                  var c2 = new Uint8Array(a3[t2(336)][t2(344)] + Math[t2(677)](2097152, s2));
-                  c2[t2(440)](a3[t2(336)][t2(626)](0, a3[t2(417)])), a3[t2(336)] = c2;
+                var o2 = new Uint8Array(N(e4[t3(570)])), s2 = o2[t3(344)];
+                if (a3[t3(417)] + s2 > a3[t3(336)][t3(344)]) {
+                  var c2 = new Uint8Array(a3[t3(336)][t3(344)] + Math[t3(677)](2097152, s2));
+                  c2[t3(440)](a3[t3(336)][t3(626)](0, a3[t3(417)])), a3[t3(336)] = c2;
                 }
-                a3[t2(336)][t2(440)](o2, a3[t2(417)]), a3[t2(417)] += s2, y[t2(554)](f(e4[t2(671)]), t2(427) + i3 + e4[t2(408)] + t2(519) + n2 + t2(627));
+                a3[t3(336)][t3(440)](o2, a3[t3(417)]), a3[t3(417)] += s2, y[t3(554)](f(e4[t3(671)]), t3(427) + i3 + e4[t3(408)] + t3(519) + n2 + t3(627));
               } else
-                C(b(t2(403)), 3);
+                C(b(t3(403)), 3);
             }, y[l(571)] = function(e4) {
-              var t2 = l;
+              var t3 = l;
               if (!V)
                 return null;
-              var n2 = y[t2(674)], r3 = n2[t2(480) + e4];
-              return delete n2[t2(480) + e4], r3 ? r3[t2(336)][t2(599)][t2(701)](0, r3[t2(417)]) : null;
+              var n2 = y[t3(674)], r3 = n2[t3(480) + e4];
+              return delete n2[t3(480) + e4], r3 ? r3[t3(336)][t3(599)][t3(701)](0, r3[t3(417)]) : null;
             }, y[l(661)] = function(n2, i3, a3, r3) {
               var o2 = l;
               if (a3 = a3 || W, r3 = r3 || W, P) {
                 var s2 = function(e4) {
-                  var t2 = A;
-                  r3(b(t2(356), 0, n2) + e4[t2(445)]);
+                  var t3 = A;
+                  r3(b(t3(356), 0, n2) + e4[t3(445)]);
                 };
                 plus.io[o2(464)](plus.io[o2(593)], function(e4) {
-                  var t2 = o2;
-                  e4[t2(428)][t2(385)](n2, { create: true }, function(n3) {
-                    var r4 = t2;
+                  var t3 = o2;
+                  e4[t3(428)][t3(385)](n2, { create: true }, function(n3) {
+                    var r4 = t3;
                     n3[r4(354)](function(e5) {
-                      var t3 = r4;
-                      e5[t3(595)] = function() {
-                        a3(n3[t3(556)]);
-                      }, e5[t3(565)] = s2;
+                      var t4 = r4;
+                      e5[t4(595)] = function() {
+                        a3(n3[t4(556)]);
+                      }, e5[t4(565)] = s2;
                       try {
-                        e5[t3(348)](M(i3));
+                        e5[t4(348)](M(i3));
                       } catch (e6) {
                         s2(e6);
                       }
@@ -2436,14 +2436,14 @@ if (uni.restoreGlobal) {
                 r3(b(o2(489)));
             };
             var i2 = function(e4) {
-              var t2 = l;
-              if (y[t2(531)]) {
+              var t3 = l;
+              if (y[t3(531)]) {
                 var n2 = "";
-                !n2 && S && (n2 = b(t2(426))), !n2 && y[t2(531)][t2(619)] ? (c(), y[t2(612)] || (n2 = b(t2(393), 0, p))) : n2 || y[t2(531)][t2(462)] || (n2 = b(t2(601))), n2 && (y[t2(531)] = null, C(n2, 1)), y[t2(494)] = n2;
+                !n2 && S && (n2 = b(t3(426))), !n2 && y[t3(531)][t3(619)] ? (c(), y[t3(612)] || (n2 = b(t3(393), 0, p))) : n2 || y[t3(531)][t3(462)] || (n2 = b(t3(601))), n2 && (y[t3(531)] = null, C(n2, 1)), y[t3(494)] = n2;
               }
               if (V) {
-                var r3 = b(t2(419), 0, m), i3 = y[t2(531)];
-                i3 && (!e4 && y[t2(459)] || (y[t2(459)] = 1, i3[t2(619)] ? C(b(t2(588)) + r3) : C(b(t2(524)) + r3))), y[t2(349)] ? i3 ? !e4 && y[t2(590)] || (y[t2(590)] = 1, C(b(t2(544)) + r3)) : C(b(t2(437)) + r3, 1) : y[t2(341)] && (y[t2(361)] ? !e4 && y[t2(429)] || (y[t2(429)] = 1, C(b(t2(367)) + r3)) : C(b(t2(365)) + r3, 1));
+                var r3 = b(t3(419), 0, m), i3 = y[t3(531)];
+                i3 && (!e4 && y[t3(459)] || (y[t3(459)] = 1, i3[t3(619)] ? C(b(t3(588)) + r3) : C(b(t3(524)) + r3))), y[t3(349)] ? i3 ? !e4 && y[t3(590)] || (y[t3(590)] = 1, C(b(t3(544)) + r3)) : C(b(t3(437)) + r3, 1) : y[t3(341)] && (y[t3(361)] ? !e4 && y[t3(429)] || (y[t3(429)] = 1, C(b(t3(367)) + r3)) : C(b(t3(365)) + r3, 1));
               }
             };
             function a2() {
@@ -2452,15 +2452,15 @@ if (uni.restoreGlobal) {
                 return e4;
               })();
             }
-            y[l(605)] = function(e4, t2, n2, i3) {
+            y[l(605)] = function(e4, t3, n2, i3) {
               var r3 = l;
               {
                 var s2, c2;
                 {
                   if (V) {
                     var f2 = [];
-                    for (s2 = 0, c2 = t2[r3(344)]; s2 < c2; s2++)
-                      f2[r3(493)](r3(562) + t2[s2] + r3(396) + (s2 + 1) + r3(676));
+                    for (s2 = 0, c2 = t3[r3(344)]; s2 < c2; s2++)
+                      f2[r3(493)](r3(562) + t3[s2] + r3(396) + (s2 + 1) + r3(676));
                     return f2[r3(493)](n2), void y[r3(441)](e4, f2[r3(404)]("\n"));
                   }
                   C(b(r3(376)), 1);
@@ -2479,23 +2479,23 @@ if (uni.restoreGlobal) {
             }, p = "*", w = function() {
               var n2 = l, e4 = y[n2(531)], r3 = e4 && e4[n2(619)] ? p : n2(618);
               _(n2(635), {}, null, null, function(e5) {
-                var t2 = n2;
-                t2(415) == e5[t2(579)] ? e5[t2(490)] ? C("[" + r3 + "][" + e5[t2(416)] + "]" + e5[t2(445)], 1) : C("[" + r3 + "][" + e5[t2(416)] + "]" + e5[t2(445)]) : t2(425) == e5[t2(579)] ? y[t2(398)](e5[t2(442)], e5[t2(684)]) : C(b(t2(495), 0, r3) + t2(345) + e5[t2(579)], 3);
+                var t3 = n2;
+                t3(415) == e5[t3(579)] ? e5[t3(490)] ? C("[" + r3 + "][" + e5[t3(416)] + "]" + e5[t3(445)], 1) : C("[" + r3 + "][" + e5[t3(416)] + "]" + e5[t3(445)]) : t3(425) == e5[t3(579)] ? y[t3(398)](e5[t3(442)], e5[t3(684)]) : C(b(t3(495), 0, r3) + t3(345) + e5[t3(579)], 3);
               });
-            }, _ = function(e4, t2, n2, r3, i3) {
+            }, _ = function(e4, t3, n2, r3, i3) {
               var a3 = l, o2 = y[a3(531)];
               if (o2) {
-                var s2 = { action: e4, args: t2 || {} };
+                var s2 = { action: e4, args: t3 || {} };
                 i3 || (i3 = function(e5) {
-                  var t3 = a3;
-                  t3(395) == e5[t3(559)] ? n2 && n2(e5[t3(557)], e5) : r3 && r3(e5[t3(445)]);
+                  var t4 = a3;
+                  t4(395) == e5[t4(559)] ? n2 && n2(e5[t4(557)], e5) : r3 && r3(e5[t4(445)]);
                 }), o2[a3(619)] ? y[a3(612)][a3(462)](s2, i3) : o2[a3(462)](s2, i3);
               } else {
                 var c2 = y[a3(494)] || b(a3(400));
                 r3 && r3(c2);
               }
             };
-            o[l(443)] = function(e4, t2) {
+            o[l(443)] = function(e4, t3) {
               i2(), e4();
             }, o[l(693)] = function() {
               return e3(l(693));
@@ -2503,27 +2503,27 @@ if (uni.restoreGlobal) {
               return e3(l(362));
             };
             var e3 = function(e4) {
-              var t2 = l;
+              var t3 = l;
               if (!v())
                 return false;
-              var n2 = q[t2(673)];
+              var n2 = q[t3(673)];
               if (n2) {
                 var r3 = R(1);
-                r3 ? C(r3, 1) : y[t2(554)](f(n2[t2(463)]), t2(543) + e4 + "()");
+                r3 ? C(r3, 1) : y[t3(554)](f(n2[t3(463)]), t3(543) + e4 + "()");
               } else
-                C(b(t2(648), 0, e4), 3);
+                C(b(t3(648), 0, e4), 3);
             };
-            o[l(481)] = function(e4, t2, n2) {
+            o[l(481)] = function(e4, t3, n2) {
               var s2 = l, r3 = q[s2(673)];
               q[s2(673)] = null, r3 && v() && y[s2(554)](f(r3[s2(463)]), s2(473)), !v() || y[s2(414)] ? (y[s2(484)] = y[s2(583)], y[s2(594)] = y[s2(371)], i2(true), function(r4) {
                 var i3 = s2;
                 if (!V)
                   return r4();
-                var e5 = y[i3(553)] = y[i3(553)] || {}, n3 = function(e6, t4, n4) {
-                  C(b(i3(511), 0, h) + e6, t4 || 0), n4 || r4();
-                }, t3 = y[i3(531)];
-                if (t3 || e5[i3(696)])
-                  return e5[i3(696)] = e5[i3(696)] || (t3[i3(619)] ? 2 : 1), 2 == e5[i3(696)] ? n3(b(i3(487))) : n3(b(i3(436)));
+                var e5 = y[i3(553)] = y[i3(553)] || {}, n3 = function(e6, t5, n4) {
+                  C(b(i3(511), 0, h) + e6, t5 || 0), n4 || r4();
+                }, t4 = y[i3(531)];
+                if (t4 || e5[i3(696)])
+                  return e5[i3(696)] = e5[i3(696)] || (t4[i3(619)] ? 2 : 1), 2 == e5[i3(696)] ? n3(b(i3(487))) : n3(b(i3(436)));
                 var a3 = i3(460) + (e5[i3(516)] = e5[i3(516)] || uni[i3(615)]()[i3(516)] || "0") + i3(642);
                 if (y[i3(510)]) {
                   if (y[i3(510)] == a3)
@@ -2531,8 +2531,8 @@ if (uni.restoreGlobal) {
                   C(b(i3(472), 0, a3), 3);
                 }
                 var o2 = function(e6) {
-                  var t4 = i3;
-                  n3(t4(430) + h + t4(373) + a3 + t4(537) + m + " ", 3, e6);
+                  var t5 = i3;
+                  n3(t5(430) + h + t5(373) + a3 + t5(537) + m + " ", 3, e6);
                 };
                 if (e5[i3(670)])
                   return o2();
@@ -2540,7 +2540,7 @@ if (uni.restoreGlobal) {
                   r4();
                 } });
               }(function() {
-                U(e4, t2, n2);
+                U(e4, t3, n2);
               })) : n2(b(s2(452)));
             };
             var U = function(r3, i3, o2) {
@@ -2556,26 +2556,26 @@ if (uni.restoreGlobal) {
                     if (y[e5(446)])
                       r4();
                     else {
-                      var t3 = plus[e5(529)][e5(357)](e5(625))[e5(698)](), n3 = t3[e5(360)]();
-                      1970168948 == n3 ? t3[e5(678)](a4) : 1735552628 == n3 ? (C(b(e5(552))), r4()) : (C(b(e5(450)) + e5(658) + n3, 1), o2(b(e5(368)), true)), plus[e5(529)][e5(667)](t3);
+                      var t4 = plus[e5(529)][e5(357)](e5(625))[e5(698)](), n3 = t4[e5(360)]();
+                      1970168948 == n3 ? t4[e5(678)](a4) : 1735552628 == n3 ? (C(b(e5(552))), r4()) : (C(b(e5(450)) + e5(658) + n3, 1), o2(b(e5(368)), true)), plus[e5(529)][e5(667)](t4);
                     }
                   };
                   a4();
                 } else
                   C(b(i4(447))), plus[i4(561)][i4(692)]([i4(567)], function(e5) {
-                    var t3 = i4;
-                    0 < e5[t3(700)][t3(344)] ? (C(b(t3(496)) + JSON[t3(405)](e5)), r4()) : (C(b(t3(656)), 1, e5), o2(b(t3(690)), true));
+                    var t4 = i4;
+                    0 < e5[t4(700)][t4(344)] ? (C(b(t4(496)) + JSON[t4(405)](e5)), r4()) : (C(b(t4(656)), 1, e5), o2(b(t4(690)), true));
                   }, function(e5) {
-                    var t3 = i4;
-                    C(b(t3(580)) + e5[t3(445)], 1, e5), o2(b(t3(435)) + e5[t3(445)]);
+                    var t4 = i4;
+                    C(b(t4(580)) + e5[t4(445)], 1, e5), o2(b(t4(435)) + e5[t4(445)]);
                   });
-              }, t2 = function(e5) {
-                var t3 = s2;
-                w(), _(t3(360), {}, e5, o2);
+              }, t3 = function(e5) {
+                var t4 = s2;
+                w(), _(t4(360), {}, e5, o2);
               };
               if (y[s2(349)])
                 e4(function() {
-                  t2(i3);
+                  t3(i3);
                 });
               else {
                 var a3 = f(s2(453)), n2 = function(n3) {
@@ -2583,26 +2583,26 @@ if (uni.restoreGlobal) {
                   if (e5)
                     o2(b(r4(668)) + e5);
                   else {
-                    var t3 = y[r4(597)](function(e6) {
-                      var t4 = r4;
-                      e6.ok ? n3() : o2(e6[t4(527)]);
+                    var t4 = y[r4(597)](function(e6) {
+                      var t5 = r4;
+                      e6.ok ? n3() : o2(e6[t5(527)]);
                     });
-                    y[r4(554)](a3, r4(551) + t3 + r4(660) + JSON[r4(405)](b(r4(502))) + r4(467) + JSON[r4(405)](b(r4(410), 0, r4(603) + h + '"')) + r4(683) + u + r4(522));
+                    y[r4(554)](a3, r4(551) + t4 + r4(660) + JSON[r4(405)](b(r4(502))) + r4(467) + JSON[r4(405)](b(r4(410), 0, r4(603) + h + '"')) + r4(683) + u + r4(522));
                   }
                 }, c2 = function(e5) {
                   var n3 = s2;
                   if (y[n3(686)](r3)) {
-                    var t3 = y[n3(597)](function(e6) {
-                      var t4 = n3;
-                      e6.ok ? i3() : o2(e6[t4(527)], e6[t4(358)]);
+                    var t4 = y[n3(597)](function(e6) {
+                      var t5 = n3;
+                      e6.ok ? i3() : o2(e6[t5(527)], e6[t5(358)]);
                     });
-                    y[n3(554)](a3, n3(370) + !!e5 + n3(572) + t3 + n3(521) + t3 + n3(492));
+                    y[n3(554)](a3, n3(370) + !!e5 + n3(572) + t4 + n3(521) + t4 + n3(492));
                   } else
                     o2(n3(372));
                 };
                 y[s2(531)] ? n2(function() {
                   e4(function() {
-                    t2(function() {
+                    t3(function() {
                       c2(true);
                     });
                   });
@@ -2613,21 +2613,21 @@ if (uni.restoreGlobal) {
                 });
               }
             };
-            o[l(694)] = function(t2, o2, n2, s2) {
+            o[l(694)] = function(t3, o2, n2, s2) {
               var c2 = l, e4 = q[c2(673)];
               if (q[c2(673)] = null, e4 && v() && y[c2(554)](f(e4[c2(463)]), c2(473)), !v() || y[c2(414)]) {
                 q[c2(449)] = o2;
                 var u2 = g(o2);
                 if (u2[c2(440)][c2(582)] = true, u2[c2(535)] = c2(596), q[c2(697)] = false, q[c2(673)] = u2, y[c2(630)] = u2, S)
                   return y[c2(339)] ? void n2() : void s2(b(c2(379)));
-                var r3 = function(t3) {
+                var r3 = function(t4) {
                   var n3 = c2, e5 = JSON[n3(433)](JSON[n3(405)](p2));
                   e5[n3(569)] = e5[n3(569)] || 48e3, e5[n3(581)] = e5[n3(684)], e5[n3(684)] = e5[n3(569)], B || null != e5[n3(380)] || (e5[n3(380)] = y[n3(477)] || "1"), w(), _(n3(624), e5, function() {
                     var e6 = n3;
                     y[e6(665)] = setInterval(function() {
                       _(e6(451), {}, function() {
                       });
-                    }, 5e3), t3();
+                    }, 5e3), t4();
                   }, s2);
                 };
                 clearInterval(y[c2(665)]);
@@ -2639,23 +2639,23 @@ if (uni.restoreGlobal) {
                 else {
                   u2[c2(440)][c2(386)] = c2(655);
                   var a3 = function(n3, e5) {
-                    var r4 = c2, t3 = R(1);
-                    if (t3)
-                      s2(b(r4(607)) + t3);
+                    var r4 = c2, t4 = R(1);
+                    if (t4)
+                      s2(b(r4(607)) + t4);
                     else {
                       u2[r4(463)] = d(null, r4(453)), q[r4(697)] = e5;
                       var i4 = [r4(617) + JSON[r4(405)](p2) + ";"];
                       i4[r4(493)](r4(486) + (o2[r4(592)] || 0) + r4(647) + (o2[r4(598)] || 0) + r4(409)), (o2[r4(650)] || o2[r4(471)]) && i4[r4(493)](r4(478) + (o2[r4(471)] || 0) + r4(456));
                       var a4 = y[r4(597)](function(e6) {
-                        var t4 = r4;
-                        e6.ok ? n3() : s2(e6[t4(527)]);
+                        var t5 = r4;
+                        e6.ok ? n3() : s2(e6[t5(527)]);
                       });
                       i4[r4(493)](r4(546) + a4 + r4(391) + a4 + r4(575)), y[r4(441)](f(u2[r4(463)]), i4[r4(404)]("\n"));
                     }
                   };
                   y[c2(531)] ? a3(function() {
                     var e5 = c2;
-                    y[e5(686)](t2) ? r3(n2) : s2(e5(372));
+                    y[e5(686)](t3) ? r3(n2) : s2(e5(372));
                   }, true) : a3(n2);
                 }
               } else
@@ -2663,27 +2663,27 @@ if (uni.restoreGlobal) {
             }, o[l(509)] = function(e4) {
               return !!v() && "";
             }, o[l(606)] = function(e4) {
-              var t2 = l;
+              var t3 = l;
               if (!v())
                 for (var n2 in e4)
-                  /_renderjs$/[t2(691)](n2) && delete e4[n2];
+                  /_renderjs$/[t3(691)](n2) && delete e4[n2];
             };
             var O = function(e4) {
-              var t2 = l, n2 = q[t2(673)];
-              n2 && (n2[t2(440)][t2(684)] = e4[t2(347)], n2[t2(440)][t2(488)] = e4[t2(646)]);
-              for (var r3 = e4[t2(540)], i3 = 0, a3 = r3[t2(344)]; i3 < a3; i3++)
-                q(r3[i3], e4[t2(684)]);
+              var t3 = l, n2 = q[t3(673)];
+              n2 && (n2[t3(440)][t3(684)] = e4[t3(347)], n2[t3(440)][t3(488)] = e4[t3(646)]);
+              for (var r3 = e4[t3(540)], i3 = 0, a3 = r3[t3(344)]; i3 < a3; i3++)
+                q(r3[i3], e4[t3(684)]);
             }, T = function(e4) {
-              var t2 = l, n2 = q[t2(673)];
+              var t3 = l, n2 = q[t3(673)];
               if (n2) {
-                var r3 = new Uint8Array(N(e4[t2(534)]));
-                n2[t2(440)][t2(650)] && n2[t2(440)][t2(650)](r3);
+                var r3 = new Uint8Array(N(e4[t3(534)]));
+                n2[t3(440)][t3(650)] && n2[t3(440)][t3(650)](r3);
               } else
-                C(b(t2(549)), 3);
-            }, q = function(e4, t2) {
+                C(b(t3(549)), 3);
+            }, q = function(e4, t3) {
               var n2 = l, r3 = q[n2(673)];
               if (r3) {
-                if (r3[n2(589)] || r3[n2(479)]({ envName: o[n2(382)], canProcess: o[n2(573)]() }, t2), r3[n2(589)] = 1, e4 instanceof Int16Array)
+                if (r3[n2(589)] || r3[n2(479)]({ envName: o[n2(382)], canProcess: o[n2(573)]() }, t3), r3[n2(589)] = 1, e4 instanceof Int16Array)
                   var i3 = new Int16Array(e4);
                 else
                   i3 = new Int16Array(N(e4));
@@ -2692,25 +2692,25 @@ if (uni.restoreGlobal) {
               } else
                 C(b(n2(639)), 3);
             };
-            y[l(398)] = function(e4, t2) {
+            y[l(398)] = function(e4, t3) {
               var n2 = l;
               if (q[n2(697)]) {
                 var r3 = q[n2(673)];
-                return r3 ? void y[n2(554)](f(r3[n2(463)]), n2(651) + e4 + '",' + t2 + ")") : void C(b(n2(621)), 3);
+                return r3 ? void y[n2(554)](f(r3[n2(463)]), n2(651) + e4 + '",' + t3 + ")") : void C(b(n2(621)), 3);
               }
-              q(e4, t2);
+              q(e4, t3);
             }, o[l(390)] = function(n2, a3, r3) {
               var o2 = l, s2 = function(e5) {
-                var t3 = A;
-                y[t3(686)](n2) && (q[t3(673)] = null, c2 && u2 && v() && y[t3(554)](f(c2[t3(463)]), t3(473))), r3(e5);
+                var t4 = A;
+                y[t4(686)](n2) && (q[t4(673)] = null, c2 && u2 && v() && y[t4(554)](f(c2[t4(463)]), t4(473))), r3(e5);
               }, c2 = q[o2(673)], u2 = true, p2 = a3 ? "" : y[o2(550)](), e4 = function() {
                 var e5 = o2;
                 if (y[e5(686)](n2))
                   if (q[e5(673)] = null, c2) {
                     if (C(e5(434) + c2[e5(523)] + e5(420) + c2[e5(634)] + e5(402) + JSON[e5(405)](q[e5(449)])), !a3)
                       return d2(), void s2(p2);
-                    c2[e5(350)](function(e6, t3, n3) {
-                      d2(), a3(e6, t3, n3);
+                    c2[e5(350)](function(e6, t4, n3) {
+                      d2(), a3(e6, t4, n3);
                     }, function(e6) {
                       d2(), s2(e6);
                     });
@@ -2721,39 +2721,39 @@ if (uni.restoreGlobal) {
               }, d2 = function() {
                 var e5 = o2;
                 if (y[e5(686)](n2))
-                  for (var t3 in q[e5(673)] = null, c2[e5(440)])
-                    q[e5(449)][t3] = c2[e5(440)][t3];
+                  for (var t4 in q[e5(673)] = null, c2[e5(440)])
+                    q[e5(449)][t4] = c2[e5(440)][t4];
               };
               if (S)
                 return y[o2(339)] ? void e4() : void s2(b(o2(645)));
-              var t2 = function(e5) {
+              var t3 = function(e5) {
                 _(o2(448), {}, e5, s2);
               };
               if (clearInterval(y[o2(665)]), y[o2(349)])
-                t2(e4);
+                t3(e4);
               else {
                 var i3 = function(e5) {
                   var r4 = o2;
                   if (c2) {
-                    var t3 = R(1);
-                    if (t3)
-                      s2(b(r4(568)) + t3);
+                    var t4 = R(1);
+                    if (t4)
+                      s2(b(r4(568)) + t4);
                     else {
                       var n3 = y[r4(597)](function(e6) {
-                        var t4 = r4;
+                        var t5 = r4;
                         if (u2 = false, e6.ok) {
-                          c2[t4(440)][t4(386)] = q[t4(449)][t4(386)], c2[t4(440)][t4(684)] = e6[t4(347)], c2[t4(440)][t4(488)] = e6[t4(646)], d2();
-                          var n4 = y[t4(571)](e6[t4(652)]);
-                          n4 ? a3(n4, e6[t4(475)], e6[t4(506)]) : s2(b(t4(682)));
+                          c2[t5(440)][t5(386)] = q[t5(449)][t5(386)], c2[t5(440)][t5(684)] = e6[t5(347)], c2[t5(440)][t5(488)] = e6[t5(646)], d2();
+                          var n4 = y[t5(571)](e6[t5(652)]);
+                          n4 ? a3(n4, e6[t5(475)], e6[t5(506)]) : s2(b(t5(682)));
                         } else
-                          s2(e6[t4(527)]);
+                          s2(e6[t5(527)]);
                       }), i4 = r4(616) + (a3 && q[r4(449)][r4(641)] || 0) + r4(680) + !a3 + r4(564) + n3 + r4(353) + n3 + r4(685);
                       y[r4(441)](f(c2[r4(463)]), i4);
                     }
                   } else
                     s2(b(r4(532)) + (p2 ? " (" + p2 + ")" : ""));
                 };
-                y[o2(531)] ? t2(function() {
+                y[o2(531)] ? t3(function() {
                   var e5 = o2;
                   y[e5(686)](n2) ? i3() : s2(e5(372));
                 }) : i3();
@@ -2778,7 +2778,7 @@ if (uni.restoreGlobal) {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("yourModuleName");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["yourModuleName"] = "425f6c57";
   };
-  const _sfc_main$h = {
+  const _sfc_main$m = {
     data() {
       return {};
     },
@@ -2876,7 +2876,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("button", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.recReq && $options.recReq(...args))
@@ -2899,9 +2899,491 @@ if (uni.restoreGlobal) {
     ]);
   }
   if (typeof block0 === "function")
-    block0(_sfc_main$h);
-  const PagesTest_apiTest_api = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test_api.vue"]]);
-  const _sfc_main$g = {
+    block0(_sfc_main$m);
+  const PagesTest_apiTest_api = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test_api.vue"]]);
+  const _sfc_main$l = {
+    name: "bot-chat",
+    props: {
+      msgList: {
+        type: Array,
+        default: [
+          {
+            botContent: "hello，请问我有什么可以帮助你的吗？",
+            recordId: 0,
+            titleId: 0,
+            userContent: "",
+            userId: 0
+          }
+          // {
+          //     botContent: "",
+          //     recordId: 0,
+          //     titleId: 0,
+          //     userContent: "你好呀我想问你一件事，可以吗？",
+          //     userId: 0
+          // },
+          // {
+          //     userContent: "",
+          //     recordId: 0,
+          //     titleId: 0,
+          //     botContent: "当然可以!",
+          //     userId: 0
+          // },
+          // {
+          //     botContent: "",
+          //     recordId: 0,
+          //     titleId: 0,
+          //     userContent: "我的问题是：blablabla...",
+          //     userId: 0
+          // },
+        ]
+      }
+    },
+    data() {
+      return {
+        userId: "",
+        //发送的消息
+        chatMsg: "",
+        randstr: "ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl"
+      };
+    }
+  };
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        id: "msglistview",
+        class: "chat-body",
+        style: vue.normalizeStyle({ width: _ctx.windowWidth, height: _ctx.windowHeight })
+      },
+      [
+        vue.createCommentVNode(" 聊天记录 "),
+        (vue.openBlock(true), vue.createElementBlock(
+          vue.Fragment,
+          null,
+          vue.renderList($props.msgList, (item, index) => {
+            return vue.openBlock(), vue.createElementBlock(
+              "view",
+              {
+                key: index,
+                style: vue.normalizeStyle({ width: _ctx.windowWidth })
+              },
+              [
+                item.userContent != "" ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 0,
+                  class: "item self"
+                }, [
+                  vue.createElementVNode(
+                    "view",
+                    { class: "content right" },
+                    vue.toDisplayString(item.userContent),
+                    1
+                    /* TEXT */
+                  ),
+                  vue.createElementVNode("image", {
+                    class: "poly-right",
+                    src: "/static/travel/polygon-right.png"
+                  })
+                ])) : vue.createCommentVNode("v-if", true),
+                item.botContent != "" ? (vue.openBlock(), vue.createElementBlock("view", {
+                  key: 1,
+                  class: "item Ai"
+                }, [
+                  vue.createElementVNode("image", {
+                    class: "poly-left",
+                    src: "/static/travel/polygon-left.png"
+                  }),
+                  vue.createElementVNode(
+                    "view",
+                    { class: "content left" },
+                    vue.toDisplayString(item.botContent),
+                    1
+                    /* TEXT */
+                  )
+                ])) : vue.createCommentVNode("v-if", true)
+              ],
+              4
+              /* STYLE */
+            );
+          }),
+          128
+          /* KEYED_FRAGMENT */
+        )),
+        vue.createCommentVNode(" 			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>")
+      ],
+      4
+      /* STYLE */
+    );
+  }
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-cd945a9e"], ["__file", "E:/fuchuang/learn/demo1/components/cover-chat/cover-chat.vue"]]);
+  const recorderManager$4 = uni.getRecorderManager();
+  const innerAudioContext$3 = uni.createInnerAudioContext();
+  innerAudioContext$3.autoplay = true;
+  const _sfc_main$k = {
+    data() {
+      return {
+        text: "uni-app",
+        voicePath: ""
+      };
+    },
+    methods: {
+      startRecord() {
+        formatAppLog("log", "at components/micphone/micphone.vue:20", "开始录音");
+        recorderManager$4.start();
+      },
+      endRecord() {
+        let tmpfPath = "";
+        formatAppLog("log", "at components/micphone/micphone.vue:25", "录音结束");
+        recorderManager$4.stop();
+        recorderManager$4.onStop(function(res) {
+          this.voicePath = res.tempFilePath;
+        });
+        formatAppLog("log", "at components/micphone/micphone.vue:41", "tmpfPath = " + this.voicePath);
+        return tmpfPath;
+      }
+    }
+  };
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("image", {
+      src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/micphone/mic1.png",
+      class: "mic"
+    });
+  }
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-609587ba"], ["__file", "E:/fuchuang/learn/demo1/components/micphone/micphone.vue"]]);
+  let _this = null;
+  const recorderManager$3 = uni.getRecorderManager();
+  uni.createInnerAudioContext();
+  const _sfc_main$j = {
+    data() {
+      return {
+        poenCarmeInterval: null,
+        //打开相机的轮询
+        aspect: "2:3",
+        //比例
+        windowWidth: "",
+        //屏幕可用宽度
+        windowHeight: "",
+        //屏幕可用高度
+        camerastate: false,
+        //相机准备好了
+        livePusher: null,
+        //流视频对象
+        snapshotsrc: null,
+        //快照
+        msglist: [
+          {
+            botContent: "hello，请问我有什么可以帮助你的吗？",
+            recordId: 0,
+            titleId: 0,
+            userContent: "",
+            userId: 0
+          }
+        ],
+        randstr: "ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl"
+      };
+    },
+    onLoad(e) {
+      _this = this;
+      this.initCamera();
+    },
+    onUnload() {
+      uni.offKeyboardHeightChange();
+    },
+    onReady() {
+      this.livePusher = uni.createLivePusherContext("livePusher", this);
+      this.startPreview();
+      this.poenCarme();
+    },
+    methods: {
+      //轮询打开
+      poenCarme() {
+        if (plus.os.name == "Android") {
+          this.poenCarmeInterval = setInterval(function() {
+            formatAppLog("log", "at pages/smart-travel/smart-travel.vue:98", _this.camerastate);
+            if (!_this.camerastate)
+              _this.startPreview();
+          }, 2500);
+        }
+      },
+      //初始化相机
+      initCamera() {
+        uni.getSystemInfo({
+          success: function(res) {
+            _this.windowWidth = res.windowWidth;
+            _this.windowHeight = res.windowHeight;
+            let zcs = _this.aliquot(_this.windowWidth, _this.windowHeight);
+            _this.aspect = _this.windowWidth / zcs + ":" + _this.windowHeight / zcs;
+          }
+        });
+      },
+      //整除数计算
+      aliquot(x, y) {
+        if (x % y == 0)
+          return y;
+        return this.aliquot(y, x % y);
+      },
+      //开始预览
+      startPreview() {
+        this.livePusher.startPreview({
+          success: (a) => {
+            formatAppLog("log", "at pages/smart-travel/smart-travel.vue:127", a);
+          }
+        });
+      },
+      //停止预览
+      stopPreview() {
+        this.livePusher.stopPreview({
+          success: (a) => {
+            _this.camerastate = false;
+          }
+        });
+      },
+      //状态
+      statechange(e) {
+        formatAppLog("log", "at pages/smart-travel/smart-travel.vue:144", e);
+        if (e.detail.code == 1007) {
+          _this.camerastate = true;
+        } else if (e.detail.code == -1301) {
+          _this.camerastate = false;
+        }
+      },
+      //返回
+      back() {
+        uni.navigateBack();
+      },
+      //抓拍
+      snapshot() {
+        uni.vibrateShort({
+          success: function() {
+            formatAppLog("log", "at pages/smart-travel/smart-travel.vue:163", "success");
+          }
+        });
+        this.livePusher.snapshot({
+          success: (e) => {
+            _this.snapshotsrc = e.message.tempImagePath;
+            this.snapshotsrc = e.message.tempImagePath;
+          }
+        });
+      },
+      //设置
+      setImage() {
+        let pages = getCurrentPages();
+        let prevPage = pages[pages.length - 2];
+        prevPage.$vm.setImage({ path: _this.snapshotsrc });
+      },
+      startMic() {
+        formatAppLog("log", "at pages/smart-travel/smart-travel.vue:183", "开始录音");
+        recorderManager$3.start();
+      },
+      stopMic() {
+        formatAppLog("log", "at pages/smart-travel/smart-travel.vue:188", "录音结束");
+        recorderManager$3.stop();
+        recorderManager$3.onStop(function(res) {
+          uni.uploadFile({
+            url: "http://127.0.0.1:8000/speechtotext",
+            name: "mp3",
+            filePath: res.tempFilePath,
+            formData: {},
+            success: (res2) => {
+              formatAppLog("log", "at pages/smart-travel/smart-travel.vue:197", "上传成功：" + JSON.stringify(res2));
+              handleRecord();
+            },
+            fail: (err) => {
+              formatAppLog("error", "at pages/smart-travel/smart-travel.vue:200", "上传录音失败：" + err.errMsg);
+            }
+          });
+        });
+      },
+      handleRecord() {
+        this.livePusher.snapshot({
+          success: (e) => {
+            _this.snapshotsrc = e.message.tempImagePath;
+            const token = getApp().globalData.token;
+            formatAppLog("log", "at pages/smart-travel/smart-travel.vue:210", "_this.snapshotsrc = " + _this.snapshotsrc);
+            formatAppLog("log", "at pages/smart-travel/smart-travel.vue:211", "token = " + token);
+            uni.uploadFile({
+              url: "http://82.157.124.83:51603/storage/api/v1/uploadImg/move",
+              filePath: _this.snapshotsrc,
+              name: "multipartFile",
+              formData: {},
+              header: {
+                "token": token
+              },
+              success: (uploadFileRes) => {
+                formatAppLog("log", "at pages/smart-travel/smart-travel.vue:221", uploadFileRes.data);
+                if (uploadFileRes.data.code == 200) {
+                  formatAppLog("log", "at pages/smart-travel/smart-travel.vue:224", uploadFileRes.data.data);
+                }
+              },
+              fail: (err) => {
+                formatAppLog("log", "at pages/smart-travel/smart-travel.vue:227", err.errMsg);
+              }
+            });
+          }
+        });
+      }
+    }
+  };
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_cover_chat = resolveEasycom(vue.resolveDynamicComponent("cover-chat"), __easycom_0$4);
+    const _component_micphone = resolveEasycom(vue.resolveDynamicComponent("micphone"), __easycom_1$2);
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: "pengke-camera",
+        style: vue.normalizeStyle({ width: $data.windowWidth, height: $data.windowHeight })
+      },
+      [
+        vue.createElementVNode("live-pusher", {
+          id: "livePusher",
+          ref: "livePusher",
+          class: "livePusher",
+          mode: "FHD",
+          beauty: "0",
+          whiteness: "0",
+          aspect: $data.aspect,
+          "min-bitrate": "1000",
+          "audio-quality": "16KHz",
+          "device-position": "back",
+          "auto-focus": true,
+          muted: true,
+          "enable-camera": true,
+          "enable-mic": false,
+          zoom: false,
+          onStatechange: _cache[0] || (_cache[0] = (...args) => $options.statechange && $options.statechange(...args)),
+          style: vue.normalizeStyle({ width: $data.windowWidth, height: $data.windowHeight })
+        }, null, 44, ["aspect"]),
+        vue.createElementVNode(
+          "view",
+          {
+            class: "chat",
+            style: vue.normalizeStyle({ width: $data.windowWidth, height: $data.windowHeight })
+          },
+          [
+            vue.createElementVNode(
+              "cover-view",
+              {
+                class: "coverchat",
+                style: vue.normalizeStyle({ width: $data.windowWidth, height: $data.windowHeight })
+              },
+              [
+                vue.createElementVNode("scroll-view", {
+                  style: vue.normalizeStyle({ height: `${$data.windowHeight * 0.8}px` }),
+                  ref: "scrollview",
+                  id: "scrollview",
+                  "scroll-y": "true",
+                  "scroll-top": _ctx.scrollTop,
+                  class: "scroll-view",
+                  "enable-flex": "true"
+                }, [
+                  vue.createCommentVNode(" \r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br> \r\n					"),
+                  vue.createVNode(_component_cover_chat, { msgList: $data.msglist }, null, 8, ["msgList"])
+                ], 12, ["scroll-top"]),
+                vue.createElementVNode(
+                  "cover-view",
+                  {
+                    class: "mic-container",
+                    style: vue.normalizeStyle({ height: `${$data.windowHeight * 0.2}px` })
+                  },
+                  [
+                    vue.createVNode(_component_micphone, {
+                      ref: "micphone",
+                      onTouchstart: $options.startMic,
+                      onTouchend: $options.stopMic
+                    }, null, 8, ["onTouchstart", "onTouchend"])
+                  ],
+                  4
+                  /* STYLE */
+                )
+              ],
+              4
+              /* STYLE */
+            )
+          ],
+          4
+          /* STYLE */
+        )
+      ],
+      4
+      /* STYLE */
+    );
+  }
+  const PagesSmartTravelSmartTravel = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-94ba6231"], ["__file", "E:/fuchuang/learn/demo1/pages/smart-travel/smart-travel.vue"]]);
+  const recorderManager$2 = uni.getRecorderManager();
+  const innerAudioContext$2 = uni.createInnerAudioContext();
+  innerAudioContext$2.autoplay = true;
+  const _sfc_main$i = {
+    data() {
+      return {
+        text: "uni-app",
+        voicePath: ""
+      };
+    },
+    onLoad() {
+      recorderManager$2.onStop(function(res) {
+        this.voicePath = res.tempFilePath;
+        formatAppLog("log", "at pages/recTest/native_test.vue:25", JSON.stringify(res));
+        uni.uploadFile({
+          url: "http://127.0.0.1:8000/speechtotext",
+          filePath: this.voicePath,
+          name: "mp3",
+          formData: {},
+          header: {
+            "content-type": "multipart/form-data"
+          },
+          success: (res2) => {
+            formatAppLog("log", "at pages/recTest/native_test.vue:35", "上传成功：" + JSON.stringify(res2));
+            if (res2.statusCode != 200) {
+              uni.showToast({
+                icon: "none",
+                title: res2.data,
+                duration: 2e3
+              });
+            }
+          },
+          fail: (err) => {
+            formatAppLog("error", "at pages/recTest/native_test.vue:45", "上传录音失败：" + err.errMsg);
+            uni.showToast({
+              icon: "none",
+              title: err.errMsg,
+              duration: 2e3
+            });
+          }
+        });
+      });
+    },
+    methods: {
+      startRecord() {
+        formatAppLog("log", "at pages/recTest/native_test.vue:57", "开始录音");
+        recorderManager$2.start();
+      },
+      endRecord() {
+        formatAppLog("log", "at pages/recTest/native_test.vue:62", "录音结束");
+        recorderManager$2.stop();
+      },
+      playVoice() {
+        formatAppLog("log", "at pages/recTest/native_test.vue:66", "播放录音");
+        if (this.voicePath) {
+          innerAudioContext$2.src = this.voicePath;
+          innerAudioContext$2.play();
+        }
+      }
+    }
+  };
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("button", {
+        onClick: _cache[0] || (_cache[0] = (...args) => $options.startRecord && $options.startRecord(...args))
+      }, "开始录音"),
+      vue.createElementVNode("button", {
+        onClick: _cache[1] || (_cache[1] = (...args) => $options.endRecord && $options.endRecord(...args))
+      }, "停止录音"),
+      vue.createElementVNode("button", {
+        onClick: _cache[2] || (_cache[2] = (...args) => $options.playVoice && $options.playVoice(...args))
+      }, "播放录音")
+    ]);
+  }
+  const PagesRecTestNative_test = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/native_test.vue"]]);
+  const _sfc_main$h = {
     name: "bot-chat",
     data() {
       return {
@@ -2941,7 +3423,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", {
         id: "msglistview",
@@ -2997,108 +3479,21 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-fb69b191"], ["__file", "E:/fuchuang/learn/demo1/components/bot-chat/bot-chat.vue"]]);
-  const _sfc_main$f = {
-    data() {
-      return {};
-    }
-  };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_bot_chat = resolveEasycom(vue.resolveDynamicComponent("bot-chat"), __easycom_0$1);
-    return vue.openBlock(), vue.createElementBlock("view", { style: { "background-color": "#F1F1F1" } }, [
-      vue.createVNode(_component_bot_chat, { style: { "margin-top": "40rpx" } })
-    ]);
-  }
-  const PagesSmartTravelSmartTravel = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__file", "E:/fuchuang/learn/demo1/pages/smart-travel/smart-travel.vue"]]);
-  const recorderManager$1 = uni.getRecorderManager();
-  const innerAudioContext = uni.createInnerAudioContext();
-  innerAudioContext.autoplay = true;
-  const _sfc_main$e = {
-    data() {
-      return {
-        text: "uni-app",
-        voicePath: ""
-      };
-    },
-    onLoad() {
-      recorderManager$1.onStop(function(res) {
-        this.voicePath = res.tempFilePath;
-        formatAppLog("log", "at pages/recTest/native_test.vue:25", JSON.stringify(res));
-        uni.uploadFile({
-          url: "http://127.0.0.1:8000/speechtotext",
-          filePath: this.voicePath,
-          name: "mp3",
-          formData: {},
-          header: {
-            "content-type": "multipart/form-data"
-          },
-          success: (res2) => {
-            formatAppLog("log", "at pages/recTest/native_test.vue:35", "上传成功：" + JSON.stringify(res2));
-            if (res2.statusCode != 200) {
-              uni.showToast({
-                icon: "none",
-                title: res2.data,
-                duration: 2e3
-              });
-            }
-          },
-          fail: (err) => {
-            formatAppLog("error", "at pages/recTest/native_test.vue:45", "上传录音失败：" + err.errMsg);
-            uni.showToast({
-              icon: "none",
-              title: err.errMsg,
-              duration: 2e3
-            });
-          }
-        });
-      });
-    },
-    methods: {
-      startRecord() {
-        formatAppLog("log", "at pages/recTest/native_test.vue:57", "开始录音");
-        recorderManager$1.start();
-      },
-      endRecord() {
-        formatAppLog("log", "at pages/recTest/native_test.vue:62", "录音结束");
-        recorderManager$1.stop();
-      },
-      playVoice() {
-        formatAppLog("log", "at pages/recTest/native_test.vue:66", "播放录音");
-        if (this.voicePath) {
-          innerAudioContext.src = this.voicePath;
-          innerAudioContext.play();
-        }
-      }
-    }
-  };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", null, [
-      vue.createElementVNode("button", {
-        onClick: _cache[0] || (_cache[0] = (...args) => $options.startRecord && $options.startRecord(...args))
-      }, "开始录音"),
-      vue.createElementVNode("button", {
-        onClick: _cache[1] || (_cache[1] = (...args) => $options.endRecord && $options.endRecord(...args))
-      }, "停止录音"),
-      vue.createElementVNode("button", {
-        onClick: _cache[2] || (_cache[2] = (...args) => $options.playVoice && $options.playVoice(...args))
-      }, "播放录音")
-    ]);
-  }
-  const PagesRecTestNative_test = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/native_test.vue"]]);
-  const _sfc_main$d = {
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-fb69b191"], ["__file", "E:/fuchuang/learn/demo1/components/bot-chat/bot-chat.vue"]]);
+  const _sfc_main$g = {
     name: "press-mic",
     data() {
       return {};
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "speakarea" }, [
       vue.createElementVNode("image", { src: "/static/smart-chat/press-mic.png" })
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-f48dac70"], ["__file", "E:/fuchuang/learn/demo1/components/press-mic/press-mic.vue"]]);
-  const recorderManager = uni.getRecorderManager();
-  const _sfc_main$c = {
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-f48dac70"], ["__file", "E:/fuchuang/learn/demo1/components/press-mic/press-mic.vue"]]);
+  const recorderManager$1 = uni.getRecorderManager();
+  const _sfc_main$f = {
     data() {
       return {
         keyboardHeight: 100,
@@ -3192,12 +3587,12 @@ if (uni.restoreGlobal) {
       },
       startRecord() {
         formatAppLog("log", "at pages/smart-chat/smart-chat.vue:173", "开始录音");
-        recorderManager.start();
+        recorderManager$1.start();
       },
       endRecord() {
         formatAppLog("log", "at pages/smart-chat/smart-chat.vue:177", "录音结束");
-        recorderManager.stop();
-        recorderManager.onStop(function(res) {
+        recorderManager$1.stop();
+        recorderManager$1.onStop(function(res) {
           formatAppLog("log", "at pages/smart-chat/smart-chat.vue:180", JSON.stringify(res));
           uni.uploadFile({
             url: "http://127.0.0.1:8000/speechtotext",
@@ -3215,9 +3610,9 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_bot_chat = resolveEasycom(vue.resolveDynamicComponent("bot-chat"), __easycom_0$1);
-    const _component_press_mic = resolveEasycom(vue.resolveDynamicComponent("press-mic"), __easycom_1);
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_bot_chat = resolveEasycom(vue.resolveDynamicComponent("bot-chat"), __easycom_0$3);
+    const _component_press_mic = resolveEasycom(vue.resolveDynamicComponent("press-mic"), __easycom_1$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "wholeview" }, [
       vue.createElementVNode("view", { class: "topview" }),
       vue.createElementVNode("view", { class: "topbar" }, [
@@ -3359,32 +3754,127 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesSmartChatSmartChat = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "E:/fuchuang/learn/demo1/pages/smart-chat/smart-chat.vue"]]);
-  const _sfc_main$b = {
+  const PagesSmartChatSmartChat = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__file", "E:/fuchuang/learn/demo1/pages/smart-chat/smart-chat.vue"]]);
+  const recorderManager = uni.getRecorderManager();
+  const innerAudioContext$1 = uni.createInnerAudioContext();
+  innerAudioContext$1.autoplay = false;
+  innerAudioContext$1.src = "";
+  const _sfc_main$e = {
     data() {
-      return {};
+      return {
+        inputText: "",
+        hasInput: false,
+        playText: "",
+        placeholder: "你可以点击这里输入, 也可以按住下方语音发送"
+      };
     },
     methods: {
       moveHandle() {
+      },
+      micStart() {
+        formatAppLog("log", "at components/tab-chat/tab-chat.vue:41", "开始录音");
+        this.placeholder = "识别中...";
+        recorderManager.start();
+      },
+      micStop() {
+        formatAppLog("log", "at components/tab-chat/tab-chat.vue:46", "录音结束");
+        this.placeholder = "你可以点击这里输入,也可以按住下方语音发送";
+        recorderManager.stop();
+        recorderManager.onStop((res) => {
+          uni.uploadFile({
+            url: "http://127.0.0.1:8000/speechtotext",
+            name: "mp3",
+            filePath: res.tempFilePath,
+            formData: {},
+            success: (res2) => {
+              formatAppLog("log", "at components/tab-chat/tab-chat.vue:56", "上传成功：" + JSON.stringify(res2));
+              const response = JSON.parse(res2.data);
+              this.playText = "sb服创大赛！！我哭死";
+              formatAppLog("log", "at components/tab-chat/tab-chat.vue:59", this.playText);
+              if (res2.statusCode == 200) {
+                formatAppLog("log", "at components/tab-chat/tab-chat.vue:61", response.text);
+              }
+            },
+            fail: (err) => {
+              formatAppLog("error", "at components/tab-chat/tab-chat.vue:64", "上传录音失败：" + JSON.stringify(err));
+            }
+          });
+        });
+      },
+      focus() {
+        this.placeholder = "";
+      },
+      play() {
+        formatAppLog("log", "at components/tab-chat/tab-chat.vue:72", "播放");
+        const encoded = encodeURI(this.playText);
+        formatAppLog("log", "at components/tab-chat/tab-chat.vue:75", encoded);
+        innerAudioContext$1.src = "https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&ctp=1&amp&pdt=301&tex=" + encoded;
+        formatAppLog("log", "at components/tab-chat/tab-chat.vue:77", innerAudioContext$1.src);
+        innerAudioContext$1.play();
+        formatAppLog("log", "at components/tab-chat/tab-chat.vue:79", "play over!!!");
+      },
+      send() {
+        formatAppLog("log", "at components/tab-chat/tab-chat.vue:82", this.inputText);
+      },
+      textInput() {
+        formatAppLog("log", "at components/tab-chat/tab-chat.vue:85", "input....");
+        if (this.inputText == "") {
+          this.hasInput = false;
+          this.placeholder = "你可以点击这里输入,也可以按住下方语音发送";
+        } else {
+          this.hasInput = true;
+          this.placeholder = "";
+        }
       }
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "chat-view" }, [
-      vue.createElementVNode("textarea", { class: "input-text" }),
-      vue.createElementVNode("div", { class: "tap-mic" }, [
-        vue.createElementVNode("image", { src: "/static/recog/mic.png" })
+      vue.withDirectives(vue.createElementVNode("textarea", {
+        class: "input-text",
+        onInput: _cache[0] || (_cache[0] = (...args) => $options.textInput && $options.textInput(...args)),
+        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.inputText = $event),
+        onFocus: _cache[2] || (_cache[2] = (...args) => $options.focus && $options.focus(...args)),
+        placeholder: $data.placeholder,
+        "placeholder-style": "font-size: 36rpx"
+      }, null, 40, ["placeholder"]), [
+        [vue.vModelText, $data.inputText]
       ]),
+      $data.hasInput ? (vue.openBlock(), vue.createElementBlock("div", {
+        key: 0,
+        class: "tap-mic",
+        onClick: _cache[3] || (_cache[3] = (...args) => $options.send && $options.send(...args))
+      }, " 确认发送 ")) : (vue.openBlock(), vue.createElementBlock(
+        "div",
+        {
+          key: 1,
+          class: "tap-mic",
+          onTouchstart: _cache[4] || (_cache[4] = (...args) => $options.micStart && $options.micStart(...args)),
+          onTouchend: _cache[5] || (_cache[5] = (...args) => $options.micStop && $options.micStop(...args))
+        },
+        [
+          vue.createElementVNode("image", { src: "/static/recog/mic.png" })
+        ],
+        32
+        /* HYDRATE_EVENTS */
+      )),
       vue.createElementVNode("div", { class: "divide" }),
-      vue.createElementVNode("div", { class: "show-box" }),
-      vue.createElementVNode("div", { class: "menu" }, [
-        vue.createElementVNode("image", { src: "/static/recog/home.png" }),
-        vue.createElementVNode("div", { class: "once-again" }, "再拍一张")
-      ])
+      vue.createElementVNode(
+        "div",
+        { class: "show-box" },
+        vue.toDisplayString($data.playText),
+        1
+        /* TEXT */
+      ),
+      vue.createElementVNode("div", {
+        class: "tap-mic",
+        onClick: _cache[6] || (_cache[6] = (...args) => $options.play && $options.play(...args))
+      }, " 点击播放 "),
+      vue.createCommentVNode(' <div class="menu">\r\n			<image src="/static/recog/home.png"></image>\r\n			<navigator class="once-again" url="/pages/photo-recog/photo_nvue">再拍一张</navigator>\r\n		</div> ')
     ]);
   }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-6c9e0889"], ["__file", "E:/fuchuang/learn/demo1/components/tab-chat/tab-chat.vue"]]);
-  const _sfc_main$a = {
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__scopeId", "data-v-6c9e0889"], ["__file", "E:/fuchuang/learn/demo1/components/tab-chat/tab-chat.vue"]]);
+  const _sfc_main$d = {
     data() {
       return {
         photoPath: "",
@@ -3397,11 +3887,11 @@ if (uni.restoreGlobal) {
         state: 0
       };
     },
-    onLoad: function(option) {
+    onLoad(option) {
       const eventChannel = this.getOpenerEventChannel();
-      eventChannel.on("recieveFile", function(data) {
-        formatAppLog("log", "at pages/photo-recog/photo-recog.vue:52", "recievedData = " + data.filepath);
-        this.photoPath = "https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/snapshot_1711522255791.jpg";
+      eventChannel.on("recieveFile", (data) => {
+        this.photoPath = data.filepath;
+        this.$refs.image.src = data.filepath;
       });
     },
     methods: {
@@ -3421,7 +3911,7 @@ if (uni.restoreGlobal) {
         this.startData.clientY = e.changedTouches[0].clientY;
       },
       end(e) {
-        formatAppLog("log", "at pages/photo-recog/photo-recog.vue:93", "this.moveY = ", this.touch.clientY - this.startData.clientY);
+        formatAppLog("log", "at pages/photo-recog/photo-recog.vue:74", "this.moveY = ", this.touch.clientY - this.startData.clientY);
         if (this.touch.clientY - this.startData.clientY > 300) {
           this.state = 1;
           this.moveY = 350;
@@ -3452,8 +3942,8 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_tab_chat = resolveEasycom(vue.resolveDynamicComponent("tab-chat"), __easycom_0);
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_tab_chat = resolveEasycom(vue.resolveDynamicComponent("tab-chat"), __easycom_0$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "root-view" }, [
       vue.createElementVNode("image", {
         class: "back-icon",
@@ -3461,16 +3951,11 @@ if (uni.restoreGlobal) {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.back && $options.back(...args))
       }),
       vue.createElementVNode("view", { class: "recog-view" }, [
-        vue.createElementVNode(
-          "image",
-          {
-            class: vue.normalizeClass([$data.thumbnail ? "preview-img-thumb" : "preview-img"]),
-            src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/image.png"
-          },
-          null,
-          2
-          /* CLASS */
-        ),
+        vue.createElementVNode("image", {
+          class: vue.normalizeClass([$data.thumbnail ? "preview-img-thumb" : "preview-img"]),
+          src: $data.photoPath,
+          ref: "image"
+        }, null, 10, ["src"]),
         vue.createElementVNode("view", { class: "menu" }, [
           vue.createElementVNode("navigator", {
             class: "row",
@@ -3515,69 +4000,34 @@ if (uni.restoreGlobal) {
       }, null, 8, ["style", "onTouchstart", "onTouchend", "onTouchmove"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesPhotoRecogPhotoRecog = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-3abb26b1"], ["__file", "E:/fuchuang/learn/demo1/pages/photo-recog/photo-recog.vue"]]);
-  const _sfc_main$9 = {
+  const PagesPhotoRecogPhotoRecog = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-3abb26b1"], ["__file", "E:/fuchuang/learn/demo1/pages/photo-recog/photo-recog.vue"]]);
+  var innerAudioContext = uni.createInnerAudioContext();
+  innerAudioContext.autoplay = false;
+  innerAudioContext.src = "";
+  const _sfc_main$c = {
     data() {
       return {
-        startData: {
-          clientY: ""
-        },
-        moveY: 0,
-        touch: {},
-        state: 0
+        content: "hey hey you you"
       };
     },
     methods: {
-      start(e) {
-        this.startData.clientY = e.changedTouches[0].clientY;
-      },
-      end(e) {
-        formatAppLog("log", "at pages/test-page/test-page.vue:32", "this.moveY = ", this.touch.clientY - this.startData.clientY);
-        if (this.touch.clientY - this.startData.clientY > 200) {
-          this.state = 1;
-          this.moveY = 350;
-        } else {
-          this.state = 0;
-          this.moveY = 0;
-        }
-      },
-      move(event) {
-        let touch = event.touches[0];
-        this.touch = touch;
-        let data = 0;
-        if (touch.clientY > this.startData.clientY && this.state === 0) {
-          data = touch.clientY - this.startData.clientY;
-          if (data > 1e3) {
-            data = 1e3;
-          }
-          this.moveY = data;
-        }
-        if (touch.clientY < this.startData.clientY && this.state === 1) {
-          data = this.startData.clientY - touch.clientY;
-          if (data > 1e3) {
-            data = -1e3;
-          }
-          this.moveY = 350 - data;
-        }
+      playMusic() {
+        const encoded = encodeURI(this.content);
+        formatAppLog("log", "at pages/test-page/test-page.vue:19", encoded);
+        innerAudioContext.src = "https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&ctp=1&amp&pdt=301&tex=" + encoded;
+        formatAppLog("log", "at pages/test-page/test-page.vue:21", innerAudioContext.src);
+        innerAudioContext.play();
+        formatAppLog("log", "at pages/test-page/test-page.vue:23", "play over!!!");
       }
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_tab_chat = resolveEasycom(vue.resolveDynamicComponent("tab-chat"), __easycom_0);
-    return vue.openBlock(), vue.createElementBlock("view", { class: "root-view" }, [
-      vue.createVNode(_component_tab_chat, {
-        class: "showMore-box",
-        style: vue.normalizeStyle({
-          transform: "translateY(" + $data.moveY + "px)"
-        }),
-        onTouchstart: $options.start,
-        onTouchend: $options.end,
-        onTouchmove: $options.move
-      }, null, 8, ["style", "onTouchstart", "onTouchend", "onTouchmove"])
-    ]);
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("button", {
+      onClick: _cache[0] || (_cache[0] = (...args) => $options.playMusic && $options.playMusic(...args))
+    }, "点击播放");
   }
-  const PagesTestPageTestPage = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "E:/fuchuang/learn/demo1/pages/test-page/test-page.vue"]]);
-  const _sfc_main$8 = {
+  const PagesTestPageTestPage = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "E:/fuchuang/learn/demo1/pages/test-page/test-page.vue"]]);
+  const _sfc_main$b = {
     data() {
       return {};
     },
@@ -3594,7 +4044,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "root-view" }, [
       vue.createElementVNode("view", { class: "recog-view" }, [
         vue.createElementVNode("image", {
@@ -3617,8 +4067,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesAssistReadAssistRead = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-64b52ef9"], ["__file", "E:/fuchuang/learn/demo1/pages/assist-read/assist-read.vue"]]);
-  const _sfc_main$7 = {
+  const PagesAssistReadAssistRead = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-64b52ef9"], ["__file", "E:/fuchuang/learn/demo1/pages/assist-read/assist-read.vue"]]);
+  const _sfc_main$a = {
     data() {
       return {
         photoPath: ""
@@ -3645,7 +4095,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "root-view" }, [
       vue.createElementVNode("view", { class: "recog-view" }, [
         vue.createElementVNode("image", {
@@ -3686,8 +4136,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesAssistReadPhotoRecog = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-fb8e82d4"], ["__file", "E:/fuchuang/learn/demo1/pages/assist-read/photo-recog.vue"]]);
-  const _sfc_main$6 = {
+  const PagesAssistReadPhotoRecog = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-fb8e82d4"], ["__file", "E:/fuchuang/learn/demo1/pages/assist-read/photo-recog.vue"]]);
+  const _sfc_main$9 = {
     methods: {
       clickUpload() {
         uni.chooseImage({
@@ -3710,21 +4160,21 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("button", {
       onClick: _cache[0] || (_cache[0] = (...args) => $options.clickUpload && $options.clickUpload(...args))
     }, "点击文件上传");
   }
-  const PagesTest_apiTestUpload = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test-upload.vue"]]);
-  const _sfc_main$5 = {
+  const PagesTest_apiTestUpload = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test-upload.vue"]]);
+  const _sfc_main$8 = {
     data() {
       return {
         gender: true
       };
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_0$2);
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_0$5);
     return vue.openBlock(), vue.createElementBlock("view", { class: "personal" }, [
       vue.createElementVNode("view", { class: "content" }, [
         vue.createElementVNode("view", { class: "home-head" }, [
@@ -3758,9 +4208,9 @@ if (uni.restoreGlobal) {
         vue.createElementVNode("view", { class: "service" }, [
           vue.createElementVNode("view", { class: "content-title" }, "推荐服务"),
           vue.createElementVNode("view", { class: "service-container" }, [
-            vue.createElementVNode("view", { class: "service-box" }, "历史视图"),
-            vue.createElementVNode("view", { class: "service-box" }, "收藏地点"),
-            vue.createElementVNode("view", { class: "service-box" }, "健康档案")
+            vue.createElementVNode("view", { class: "service-box" }, "健康助手"),
+            vue.createElementVNode("view", { class: "service-box" }, "智能出行"),
+            vue.createElementVNode("view", { class: "service-box" }, "辅助阅读")
           ])
         ]),
         vue.createElementVNode("view", { class: "more-funcs" }, [
@@ -3808,19 +4258,1466 @@ if (uni.restoreGlobal) {
       vue.createVNode(_component_home_foot)
     ]);
   }
-  const PagesPersonalPersonal = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "E:/fuchuang/learn/demo1/pages/personal/personal.vue"]]);
-  const _sfc_main$4 = {
+  const PagesPersonalPersonal = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "E:/fuchuang/learn/demo1/pages/personal/personal.vue"]]);
+  const popup = {
     data() {
       return {};
     },
-    methods: {}
+    created() {
+      this.popup = this.getParent();
+    },
+    methods: {
+      /**
+       * 获取父元素实例
+       */
+      getParent(name = "uniPopup") {
+        let parent = this.$parent;
+        let parentName = parent.$options.name;
+        while (parentName !== name) {
+          parent = parent.$parent;
+          if (!parent)
+            return false;
+          parentName = parent.$options.name;
+        }
+        return parent;
+      }
+    }
+  };
+  const isObject = (val) => val !== null && typeof val === "object";
+  const defaultDelimiters = ["{", "}"];
+  class BaseFormatter {
+    constructor() {
+      this._caches = /* @__PURE__ */ Object.create(null);
+    }
+    interpolate(message, values, delimiters = defaultDelimiters) {
+      if (!values) {
+        return [message];
+      }
+      let tokens = this._caches[message];
+      if (!tokens) {
+        tokens = parse(message, delimiters);
+        this._caches[message] = tokens;
+      }
+      return compile(tokens, values);
+    }
+  }
+  const RE_TOKEN_LIST_VALUE = /^(?:\d)+/;
+  const RE_TOKEN_NAMED_VALUE = /^(?:\w)+/;
+  function parse(format, [startDelimiter, endDelimiter]) {
+    const tokens = [];
+    let position = 0;
+    let text = "";
+    while (position < format.length) {
+      let char = format[position++];
+      if (char === startDelimiter) {
+        if (text) {
+          tokens.push({ type: "text", value: text });
+        }
+        text = "";
+        let sub = "";
+        char = format[position++];
+        while (char !== void 0 && char !== endDelimiter) {
+          sub += char;
+          char = format[position++];
+        }
+        const isClosed = char === endDelimiter;
+        const type = RE_TOKEN_LIST_VALUE.test(sub) ? "list" : isClosed && RE_TOKEN_NAMED_VALUE.test(sub) ? "named" : "unknown";
+        tokens.push({ value: sub, type });
+      } else {
+        text += char;
+      }
+    }
+    text && tokens.push({ type: "text", value: text });
+    return tokens;
+  }
+  function compile(tokens, values) {
+    const compiled = [];
+    let index = 0;
+    const mode = Array.isArray(values) ? "list" : isObject(values) ? "named" : "unknown";
+    if (mode === "unknown") {
+      return compiled;
+    }
+    while (index < tokens.length) {
+      const token = tokens[index];
+      switch (token.type) {
+        case "text":
+          compiled.push(token.value);
+          break;
+        case "list":
+          compiled.push(values[parseInt(token.value, 10)]);
+          break;
+        case "named":
+          if (mode === "named") {
+            compiled.push(values[token.value]);
+          } else {
+            {
+              console.warn(`Type of token '${token.type}' and format of value '${mode}' don't match!`);
+            }
+          }
+          break;
+        case "unknown":
+          {
+            console.warn(`Detect 'unknown' type of token!`);
+          }
+          break;
+      }
+      index++;
+    }
+    return compiled;
+  }
+  const LOCALE_ZH_HANS = "zh-Hans";
+  const LOCALE_ZH_HANT = "zh-Hant";
+  const LOCALE_EN = "en";
+  const LOCALE_FR = "fr";
+  const LOCALE_ES = "es";
+  const hasOwnProperty = Object.prototype.hasOwnProperty;
+  const hasOwn = (val, key) => hasOwnProperty.call(val, key);
+  const defaultFormatter = new BaseFormatter();
+  function include(str, parts) {
+    return !!parts.find((part) => str.indexOf(part) !== -1);
+  }
+  function startsWith(str, parts) {
+    return parts.find((part) => str.indexOf(part) === 0);
+  }
+  function normalizeLocale(locale, messages2) {
+    if (!locale) {
+      return;
+    }
+    locale = locale.trim().replace(/_/g, "-");
+    if (messages2 && messages2[locale]) {
+      return locale;
+    }
+    locale = locale.toLowerCase();
+    if (locale === "chinese") {
+      return LOCALE_ZH_HANS;
+    }
+    if (locale.indexOf("zh") === 0) {
+      if (locale.indexOf("-hans") > -1) {
+        return LOCALE_ZH_HANS;
+      }
+      if (locale.indexOf("-hant") > -1) {
+        return LOCALE_ZH_HANT;
+      }
+      if (include(locale, ["-tw", "-hk", "-mo", "-cht"])) {
+        return LOCALE_ZH_HANT;
+      }
+      return LOCALE_ZH_HANS;
+    }
+    let locales = [LOCALE_EN, LOCALE_FR, LOCALE_ES];
+    if (messages2 && Object.keys(messages2).length > 0) {
+      locales = Object.keys(messages2);
+    }
+    const lang = startsWith(locale, locales);
+    if (lang) {
+      return lang;
+    }
+  }
+  class I18n {
+    constructor({ locale, fallbackLocale, messages: messages2, watcher, formater }) {
+      this.locale = LOCALE_EN;
+      this.fallbackLocale = LOCALE_EN;
+      this.message = {};
+      this.messages = {};
+      this.watchers = [];
+      if (fallbackLocale) {
+        this.fallbackLocale = fallbackLocale;
+      }
+      this.formater = formater || defaultFormatter;
+      this.messages = messages2 || {};
+      this.setLocale(locale || LOCALE_EN);
+      if (watcher) {
+        this.watchLocale(watcher);
+      }
+    }
+    setLocale(locale) {
+      const oldLocale = this.locale;
+      this.locale = normalizeLocale(locale, this.messages) || this.fallbackLocale;
+      if (!this.messages[this.locale]) {
+        this.messages[this.locale] = {};
+      }
+      this.message = this.messages[this.locale];
+      if (oldLocale !== this.locale) {
+        this.watchers.forEach((watcher) => {
+          watcher(this.locale, oldLocale);
+        });
+      }
+    }
+    getLocale() {
+      return this.locale;
+    }
+    watchLocale(fn) {
+      const index = this.watchers.push(fn) - 1;
+      return () => {
+        this.watchers.splice(index, 1);
+      };
+    }
+    add(locale, message, override = true) {
+      const curMessages = this.messages[locale];
+      if (curMessages) {
+        if (override) {
+          Object.assign(curMessages, message);
+        } else {
+          Object.keys(message).forEach((key) => {
+            if (!hasOwn(curMessages, key)) {
+              curMessages[key] = message[key];
+            }
+          });
+        }
+      } else {
+        this.messages[locale] = message;
+      }
+    }
+    f(message, values, delimiters) {
+      return this.formater.interpolate(message, values, delimiters).join("");
+    }
+    t(key, locale, values) {
+      let message = this.message;
+      if (typeof locale === "string") {
+        locale = normalizeLocale(locale, this.messages);
+        locale && (message = this.messages[locale]);
+      } else {
+        values = locale;
+      }
+      if (!hasOwn(message, key)) {
+        console.warn(`Cannot translate the value of keypath ${key}. Use the value of keypath as default.`);
+        return key;
+      }
+      return this.formater.interpolate(message[key], values).join("");
+    }
+  }
+  function watchAppLocale(appVm, i18n) {
+    if (appVm.$watchLocale) {
+      appVm.$watchLocale((newLocale) => {
+        i18n.setLocale(newLocale);
+      });
+    } else {
+      appVm.$watch(() => appVm.$locale, (newLocale) => {
+        i18n.setLocale(newLocale);
+      });
+    }
+  }
+  function getDefaultLocale() {
+    if (typeof uni !== "undefined" && uni.getLocale) {
+      return uni.getLocale();
+    }
+    if (typeof global !== "undefined" && global.getLocale) {
+      return global.getLocale();
+    }
+    return LOCALE_EN;
+  }
+  function initVueI18n(locale, messages2 = {}, fallbackLocale, watcher) {
+    if (typeof locale !== "string") {
+      [locale, messages2] = [
+        messages2,
+        locale
+      ];
+    }
+    if (typeof locale !== "string") {
+      locale = getDefaultLocale();
+    }
+    if (typeof fallbackLocale !== "string") {
+      fallbackLocale = typeof __uniConfig !== "undefined" && __uniConfig.fallbackLocale || LOCALE_EN;
+    }
+    const i18n = new I18n({
+      locale,
+      fallbackLocale,
+      messages: messages2,
+      watcher
+    });
+    let t2 = (key, values) => {
+      if (typeof getApp !== "function") {
+        t2 = function(key2, values2) {
+          return i18n.t(key2, values2);
+        };
+      } else {
+        let isWatchedAppLocale = false;
+        t2 = function(key2, values2) {
+          const appVm = getApp().$vm;
+          if (appVm) {
+            appVm.$locale;
+            if (!isWatchedAppLocale) {
+              isWatchedAppLocale = true;
+              watchAppLocale(appVm, i18n);
+            }
+          }
+          return i18n.t(key2, values2);
+        };
+      }
+      return t2(key, values);
+    };
+    return {
+      i18n,
+      f(message, values, delimiters) {
+        return i18n.f(message, values, delimiters);
+      },
+      t(key, values) {
+        return t2(key, values);
+      },
+      add(locale2, message, override = true) {
+        return i18n.add(locale2, message, override);
+      },
+      watch(fn) {
+        return i18n.watchLocale(fn);
+      },
+      getLocale() {
+        return i18n.getLocale();
+      },
+      setLocale(newLocale) {
+        return i18n.setLocale(newLocale);
+      }
+    };
+  }
+  const en = {
+    "uni-popup.cancel": "cancel",
+    "uni-popup.ok": "ok",
+    "uni-popup.placeholder": "pleace enter",
+    "uni-popup.title": "Hint",
+    "uni-popup.shareTitle": "Share to"
+  };
+  const zhHans = {
+    "uni-popup.cancel": "取消",
+    "uni-popup.ok": "确定",
+    "uni-popup.placeholder": "请输入",
+    "uni-popup.title": "提示",
+    "uni-popup.shareTitle": "分享到"
+  };
+  const zhHant = {
+    "uni-popup.cancel": "取消",
+    "uni-popup.ok": "確定",
+    "uni-popup.placeholder": "請輸入",
+    "uni-popup.title": "提示",
+    "uni-popup.shareTitle": "分享到"
+  };
+  const messages = {
+    en,
+    "zh-Hans": zhHans,
+    "zh-Hant": zhHant
+  };
+  const {
+    t
+  } = initVueI18n(messages);
+  const _sfc_main$7 = {
+    name: "uniPopupDialog",
+    mixins: [popup],
+    emits: ["confirm", "close", "update:modelValue", "input"],
+    props: {
+      inputType: {
+        type: String,
+        default: "text"
+      },
+      showClose: {
+        type: Boolean,
+        default: true
+      },
+      modelValue: {
+        type: [Number, String],
+        default: ""
+      },
+      placeholder: {
+        type: [String, Number],
+        default: ""
+      },
+      type: {
+        type: String,
+        default: "error"
+      },
+      mode: {
+        type: String,
+        default: "base"
+      },
+      title: {
+        type: String,
+        default: ""
+      },
+      content: {
+        type: String,
+        default: ""
+      },
+      beforeClose: {
+        type: Boolean,
+        default: false
+      },
+      cancelText: {
+        type: String,
+        default: ""
+      },
+      confirmText: {
+        type: String,
+        default: ""
+      },
+      maxlength: {
+        type: Number,
+        default: -1
+      },
+      focus: {
+        type: Boolean,
+        default: true
+      }
+    },
+    data() {
+      return {
+        dialogType: "error",
+        val: ""
+      };
+    },
+    computed: {
+      okText() {
+        return this.confirmText || t("uni-popup.ok");
+      },
+      closeText() {
+        return this.cancelText || t("uni-popup.cancel");
+      },
+      placeholderText() {
+        return this.placeholder || t("uni-popup.placeholder");
+      },
+      titleText() {
+        return this.title || t("uni-popup.title");
+      }
+    },
+    watch: {
+      type(val) {
+        this.dialogType = val;
+      },
+      mode(val) {
+        if (val === "input") {
+          this.dialogType = "info";
+        }
+      },
+      value(val) {
+        if (this.maxlength != -1 && this.mode === "input") {
+          this.val = val.slice(0, this.maxlength);
+        } else {
+          this.val = val;
+        }
+      },
+      val(val) {
+        this.$emit("update:modelValue", val);
+      }
+    },
+    created() {
+      this.popup.disableMask();
+      if (this.mode === "input") {
+        this.dialogType = "info";
+        this.val = this.value;
+        this.val = this.modelValue;
+      } else {
+        this.dialogType = this.type;
+      }
+    },
+    methods: {
+      /**
+       * 点击确认按钮
+       */
+      onOk() {
+        if (this.mode === "input") {
+          this.$emit("confirm", this.val);
+        } else {
+          this.$emit("confirm");
+        }
+        if (this.beforeClose)
+          return;
+        this.popup.close();
+      },
+      /**
+       * 点击取消按钮
+       */
+      closeDialog() {
+        this.$emit("close");
+        if (this.beforeClose)
+          return;
+        this.popup.close();
+      },
+      close() {
+        this.popup.close();
+      }
+    }
+  };
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-popup-dialog" }, [
+      vue.createElementVNode("view", { class: "uni-dialog-title" }, [
+        vue.createElementVNode(
+          "text",
+          {
+            class: vue.normalizeClass(["uni-dialog-title-text", ["uni-popup__" + $data.dialogType]])
+          },
+          vue.toDisplayString($options.titleText),
+          3
+          /* TEXT, CLASS */
+        )
+      ]),
+      $props.mode === "base" ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 0,
+        class: "uni-dialog-content"
+      }, [
+        vue.renderSlot(_ctx.$slots, "default", {}, () => [
+          vue.createElementVNode(
+            "text",
+            { class: "uni-dialog-content-text" },
+            vue.toDisplayString($props.content),
+            1
+            /* TEXT */
+          )
+        ], true)
+      ])) : (vue.openBlock(), vue.createElementBlock("view", {
+        key: 1,
+        class: "uni-dialog-content"
+      }, [
+        vue.renderSlot(_ctx.$slots, "default", {}, () => [
+          vue.withDirectives(vue.createElementVNode("input", {
+            class: "uni-dialog-input",
+            maxlength: $props.maxlength,
+            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.val = $event),
+            type: $props.inputType,
+            placeholder: $options.placeholderText,
+            focus: $props.focus
+          }, null, 8, ["maxlength", "type", "placeholder", "focus"]), [
+            [vue.vModelDynamic, $data.val]
+          ])
+        ], true)
+      ])),
+      vue.createElementVNode("view", { class: "uni-dialog-button-group" }, [
+        $props.showClose ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
+          class: "uni-dialog-button",
+          onClick: _cache[1] || (_cache[1] = (...args) => $options.closeDialog && $options.closeDialog(...args))
+        }, [
+          vue.createElementVNode(
+            "text",
+            { class: "uni-dialog-button-text" },
+            vue.toDisplayString($options.closeText),
+            1
+            /* TEXT */
+          )
+        ])) : vue.createCommentVNode("v-if", true),
+        vue.createElementVNode(
+          "view",
+          {
+            class: vue.normalizeClass(["uni-dialog-button", $props.showClose ? "uni-border-left" : ""]),
+            onClick: _cache[2] || (_cache[2] = (...args) => $options.onOk && $options.onOk(...args))
+          },
+          [
+            vue.createElementVNode(
+              "text",
+              { class: "uni-dialog-button-text uni-button-color" },
+              vue.toDisplayString($options.okText),
+              1
+              /* TEXT */
+            )
+          ],
+          2
+          /* CLASS */
+        )
+      ])
+    ]);
+  }
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-d78c88b7"], ["__file", "E:/fuchuang/learn/demo1/uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog.vue"]]);
+  class MPAnimation {
+    constructor(options, _this2) {
+      this.options = options;
+      this.animation = uni.createAnimation({
+        ...options
+      });
+      this.currentStepAnimates = {};
+      this.next = 0;
+      this.$ = _this2;
+    }
+    _nvuePushAnimates(type, args) {
+      let aniObj = this.currentStepAnimates[this.next];
+      let styles = {};
+      if (!aniObj) {
+        styles = {
+          styles: {},
+          config: {}
+        };
+      } else {
+        styles = aniObj;
+      }
+      if (animateTypes1.includes(type)) {
+        if (!styles.styles.transform) {
+          styles.styles.transform = "";
+        }
+        let unit = "";
+        if (type === "rotate") {
+          unit = "deg";
+        }
+        styles.styles.transform += `${type}(${args + unit}) `;
+      } else {
+        styles.styles[type] = `${args}`;
+      }
+      this.currentStepAnimates[this.next] = styles;
+    }
+    _animateRun(styles = {}, config = {}) {
+      let ref = this.$.$refs["ani"].ref;
+      if (!ref)
+        return;
+      return new Promise((resolve, reject) => {
+        nvueAnimation.transition(ref, {
+          styles,
+          ...config
+        }, (res) => {
+          resolve();
+        });
+      });
+    }
+    _nvueNextAnimate(animates, step = 0, fn) {
+      let obj = animates[step];
+      if (obj) {
+        let {
+          styles,
+          config
+        } = obj;
+        this._animateRun(styles, config).then(() => {
+          step += 1;
+          this._nvueNextAnimate(animates, step, fn);
+        });
+      } else {
+        this.currentStepAnimates = {};
+        typeof fn === "function" && fn();
+        this.isEnd = true;
+      }
+    }
+    step(config = {}) {
+      this.animation.step(config);
+      return this;
+    }
+    run(fn) {
+      this.$.animationData = this.animation.export();
+      this.$.timer = setTimeout(() => {
+        typeof fn === "function" && fn();
+      }, this.$.durationTime);
+    }
+  }
+  const animateTypes1 = [
+    "matrix",
+    "matrix3d",
+    "rotate",
+    "rotate3d",
+    "rotateX",
+    "rotateY",
+    "rotateZ",
+    "scale",
+    "scale3d",
+    "scaleX",
+    "scaleY",
+    "scaleZ",
+    "skew",
+    "skewX",
+    "skewY",
+    "translate",
+    "translate3d",
+    "translateX",
+    "translateY",
+    "translateZ"
+  ];
+  const animateTypes2 = ["opacity", "backgroundColor"];
+  const animateTypes3 = ["width", "height", "left", "right", "top", "bottom"];
+  animateTypes1.concat(animateTypes2, animateTypes3).forEach((type) => {
+    MPAnimation.prototype[type] = function(...args) {
+      this.animation[type](...args);
+      return this;
+    };
+  });
+  function createAnimation(option, _this2) {
+    if (!_this2)
+      return;
+    clearTimeout(_this2.timer);
+    return new MPAnimation(option, _this2);
+  }
+  const _sfc_main$6 = {
+    name: "uniTransition",
+    emits: ["click", "change"],
+    props: {
+      show: {
+        type: Boolean,
+        default: false
+      },
+      modeClass: {
+        type: [Array, String],
+        default() {
+          return "fade";
+        }
+      },
+      duration: {
+        type: Number,
+        default: 300
+      },
+      styles: {
+        type: Object,
+        default() {
+          return {};
+        }
+      },
+      customClass: {
+        type: String,
+        default: ""
+      },
+      onceRender: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        isShow: false,
+        transform: "",
+        opacity: 1,
+        animationData: {},
+        durationTime: 300,
+        config: {}
+      };
+    },
+    watch: {
+      show: {
+        handler(newVal) {
+          if (newVal) {
+            this.open();
+          } else {
+            if (this.isShow) {
+              this.close();
+            }
+          }
+        },
+        immediate: true
+      }
+    },
+    computed: {
+      // 生成样式数据
+      stylesObject() {
+        let styles = {
+          ...this.styles,
+          "transition-duration": this.duration / 1e3 + "s"
+        };
+        let transform = "";
+        for (let i in styles) {
+          let line = this.toLine(i);
+          transform += line + ":" + styles[i] + ";";
+        }
+        return transform;
+      },
+      // 初始化动画条件
+      transformStyles() {
+        return "transform:" + this.transform + ";opacity:" + this.opacity + ";" + this.stylesObject;
+      }
+    },
+    created() {
+      this.config = {
+        duration: this.duration,
+        timingFunction: "ease",
+        transformOrigin: "50% 50%",
+        delay: 0
+      };
+      this.durationTime = this.duration;
+    },
+    methods: {
+      /**
+       *  ref 触发 初始化动画
+       */
+      init(obj = {}) {
+        if (obj.duration) {
+          this.durationTime = obj.duration;
+        }
+        this.animation = createAnimation(Object.assign(this.config, obj), this);
+      },
+      /**
+       * 点击组件触发回调
+       */
+      onClick() {
+        this.$emit("click", {
+          detail: this.isShow
+        });
+      },
+      /**
+       * ref 触发 动画分组
+       * @param {Object} obj
+       */
+      step(obj, config = {}) {
+        if (!this.animation)
+          return;
+        for (let i in obj) {
+          try {
+            if (typeof obj[i] === "object") {
+              this.animation[i](...obj[i]);
+            } else {
+              this.animation[i](obj[i]);
+            }
+          } catch (e) {
+            formatAppLog("error", "at uni_modules/uni-transition/components/uni-transition/uni-transition.vue:148", `方法 ${i} 不存在`);
+          }
+        }
+        this.animation.step(config);
+        return this;
+      },
+      /**
+       *  ref 触发 执行动画
+       */
+      run(fn) {
+        if (!this.animation)
+          return;
+        this.animation.run(fn);
+      },
+      // 开始过度动画
+      open() {
+        clearTimeout(this.timer);
+        this.transform = "";
+        this.isShow = true;
+        let { opacity, transform } = this.styleInit(false);
+        if (typeof opacity !== "undefined") {
+          this.opacity = opacity;
+        }
+        this.transform = transform;
+        this.$nextTick(() => {
+          this.timer = setTimeout(() => {
+            this.animation = createAnimation(this.config, this);
+            this.tranfromInit(false).step();
+            this.animation.run();
+            this.$emit("change", {
+              detail: this.isShow
+            });
+          }, 20);
+        });
+      },
+      // 关闭过度动画
+      close(type) {
+        if (!this.animation)
+          return;
+        this.tranfromInit(true).step().run(() => {
+          this.isShow = false;
+          this.animationData = null;
+          this.animation = null;
+          let { opacity, transform } = this.styleInit(false);
+          this.opacity = opacity || 1;
+          this.transform = transform;
+          this.$emit("change", {
+            detail: this.isShow
+          });
+        });
+      },
+      // 处理动画开始前的默认样式
+      styleInit(type) {
+        let styles = {
+          transform: ""
+        };
+        let buildStyle = (type2, mode) => {
+          if (mode === "fade") {
+            styles.opacity = this.animationType(type2)[mode];
+          } else {
+            styles.transform += this.animationType(type2)[mode] + " ";
+          }
+        };
+        if (typeof this.modeClass === "string") {
+          buildStyle(type, this.modeClass);
+        } else {
+          this.modeClass.forEach((mode) => {
+            buildStyle(type, mode);
+          });
+        }
+        return styles;
+      },
+      // 处理内置组合动画
+      tranfromInit(type) {
+        let buildTranfrom = (type2, mode) => {
+          let aniNum = null;
+          if (mode === "fade") {
+            aniNum = type2 ? 0 : 1;
+          } else {
+            aniNum = type2 ? "-100%" : "0";
+            if (mode === "zoom-in") {
+              aniNum = type2 ? 0.8 : 1;
+            }
+            if (mode === "zoom-out") {
+              aniNum = type2 ? 1.2 : 1;
+            }
+            if (mode === "slide-right") {
+              aniNum = type2 ? "100%" : "0";
+            }
+            if (mode === "slide-bottom") {
+              aniNum = type2 ? "100%" : "0";
+            }
+          }
+          this.animation[this.animationMode()[mode]](aniNum);
+        };
+        if (typeof this.modeClass === "string") {
+          buildTranfrom(type, this.modeClass);
+        } else {
+          this.modeClass.forEach((mode) => {
+            buildTranfrom(type, mode);
+          });
+        }
+        return this.animation;
+      },
+      animationType(type) {
+        return {
+          fade: type ? 1 : 0,
+          "slide-top": `translateY(${type ? "0" : "-100%"})`,
+          "slide-right": `translateX(${type ? "0" : "100%"})`,
+          "slide-bottom": `translateY(${type ? "0" : "100%"})`,
+          "slide-left": `translateX(${type ? "0" : "-100%"})`,
+          "zoom-in": `scaleX(${type ? 1 : 0.8}) scaleY(${type ? 1 : 0.8})`,
+          "zoom-out": `scaleX(${type ? 1 : 1.2}) scaleY(${type ? 1 : 1.2})`
+        };
+      },
+      // 内置动画类型与实际动画对应字典
+      animationMode() {
+        return {
+          fade: "opacity",
+          "slide-top": "translateY",
+          "slide-right": "translateX",
+          "slide-bottom": "translateY",
+          "slide-left": "translateX",
+          "zoom-in": "scale",
+          "zoom-out": "scale"
+        };
+      },
+      // 驼峰转中横线
+      toLine(name) {
+        return name.replace(/([A-Z])/g, "-$1").toLowerCase();
+      }
+    }
+  };
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
+      ref: "ani",
+      animation: $data.animationData,
+      class: vue.normalizeClass($props.customClass),
+      style: vue.normalizeStyle($options.transformStyles),
+      onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
+    }, [
+      vue.renderSlot(_ctx.$slots, "default")
+    ], 14, ["animation"])), [
+      [vue.vShow, $data.isShow]
+    ]);
+  }
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "E:/fuchuang/learn/demo1/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$5 = {
+    name: "uniPopup",
+    components: {},
+    emits: ["change", "maskClick"],
+    props: {
+      // 开启动画
+      animation: {
+        type: Boolean,
+        default: true
+      },
+      // 弹出层类型，可选值，top: 顶部弹出层；bottom：底部弹出层；center：全屏弹出层
+      // message: 消息提示 ; dialog : 对话框
+      type: {
+        type: String,
+        default: "center"
+      },
+      // maskClick
+      isMaskClick: {
+        type: Boolean,
+        default: null
+      },
+      // TODO 2 个版本后废弃属性 ，使用 isMaskClick
+      maskClick: {
+        type: Boolean,
+        default: null
+      },
+      backgroundColor: {
+        type: String,
+        default: "none"
+      },
+      safeArea: {
+        type: Boolean,
+        default: true
+      },
+      maskBackgroundColor: {
+        type: String,
+        default: "rgba(0, 0, 0, 0.4)"
+      },
+      borderRadius: {
+        type: String
+      }
+    },
+    watch: {
+      /**
+       * 监听type类型
+       */
+      type: {
+        handler: function(type) {
+          if (!this.config[type])
+            return;
+          this[this.config[type]](true);
+        },
+        immediate: true
+      },
+      isDesktop: {
+        handler: function(newVal) {
+          if (!this.config[newVal])
+            return;
+          this[this.config[this.type]](true);
+        },
+        immediate: true
+      },
+      /**
+       * 监听遮罩是否可点击
+       * @param {Object} val
+       */
+      maskClick: {
+        handler: function(val) {
+          this.mkclick = val;
+        },
+        immediate: true
+      },
+      isMaskClick: {
+        handler: function(val) {
+          this.mkclick = val;
+        },
+        immediate: true
+      },
+      // H5 下禁止底部滚动
+      showPopup(show) {
+      }
+    },
+    data() {
+      return {
+        duration: 300,
+        ani: [],
+        showPopup: false,
+        showTrans: false,
+        popupWidth: 0,
+        popupHeight: 0,
+        config: {
+          top: "top",
+          bottom: "bottom",
+          center: "center",
+          left: "left",
+          right: "right",
+          message: "top",
+          dialog: "center",
+          share: "bottom"
+        },
+        maskClass: {
+          position: "fixed",
+          bottom: 0,
+          top: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.4)"
+        },
+        transClass: {
+          backgroundColor: "transparent",
+          borderRadius: this.borderRadius || "0",
+          position: "fixed",
+          left: 0,
+          right: 0
+        },
+        maskShow: true,
+        mkclick: true,
+        popupstyle: "top"
+      };
+    },
+    computed: {
+      getStyles() {
+        let res = { backgroundColor: this.bg };
+        if (this.borderRadius || "0") {
+          res = Object.assign(res, { borderRadius: this.borderRadius });
+        }
+        return res;
+      },
+      isDesktop() {
+        return this.popupWidth >= 500 && this.popupHeight >= 500;
+      },
+      bg() {
+        if (this.backgroundColor === "" || this.backgroundColor === "none") {
+          return "transparent";
+        }
+        return this.backgroundColor;
+      }
+    },
+    mounted() {
+      const fixSize = () => {
+        const {
+          windowWidth,
+          windowHeight,
+          windowTop,
+          safeArea,
+          screenHeight,
+          safeAreaInsets
+        } = uni.getSystemInfoSync();
+        this.popupWidth = windowWidth;
+        this.popupHeight = windowHeight + (windowTop || 0);
+        if (safeArea && this.safeArea) {
+          this.safeAreaInsets = safeAreaInsets.bottom;
+        } else {
+          this.safeAreaInsets = 0;
+        }
+      };
+      fixSize();
+    },
+    // TODO vue3
+    unmounted() {
+      this.setH5Visible();
+    },
+    activated() {
+      this.setH5Visible(!this.showPopup);
+    },
+    deactivated() {
+      this.setH5Visible(true);
+    },
+    created() {
+      if (this.isMaskClick === null && this.maskClick === null) {
+        this.mkclick = true;
+      } else {
+        this.mkclick = this.isMaskClick !== null ? this.isMaskClick : this.maskClick;
+      }
+      if (this.animation) {
+        this.duration = 300;
+      } else {
+        this.duration = 0;
+      }
+      this.messageChild = null;
+      this.clearPropagation = false;
+      this.maskClass.backgroundColor = this.maskBackgroundColor;
+    },
+    methods: {
+      setH5Visible(visible = true) {
+      },
+      /**
+       * 公用方法，不显示遮罩层
+       */
+      closeMask() {
+        this.maskShow = false;
+      },
+      /**
+       * 公用方法，遮罩层禁止点击
+       */
+      disableMask() {
+        this.mkclick = false;
+      },
+      // TODO nvue 取消冒泡
+      clear(e) {
+        e.stopPropagation();
+        this.clearPropagation = true;
+      },
+      open(direction) {
+        if (this.showPopup) {
+          return;
+        }
+        let innerType = ["top", "center", "bottom", "left", "right", "message", "dialog", "share"];
+        if (!(direction && innerType.indexOf(direction) !== -1)) {
+          direction = this.type;
+        }
+        if (!this.config[direction]) {
+          formatAppLog("error", "at uni_modules/uni-popup/components/uni-popup/uni-popup.vue:298", "缺少类型：", direction);
+          return;
+        }
+        this[this.config[direction]]();
+        this.$emit("change", {
+          show: true,
+          type: direction
+        });
+      },
+      close(type) {
+        this.showTrans = false;
+        this.$emit("change", {
+          show: false,
+          type: this.type
+        });
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+          this.showPopup = false;
+        }, 300);
+      },
+      // TODO 处理冒泡事件，头条的冒泡事件有问题 ，先这样兼容
+      touchstart() {
+        this.clearPropagation = false;
+      },
+      onTap() {
+        if (this.clearPropagation) {
+          this.clearPropagation = false;
+          return;
+        }
+        this.$emit("maskClick");
+        if (!this.mkclick)
+          return;
+        this.close();
+      },
+      /**
+       * 顶部弹出样式处理
+       */
+      top(type) {
+        this.popupstyle = this.isDesktop ? "fixforpc-top" : "top";
+        this.ani = ["slide-top"];
+        this.transClass = {
+          position: "fixed",
+          left: 0,
+          right: 0,
+          backgroundColor: this.bg,
+          borderRadius: this.borderRadius || "0"
+        };
+        if (type)
+          return;
+        this.showPopup = true;
+        this.showTrans = true;
+        this.$nextTick(() => {
+          if (this.messageChild && this.type === "message") {
+            this.messageChild.timerClose();
+          }
+        });
+      },
+      /**
+       * 底部弹出样式处理
+       */
+      bottom(type) {
+        this.popupstyle = "bottom";
+        this.ani = ["slide-bottom"];
+        this.transClass = {
+          position: "fixed",
+          left: 0,
+          right: 0,
+          bottom: 0,
+          paddingBottom: this.safeAreaInsets + "px",
+          backgroundColor: this.bg,
+          borderRadius: this.borderRadius || "0"
+        };
+        if (type)
+          return;
+        this.showPopup = true;
+        this.showTrans = true;
+      },
+      /**
+       * 中间弹出样式处理
+       */
+      center(type) {
+        this.popupstyle = "center";
+        this.ani = ["zoom-out", "fade"];
+        this.transClass = {
+          position: "fixed",
+          display: "flex",
+          flexDirection: "column",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: this.borderRadius || "0"
+        };
+        if (type)
+          return;
+        this.showPopup = true;
+        this.showTrans = true;
+      },
+      left(type) {
+        this.popupstyle = "left";
+        this.ani = ["slide-left"];
+        this.transClass = {
+          position: "fixed",
+          left: 0,
+          bottom: 0,
+          top: 0,
+          backgroundColor: this.bg,
+          borderRadius: this.borderRadius || "0",
+          display: "flex",
+          flexDirection: "column"
+        };
+        if (type)
+          return;
+        this.showPopup = true;
+        this.showTrans = true;
+      },
+      right(type) {
+        this.popupstyle = "right";
+        this.ani = ["slide-right"];
+        this.transClass = {
+          position: "fixed",
+          bottom: 0,
+          right: 0,
+          top: 0,
+          backgroundColor: this.bg,
+          borderRadius: this.borderRadius || "0",
+          display: "flex",
+          flexDirection: "column"
+        };
+        if (type)
+          return;
+        this.showPopup = true;
+        this.showTrans = true;
+      }
+    }
+  };
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0);
+    return $data.showPopup ? (vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        key: 0,
+        class: vue.normalizeClass(["uni-popup", [$data.popupstyle, $options.isDesktop ? "fixforpc-z-index" : ""]])
+      },
+      [
+        vue.createElementVNode(
+          "view",
+          {
+            onTouchstart: _cache[1] || (_cache[1] = (...args) => $options.touchstart && $options.touchstart(...args))
+          },
+          [
+            $data.maskShow ? (vue.openBlock(), vue.createBlock(_component_uni_transition, {
+              key: "1",
+              name: "mask",
+              "mode-class": "fade",
+              styles: $data.maskClass,
+              duration: $data.duration,
+              show: $data.showTrans,
+              onClick: $options.onTap
+            }, null, 8, ["styles", "duration", "show", "onClick"])) : vue.createCommentVNode("v-if", true),
+            vue.createVNode(_component_uni_transition, {
+              key: "2",
+              "mode-class": $data.ani,
+              name: "content",
+              styles: $data.transClass,
+              duration: $data.duration,
+              show: $data.showTrans,
+              onClick: $options.onTap
+            }, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode(
+                  "view",
+                  {
+                    class: vue.normalizeClass(["uni-popup__wrapper", [$data.popupstyle]]),
+                    style: vue.normalizeStyle($options.getStyles),
+                    onClick: _cache[0] || (_cache[0] = (...args) => $options.clear && $options.clear(...args))
+                  },
+                  [
+                    vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+                  ],
+                  6
+                  /* CLASS, STYLE */
+                )
+              ]),
+              _: 3
+              /* FORWARDED */
+            }, 8, ["mode-class", "styles", "duration", "show", "onClick"])
+          ],
+          32
+          /* HYDRATE_EVENTS */
+        )
+      ],
+      2
+      /* CLASS */
+    )) : vue.createCommentVNode("v-if", true);
+  }
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/fuchuang/learn/demo1/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const _sfc_main$4 = {
+    data() {
+      const currentDate = this.getDate({
+        format: true
+      });
+      return {
+        date: currentDate,
+        array: ["男", "女"],
+        index: 0,
+        genderSet: false,
+        height: 0,
+        weight: 0,
+        nickname: ""
+      };
+    },
+    onLoad() {
+      uni.request({
+        url: "http://82.157.124.83:51603/user/api/v1",
+        method: "GET",
+        header: {
+          "token": getApp().globalData.token
+        },
+        success: (res) => {
+          formatAppLog("log", "at pages/personal/profile/profile.vue:92", res.data.data);
+          const response = res.data.data;
+          this.date = response.birthday;
+          this.height = response.height;
+          this.weight = response.weight;
+          this.genderSet = true;
+          if (response.gender == "男") {
+            this.index = 0;
+          } else if (response.gender == "女") {
+            this.index = 1;
+          }
+          this.nickname = response.nickname;
+        }
+      });
+    },
+    computed: {
+      startDate() {
+        return this.getDate("start");
+      },
+      endDate() {
+        return this.getDate("end");
+      }
+    },
+    methods: {
+      bindPickerChange: function(e) {
+        formatAppLog("log", "at pages/personal/profile/profile.vue:118", "picker发送选择改变，携带值为", e.detail.value);
+        this.index = e.detail.value;
+        this.genderSet = true;
+      },
+      bindDateChange: function(e) {
+        this.date = e.detail.value;
+      },
+      getDate(type) {
+        const date = /* @__PURE__ */ new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        if (type === "start") {
+          year = year - 100;
+        }
+        month = month > 9 ? month : "0" + month;
+        day = day > 9 ? day : "0" + day;
+        return `${year}-${month}-${day}`;
+      },
+      nameChange() {
+        this.$refs["popup-name"].open();
+      },
+      heightChange() {
+        this.$refs["popup-height"].open();
+      },
+      weightChange() {
+        this.$refs["popup-weight"].open();
+      },
+      save() {
+        uni.request({
+          url: "http://82.157.124.83:51603/user/api/v1",
+          method: "PUT",
+          data: {
+            "birthday": this.date,
+            "city": "成都",
+            "gender": this.array[this.index],
+            "height": this.height,
+            "nickname": this.nickname,
+            "phone": getApp().globalData.phone,
+            "weight": this.weight
+          },
+          header: {
+            "token": getApp().globalData.token
+          },
+          success() {
+            uni.showToast({
+              title: "保存成功",
+              duration: 2e3
+            });
+          }
+        });
+      }
+    }
   };
   function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_popup_dialog = resolveEasycom(vue.resolveDynamicComponent("uni-popup-dialog"), __easycom_0$1);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "profile" }, [
       vue.createElementVNode("view", { class: "item" }, [
         vue.createElementVNode("view", { class: "item-left" }, "昵称"),
-        vue.createElementVNode("view", { class: "item-right" }, [
-          vue.createElementVNode("text", { class: "text-right" }, "张三"),
+        vue.createElementVNode("view", {
+          class: "item-right",
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.nameChange && $options.nameChange(...args))
+        }, [
+          vue.createElementVNode(
+            "text",
+            { class: "text-right" },
+            vue.toDisplayString($data.nickname == "" ? "未填写" : $data.nickname),
+            1
+            /* TEXT */
+          ),
           vue.createElementVNode("image", {
             class: "icon-right",
             src: "/static/personal/more1.png"
@@ -3830,41 +5727,65 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "line" }),
       vue.createElementVNode("view", { class: "item" }, [
         vue.createElementVNode("view", { class: "item-left" }, "性别"),
-        vue.createElementVNode("view", { class: "item-right" }, [
-          vue.createElementVNode("text", { class: "text-right" }, "女"),
-          vue.createElementVNode("image", {
-            class: "icon-right",
-            src: "/static/personal/more1.png"
-          })
-        ])
+        vue.createElementVNode("picker", {
+          onChange: _cache[1] || (_cache[1] = (...args) => $options.bindPickerChange && $options.bindPickerChange(...args)),
+          value: $data.index,
+          range: $data.array
+        }, [
+          vue.createElementVNode("view", { class: "item-right" }, [
+            vue.createElementVNode(
+              "text",
+              { class: "text-right" },
+              vue.toDisplayString($data.genderSet ? $data.array[$data.index] : "未填写"),
+              1
+              /* TEXT */
+            ),
+            vue.createElementVNode("image", {
+              class: "icon-right",
+              src: "/static/personal/more1.png"
+            })
+          ])
+        ], 40, ["value", "range"])
       ]),
       vue.createElementVNode("view", { class: "line" }),
       vue.createElementVNode("view", { class: "item" }, [
         vue.createElementVNode("view", { class: "item-left" }, "生日"),
-        vue.createElementVNode("view", { class: "item-right" }, [
-          vue.createElementVNode("view", { class: "text-right" }, "1979-07-01"),
-          vue.createElementVNode("image", {
-            class: "icon-right",
-            src: "/static/personal/more1.png"
-          })
-        ])
-      ]),
-      vue.createElementVNode("view", { class: "line" }),
-      vue.createElementVNode("view", { class: "item" }, [
-        vue.createElementVNode("view", { class: "item-left" }, "所在城市"),
-        vue.createElementVNode("view", { class: "item-right" }, [
-          vue.createElementVNode("view", { class: "text-right" }, "未设置"),
-          vue.createElementVNode("image", {
-            class: "icon-right",
-            src: "/static/personal/more1.png"
-          })
-        ])
+        vue.createElementVNode("picker", {
+          mode: "date",
+          value: $data.date,
+          start: $options.startDate,
+          end: $options.endDate,
+          onChange: _cache[2] || (_cache[2] = (...args) => $options.bindDateChange && $options.bindDateChange(...args))
+        }, [
+          vue.createElementVNode("view", { class: "item-right" }, [
+            vue.createElementVNode(
+              "view",
+              { class: "text-right" },
+              vue.toDisplayString($data.date),
+              1
+              /* TEXT */
+            ),
+            vue.createElementVNode("image", {
+              class: "icon-right",
+              src: "/static/personal/more1.png"
+            })
+          ])
+        ], 40, ["value", "start", "end"])
       ]),
       vue.createElementVNode("view", { class: "line" }),
       vue.createElementVNode("view", { class: "item" }, [
         vue.createElementVNode("view", { class: "item-left" }, "身高"),
-        vue.createElementVNode("view", { class: "item-right" }, [
-          vue.createElementVNode("view", { class: "text-right" }, "160cm"),
+        vue.createElementVNode("view", {
+          class: "item-right",
+          onClick: _cache[3] || (_cache[3] = (...args) => $options.heightChange && $options.heightChange(...args))
+        }, [
+          vue.createElementVNode(
+            "view",
+            { class: "text-right" },
+            vue.toDisplayString($data.height == 0 ? "未填写" : $data.height + "cm"),
+            1
+            /* TEXT */
+          ),
           vue.createElementVNode("image", {
             class: "icon-right",
             src: "/static/personal/more1.png"
@@ -3874,15 +5795,94 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "line" }),
       vue.createElementVNode("view", { class: "item" }, [
         vue.createElementVNode("view", { class: "item-left" }, "体重"),
-        vue.createElementVNode("view", { class: "item-right" }, [
-          vue.createElementVNode("view", { class: "text-right" }, "50kg"),
+        vue.createElementVNode("view", {
+          class: "item-right",
+          onClick: _cache[4] || (_cache[4] = (...args) => $options.weightChange && $options.weightChange(...args))
+        }, [
+          vue.createElementVNode(
+            "view",
+            { class: "text-right" },
+            vue.toDisplayString($data.weight == 0 ? "未填写" : $data.weight + "kg"),
+            1
+            /* TEXT */
+          ),
           vue.createElementVNode("image", {
             class: "icon-right",
             src: "/static/personal/more1.png"
           })
         ])
       ]),
-      vue.createElementVNode("view", { class: "line" })
+      vue.createElementVNode("view", { class: "line" }),
+      vue.createVNode(
+        _component_uni_popup,
+        {
+          ref: "popup-name",
+          type: "dialog"
+        },
+        {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_uni_popup_dialog, {
+              mode: "input",
+              title: "输入你的名字",
+              modelValue: $data.nickname,
+              "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => $data.nickname = $event),
+              placeholder: "请在此输入"
+            }, null, 8, ["modelValue"])
+          ]),
+          _: 1
+          /* STABLE */
+        },
+        512
+        /* NEED_PATCH */
+      ),
+      vue.createVNode(
+        _component_uni_popup,
+        {
+          ref: "popup-height",
+          type: "dialog"
+        },
+        {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_uni_popup_dialog, {
+              mode: "input",
+              title: "输入你的体重(公斤)",
+              modelValue: $data.height,
+              "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => $data.height = $event),
+              placeholder: "请在此输入"
+            }, null, 8, ["modelValue"])
+          ]),
+          _: 1
+          /* STABLE */
+        },
+        512
+        /* NEED_PATCH */
+      ),
+      vue.createVNode(
+        _component_uni_popup,
+        {
+          ref: "popup-weight",
+          type: "dialog"
+        },
+        {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_uni_popup_dialog, {
+              mode: "input",
+              title: "输入你的身高(厘米)",
+              modelValue: $data.weight,
+              "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => $data.weight = $event),
+              placeholder: "请在此输入"
+            }, null, 8, ["modelValue"])
+          ]),
+          _: 1
+          /* STABLE */
+        },
+        512
+        /* NEED_PATCH */
+      ),
+      vue.createElementVNode("view", {
+        class: "save-btn",
+        onClick: _cache[8] || (_cache[8] = (...args) => $options.save && $options.save(...args))
+      }, "保存")
     ]);
   }
   const PagesPersonalProfileProfile = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-b9418a0f"], ["__file", "E:/fuchuang/learn/demo1/pages/personal/profile/profile.vue"]]);
@@ -3994,13 +5994,14 @@ if (uni.restoreGlobal) {
           success: (res) => {
             formatAppLog("log", "at pages/test-page/login.vue:83", res.data);
             this.text = "request success";
-            getApp().globalData.token = res.data.token;
+            getApp().globalData.token = res.data.data.token;
+            getApp().globalData.phone = this.phoneNumber;
             uni.navigateTo({
               url: "/pages/index/index"
             });
           },
           fail(e) {
-            formatAppLog("log", "at pages/test-page/login.vue:92", e);
+            formatAppLog("log", "at pages/test-page/login.vue:93", e);
           }
         });
       }
@@ -4105,32 +6106,33 @@ if (uni.restoreGlobal) {
     globalData: {
       BackEndUrl: "http://82.157.124.83:51603",
       llmUrl: "http://127.0.0.1:8000",
-      token: "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAADWL0QrDIAwA_yXPFRprY-nfxCjFMUEWCxuj_770YW93HPeFx6iwA6UZcQmb45CjC5iiY6Tosi8iJFIkJ5ig8oAdI_qZFh9wAj2T3frRUdrdVU2PZ22tvMz5zObcu3F59_9L2_1Wa-v1A4M1H0WCAAAA.s39x3oTuAOX5dl7Zwv6jLGT1nqYWfx9k7g-1RUvjC9XlPxPmB1JyWw0scNsZXoC6digRclB3hAxTMAE86mSFBQ"
+      token: "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAADWLywqDMBAA_2XPBpK6Wa1_s3m0RAyEboSK-O9dD73NMMwJay-wwGjZjxyj4ZmsQU4vE2Iig-R8CmgxxwADFO6wuMk98Okd0QCyB73lkJ7r3UVU31upNX_UeU_q3Jpy_rb_O0_3W7T56wfz5p8PggAAAA.-LbMs0Yjl1qd9N6lJR1JOb2tf1YZ-FT-KrPwwgXeFvMKDLEMsNGHGZxnMnoj_hb3gVm_rp6JwCzHHh_TBNgmoA",
+      phone: ""
     },
     onLaunch: function() {
-      formatAppLog("log", "at App.vue:9", "App Launch");
+      formatAppLog("log", "at App.vue:10", "App Launch");
       let token = getApp().globalData.token;
-      formatAppLog("log", "at App.vue:14", "token is " + token);
+      formatAppLog("log", "at App.vue:15", "token is " + token);
       if (token != "") {
         plus.navigator.closeSplashscreen();
       } else {
-        formatAppLog("log", "at App.vue:21", "Here we go!!!");
+        formatAppLog("log", "at App.vue:22", "Here we go!!!");
         uni.reLaunch({
           url: "/pages/test-page/login",
           success: () => {
             plus.navigator.closeSplashscreen();
           },
           fail(e) {
-            formatAppLog("log", "at App.vue:29", e);
+            formatAppLog("log", "at App.vue:30", e);
           }
         });
       }
     },
     onShow: function() {
-      formatAppLog("log", "at App.vue:36", "App Show");
+      formatAppLog("log", "at App.vue:37", "App Show");
     },
     onHide: function() {
-      formatAppLog("log", "at App.vue:39", "App Hide");
+      formatAppLog("log", "at App.vue:40", "App Hide");
     }
   };
   const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "E:/fuchuang/learn/demo1/App.vue"]]);

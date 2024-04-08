@@ -83,7 +83,8 @@
 						console.log(res.data);
 						this.text = 'request success';
 						
-						getApp().globalData.token = res.data.token;
+						getApp().globalData.token = res.data.data.token;
+						getApp().globalData.phone = this.phoneNumber;
 						uni.navigateTo({
 							url: '/pages/index/index'
 						})

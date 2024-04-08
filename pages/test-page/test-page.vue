@@ -1,73 +1,27 @@
 <template>
-	<view class="root-view">
-		<tab-chat class="showMore-box" 
-			:style="{
-				transform: 'translateY('+moveY+'px)', 
-			}" 
-			@touchstart="start" 
-			@touchend="end" 
-			@touchmove="move">
-		</tab-chat>
-	</view>
+	<button @tap="playMusic">点击播放</button>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				startData: {
-					clientY: '',
-				},
-				moveY: 0,
-				touch: {},
-				state: 0,
-			}
-		},
-		methods: {
-			start(e){ 
-			    this.startData.clientY = e.changedTouches[0].clientY;
-			},
-			end(e){ 
-				//触摸事件结束
-				console.log("this.moveY = ", this.touch.clientY - this.startData.clientY);
-				if(this.touch.clientY - this.startData.clientY > 200) {
-					this.state = 1;
-					this.moveY = 350;
-				} else {
-					this.state = 0;
-					this.moveY = 0;
-				}
-			},
-			move(event) {
-				let touch = event.touches[0];
-				this.touch = touch;
-				let data = 0;
-				if(touch.clientY > this.startData.clientY && this.state === 0) {  //向下移动
-					data = touch.clientY - this.startData.clientY;
-					if(data > 1000) {
-						data = 1000;
-					}
-					this.moveY = data;
-				}
-				if(touch.clientY < this.startData.clientY && this.state === 1) {  //向上移动
-					data = this.startData.clientY - touch.clientY;
-					if(data > 1000) {
-						data = -1000;
-					}
-					this.moveY = 350-data;
-				}
-			},
+var innerAudioContext = uni.createInnerAudioContext();
+innerAudioContext.autoplay = false;			//不让它自动播放
+innerAudioContext.src = '';
+
+export default {
+	data() {
+		return {
+			content: 'hey hey you you'
+		}
+	}, 
+	methods: {
+		playMusic() {
+			const encoded = encodeURI(this.content);
+			console.log(encoded);
+			innerAudioContext.src = 'https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&ctp=1&amp&pdt=301&tex=' + encoded;
+			console.log(innerAudioContext.src);
+			innerAudioContext.play();
+			console.log("play over!!!");
 		}
 	}
-</script>
-
-<style>
-.root-view {
-	height: 100%;
-	background-color: black;
-	.showMore-box{
-		transition: all .5s;
-		background-color: white;
-	}
 }
-</style>
+</script>

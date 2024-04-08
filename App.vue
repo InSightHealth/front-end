@@ -3,7 +3,8 @@
 		globalData: {  
 			BackEndUrl: 'http://82.157.124.83:51603',
 			llmUrl: 'http://127.0.0.1:8000',
-		    token: "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAADWL0QrDIAwA_yXPFRprY-nfxCjFMUEWCxuj_770YW93HPeFx6iwA6UZcQmb45CjC5iiY6Tosi8iJFIkJ5ig8oAdI_qZFh9wAj2T3frRUdrdVU2PZ22tvMz5zObcu3F59_9L2_1Wa-v1A4M1H0WCAAAA.s39x3oTuAOX5dl7Zwv6jLGT1nqYWfx9k7g-1RUvjC9XlPxPmB1JyWw0scNsZXoC6digRclB3hAxTMAE86mSFBQ"
+		    token: "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAADWLywqDMBAA_2XPBpK6Wa1_s3m0RAyEboSK-O9dD73NMMwJay-wwGjZjxyj4ZmsQU4vE2Iig-R8CmgxxwADFO6wuMk98Okd0QCyB73lkJ7r3UVU31upNX_UeU_q3Jpy_rb_O0_3W7T56wfz5p8PggAAAA.-LbMs0Yjl1qd9N6lJR1JOb2tf1YZ-FT-KrPwwgXeFvMKDLEMsNGHGZxnMnoj_hb3gVm_rp6JwCzHHh_TBNgmoA",
+			phone: ""
 		},
 		onLaunch: function() {
 			console.log('App Launch')
@@ -42,15 +43,4 @@
 </script>
 
 <style>
-	/*每个页面公共css */
-	/* #ifdef H5 */
-	*{
-		padding: 0;
-		margin: 0;
-	}
-
-	uni-page-body,html,body{  
-		height: 100%;  
-	}  
-	/* #endif */
 </style>

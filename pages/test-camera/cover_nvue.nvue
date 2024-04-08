@@ -31,17 +31,12 @@
 				>
 					<!-- 
 						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
-						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
-						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
-						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
-						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br> 
 					-->
-					<cover-chat :msgList="msglist"></cover-chat>
-				
+					<cover-chat :msgList="msglist" :style="{height: `${windowHeight * 0.8}px`}"></cover-chat>
 				</scroll-view>
 				
 				<cover-view class="mic-container" :style="{height: `${windowHeight * 0.2}px`}">
-					<micphone ref="micphone" @touchstart="startMic" @touchend="stopMic"></micphone>
+					<micphone ref="micphone" @touchstart="startMic" @touchend="stopMic"></micphone> 
 				</cover-view>
 			</cover-view>
 		</view>
@@ -50,6 +45,9 @@
 
 <script>
 let _this = null;
+const recorderManager = uni.getRecorderManager();
+const innerAudioContext = uni.createInnerAudioContext();
+
 export default {
 	data() {
 		return {
@@ -68,6 +66,27 @@ export default {
 					userContent: "",
 					userId: 0
 				},
+				// {
+				//     botContent: "",
+				//     recordId: 0,
+				//     titleId: 0,
+				//     userContent: "你好呀我想问你一件事，可以吗？",
+				//     userId: 0
+				// },
+				// {
+				//     userContent: "",
+				//     recordId: 0,
+				//     titleId: 0,
+				//     botContent: "当然可以!",
+				//     userId: 0
+				// },
+				// {
+				//     botContent: "",
+				//     recordId: 0,
+				//     titleId: 0,
+				//     userContent: "我的问题是：blablabla...",
+				//     userId: 0
+				// },
 			],
 			randstr: 'ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl'
 		};
@@ -163,9 +182,7 @@ export default {
 			this.livePusher.snapshot({
 				success: e => {
 					_this.snapshotsrc = e.message.tempImagePath;
-					_this.stopPreview();
-					_this.setImage();
-					uni.navigateBack();
+					this.snapshotsrc = e.message.tempImagePath;
 				}
 			});
 		},
@@ -178,17 +195,98 @@ export default {
 		},
 		
 		startMic() {
-			this.$refs.micphone.startRecord();
+			console.log('开始录音');
+			recorderManager.start();
 		},
 		
 		stopMic() {
-			this.$refs.micphone.endRecord();
+			console.log('录音结束');
+			recorderManager.stop();
+			recorderManager.onStop(function (res) {
+				uni.uploadFile({
+					url: "http://127.0.0.1:8000/speechtotext"
+					,name: "mp3"
+					,filePath: res.tempFilePath
+					,formData: { }
+					,success: (res) => { 
+						console.log("上传成功："+JSON.stringify(res));
+						const response = JSON.parse(res.data);
+						if (res.statusCode == 200) {
+							_this.msglist.push({
+								botContent: "",
+								recordId: 0,
+								titleId: 0,
+								userContent: response.text,
+								userId: 0
+							});
+							
+							_this.handleRecord(response.text);
+						}
+					}
+					,fail: (err)=>{ console.error("上传录音失败："+err.errMsg); }
+				});
+			});
+		},
+		
+		handleRecord(text) {
+			this.livePusher.snapshot({
+				success: e => {
+					_this.snapshotsrc = e.message.tempImagePath;
+					const token = getApp().globalData.token;
+					console.log("_this.snapshotsrc = " + _this.snapshotsrc);
+					console.log("token = " + token);
+					uni.uploadFile({
+						url: 'http://82.157.124.83:51603/storage/api/v1/uploadImg/move',
+						filePath: _this.snapshotsrc,
+						name: 'multipartFile',
+						formData: { },
+						header: {
+							'token': token
+						},
+						success: (uploadFileRes) => {
+							console.log(uploadFileRes.data);
+							const response = JSON.parse(uploadFileRes.data);
+							if (response.code == 200) {
+								console.log(response.data);
+								_this.sendChat(text, response.data.image)
+							}
+						}, fail: (err) => {
+							console.log(err.errMsg);
+						}
+					})
+				}
+			});
+		},
+		
+		sendChat(text, imgUrl) {
+			console.log('text = ' + text + '   imgUrl = ' + imgUrl);
+			uni.request({
+				url: 'http://127.0.0.1:8000/chatbot',
+				method: 'POST',
+				data: {
+					'prompt': text,
+					'image': imgUrl,
+				},
+				success: (res) => {
+					console.log(res);
+					
+					if (true) { // res.statusCode == 200
+						_this.msglist.push({
+							botContent: res.data,
+							recordId: 0,
+							titleId: 0,
+							userContent: "",
+							userId: 0
+						});
+					}
+				}
+			});
 		}
 	}
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 $chatContentbgc: #C2DCFF;
 

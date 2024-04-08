@@ -3,7 +3,7 @@
 		<image class="back-icon" src="/static/recog/back-icon.png" @tap="back"></image>
 		<view class="recog-view">
 			<image :class="[thumbnail ? 'preview-img-thumb':'preview-img']" 
-				src="https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/image.png"></image>
+				:src="photoPath" ref="image"></image>
 			<view class="menu">
 				<navigator class="row" url="/pages/photo-recog/photo_nvue">
 					<image src="/static/recog/back.png" class="row-side"></image>
@@ -46,30 +46,11 @@ export default {
 			state: 0
 		};
 	},
-	onLoad: function (option) { 
+	onLoad(option) { 
 		const eventChannel = this.getOpenerEventChannel();
-		eventChannel.on('recieveFile', function(data) {
-		    console.log('recievedData = ' + data.filepath);
-			this.photoPath = 'https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/snapshot_1711522255791.jpg';
-			/*
-			uni.uploadFile({
-			    url: 'http://82.157.124.83:51603/api/v1/uploadImg', // 后端api接口
-			    filePath: data.filepath,
-			    name: 'file',
-			    formData: {},
-			    header:{ "Content-Type": "multipart/form-data" },
-			    success:(res) => {
-			        if (res.data.code == 200){
-			            console.log('文件上传成功')
-						console.log(JSON.stringify(res));
-			        }
-			    },
-				fail: (err) => {
-				    console.log('发生错误, 查看数据', data);
-				    console.log('发生错误, 查看数据', path);
-				}
-			});
-			*/
+		eventChannel.on('recieveFile', (data) => {
+			this.photoPath = data.filepath;
+			this.$refs.image.src = data.filepath;
 		})
 	},
 	methods: {
@@ -131,7 +112,7 @@ export default {
 		position: fixed;
 		top: 100rpx;
 		left: 70rpx;
-		z-index: 99;
+		z-index: 98;
 		height: 77rpx;
 		width: 77rpx;
 	}

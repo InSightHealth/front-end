@@ -1,19 +1,277 @@
 <template>
-	<view style="background-color: #F1F1F1;">
-		<bot-chat style="margin-top: 40rpx;"></bot-chat>
+	<view class="pengke-camera" :style="{ width: windowWidth, height: windowHeight }">
+		<live-pusher
+			id="livePusher"
+			ref="livePusher"
+			class="livePusher"
+			mode="FHD"
+			beauty="0"
+			whiteness="0"
+			:aspect="aspect"
+			min-bitrate="1000"
+			audio-quality="16KHz"
+			device-position="back"
+			:auto-focus="true"
+			:muted="true"
+			:enable-camera="true"
+			:enable-mic="false"
+			:zoom="false"
+			@statechange="statechange"
+			:style="{ width: windowWidth, height: windowHeight }"
+		></live-pusher>
+		
+		<view class="chat" :style="{ width: windowWidth, height: windowHeight }">
+			<cover-view class="coverchat" :style="{ width: windowWidth, height: windowHeight }">
+				<scroll-view  :style="{height: `${windowHeight * 0.8}px`}"
+				ref="scrollview"
+				id="scrollview"
+				scroll-y="true" 
+				:scroll-top="scrollTop"
+				class="scroll-view"
+				enable-flex="true"
+				>
+					<!-- 
+						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
+						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
+						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
+						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
+						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br> 
+					-->
+					<cover-chat :msgList="msglist"></cover-chat>
+				
+				</scroll-view>
+				
+				<cover-view class="mic-container" :style="{height: `${windowHeight * 0.2}px`}">
+					<micphone ref="micphone" @touchstart="startMic" @touchend="stopMic"></micphone>
+				</cover-view>
+			</cover-view>
+		</view>
 	</view>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				
-			};
+let _this = null;
+const recorderManager = uni.getRecorderManager();
+const innerAudioContext = uni.createInnerAudioContext();
+
+export default {
+	data() {
+		return {
+			poenCarmeInterval:null,//打开相机的轮询
+			aspect: '2:3', //比例
+			windowWidth: '', //屏幕可用宽度
+			windowHeight: '', //屏幕可用高度
+			camerastate: false, //相机准备好了
+			livePusher: null, //流视频对象
+			snapshotsrc: null, //快照
+			msglist: [
+				{
+					botContent: "hello，请问我有什么可以帮助你的吗？",
+					recordId: 0,
+					titleId: 0,
+					userContent: "",
+					userId: 0
+				},
+			],
+			randstr: 'ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl'
+		};
+	},
+	onLoad(e) {
+		_this = this;
+		this.initCamera();
+	},
+	onUnload(){
+		uni.offKeyboardHeightChange()
+	},
+	onReady() {
+		this.livePusher = uni.createLivePusherContext('livePusher', this);
+		this.startPreview(); //开启预览并设置摄像头
+		this.poenCarme();
+	},
+	methods: {
+		
+		//轮询打开
+		poenCarme(){
+			//#ifdef APP-PLUS
+			if (plus.os.name == 'Android') {
+				this.poenCarmeInterval = setInterval(function() {
+					console.log(_this.camerastate);
+					if (!_this.camerastate) _this.startPreview();
+				}, 2500);
+			}
+			//#endif
+		},
+		//初始化相机
+		initCamera() {
+			uni.getSystemInfo({
+				success: function(res) {
+					_this.windowWidth = res.windowWidth;
+					_this.windowHeight = res.windowHeight;
+					let zcs = _this.aliquot(_this.windowWidth,_this.windowHeight);
+					_this.aspect = (_this.windowWidth/zcs)+':'+(_this.windowHeight/zcs);
+					// console.log('画面比例：'+_this.aspect);
+				}
+			});
+		},
+		
+		//整除数计算
+		aliquot(x, y) {
+			if (x % y == 0) return y;
+			return this.aliquot(y, x % y);
+		},
+
+		//开始预览
+		startPreview() {
+			this.livePusher.startPreview({
+				success: a => {
+					console.log(a)
+				}
+			});
+		},
+		
+		//停止预览
+		stopPreview() {
+			this.livePusher.stopPreview({
+				success: a => {
+					_this.camerastate = false;
+				}
+			});
+		},
+		
+		//状态
+		statechange(e) {
+			//状态改变
+			console.log(e);
+			if (e.detail.code == 1007) {
+				_this.camerastate = true;
+			} else if (e.detail.code == -1301) {
+				_this.camerastate = false;
+			}
+		},
+		
+
+		//返回
+		back() {
+			uni.navigateBack();
+		},
+
+		//抓拍
+		snapshot() {
+			//震动
+			uni.vibrateShort({
+			    success: function () {
+			        console.log('success');
+			    }
+			});
+			//拍照
+			this.livePusher.snapshot({
+				success: e => {
+					_this.snapshotsrc = e.message.tempImagePath;
+					this.snapshotsrc = e.message.tempImagePath;
+				}
+			});
+		},
+
+		//设置
+		setImage() {
+			let pages = getCurrentPages();
+			let prevPage = pages[pages.length - 2];
+			prevPage.$vm.setImage({ path: _this.snapshotsrc});
+		},
+		
+		startMic() {
+			console.log('开始录音');
+			recorderManager.start();
+		},
+		
+		stopMic() {
+			console.log('录音结束');
+			recorderManager.stop();
+			recorderManager.onStop(function (res) {
+				uni.uploadFile({
+					url: "http://127.0.0.1:8000/speechtotext"
+					,name: "mp3"
+					,filePath: res.tempFilePath
+					,formData: { }
+					,success: (res) => { 
+						console.log("上传成功："+JSON.stringify(res));
+						handleRecord();
+					}
+					,fail: (err)=>{ console.error("上传录音失败："+err.errMsg); }
+				});
+			});
+		},
+		
+		handleRecord() {
+			this.livePusher.snapshot({
+				success: e => {
+					_this.snapshotsrc = e.message.tempImagePath;
+					const token = getApp().globalData.token;
+					console.log("_this.snapshotsrc = " + _this.snapshotsrc);
+					console.log("token = " + token);
+					uni.uploadFile({
+						url: 'http://82.157.124.83:51603/storage/api/v1/uploadImg/move',
+						filePath: _this.snapshotsrc,
+						name: 'multipartFile',
+						formData: { },
+						header: {
+							'token': token
+						},
+						success: (uploadFileRes) => {
+							console.log(uploadFileRes.data);
+							
+							if (uploadFileRes.data.code == 200) {
+								console.log(uploadFileRes.data.data);
+							}
+						}, fail: (err) => {
+							console.log(err.errMsg);
+						}
+					})
+				}
+			});
 		}
 	}
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
+$chatContentbgc: #C2DCFF;
+
+view {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.pengke-camera {
+	justify-content: center;
+	align-items: center;
+	.chat {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		z-index: 98;
+		align-items: center;
+		justify-content: center;
+		.coverchat{
+			z-index: 99;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: space-between;
+			.scroll-view {
+				height: 100%;
+				width: 750rpx;
+			}
+			
+			.mic-container {
+				height: 160rpx;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+	}
+}
 </style>

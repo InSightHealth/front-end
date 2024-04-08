@@ -86,7 +86,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
 
   // E:/fuchuang/learn/demo1/unpackage/dist/dev/.nvue/pages/test-camera/cover_nvue.js
   var import_vue2 = __toESM(require_vue());
-  var _style_0$2 = { "chat-body": { "": { "display": "flex", "flexDirection": "column", "width": "750rpx", "height": "750rpx", "boxSizing": "content-box" } }, "self": { ".chat-body ": { "justifyContent": "flex-end" } }, "item": { ".chat-body ": { "width": "750rpx", "display": "flex", "paddingTop": "45rpx", "paddingRight": "30rpx", "paddingBottom": "45rpx", "paddingLeft": "30rpx" } }, "right": { ".chat-body .item ": { "backgroundColor": "#ACEC9C", "alignSelf": "flex-end" } }, "left": { ".chat-body .item ": { "backgroundColor": "#FFFFFF" } }, "poly-right": { ".chat-body .item ": { "position": "relative", "top": "-100rpx", "left": "-10rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-end" } }, "poly-left": { ".chat-body .item ": { "position": "relative", "top": "50rpx", "left": "10rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-start" } }, "content": { ".chat-body .item ": { "position": "relative", "wordWrap": "break-word", "paddingTop": "24rpx", "paddingRight": "24rpx", "paddingBottom": "24rpx", "paddingLeft": "24rpx", "marginTop": 0, "marginRight": "24rpx", "marginBottom": 0, "marginLeft": "24rpx", "borderRadius": "30rpx", "fontSize": "32rpx", "fontFamily": "PingFang SC", "fontWeight": "500", "color": "#333333", "lineHeight": "42rpx", "maxWidth": "380rpx" } }, "avatar": { ".chat-body .item ": { "display": "flex", "alignItems": "center", "justifyContent": "center", "width": "115rpx", "height": "115rpx", "overflow": "hidden" } } };
+  var _style_0$2 = { "chat-body": { "": { "display": "flex", "flexDirection": "column", "width": "750rpx", "height": "750rpx", "boxSizing": "content-box" } }, "self": { ".chat-body ": { "justifyContent": "flex-end" } }, "item": { ".chat-body ": { "width": "750rpx", "display": "flex", "paddingTop": "45rpx", "paddingRight": "30rpx", "paddingBottom": "45rpx", "paddingLeft": "30rpx" } }, "right": { ".chat-body .item ": { "backgroundColor": "#ACEC9C", "alignSelf": "flex-end" } }, "left": { ".chat-body .item ": { "backgroundColor": "#FFFFFF" } }, "poly-right": { ".chat-body .item ": { "position": "relative", "top": "-50rpx", "left": "-5rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-end" } }, "poly-left": { ".chat-body .item ": { "position": "relative", "top": "50rpx", "left": "5rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-start" } }, "content": { ".chat-body .item ": { "position": "relative", "wordWrap": "break-word", "paddingTop": "24rpx", "paddingRight": "24rpx", "paddingBottom": "24rpx", "paddingLeft": "24rpx", "marginTop": 0, "marginRight": "24rpx", "marginBottom": 0, "marginLeft": "24rpx", "borderRadius": "30rpx", "fontSize": "32rpx", "fontFamily": "PingFang SC", "fontWeight": "500", "color": "#333333", "lineHeight": "42rpx", "maxWidth": "380rpx" } }, "avatar": { ".chat-body .item ": { "display": "flex", "alignItems": "center", "justifyContent": "center", "width": "115rpx", "height": "115rpx", "overflow": "hidden" } } };
   var _sfc_main$2 = {
     name: "bot-chat",
     props: {
@@ -122,7 +122,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           //     userId: 0
           // },
         ]
-        //default 默认值，父组件不传值就显示默认
       }
     },
     data() {
@@ -200,7 +199,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           128
           /* KEYED_FRAGMENT */
         )),
-        (0, import_vue2.createCommentVNode)(" 			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br> ")
+        (0, import_vue2.createCommentVNode)(" 			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>")
       ],
       4
       /* STYLE */
@@ -208,7 +207,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
   }
   var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["styles", [_style_0$2]], ["__file", "E:/fuchuang/learn/demo1/components/cover-chat/cover-chat.vue"]]);
   var _style_0$1 = { "mic": { "": { "width": "130rpx", "height": "130rpx" } } };
-  var recorderManager = uni.getRecorderManager();
+  var recorderManager$1 = uni.getRecorderManager();
   var innerAudioContext = uni.createInnerAudioContext();
   innerAudioContext.autoplay = true;
   var _sfc_main$1 = {
@@ -221,26 +220,17 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     methods: {
       startRecord() {
         formatAppLog("log", "at components/micphone/micphone.vue:20", "\u5F00\u59CB\u5F55\u97F3");
-        recorderManager.start();
+        recorderManager$1.start();
       },
       endRecord() {
-        formatAppLog("log", "at components/micphone/micphone.vue:24", "\u5F55\u97F3\u7ED3\u675F");
-        recorderManager.stop();
-        recorderManager.onStop(function(res) {
-          formatAppLog("log", "at components/micphone/micphone.vue:27", JSON.stringify(res));
-          uni.uploadFile({
-            url: "http://127.0.0.1:8000/speechtotext",
-            filePath: res.tempFilePath,
-            name: "mp3",
-            formData: {},
-            success: (res2) => {
-              formatAppLog("log", "at components/micphone/micphone.vue:34", "\u4E0A\u4F20\u6210\u529F\uFF1A" + JSON.stringify(res2));
-            },
-            fail: (err) => {
-              formatAppLog("error", "at components/micphone/micphone.vue:36", "\u4E0A\u4F20\u5F55\u97F3\u5931\u8D25\uFF1A" + err);
-            }
-          });
+        let tmpfPath = "";
+        formatAppLog("log", "at components/micphone/micphone.vue:25", "\u5F55\u97F3\u7ED3\u675F");
+        recorderManager$1.stop();
+        recorderManager$1.onStop(function(res) {
+          this.voicePath = res.tempFilePath;
         });
+        formatAppLog("log", "at components/micphone/micphone.vue:41", "tmpfPath = " + this.voicePath);
+        return tmpfPath;
       }
     }
   };
@@ -253,6 +243,8 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
   var __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "E:/fuchuang/learn/demo1/components/micphone/micphone.vue"]]);
   var _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "chat": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "zIndex": 98, "alignItems": "center", "justifyContent": "center" } }, "coverchat": { ".pengke-camera .chat ": { "zIndex": 99, "display": "flex", "flexDirection": "column", "alignItems": "center", "justifyContent": "space-between" } }, "scroll-view": { ".pengke-camera .chat .coverchat ": { "height": 100, "width": "750rpx" } }, "mic-container": { ".pengke-camera .chat .coverchat ": { "height": "160rpx", "display": "flex", "alignItems": "center", "justifyContent": "center" } } };
   var _this = null;
+  var recorderManager = uni.getRecorderManager();
+  uni.createInnerAudioContext();
   var _sfc_main = {
     data() {
       return {
@@ -278,6 +270,27 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
             userContent: "",
             userId: 0
           }
+          // {
+          //     botContent: "",
+          //     recordId: 0,
+          //     titleId: 0,
+          //     userContent: "你好呀我想问你一件事，可以吗？",
+          //     userId: 0
+          // },
+          // {
+          //     userContent: "",
+          //     recordId: 0,
+          //     titleId: 0,
+          //     botContent: "当然可以!",
+          //     userId: 0
+          // },
+          // {
+          //     botContent: "",
+          //     recordId: 0,
+          //     titleId: 0,
+          //     userContent: "我的问题是：blablabla...",
+          //     userId: 0
+          // },
         ],
         randstr: "ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl"
       };
@@ -299,7 +312,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       poenCarme() {
         if (plus.os.name == "Android") {
           this.poenCarmeInterval = setInterval(function() {
-            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:94", _this.camerastate);
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:113", _this.camerastate);
             if (!_this.camerastate)
               _this.startPreview();
           }, 2500);
@@ -326,7 +339,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       startPreview() {
         this.livePusher.startPreview({
           success: (a) => {
-            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:123", a);
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:142", a);
           }
         });
       },
@@ -340,7 +353,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       },
       //状态
       statechange(e) {
-        formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:140", e);
+        formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:159", e);
         if (e.detail.code == 1007) {
           _this.camerastate = true;
         } else if (e.detail.code == -1301) {
@@ -355,15 +368,13 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       snapshot() {
         uni.vibrateShort({
           success: function() {
-            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:159", "success");
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:178", "success");
           }
         });
         this.livePusher.snapshot({
           success: (e) => {
             _this.snapshotsrc = e.message.tempImagePath;
-            _this.stopPreview();
-            _this.setImage();
-            uni.navigateBack();
+            this.snapshotsrc = e.message.tempImagePath;
           }
         });
       },
@@ -374,10 +385,90 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
         prevPage.$vm.setImage({ path: _this.snapshotsrc });
       },
       startMic() {
-        this.$refs.micphone.startRecord();
+        formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:198", "\u5F00\u59CB\u5F55\u97F3");
+        recorderManager.start();
       },
       stopMic() {
-        this.$refs.micphone.endRecord();
+        formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:203", "\u5F55\u97F3\u7ED3\u675F");
+        recorderManager.stop();
+        recorderManager.onStop(function(res) {
+          uni.uploadFile({
+            url: "http://127.0.0.1:8000/speechtotext",
+            name: "mp3",
+            filePath: res.tempFilePath,
+            formData: {},
+            success: (res2) => {
+              formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:212", "\u4E0A\u4F20\u6210\u529F\uFF1A" + JSON.stringify(res2));
+              const response = JSON.parse(res2.data);
+              if (res2.statusCode == 200) {
+                _this.msglist.push({
+                  botContent: "",
+                  recordId: 0,
+                  titleId: 0,
+                  userContent: response.text,
+                  userId: 0
+                });
+                _this.handleRecord(response.text);
+              }
+            },
+            fail: (err) => {
+              formatAppLog("error", "at pages/test-camera/cover_nvue.nvue:226", "\u4E0A\u4F20\u5F55\u97F3\u5931\u8D25\uFF1A" + err.errMsg);
+            }
+          });
+        });
+      },
+      handleRecord(text) {
+        this.livePusher.snapshot({
+          success: (e) => {
+            _this.snapshotsrc = e.message.tempImagePath;
+            const token = getApp().globalData.token;
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:236", "_this.snapshotsrc = " + _this.snapshotsrc);
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:237", "token = " + token);
+            uni.uploadFile({
+              url: "http://82.157.124.83:51603/storage/api/v1/uploadImg/move",
+              filePath: _this.snapshotsrc,
+              name: "multipartFile",
+              formData: {},
+              header: {
+                "token": token
+              },
+              success: (uploadFileRes) => {
+                formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:247", uploadFileRes.data);
+                const response = JSON.parse(uploadFileRes.data);
+                if (response.code == 200) {
+                  formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:250", response.data);
+                  _this.sendChat(text, response.data.image);
+                }
+              },
+              fail: (err) => {
+                formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:254", err.errMsg);
+              }
+            });
+          }
+        });
+      },
+      sendChat(text, imgUrl) {
+        formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:262", "text = " + text + "   imgUrl = " + imgUrl);
+        uni.request({
+          url: "http://127.0.0.1:8000/chatbot",
+          method: "POST",
+          data: {
+            "prompt": text,
+            "image": imgUrl
+          },
+          success: (res) => {
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:271", res);
+            {
+              _this.msglist.push({
+                botContent: res.data,
+                recordId: 0,
+                titleId: 0,
+                userContent: "",
+                userId: 0
+              });
+            }
+          }
+        });
       }
     }
   };
@@ -439,8 +530,11 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                     class: "scroll-view",
                     enableFlex: "true"
                   }, [
-                    (0, import_vue2.createCommentVNode)(" \r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br> \r\n					"),
-                    (0, import_vue2.createVNode)(_component_cover_chat, { msgList: $data.msglist }, null, 8, ["msgList"])
+                    (0, import_vue2.createCommentVNode)(" \r\n						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>\r\n					"),
+                    (0, import_vue2.createVNode)(_component_cover_chat, {
+                      msgList: $data.msglist,
+                      style: (0, import_vue2.normalizeStyle)({ height: `${$data.windowHeight * 0.8}px` })
+                    }, null, 8, ["msgList", "style"])
                   ], 12, ["scrollTop"]),
                   (0, import_vue2.createElementVNode)(
                     "cover-view",

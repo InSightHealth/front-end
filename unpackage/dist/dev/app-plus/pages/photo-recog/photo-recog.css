@@ -25,7 +25,7 @@
 /* 文章场景相关 */
 .chat-view[data-v-6c9e0889] {
   position: fixed;
-  z-index: 100;
+  z-index: 99;
   bottom: 0;
   height: 68%;
   width: 23.4375rem;
@@ -42,6 +42,8 @@
   width: 18.75rem;
   background-color: #dbf4e4;
   border-radius: 1.1875rem;
+  box-sizing: border-box;
+  padding: 1.25rem;
 }
 .chat-view .tap-mic[data-v-6c9e0889] {
   margin-top: 1.1875rem;
@@ -52,6 +54,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 100;
+  color: white;
+  font-size: 1.125rem;
 }
 .chat-view .tap-mic uni-image[data-v-6c9e0889] {
   height: 2.3125rem;
@@ -69,6 +74,9 @@
   height: 8.875rem;
   background-color: #dbf4e4;
   border-radius: 1.1875rem;
+  box-sizing: border-box;
+  padding: 1.25rem;
+  font-size: 1.125rem;
 }
 .chat-view .menu[data-v-6c9e0889] {
   margin-top: 1.40625rem;
@@ -126,7 +134,7 @@
   position: fixed;
   top: 3.125rem;
   left: 2.1875rem;
-  z-index: 99;
+  z-index: 98;
   height: 2.40625rem;
   width: 2.40625rem;
 }

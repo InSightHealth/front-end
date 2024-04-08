@@ -23,56 +23,53 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-uni-view[data-v-fb69b191] {
+uni-view[data-v-cd945a9e] {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.chat-body[data-v-fb69b191] {
+.chat-body[data-v-cd945a9e] {
   display: flex;
   flex-direction: column;
   background-color: inherit;
-  width: 100%;
-  height: 100%;
+  width: 23.4375rem;
+  height: 23.4375rem;
   box-sizing: content-box;
 }
-.chat-body .self[data-v-fb69b191] {
+.chat-body .self[data-v-cd945a9e] {
   justify-content: flex-end;
 }
-.chat-body .item[data-v-fb69b191] {
-  display: flex;
+.chat-body .item[data-v-cd945a9e] {
   width: 23.4375rem;
+  display: flex;
   padding: 1.40625rem 0.9375rem;
 }
-.chat-body .item .right[data-v-fb69b191] {
+.chat-body .item .right[data-v-cd945a9e] {
   background-color: #ACEC9C;
+  align-self: flex-end;
 }
-.chat-body .item .left[data-v-fb69b191] {
+.chat-body .item .left[data-v-cd945a9e] {
   background-color: #FFFFFF;
 }
-.chat-body .item .right[data-v-fb69b191]::after {
-  position: absolute;
+.chat-body .item .poly-right[data-v-cd945a9e] {
+  position: relative;
+  top: -1.5625rem;
+  left: -0.15625rem;
+  height: 0.9375rem;
+  width: 0.9375rem;
+  align-self: flex-end;
   display: inline-block;
-  content: "";
-  width: 0;
-  height: 0;
-  left: 100%;
-  top: 10px;
-  border: 0.375rem solid transparent;
-  border-left: 0.375rem solid #ACEC9C;
 }
-.chat-body .item .left[data-v-fb69b191]::after {
-  position: absolute;
+.chat-body .item .poly-left[data-v-cd945a9e] {
+  position: relative;
+  top: 1.5625rem;
+  left: 0.15625rem;
+  height: 0.9375rem;
+  width: 0.9375rem;
+  align-self: flex-start;
   display: inline-block;
-  content: "";
-  width: 0;
-  height: 0;
-  top: 10px;
-  right: 100%;
-  border: 0.375rem solid transparent;
-  border-right: 0.375rem solid #FFFFFF;
 }
-.chat-body .item .content[data-v-fb69b191] {
+.chat-body .item .content[data-v-cd945a9e] {
   position: relative;
   word-wrap: break-word;
   padding: 0.75rem 0.75rem;
@@ -84,10 +81,9 @@ uni-view[data-v-fb69b191] {
   color: #333333;
   line-height: 1.3125rem;
   max-width: 11.875rem;
-  display: flex;
-  align-self: center;
+  display: inline-block;
 }
-.chat-body .item .avatar[data-v-fb69b191] {
+.chat-body .item .avatar[data-v-cd945a9e] {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,8 +91,73 @@ uni-view[data-v-fb69b191] {
   height: 3.59375rem;
   overflow: hidden;
 }
-.chat-body .item .avatar uni-image[data-v-fb69b191] {
+.chat-body .item .avatar uni-image[data-v-cd945a9e] {
   width: 3.59375rem;
   height: 3.59375rem;
   align-self: center;
+}
+
+.mic[data-v-609587ba] {
+		width: 4.0625rem; /* 定义按钮的宽度 */
+		height: 4.0625rem; /* 定义按钮的高度 */
+}
+
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+uni-view[data-v-94ba6231] {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.pengke-camera[data-v-94ba6231] {
+  justify-content: center;
+  align-items: center;
+}
+.pengke-camera .chat[data-v-94ba6231] {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 98;
+  align-items: center;
+  justify-content: center;
+}
+.pengke-camera .chat .coverchat[data-v-94ba6231] {
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.pengke-camera .chat .coverchat .scroll-view[data-v-94ba6231] {
+  height: 100%;
+  width: 23.4375rem;
+}
+.pengke-camera .chat .coverchat .mic-container[data-v-94ba6231] {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

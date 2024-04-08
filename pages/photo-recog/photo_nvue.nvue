@@ -137,16 +137,31 @@ export default {
 			this.livePusher.snapshot({
 				success: e => {
 					_this.snapshotsrc = e.message.tempImagePath;
-					uni.navigateTo({
-						url: '/pages/photo-recog/photo-recog',
-						success: function(res) {
-						    res.eventChannel.emit('recieveFile', { filepath: e.message.tempImagePath })
-						},
-						fail: (e) => { console.log(e); } 
-					});
-					// _this.stopPreview();
-					// _this.setImage();
-					// uni.navigateBack();
+					const token = getApp().globalData.token;
+					uni.uploadFile({
+						url: 'http://82.157.124.83:51603/storage/api/v1/uploadImg/photo'
+						,name: "multipartFile"
+						,filePath: _this.snapshotsrc
+						,formData: { }
+						,header: {
+							'token': token
+						}
+						,success: (res) => { 
+							console.log("上传成功："+JSON.stringify(res));
+							const response = JSON.parse(res.data);
+							console.log(response.data.image);
+							if (res.statusCode == 200) {
+								uni.navigateTo({
+									url: '/pages/photo-recog/photo-recog',
+									success: function(res) {
+									    res.eventChannel.emit('recieveFile', { filepath: response.data.image })
+									},
+									fail: (e) => { console.log(e); } 
+								});
+							}
+						}
+						,fail: (err)=>{ console.error("上传录音失败："+err.errMsg); }
+					})
 				}
 			});
 		},
