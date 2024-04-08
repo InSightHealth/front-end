@@ -22,6 +22,14 @@
 				</navigator>
 			</div>
 		</div>
+		<uni-popup ref="popup" type="bottom" class="popup">
+			<view class="popup"> 
+				<text class="holderText"> {{ holderText }} </text>
+				<text class="responseText"> {{recog}} </text>
+				<image src="/static/homepage/sound.gif"></image>
+			 </view>
+			<!-- <uni-popup-message :type="msgType" :message="message" :duration="700" /> -->
+		</uni-popup>
 		<home-foot></home-foot>
 	</view>
 </template>
@@ -170,4 +178,16 @@
 			}
 		}
 	} 
+	
+	.popup {
+		z-index: 100;
+		position: fixed;
+		width: 570rpx; 
+		left: 90rpx;
+		bottom: 363rpx;
+		height: 358rpx; 
+		background-color: white; 
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
+		border-radius: 38rpx;
+	}
 </style>

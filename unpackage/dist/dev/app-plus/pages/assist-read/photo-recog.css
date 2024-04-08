@@ -23,6 +23,104 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.tab-view[data-v-ba5ee5c4] {
+  position: fixed;
+  z-index: 99;
+  bottom: 0;
+  height: 68%;
+  width: 23.4375rem;
+  background-color: white;
+  border-radius: 2.1875rem 2.1875rem 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.tab-view .show-box[data-v-ba5ee5c4] {
+  width: 19.625rem;
+  height: 20rem;
+  background-color: #dbf4e4;
+  border-radius: 1.1875rem;
+}
+.tab-view .menu[data-v-ba5ee5c4] {
+  width: 23.4375rem;
+  margin-top: 1.5625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.tab-view .menu .first-row[data-v-ba5ee5c4] {
+  display: flex;
+  align-items: center;
+  width: 23.4375rem;
+  height: 4.3125rem;
+}
+.tab-view .menu .first-row .start-play[data-v-ba5ee5c4] {
+  margin-left: 9.375rem;
+  width: 4.3125rem;
+  height: 4.3125rem;
+}
+.tab-view .menu .first-row .mult-play[data-v-ba5ee5c4] {
+  width: 4.3125rem;
+  height: 2.03125rem;
+  background-color: white;
+  border-radius: 0.59375rem;
+  border: 0.0625rem solid #94c86c;
+  margin-left: 1.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tab-view .menu .second-row[data-v-ba5ee5c4] {
+  margin-top: 1.40625rem;
+  width: 18.75rem;
+  height: 2.40625rem;
+  margin-right: 3.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tab-view .menu .second-row uni-image[data-v-ba5ee5c4] {
+  width: 2.8125rem;
+  height: 2.8125rem;
+}
+.tab-view .menu .second-row .once-again[data-v-ba5ee5c4] {
+  height: 2.8125rem;
+  width: 15.3125rem;
+  background-color: #08df86;
+  border-radius: 0.59375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.9375rem;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
 .root-view[data-v-fb8e82d4] {
   background-color: grey;
   height: 100%;
@@ -31,7 +129,7 @@
   position: fixed;
   top: 3.125rem;
   left: 2.1875rem;
-  z-index: 99;
+  z-index: 98;
   height: 2.40625rem;
   width: 2.40625rem;
 }
@@ -45,6 +143,13 @@
   left: 2.03125rem;
   height: 37.5rem;
   width: 19.34375rem;
+}
+.root-view .recog-view .preview-img-thumb[data-v-fb8e82d4] {
+  position: absolute;
+  top: -10.8125rem;
+  left: 0;
+  height: 45.4375rem;
+  width: 23.4375rem;
 }
 .root-view .recog-view .menu[data-v-fb8e82d4] {
   position: absolute;
@@ -77,4 +182,8 @@
 .root-view .recog-view .menu .row .row-text[data-v-fb8e82d4] {
   font-size: 0.9375rem;
   color: white;
+}
+.root-view .thumb-view[data-v-fb8e82d4] {
+  transition: all 0.5s;
+  background-color: white;
 }

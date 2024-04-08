@@ -1,8 +1,9 @@
 <template>
 	<view class="root-view">
+		<image class="back-icon" src="/static/recog/back-icon.png" @tap="back"></image>
 		<view class="recog-view">
-			<image class="preview-img"
-				src="https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/image.png"></image>
+			<image :class="[thumbnail ? 'preview-img-thumb':'preview-img']" 
+				:src="photoPath" ref="image"></image>
 			<view class="menu">
 				<navigator class="row" url="/pages/photo-recog/photo_nvue">
 					<image src="/static/recog/back.png" class="row-side"></image>
@@ -19,6 +20,16 @@
 				</view>
 			</view>
 		</view>
+		<tab-recog v-if="thumbnail"
+			class="showMore-box"
+			:style="{
+				transform: 'translateY('+moveY+'px)', 
+			}" 
+			@touchstart="start" 
+			@touchend="end" 
+			@touchmove="move"
+			:photoUrl="photoPath">
+		</tab-recog>
 	</view>
 </template>
 
@@ -26,26 +37,72 @@
 export default {
     data() {
 		return {
-			photoPath: ''
+			photoPath: '/static/read/image.png',
+			heightRatio: 1,
+			thumbnail: false,
+			startData: {
+				clientY: '',
+			},
+			moveY: 0,
+			state: 0
 		};
 	},
-	onLoad: function (option) { 
-		const eventChannel = this.getOpenerEventChannel();
-		eventChannel.on('recieveFile', function(data) {
-		    console.log('recievedData = ' + data.filepath);
-			this.photoPath = 'https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/snapshot_1711522255791.jpg';
-		})
+	onLoad(option) { 
+		this.photoPath = "https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/image.png";
+		console.log("Hi there")
+		// const eventChannel = this.getOpenerEventChannel();
+		// eventChannel.on('recieveFile', (data) => {
+		// 	this.photoPath = data.filepath;
+		// 	this.$refs.image.src = data.filepath;
+		// })
 	},
 	methods: {
+		back() {
+			if (this.thumbnail) {
+				this.thumbnail = false;
+			} else {
+				uni.navigateBack();
+			}
+		},
 		showThumb() {
-			uni.navigateTo({
-				url: '/pages/assist-read/assist-read',
-				success: function(res) {
-				    res.eventChannel.emit('recogFile', { filepath: this.photoPath })
-				},
-				fail: (e) => { console.log(e); } 
-			})
-		}
+			this.thumbnail = true;
+			this.moveY = 0;
+			this.state = 0;
+		},
+		start(e){
+		    this.startData.clientY = e.changedTouches[0].clientY;
+		},
+		end(e){ 
+			//触摸事件结束
+			console.log("this.moveY = ", this.touch.clientY - this.startData.clientY);
+			if(this.touch.clientY - this.startData.clientY > 300) {
+				this.state = 1;
+				this.moveY = 350;
+				this.thumbnail = false;
+			} else {
+				this.state = 0;
+				this.moveY = 0;
+			}
+		},
+		move(event) {
+			let touch = event.touches[0];
+			this.touch = touch;
+			let data = 0;
+			if(touch.clientY > this.startData.clientY && this.state === 0) {  //向下移动
+				data = touch.clientY - this.startData.clientY;
+				if(data > 1000) {
+					data = 1000;
+				}
+				this.moveY = data;
+			}
+			if(touch.clientY < this.startData.clientY && this.state === 1) {  //向上移动
+				data = this.startData.clientY - touch.clientY;
+				if(data > 1000) {
+					data = -1000;
+				}
+				this.moveY = 350-data;
+			}
+		},
 	}
 };
 </script>
@@ -58,7 +115,7 @@ export default {
 		position: fixed;
 		top: 100rpx;
 		left: 70rpx;
-		z-index: 99;
+		z-index: 98;
 		height: 77rpx;
 		width: 77rpx;
 	}
@@ -72,6 +129,14 @@ export default {
 			left: 65rpx;
 			height: 1200rpx; // 1200
 			width: 619rpx;  // 619
+		}
+		
+		.preview-img-thumb {
+			position: absolute;
+			top: -346rpx;
+			left: 0rpx;
+			height: 1454rpx; // 1200
+			width: 750rpx;  // 619
 		}
 		
 		.menu {
@@ -108,6 +173,10 @@ export default {
 				}
 			}
 		}
+	}
+	.thumb-view {
+		transition: all .5s;
+		background-color: white;
 	}
 }
 </style>

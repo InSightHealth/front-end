@@ -7,8 +7,8 @@
 				<text class = "footer-words" style="color: #08DF86;"> 首页 </text>
 		    </div>
 		    <div class = "footer-parter-center">
-		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/segment.png" class="icon-footer-center" @click="TestPage()">
-				<text class = "footer-words"> 测试音频 </text>
+		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/segment.png" class="icon-footer-center" @click="assist">
+				<text class = "footer-words"> 智能助手 </text>
 		        <!-- <img src="path_to_microphone_icon.png" class="icon-footer" id="icon microphone-icon"> -->
 		    </div>
 		    <div class = "footer-parter-right">
@@ -51,6 +51,14 @@
 				if (url != curRoute) {
 					uni.navigateTo({url});
 				}
+			},
+			assist() {
+				const pages = getCurrentPages()
+				//    getCurrentPages() 方法用于获取当前页面栈的实例，返回一个由页面实例组成的数组，
+				//    数组的顺序是由打开的页面依次排序的，也就是说你每跳转一个页面，这个数组就会将那个页面
+				const page = pages[pages.length-1];
+				console.log(page);
+				page.$refs['popup'].open();
 			}
 		}
 	}

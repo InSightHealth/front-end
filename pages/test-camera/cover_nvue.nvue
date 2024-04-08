@@ -29,10 +29,8 @@
 				class="scroll-view"
 				enable-flex="true"
 				>
-					<!-- 
-						{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>
-					-->
-					<cover-chat :msgList="msglist" :style="{height: `${windowHeight * 0.8}px`}"></cover-chat>
+					<!-- {{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br> -->
+					<cover-chat :msgList="msglist" ></cover-chat>
 				</scroll-view>
 				
 				<cover-view class="mic-container" :style="{height: `${windowHeight * 0.2}px`}">
@@ -66,27 +64,6 @@ export default {
 					userContent: "",
 					userId: 0
 				},
-				// {
-				//     botContent: "",
-				//     recordId: 0,
-				//     titleId: 0,
-				//     userContent: "你好呀我想问你一件事，可以吗？",
-				//     userId: 0
-				// },
-				// {
-				//     userContent: "",
-				//     recordId: 0,
-				//     titleId: 0,
-				//     botContent: "当然可以!",
-				//     userId: 0
-				// },
-				// {
-				//     botContent: "",
-				//     recordId: 0,
-				//     titleId: 0,
-				//     userContent: "我的问题是：blablabla...",
-				//     userId: 0
-				// },
 			],
 			randstr: 'ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl'
 		};

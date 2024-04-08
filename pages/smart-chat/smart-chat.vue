@@ -39,7 +39,7 @@
 				</view>
 			</view>
 			<view :class="[showbox?'content-box':'content']">
-				<bot-chat></bot-chat>
+				<bot-chat :msgList="msglist"></bot-chat>
 			</view>
 			<view class="show-listen" v-if="show_listen">
 				<text class="listen-title">正在听，请说出您的问题</text>
@@ -61,7 +61,7 @@
 						:show-confirm-bar="false"
 						class="textarea"></textarea>
 				</view>
-				<image src="/static/smart-chat/send.png" class="send-btn" @tap="scrollTobottom">
+				<image src="/static/smart-chat/send.png" class="send-btn" @tap="typeSend">
 				</image>
 			</view>
 			
@@ -92,7 +92,17 @@
 				speak_mode: true,
 				type_mode: false,
 				show_listen: false,
-				placeholder: '请输入你想问的...'
+				msgModified: false,
+				placeholder: '请输入你想问的...',
+				msglist: [
+					{
+						botContent: "hello，请问我有什么可以帮助你的吗？",
+						recordId: 0,
+						titleId: 0,
+						userContent: "",
+						userId: 0
+					}
+				]
 			}
 		},
 		updated() {
@@ -119,12 +129,14 @@
 				this.showbox1 = !this.showbox1;
 				this.showbox2 = false;
 				this.showbox = this.showbox1;
+				
 				this.scrollTotop();
 			},
 			toggle2() {
 				this.showbox1 = false;
 				this.showbox2 = !this.showbox2;
 				this.showbox = this.showbox2;
+				
 				this.scrollTotop();
 			},
 			pxTorpx(px){
@@ -189,6 +201,22 @@
 						,fail: (err)=>{ console.error("上传录音失败："+err); }
 					});
 				});
+			},
+			typeSend() {
+				this.showbox1 = this.showbox2 = false;
+				this.showbox = false;
+				this.msgModified = true;
+				
+				this.msglist.push({
+					botContent: "",
+					recordId: 0,
+					titleId: 0,
+					userContent: this.chatMsg,
+					userId: 0
+				})
+				
+				this.chatMsg = '';
+				this.scrollTobottom();
 			}
 		}
 	}
@@ -406,7 +434,7 @@
 			}
 		}
 		.content {
-			padding-top: 220rpx;
+			padding-top: 250rpx;
 			padding-bottom: 200rpx;
 			background-color: #F1F1F1;
 		}

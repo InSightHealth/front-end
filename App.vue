@@ -3,7 +3,7 @@
 		globalData: {  
 			BackEndUrl: 'http://82.157.124.83:51603',
 			llmUrl: 'http://127.0.0.1:8000',
-		    token: "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAADWLywqDMBAA_2XPBpK6Wa1_s3m0RAyEboSK-O9dD73NMMwJay-wwGjZjxyj4ZmsQU4vE2Iig-R8CmgxxwADFO6wuMk98Okd0QCyB73lkJ7r3UVU31upNX_UeU_q3Jpy_rb_O0_3W7T56wfz5p8PggAAAA.-LbMs0Yjl1qd9N6lJR1JOb2tf1YZ-FT-KrPwwgXeFvMKDLEMsNGHGZxnMnoj_hb3gVm_rp6JwCzHHh_TBNgmoA",
+		    token: "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAADWLSQrDMAwA_6JzDF4i7OQ3ViIXlxpM5UBL6d-jHHKbYZgfPEeFFSxm2sNWTLSYzOyKNeSXYHihuBHHwgVhgpoHrC46jzj7kCaQg_SWrwxuVxdRfbxqa_xWz8eunntX5k-_35iut2rD_wnHjcgIggAAAA.3oIGB9_m2VKeItuVeK8EsIZu4-DWeklZawU6VCU3jIl2leRWf6vzSIozvw1Uf2_6GZznGoQki1xon3VeCb8heQ",
 			phone: ""
 		},
 		onLaunch: function() {
@@ -11,8 +11,8 @@
 			
 			// #ifdef APP-PLUS
 			    // token标志来判断
-			    let token= getApp().globalData.token;    
-				console.log('token is '+token);
+			    let token = getApp().globalData.token;    
+				// console.log('token is '+token);
 				
 			    if (token != '') {
 				    //存在则关闭启动页进入首页

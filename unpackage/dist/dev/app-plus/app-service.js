@@ -38,13 +38,13 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$q = {
+  const _sfc_main$r = {
     name: "homeHead",
     data() {
       return {};
     }
   };
-  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "home-head" }, [
         vue.createElementVNode("image", {
@@ -55,7 +55,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
+  const __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
       uni.__log__(type, filename, ...args);
@@ -66,7 +66,795 @@ if (uni.restoreGlobal) {
   function resolveEasycom(component, easycom) {
     return shared.isString(component) ? easycom : component;
   }
+  class MPAnimation {
+    constructor(options, _this2) {
+      this.options = options;
+      this.animation = uni.createAnimation({
+        ...options
+      });
+      this.currentStepAnimates = {};
+      this.next = 0;
+      this.$ = _this2;
+    }
+    _nvuePushAnimates(type, args) {
+      let aniObj = this.currentStepAnimates[this.next];
+      let styles = {};
+      if (!aniObj) {
+        styles = {
+          styles: {},
+          config: {}
+        };
+      } else {
+        styles = aniObj;
+      }
+      if (animateTypes1.includes(type)) {
+        if (!styles.styles.transform) {
+          styles.styles.transform = "";
+        }
+        let unit = "";
+        if (type === "rotate") {
+          unit = "deg";
+        }
+        styles.styles.transform += `${type}(${args + unit}) `;
+      } else {
+        styles.styles[type] = `${args}`;
+      }
+      this.currentStepAnimates[this.next] = styles;
+    }
+    _animateRun(styles = {}, config = {}) {
+      let ref = this.$.$refs["ani"].ref;
+      if (!ref)
+        return;
+      return new Promise((resolve, reject) => {
+        nvueAnimation.transition(ref, {
+          styles,
+          ...config
+        }, (res) => {
+          resolve();
+        });
+      });
+    }
+    _nvueNextAnimate(animates, step = 0, fn) {
+      let obj = animates[step];
+      if (obj) {
+        let {
+          styles,
+          config
+        } = obj;
+        this._animateRun(styles, config).then(() => {
+          step += 1;
+          this._nvueNextAnimate(animates, step, fn);
+        });
+      } else {
+        this.currentStepAnimates = {};
+        typeof fn === "function" && fn();
+        this.isEnd = true;
+      }
+    }
+    step(config = {}) {
+      this.animation.step(config);
+      return this;
+    }
+    run(fn) {
+      this.$.animationData = this.animation.export();
+      this.$.timer = setTimeout(() => {
+        typeof fn === "function" && fn();
+      }, this.$.durationTime);
+    }
+  }
+  const animateTypes1 = [
+    "matrix",
+    "matrix3d",
+    "rotate",
+    "rotate3d",
+    "rotateX",
+    "rotateY",
+    "rotateZ",
+    "scale",
+    "scale3d",
+    "scaleX",
+    "scaleY",
+    "scaleZ",
+    "skew",
+    "skewX",
+    "skewY",
+    "translate",
+    "translate3d",
+    "translateX",
+    "translateY",
+    "translateZ"
+  ];
+  const animateTypes2 = ["opacity", "backgroundColor"];
+  const animateTypes3 = ["width", "height", "left", "right", "top", "bottom"];
+  animateTypes1.concat(animateTypes2, animateTypes3).forEach((type) => {
+    MPAnimation.prototype[type] = function(...args) {
+      this.animation[type](...args);
+      return this;
+    };
+  });
+  function createAnimation(option, _this2) {
+    if (!_this2)
+      return;
+    clearTimeout(_this2.timer);
+    return new MPAnimation(option, _this2);
+  }
+  const _sfc_main$q = {
+    name: "uniTransition",
+    emits: ["click", "change"],
+    props: {
+      show: {
+        type: Boolean,
+        default: false
+      },
+      modeClass: {
+        type: [Array, String],
+        default() {
+          return "fade";
+        }
+      },
+      duration: {
+        type: Number,
+        default: 300
+      },
+      styles: {
+        type: Object,
+        default() {
+          return {};
+        }
+      },
+      customClass: {
+        type: String,
+        default: ""
+      },
+      onceRender: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        isShow: false,
+        transform: "",
+        opacity: 1,
+        animationData: {},
+        durationTime: 300,
+        config: {}
+      };
+    },
+    watch: {
+      show: {
+        handler(newVal) {
+          if (newVal) {
+            this.open();
+          } else {
+            if (this.isShow) {
+              this.close();
+            }
+          }
+        },
+        immediate: true
+      }
+    },
+    computed: {
+      // 生成样式数据
+      stylesObject() {
+        let styles = {
+          ...this.styles,
+          "transition-duration": this.duration / 1e3 + "s"
+        };
+        let transform = "";
+        for (let i in styles) {
+          let line = this.toLine(i);
+          transform += line + ":" + styles[i] + ";";
+        }
+        return transform;
+      },
+      // 初始化动画条件
+      transformStyles() {
+        return "transform:" + this.transform + ";opacity:" + this.opacity + ";" + this.stylesObject;
+      }
+    },
+    created() {
+      this.config = {
+        duration: this.duration,
+        timingFunction: "ease",
+        transformOrigin: "50% 50%",
+        delay: 0
+      };
+      this.durationTime = this.duration;
+    },
+    methods: {
+      /**
+       *  ref 触发 初始化动画
+       */
+      init(obj = {}) {
+        if (obj.duration) {
+          this.durationTime = obj.duration;
+        }
+        this.animation = createAnimation(Object.assign(this.config, obj), this);
+      },
+      /**
+       * 点击组件触发回调
+       */
+      onClick() {
+        this.$emit("click", {
+          detail: this.isShow
+        });
+      },
+      /**
+       * ref 触发 动画分组
+       * @param {Object} obj
+       */
+      step(obj, config = {}) {
+        if (!this.animation)
+          return;
+        for (let i in obj) {
+          try {
+            if (typeof obj[i] === "object") {
+              this.animation[i](...obj[i]);
+            } else {
+              this.animation[i](obj[i]);
+            }
+          } catch (e) {
+            formatAppLog("error", "at uni_modules/uni-transition/components/uni-transition/uni-transition.vue:148", `方法 ${i} 不存在`);
+          }
+        }
+        this.animation.step(config);
+        return this;
+      },
+      /**
+       *  ref 触发 执行动画
+       */
+      run(fn) {
+        if (!this.animation)
+          return;
+        this.animation.run(fn);
+      },
+      // 开始过度动画
+      open() {
+        clearTimeout(this.timer);
+        this.transform = "";
+        this.isShow = true;
+        let { opacity, transform } = this.styleInit(false);
+        if (typeof opacity !== "undefined") {
+          this.opacity = opacity;
+        }
+        this.transform = transform;
+        this.$nextTick(() => {
+          this.timer = setTimeout(() => {
+            this.animation = createAnimation(this.config, this);
+            this.tranfromInit(false).step();
+            this.animation.run();
+            this.$emit("change", {
+              detail: this.isShow
+            });
+          }, 20);
+        });
+      },
+      // 关闭过度动画
+      close(type) {
+        if (!this.animation)
+          return;
+        this.tranfromInit(true).step().run(() => {
+          this.isShow = false;
+          this.animationData = null;
+          this.animation = null;
+          let { opacity, transform } = this.styleInit(false);
+          this.opacity = opacity || 1;
+          this.transform = transform;
+          this.$emit("change", {
+            detail: this.isShow
+          });
+        });
+      },
+      // 处理动画开始前的默认样式
+      styleInit(type) {
+        let styles = {
+          transform: ""
+        };
+        let buildStyle = (type2, mode) => {
+          if (mode === "fade") {
+            styles.opacity = this.animationType(type2)[mode];
+          } else {
+            styles.transform += this.animationType(type2)[mode] + " ";
+          }
+        };
+        if (typeof this.modeClass === "string") {
+          buildStyle(type, this.modeClass);
+        } else {
+          this.modeClass.forEach((mode) => {
+            buildStyle(type, mode);
+          });
+        }
+        return styles;
+      },
+      // 处理内置组合动画
+      tranfromInit(type) {
+        let buildTranfrom = (type2, mode) => {
+          let aniNum = null;
+          if (mode === "fade") {
+            aniNum = type2 ? 0 : 1;
+          } else {
+            aniNum = type2 ? "-100%" : "0";
+            if (mode === "zoom-in") {
+              aniNum = type2 ? 0.8 : 1;
+            }
+            if (mode === "zoom-out") {
+              aniNum = type2 ? 1.2 : 1;
+            }
+            if (mode === "slide-right") {
+              aniNum = type2 ? "100%" : "0";
+            }
+            if (mode === "slide-bottom") {
+              aniNum = type2 ? "100%" : "0";
+            }
+          }
+          this.animation[this.animationMode()[mode]](aniNum);
+        };
+        if (typeof this.modeClass === "string") {
+          buildTranfrom(type, this.modeClass);
+        } else {
+          this.modeClass.forEach((mode) => {
+            buildTranfrom(type, mode);
+          });
+        }
+        return this.animation;
+      },
+      animationType(type) {
+        return {
+          fade: type ? 1 : 0,
+          "slide-top": `translateY(${type ? "0" : "-100%"})`,
+          "slide-right": `translateX(${type ? "0" : "100%"})`,
+          "slide-bottom": `translateY(${type ? "0" : "100%"})`,
+          "slide-left": `translateX(${type ? "0" : "-100%"})`,
+          "zoom-in": `scaleX(${type ? 1 : 0.8}) scaleY(${type ? 1 : 0.8})`,
+          "zoom-out": `scaleX(${type ? 1 : 1.2}) scaleY(${type ? 1 : 1.2})`
+        };
+      },
+      // 内置动画类型与实际动画对应字典
+      animationMode() {
+        return {
+          fade: "opacity",
+          "slide-top": "translateY",
+          "slide-right": "translateX",
+          "slide-bottom": "translateY",
+          "slide-left": "translateX",
+          "zoom-in": "scale",
+          "zoom-out": "scale"
+        };
+      },
+      // 驼峰转中横线
+      toLine(name) {
+        return name.replace(/([A-Z])/g, "-$1").toLowerCase();
+      }
+    }
+  };
+  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
+      ref: "ani",
+      animation: $data.animationData,
+      class: vue.normalizeClass($props.customClass),
+      style: vue.normalizeStyle($options.transformStyles),
+      onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
+    }, [
+      vue.renderSlot(_ctx.$slots, "default")
+    ], 14, ["animation"])), [
+      [vue.vShow, $data.isShow]
+    ]);
+  }
+  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__file", "E:/fuchuang/learn/demo1/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
   const _sfc_main$p = {
+    name: "uniPopup",
+    components: {},
+    emits: ["change", "maskClick"],
+    props: {
+      // 开启动画
+      animation: {
+        type: Boolean,
+        default: true
+      },
+      // 弹出层类型，可选值，top: 顶部弹出层；bottom：底部弹出层；center：全屏弹出层
+      // message: 消息提示 ; dialog : 对话框
+      type: {
+        type: String,
+        default: "center"
+      },
+      // maskClick
+      isMaskClick: {
+        type: Boolean,
+        default: null
+      },
+      // TODO 2 个版本后废弃属性 ，使用 isMaskClick
+      maskClick: {
+        type: Boolean,
+        default: null
+      },
+      backgroundColor: {
+        type: String,
+        default: "none"
+      },
+      safeArea: {
+        type: Boolean,
+        default: true
+      },
+      maskBackgroundColor: {
+        type: String,
+        default: "rgba(0, 0, 0, 0.4)"
+      },
+      borderRadius: {
+        type: String
+      }
+    },
+    watch: {
+      /**
+       * 监听type类型
+       */
+      type: {
+        handler: function(type) {
+          if (!this.config[type])
+            return;
+          this[this.config[type]](true);
+        },
+        immediate: true
+      },
+      isDesktop: {
+        handler: function(newVal) {
+          if (!this.config[newVal])
+            return;
+          this[this.config[this.type]](true);
+        },
+        immediate: true
+      },
+      /**
+       * 监听遮罩是否可点击
+       * @param {Object} val
+       */
+      maskClick: {
+        handler: function(val) {
+          this.mkclick = val;
+        },
+        immediate: true
+      },
+      isMaskClick: {
+        handler: function(val) {
+          this.mkclick = val;
+        },
+        immediate: true
+      },
+      // H5 下禁止底部滚动
+      showPopup(show) {
+      }
+    },
+    data() {
+      return {
+        duration: 300,
+        ani: [],
+        showPopup: false,
+        showTrans: false,
+        popupWidth: 0,
+        popupHeight: 0,
+        config: {
+          top: "top",
+          bottom: "bottom",
+          center: "center",
+          left: "left",
+          right: "right",
+          message: "top",
+          dialog: "center",
+          share: "bottom"
+        },
+        maskClass: {
+          position: "fixed",
+          bottom: 0,
+          top: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.4)"
+        },
+        transClass: {
+          backgroundColor: "transparent",
+          borderRadius: this.borderRadius || "0",
+          position: "fixed",
+          left: 0,
+          right: 0
+        },
+        maskShow: true,
+        mkclick: true,
+        popupstyle: "top"
+      };
+    },
+    computed: {
+      getStyles() {
+        let res = { backgroundColor: this.bg };
+        if (this.borderRadius || "0") {
+          res = Object.assign(res, { borderRadius: this.borderRadius });
+        }
+        return res;
+      },
+      isDesktop() {
+        return this.popupWidth >= 500 && this.popupHeight >= 500;
+      },
+      bg() {
+        if (this.backgroundColor === "" || this.backgroundColor === "none") {
+          return "transparent";
+        }
+        return this.backgroundColor;
+      }
+    },
+    mounted() {
+      const fixSize = () => {
+        const {
+          windowWidth,
+          windowHeight,
+          windowTop,
+          safeArea,
+          screenHeight,
+          safeAreaInsets
+        } = uni.getSystemInfoSync();
+        this.popupWidth = windowWidth;
+        this.popupHeight = windowHeight + (windowTop || 0);
+        if (safeArea && this.safeArea) {
+          this.safeAreaInsets = safeAreaInsets.bottom;
+        } else {
+          this.safeAreaInsets = 0;
+        }
+      };
+      fixSize();
+    },
+    // TODO vue3
+    unmounted() {
+      this.setH5Visible();
+    },
+    activated() {
+      this.setH5Visible(!this.showPopup);
+    },
+    deactivated() {
+      this.setH5Visible(true);
+    },
+    created() {
+      if (this.isMaskClick === null && this.maskClick === null) {
+        this.mkclick = true;
+      } else {
+        this.mkclick = this.isMaskClick !== null ? this.isMaskClick : this.maskClick;
+      }
+      if (this.animation) {
+        this.duration = 300;
+      } else {
+        this.duration = 0;
+      }
+      this.messageChild = null;
+      this.clearPropagation = false;
+      this.maskClass.backgroundColor = this.maskBackgroundColor;
+    },
+    methods: {
+      setH5Visible(visible = true) {
+      },
+      /**
+       * 公用方法，不显示遮罩层
+       */
+      closeMask() {
+        this.maskShow = false;
+      },
+      /**
+       * 公用方法，遮罩层禁止点击
+       */
+      disableMask() {
+        this.mkclick = false;
+      },
+      // TODO nvue 取消冒泡
+      clear(e) {
+        e.stopPropagation();
+        this.clearPropagation = true;
+      },
+      open(direction) {
+        if (this.showPopup) {
+          return;
+        }
+        let innerType = ["top", "center", "bottom", "left", "right", "message", "dialog", "share"];
+        if (!(direction && innerType.indexOf(direction) !== -1)) {
+          direction = this.type;
+        }
+        if (!this.config[direction]) {
+          formatAppLog("error", "at uni_modules/uni-popup/components/uni-popup/uni-popup.vue:298", "缺少类型：", direction);
+          return;
+        }
+        this[this.config[direction]]();
+        this.$emit("change", {
+          show: true,
+          type: direction
+        });
+      },
+      close(type) {
+        this.showTrans = false;
+        this.$emit("change", {
+          show: false,
+          type: this.type
+        });
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+          this.showPopup = false;
+        }, 300);
+      },
+      // TODO 处理冒泡事件，头条的冒泡事件有问题 ，先这样兼容
+      touchstart() {
+        this.clearPropagation = false;
+      },
+      onTap() {
+        if (this.clearPropagation) {
+          this.clearPropagation = false;
+          return;
+        }
+        this.$emit("maskClick");
+        if (!this.mkclick)
+          return;
+        this.close();
+      },
+      /**
+       * 顶部弹出样式处理
+       */
+      top(type) {
+        this.popupstyle = this.isDesktop ? "fixforpc-top" : "top";
+        this.ani = ["slide-top"];
+        this.transClass = {
+          position: "fixed",
+          left: 0,
+          right: 0,
+          backgroundColor: this.bg,
+          borderRadius: this.borderRadius || "0"
+        };
+        if (type)
+          return;
+        this.showPopup = true;
+        this.showTrans = true;
+        this.$nextTick(() => {
+          if (this.messageChild && this.type === "message") {
+            this.messageChild.timerClose();
+          }
+        });
+      },
+      /**
+       * 底部弹出样式处理
+       */
+      bottom(type) {
+        this.popupstyle = "bottom";
+        this.ani = ["slide-bottom"];
+        this.transClass = {
+          position: "fixed",
+          left: 0,
+          right: 0,
+          bottom: 0,
+          paddingBottom: this.safeAreaInsets + "px",
+          backgroundColor: this.bg,
+          borderRadius: this.borderRadius || "0"
+        };
+        if (type)
+          return;
+        this.showPopup = true;
+        this.showTrans = true;
+      },
+      /**
+       * 中间弹出样式处理
+       */
+      center(type) {
+        this.popupstyle = "center";
+        this.ani = ["zoom-out", "fade"];
+        this.transClass = {
+          position: "fixed",
+          display: "flex",
+          flexDirection: "column",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: this.borderRadius || "0"
+        };
+        if (type)
+          return;
+        this.showPopup = true;
+        this.showTrans = true;
+      },
+      left(type) {
+        this.popupstyle = "left";
+        this.ani = ["slide-left"];
+        this.transClass = {
+          position: "fixed",
+          left: 0,
+          bottom: 0,
+          top: 0,
+          backgroundColor: this.bg,
+          borderRadius: this.borderRadius || "0",
+          display: "flex",
+          flexDirection: "column"
+        };
+        if (type)
+          return;
+        this.showPopup = true;
+        this.showTrans = true;
+      },
+      right(type) {
+        this.popupstyle = "right";
+        this.ani = ["slide-right"];
+        this.transClass = {
+          position: "fixed",
+          bottom: 0,
+          right: 0,
+          top: 0,
+          backgroundColor: this.bg,
+          borderRadius: this.borderRadius || "0",
+          display: "flex",
+          flexDirection: "column"
+        };
+        if (type)
+          return;
+        this.showPopup = true;
+        this.showTrans = true;
+      }
+    }
+  };
+  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$6);
+    return $data.showPopup ? (vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        key: 0,
+        class: vue.normalizeClass(["uni-popup", [$data.popupstyle, $options.isDesktop ? "fixforpc-z-index" : ""]])
+      },
+      [
+        vue.createElementVNode(
+          "view",
+          {
+            onTouchstart: _cache[1] || (_cache[1] = (...args) => $options.touchstart && $options.touchstart(...args))
+          },
+          [
+            $data.maskShow ? (vue.openBlock(), vue.createBlock(_component_uni_transition, {
+              key: "1",
+              name: "mask",
+              "mode-class": "fade",
+              styles: $data.maskClass,
+              duration: $data.duration,
+              show: $data.showTrans,
+              onClick: $options.onTap
+            }, null, 8, ["styles", "duration", "show", "onClick"])) : vue.createCommentVNode("v-if", true),
+            vue.createVNode(_component_uni_transition, {
+              key: "2",
+              "mode-class": $data.ani,
+              name: "content",
+              styles: $data.transClass,
+              duration: $data.duration,
+              show: $data.showTrans,
+              onClick: $options.onTap
+            }, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode(
+                  "view",
+                  {
+                    class: vue.normalizeClass(["uni-popup__wrapper", [$data.popupstyle]]),
+                    style: vue.normalizeStyle($options.getStyles),
+                    onClick: _cache[0] || (_cache[0] = (...args) => $options.clear && $options.clear(...args))
+                  },
+                  [
+                    vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+                  ],
+                  6
+                  /* CLASS, STYLE */
+                )
+              ]),
+              _: 3
+              /* FORWARDED */
+            }, 8, ["mode-class", "styles", "duration", "show", "onClick"])
+          ],
+          32
+          /* HYDRATE_EVENTS */
+        )
+      ],
+      2
+      /* CLASS */
+    )) : vue.createCommentVNode("v-if", true);
+  }
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/fuchuang/learn/demo1/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const _sfc_main$o = {
     name: "homeFoot",
     data() {
       return {};
@@ -93,10 +881,16 @@ if (uni.restoreGlobal) {
         if (url != curRoute) {
           uni.navigateTo({ url });
         }
+      },
+      assist() {
+        const pages = getCurrentPages();
+        const page = pages[pages.length - 1];
+        formatAppLog("log", "at components/home-foot/home-foot.vue:60", page);
+        page.$refs["popup"].open();
       }
     }
   };
-  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("footer", { class: "footer-container" }, [
         vue.createElementVNode("div", { class: "footer-parter-left" }, [
@@ -116,9 +910,9 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("img", {
             src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/segment.png",
             class: "icon-footer-center",
-            onClick: _cache[1] || (_cache[1] = ($event) => $options.TestPage())
+            onClick: _cache[1] || (_cache[1] = (...args) => $options.assist && $options.assist(...args))
           }),
-          vue.createElementVNode("text", { class: "footer-words" }, " 测试音频 "),
+          vue.createElementVNode("text", { class: "footer-words" }, " 智能助手 "),
           vue.createCommentVNode(' <img src="path_to_microphone_icon.png" class="icon-footer" id="icon microphone-icon"> ')
         ]),
         vue.createElementVNode("div", { class: "footer-parter-right" }, [
@@ -134,13 +928,14 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
-  const _sfc_main$o = {
+  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
+  const _sfc_main$n = {
     onLoad() {
     }
   };
-  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_home_head = resolveEasycom(vue.resolveDynamicComponent("home-head"), __easycom_0$6);
+  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_home_head = resolveEasycom(vue.resolveDynamicComponent("home-head"), __easycom_0$7);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$2);
     const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_0$5);
     return vue.openBlock(), vue.createElementBlock("view", { class: "main-container" }, [
       vue.createVNode(_component_home_head),
@@ -175,11 +970,45 @@ if (uni.restoreGlobal) {
           ])
         ])
       ]),
+      vue.createVNode(
+        _component_uni_popup,
+        {
+          ref: "popup",
+          type: "bottom",
+          class: "popup"
+        },
+        {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "popup" }, [
+              vue.createElementVNode(
+                "text",
+                { class: "holderText" },
+                vue.toDisplayString(_ctx.holderText),
+                1
+                /* TEXT */
+              ),
+              vue.createElementVNode(
+                "text",
+                { class: "responseText" },
+                vue.toDisplayString(_ctx.recog),
+                1
+                /* TEXT */
+              ),
+              vue.createElementVNode("image", { src: "/static/homepage/sound.gif" })
+            ]),
+            vue.createCommentVNode(' <uni-popup-message :type="msgType" :message="message" :duration="700" /> ')
+          ]),
+          _: 1
+          /* STABLE */
+        },
+        512
+        /* NEED_PATCH */
+      ),
       vue.createVNode(_component_home_foot)
     ]);
   }
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
-  const _sfc_main$n = {
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
+  const _sfc_main$m = {
     data() {
       return {
         pathList: [
@@ -210,7 +1039,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("div", { class: "container" }, [
         (vue.openBlock(true), vue.createElementBlock(
@@ -228,7 +1057,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
+  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
   var recorderCoreExports = {};
   var recorderCore = {
     get exports() {
@@ -2778,7 +3607,7 @@ if (uni.restoreGlobal) {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("yourModuleName");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["yourModuleName"] = "425f6c57";
   };
-  const _sfc_main$m = {
+  const _sfc_main$l = {
     data() {
       return {};
     },
@@ -2876,7 +3705,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("button", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.recReq && $options.recReq(...args))
@@ -2899,9 +3728,9 @@ if (uni.restoreGlobal) {
     ]);
   }
   if (typeof block0 === "function")
-    block0(_sfc_main$m);
-  const PagesTest_apiTest_api = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test_api.vue"]]);
-  const _sfc_main$l = {
+    block0(_sfc_main$l);
+  const PagesTest_apiTest_api = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test_api.vue"]]);
+  const _sfc_main$k = {
     name: "bot-chat",
     props: {
       msgList: {
@@ -2947,13 +3776,13 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
         id: "msglistview",
         class: "chat-body",
-        style: vue.normalizeStyle({ width: _ctx.windowWidth, height: _ctx.windowHeight })
+        style: vue.normalizeStyle({ width: _ctx.windowWidth })
       },
       [
         vue.createCommentVNode(" 聊天记录 "),
@@ -3014,11 +3843,11 @@ if (uni.restoreGlobal) {
       /* STYLE */
     );
   }
-  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-cd945a9e"], ["__file", "E:/fuchuang/learn/demo1/components/cover-chat/cover-chat.vue"]]);
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-cd945a9e"], ["__file", "E:/fuchuang/learn/demo1/components/cover-chat/cover-chat.vue"]]);
   const recorderManager$4 = uni.getRecorderManager();
   const innerAudioContext$3 = uni.createInnerAudioContext();
   innerAudioContext$3.autoplay = true;
-  const _sfc_main$k = {
+  const _sfc_main$j = {
     data() {
       return {
         text: "uni-app",
@@ -3042,17 +3871,17 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("image", {
       src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/micphone/mic1.png",
       class: "mic"
     });
   }
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-609587ba"], ["__file", "E:/fuchuang/learn/demo1/components/micphone/micphone.vue"]]);
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-609587ba"], ["__file", "E:/fuchuang/learn/demo1/components/micphone/micphone.vue"]]);
   let _this = null;
   const recorderManager$3 = uni.getRecorderManager();
   uni.createInnerAudioContext();
-  const _sfc_main$j = {
+  const _sfc_main$i = {
     data() {
       return {
         poenCarmeInterval: null,
@@ -3223,9 +4052,9 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_cover_chat = resolveEasycom(vue.resolveDynamicComponent("cover-chat"), __easycom_0$4);
-    const _component_micphone = resolveEasycom(vue.resolveDynamicComponent("micphone"), __easycom_1$2);
+    const _component_micphone = resolveEasycom(vue.resolveDynamicComponent("micphone"), __easycom_1$1);
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -3307,11 +4136,11 @@ if (uni.restoreGlobal) {
       /* STYLE */
     );
   }
-  const PagesSmartTravelSmartTravel = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-94ba6231"], ["__file", "E:/fuchuang/learn/demo1/pages/smart-travel/smart-travel.vue"]]);
+  const PagesSmartTravelSmartTravel = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-94ba6231"], ["__file", "E:/fuchuang/learn/demo1/pages/smart-travel/smart-travel.vue"]]);
   const recorderManager$2 = uni.getRecorderManager();
   const innerAudioContext$2 = uni.createInnerAudioContext();
   innerAudioContext$2.autoplay = true;
-  const _sfc_main$i = {
+  const _sfc_main$h = {
     data() {
       return {
         text: "uni-app",
@@ -3369,7 +4198,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("button", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.startRecord && $options.startRecord(...args))
@@ -3382,48 +4211,53 @@ if (uni.restoreGlobal) {
       }, "播放录音")
     ]);
   }
-  const PagesRecTestNative_test = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/native_test.vue"]]);
-  const _sfc_main$h = {
+  const PagesRecTestNative_test = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "E:/fuchuang/learn/demo1/pages/recTest/native_test.vue"]]);
+  const _sfc_main$g = {
     name: "bot-chat",
+    props: {
+      msgList: {
+        type: Array,
+        default: [
+          // {
+          //     botContent: "hello，请问我有什么可以帮助你的吗？",
+          //     recordId: 0,
+          //     titleId: 0,
+          //     userContent: "",
+          //     userId: 0
+          // },
+          // {
+          //     botContent: "",
+          //     recordId: 0,
+          //     titleId: 0,
+          //     userContent: "你好呀我想问你一件事，可以吗？",
+          //     userId: 0
+          // },
+          // {
+          //     userContent: "",
+          //     recordId: 0,
+          //     titleId: 0,
+          //     botContent: "当然可以!",
+          //     userId: 0
+          // },
+          // {
+          //     botContent: "",
+          //     recordId: 0,
+          //     titleId: 0,
+          //     userContent: "我的问题是：blablabla...",
+          //     userId: 0
+          // },
+        ]
+      }
+    },
     data() {
       return {
         userId: "",
         //发送的消息
-        chatMsg: "",
-        msgList: [
-          {
-            botContent: "hello，请问我有什么可以帮助你的吗？",
-            recordId: 0,
-            titleId: 0,
-            userContent: "",
-            userId: 0
-          },
-          {
-            botContent: "",
-            recordId: 0,
-            titleId: 0,
-            userContent: "你好呀我想问你一件事，可以吗？",
-            userId: 0
-          },
-          {
-            userContent: "",
-            recordId: 0,
-            titleId: 0,
-            botContent: "当然可以!",
-            userId: 0
-          },
-          {
-            botContent: "",
-            recordId: 0,
-            titleId: 0,
-            userContent: "我的问题是：blablabla...",
-            userId: 0
-          }
-        ]
+        chatMsg: ""
       };
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", {
         id: "msglistview",
@@ -3433,7 +4267,7 @@ if (uni.restoreGlobal) {
         (vue.openBlock(true), vue.createElementBlock(
           vue.Fragment,
           null,
-          vue.renderList($data.msgList, (item, index) => {
+          vue.renderList($props.msgList, (item, index) => {
             return vue.openBlock(), vue.createElementBlock("view", { key: index }, [
               vue.createCommentVNode(" 自己发的消息 "),
               item.userContent != "" ? (vue.openBlock(), vue.createElementBlock("view", {
@@ -3479,21 +4313,21 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-fb69b191"], ["__file", "E:/fuchuang/learn/demo1/components/bot-chat/bot-chat.vue"]]);
-  const _sfc_main$g = {
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-fb69b191"], ["__file", "E:/fuchuang/learn/demo1/components/bot-chat/bot-chat.vue"]]);
+  const _sfc_main$f = {
     name: "press-mic",
     data() {
       return {};
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "speakarea" }, [
       vue.createElementVNode("image", { src: "/static/smart-chat/press-mic.png" })
     ]);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-f48dac70"], ["__file", "E:/fuchuang/learn/demo1/components/press-mic/press-mic.vue"]]);
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-f48dac70"], ["__file", "E:/fuchuang/learn/demo1/components/press-mic/press-mic.vue"]]);
   const recorderManager$1 = uni.getRecorderManager();
-  const _sfc_main$f = {
+  const _sfc_main$e = {
     data() {
       return {
         keyboardHeight: 100,
@@ -3504,7 +4338,17 @@ if (uni.restoreGlobal) {
         speak_mode: true,
         type_mode: false,
         show_listen: false,
-        placeholder: "请输入你想问的..."
+        msgModified: false,
+        placeholder: "请输入你想问的...",
+        msglist: [
+          {
+            botContent: "hello，请问我有什么可以帮助你的吗？",
+            recordId: 0,
+            titleId: 0,
+            userContent: "",
+            userId: 0
+          }
+        ]
       };
     },
     updated() {
@@ -3546,9 +4390,9 @@ if (uni.restoreGlobal) {
       },
       scrollTotop() {
         uni.createSelectorQuery().select(".scroll-view").boundingClientRect((res) => {
-          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:137", res);
+          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:149", res);
           const scrollH = res.top;
-          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:139", "scroll view selected!!");
+          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:151", "scroll view selected!!");
           uni.pageScrollTo({
             duration: 100,
             // 过渡时间
@@ -3559,9 +4403,9 @@ if (uni.restoreGlobal) {
       },
       scrollTobottom() {
         uni.createSelectorQuery().select(`.scroll-view`).boundingClientRect((res) => {
-          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:148", res);
+          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:160", res);
           const scrollH = res.bottom;
-          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:150", "scroll view selected!!");
+          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:162", "scroll view selected!!");
           uni.pageScrollTo({
             duration: 100,
             // 过渡时间
@@ -3586,33 +4430,47 @@ if (uni.restoreGlobal) {
         this.type_mode = !this.type_mode;
       },
       startRecord() {
-        formatAppLog("log", "at pages/smart-chat/smart-chat.vue:173", "开始录音");
+        formatAppLog("log", "at pages/smart-chat/smart-chat.vue:185", "开始录音");
         recorderManager$1.start();
       },
       endRecord() {
-        formatAppLog("log", "at pages/smart-chat/smart-chat.vue:177", "录音结束");
+        formatAppLog("log", "at pages/smart-chat/smart-chat.vue:189", "录音结束");
         recorderManager$1.stop();
         recorderManager$1.onStop(function(res) {
-          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:180", JSON.stringify(res));
+          formatAppLog("log", "at pages/smart-chat/smart-chat.vue:192", JSON.stringify(res));
           uni.uploadFile({
             url: "http://127.0.0.1:8000/speechtotext",
             filePath: res.tempFilePath,
             name: "mp3",
             formData: {},
             success: (res2) => {
-              formatAppLog("log", "at pages/smart-chat/smart-chat.vue:187", "上传成功：" + JSON.stringify(res2));
+              formatAppLog("log", "at pages/smart-chat/smart-chat.vue:199", "上传成功：" + JSON.stringify(res2));
             },
             fail: (err) => {
-              formatAppLog("error", "at pages/smart-chat/smart-chat.vue:189", "上传录音失败：" + err);
+              formatAppLog("error", "at pages/smart-chat/smart-chat.vue:201", "上传录音失败：" + err);
             }
           });
         });
+      },
+      typeSend() {
+        this.showbox1 = this.showbox2 = false;
+        this.showbox = false;
+        this.msgModified = true;
+        this.msglist.push({
+          botContent: "",
+          recordId: 0,
+          titleId: 0,
+          userContent: this.chatMsg,
+          userId: 0
+        });
+        this.chatMsg = "";
+        this.scrollTobottom();
       }
     }
   };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_bot_chat = resolveEasycom(vue.resolveDynamicComponent("bot-chat"), __easycom_0$3);
-    const _component_press_mic = resolveEasycom(vue.resolveDynamicComponent("press-mic"), __easycom_1$1);
+    const _component_press_mic = resolveEasycom(vue.resolveDynamicComponent("press-mic"), __easycom_1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "wholeview" }, [
       vue.createElementVNode("view", { class: "topview" }),
       vue.createElementVNode("view", { class: "topbar" }, [
@@ -3684,7 +4542,7 @@ if (uni.restoreGlobal) {
             class: vue.normalizeClass([$data.showbox ? "content-box" : "content"])
           },
           [
-            vue.createVNode(_component_bot_chat)
+            vue.createVNode(_component_bot_chat, { msgList: $data.msglist }, null, 8, ["msgList"])
           ],
           2
           /* CLASS */
@@ -3727,7 +4585,7 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("image", {
             src: "/static/smart-chat/send.png",
             class: "send-btn",
-            onClick: _cache[5] || (_cache[5] = (...args) => $options.scrollTobottom && $options.scrollTobottom(...args))
+            onClick: _cache[5] || (_cache[5] = (...args) => $options.typeSend && $options.typeSend(...args))
           })
         ])) : vue.createCommentVNode("v-if", true),
         $data.speak_mode ? (vue.openBlock(), vue.createElementBlock("view", {
@@ -3754,12 +4612,12 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesSmartChatSmartChat = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__file", "E:/fuchuang/learn/demo1/pages/smart-chat/smart-chat.vue"]]);
+  const PagesSmartChatSmartChat = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "E:/fuchuang/learn/demo1/pages/smart-chat/smart-chat.vue"]]);
   const recorderManager = uni.getRecorderManager();
   const innerAudioContext$1 = uni.createInnerAudioContext();
   innerAudioContext$1.autoplay = false;
   innerAudioContext$1.src = "";
-  const _sfc_main$e = {
+  const _sfc_main$d = {
     data() {
       return {
         inputText: "",
@@ -3828,7 +4686,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "chat-view" }, [
       vue.withDirectives(vue.createElementVNode("textarea", {
         class: "input-text",
@@ -3873,8 +4731,8 @@ if (uni.restoreGlobal) {
       vue.createCommentVNode(' <div class="menu">\r\n			<image src="/static/recog/home.png"></image>\r\n			<navigator class="once-again" url="/pages/photo-recog/photo_nvue">再拍一张</navigator>\r\n		</div> ')
     ]);
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__scopeId", "data-v-6c9e0889"], ["__file", "E:/fuchuang/learn/demo1/components/tab-chat/tab-chat.vue"]]);
-  const _sfc_main$d = {
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-6c9e0889"], ["__file", "E:/fuchuang/learn/demo1/components/tab-chat/tab-chat.vue"]]);
+  const _sfc_main$c = {
     data() {
       return {
         photoPath: "",
@@ -3942,7 +4800,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_tab_chat = resolveEasycom(vue.resolveDynamicComponent("tab-chat"), __easycom_0$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "root-view" }, [
       vue.createElementVNode("image", {
@@ -4000,11 +4858,11 @@ if (uni.restoreGlobal) {
       }, null, 8, ["style", "onTouchstart", "onTouchend", "onTouchmove"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesPhotoRecogPhotoRecog = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-3abb26b1"], ["__file", "E:/fuchuang/learn/demo1/pages/photo-recog/photo-recog.vue"]]);
+  const PagesPhotoRecogPhotoRecog = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__scopeId", "data-v-3abb26b1"], ["__file", "E:/fuchuang/learn/demo1/pages/photo-recog/photo-recog.vue"]]);
   var innerAudioContext = uni.createInnerAudioContext();
   innerAudioContext.autoplay = false;
   innerAudioContext.src = "";
-  const _sfc_main$c = {
+  const _sfc_main$b = {
     data() {
       return {
         content: "hey hey you you"
@@ -4021,13 +4879,13 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("button", {
       onClick: _cache[0] || (_cache[0] = (...args) => $options.playMusic && $options.playMusic(...args))
     }, "点击播放");
   }
-  const PagesTestPageTestPage = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "E:/fuchuang/learn/demo1/pages/test-page/test-page.vue"]]);
-  const _sfc_main$b = {
+  const PagesTestPageTestPage = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__file", "E:/fuchuang/learn/demo1/pages/test-page/test-page.vue"]]);
+  const _sfc_main$a = {
     data() {
       return {};
     },
@@ -4044,7 +4902,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "root-view" }, [
       vue.createElementVNode("view", { class: "recog-view" }, [
         vue.createElementVNode("image", {
@@ -4067,41 +4925,140 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesAssistReadAssistRead = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-64b52ef9"], ["__file", "E:/fuchuang/learn/demo1/pages/assist-read/assist-read.vue"]]);
-  const _sfc_main$a = {
+  const PagesAssistReadAssistRead = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-64b52ef9"], ["__file", "E:/fuchuang/learn/demo1/pages/assist-read/assist-read.vue"]]);
+  const _sfc_main$9 = {
+    props: {
+      photoUrl: {
+        type: String,
+        default: ""
+      }
+    },
     data() {
       return {
-        photoPath: ""
+        recogText: ""
       };
     },
-    onLoad: function(option) {
-      const eventChannel = this.getOpenerEventChannel();
-      eventChannel.on("recieveFile", function(data) {
-        formatAppLog("log", "at pages/assist-read/photo-recog.vue:35", "recievedData = " + data.filepath);
-        this.photoPath = "https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/snapshot_1711522255791.jpg";
+    onLoad() {
+      uni.request({
+        url: "http://127.0.0.1:8000/ocr",
+        method: "POST",
+        data: {
+          "image": photoUrl
+        },
+        success: (res) => {
+          formatAppLog("log", "at components/tab-recog/tab-recog.vue:38", res);
+        }
       });
+    }
+  };
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "tab-view" }, [
+      vue.createElementVNode(
+        "view",
+        {
+          class: "show-box",
+          style: {}
+        },
+        vue.toDisplayString($data.recogText),
+        1
+        /* TEXT */
+      ),
+      vue.createElementVNode("view", { class: "menu" }, [
+        vue.createElementVNode("view", { class: "first-row" }, [
+          vue.createElementVNode("image", {
+            src: "/static/read/start.png",
+            class: "start-play",
+            onClick: _cache[0] || (_cache[0] = (...args) => _ctx.play && _ctx.play(...args))
+          }),
+          vue.createElementVNode("view", { class: "mult-play" }, "倍速")
+        ]),
+        vue.createElementVNode("view", { class: "second-row" }, [
+          vue.createElementVNode("image", { src: "/static/recog/home.png" }),
+          vue.createElementVNode("div", { class: "once-again" }, "再拍一张")
+        ])
+      ])
+    ]);
+  }
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-ba5ee5c4"], ["__file", "E:/fuchuang/learn/demo1/components/tab-recog/tab-recog.vue"]]);
+  const _sfc_main$8 = {
+    data() {
+      return {
+        photoPath: "/static/read/image.png",
+        heightRatio: 1,
+        thumbnail: false,
+        startData: {
+          clientY: ""
+        },
+        moveY: 0,
+        state: 0
+      };
+    },
+    onLoad(option) {
+      this.photoPath = "https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/image.png";
+      formatAppLog("log", "at pages/assist-read/photo-recog.vue:52", "Hi there");
     },
     methods: {
+      back() {
+        if (this.thumbnail) {
+          this.thumbnail = false;
+        } else {
+          uni.navigateBack();
+        }
+      },
       showThumb() {
-        uni.navigateTo({
-          url: "/pages/assist-read/assist-read",
-          success: function(res) {
-            res.eventChannel.emit("recogFile", { filepath: this.photoPath });
-          },
-          fail: (e) => {
-            formatAppLog("log", "at pages/assist-read/photo-recog.vue:46", e);
+        this.thumbnail = true;
+        this.moveY = 0;
+        this.state = 0;
+      },
+      start(e) {
+        this.startData.clientY = e.changedTouches[0].clientY;
+      },
+      end(e) {
+        formatAppLog("log", "at pages/assist-read/photo-recog.vue:77", "this.moveY = ", this.touch.clientY - this.startData.clientY);
+        if (this.touch.clientY - this.startData.clientY > 300) {
+          this.state = 1;
+          this.moveY = 350;
+          this.thumbnail = false;
+        } else {
+          this.state = 0;
+          this.moveY = 0;
+        }
+      },
+      move(event) {
+        let touch = event.touches[0];
+        this.touch = touch;
+        let data = 0;
+        if (touch.clientY > this.startData.clientY && this.state === 0) {
+          data = touch.clientY - this.startData.clientY;
+          if (data > 1e3) {
+            data = 1e3;
           }
-        });
+          this.moveY = data;
+        }
+        if (touch.clientY < this.startData.clientY && this.state === 1) {
+          data = this.startData.clientY - touch.clientY;
+          if (data > 1e3) {
+            data = -1e3;
+          }
+          this.moveY = 350 - data;
+        }
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_tab_recog = resolveEasycom(vue.resolveDynamicComponent("tab-recog"), __easycom_0$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "root-view" }, [
+      vue.createElementVNode("image", {
+        class: "back-icon",
+        src: "/static/recog/back-icon.png",
+        onClick: _cache[0] || (_cache[0] = (...args) => $options.back && $options.back(...args))
+      }),
       vue.createElementVNode("view", { class: "recog-view" }, [
         vue.createElementVNode("image", {
-          class: "preview-img",
-          src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/image.png"
-        }),
+          class: vue.normalizeClass([$data.thumbnail ? "preview-img-thumb" : "preview-img"]),
+          src: $data.photoPath,
+          ref: "image"
+        }, null, 10, ["src"]),
         vue.createElementVNode("view", { class: "menu" }, [
           vue.createElementVNode("navigator", {
             class: "row",
@@ -4115,7 +5072,7 @@ if (uni.restoreGlobal) {
           ]),
           vue.createElementVNode("view", {
             class: "row",
-            onClick: _cache[0] || (_cache[0] = (...args) => $options.showThumb && $options.showThumb(...args))
+            onClick: _cache[1] || (_cache[1] = (...args) => $options.showThumb && $options.showThumb(...args))
           }, [
             vue.createElementVNode("image", {
               src: "/static/recog/ok.png",
@@ -4133,11 +5090,22 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("text", { class: "row-text" }, " 旋转 ")
           ])
         ])
-      ])
+      ]),
+      $data.thumbnail ? (vue.openBlock(), vue.createBlock(_component_tab_recog, {
+        key: 0,
+        class: "showMore-box",
+        style: vue.normalizeStyle({
+          transform: "translateY(" + $data.moveY + "px)"
+        }),
+        onTouchstart: $options.start,
+        onTouchend: $options.end,
+        onTouchmove: $options.move,
+        photoUrl: $data.photoPath
+      }, null, 8, ["style", "onTouchstart", "onTouchend", "onTouchmove", "photoUrl"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesAssistReadPhotoRecog = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-fb8e82d4"], ["__file", "E:/fuchuang/learn/demo1/pages/assist-read/photo-recog.vue"]]);
-  const _sfc_main$9 = {
+  const PagesAssistReadPhotoRecog = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-fb8e82d4"], ["__file", "E:/fuchuang/learn/demo1/pages/assist-read/photo-recog.vue"]]);
+  const _sfc_main$7 = {
     methods: {
       clickUpload() {
         uni.chooseImage({
@@ -4160,20 +5128,20 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("button", {
       onClick: _cache[0] || (_cache[0] = (...args) => $options.clickUpload && $options.clickUpload(...args))
     }, "点击文件上传");
   }
-  const PagesTest_apiTestUpload = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test-upload.vue"]]);
-  const _sfc_main$8 = {
+  const PagesTest_apiTestUpload = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "E:/fuchuang/learn/demo1/pages/test_api/test-upload.vue"]]);
+  const _sfc_main$6 = {
     data() {
       return {
         gender: true
       };
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_0$5);
     return vue.openBlock(), vue.createElementBlock("view", { class: "personal" }, [
       vue.createElementVNode("view", { class: "content" }, [
@@ -4258,7 +5226,7 @@ if (uni.restoreGlobal) {
       vue.createVNode(_component_home_foot)
     ]);
   }
-  const PagesPersonalPersonal = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "E:/fuchuang/learn/demo1/pages/personal/personal.vue"]]);
+  const PagesPersonalPersonal = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "E:/fuchuang/learn/demo1/pages/personal/personal.vue"]]);
   const popup = {
     data() {
       return {};
@@ -4596,7 +5564,7 @@ if (uni.restoreGlobal) {
   const {
     t
   } = initVueI18n(messages);
-  const _sfc_main$7 = {
+  const _sfc_main$5 = {
     name: "uniPopupDialog",
     mixins: [popup],
     emits: ["confirm", "close", "update:modelValue", "input"],
@@ -4732,7 +5700,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-popup-dialog" }, [
       vue.createElementVNode("view", { class: "uni-dialog-title" }, [
         vue.createElementVNode(
@@ -4810,795 +5778,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-d78c88b7"], ["__file", "E:/fuchuang/learn/demo1/uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog.vue"]]);
-  class MPAnimation {
-    constructor(options, _this2) {
-      this.options = options;
-      this.animation = uni.createAnimation({
-        ...options
-      });
-      this.currentStepAnimates = {};
-      this.next = 0;
-      this.$ = _this2;
-    }
-    _nvuePushAnimates(type, args) {
-      let aniObj = this.currentStepAnimates[this.next];
-      let styles = {};
-      if (!aniObj) {
-        styles = {
-          styles: {},
-          config: {}
-        };
-      } else {
-        styles = aniObj;
-      }
-      if (animateTypes1.includes(type)) {
-        if (!styles.styles.transform) {
-          styles.styles.transform = "";
-        }
-        let unit = "";
-        if (type === "rotate") {
-          unit = "deg";
-        }
-        styles.styles.transform += `${type}(${args + unit}) `;
-      } else {
-        styles.styles[type] = `${args}`;
-      }
-      this.currentStepAnimates[this.next] = styles;
-    }
-    _animateRun(styles = {}, config = {}) {
-      let ref = this.$.$refs["ani"].ref;
-      if (!ref)
-        return;
-      return new Promise((resolve, reject) => {
-        nvueAnimation.transition(ref, {
-          styles,
-          ...config
-        }, (res) => {
-          resolve();
-        });
-      });
-    }
-    _nvueNextAnimate(animates, step = 0, fn) {
-      let obj = animates[step];
-      if (obj) {
-        let {
-          styles,
-          config
-        } = obj;
-        this._animateRun(styles, config).then(() => {
-          step += 1;
-          this._nvueNextAnimate(animates, step, fn);
-        });
-      } else {
-        this.currentStepAnimates = {};
-        typeof fn === "function" && fn();
-        this.isEnd = true;
-      }
-    }
-    step(config = {}) {
-      this.animation.step(config);
-      return this;
-    }
-    run(fn) {
-      this.$.animationData = this.animation.export();
-      this.$.timer = setTimeout(() => {
-        typeof fn === "function" && fn();
-      }, this.$.durationTime);
-    }
-  }
-  const animateTypes1 = [
-    "matrix",
-    "matrix3d",
-    "rotate",
-    "rotate3d",
-    "rotateX",
-    "rotateY",
-    "rotateZ",
-    "scale",
-    "scale3d",
-    "scaleX",
-    "scaleY",
-    "scaleZ",
-    "skew",
-    "skewX",
-    "skewY",
-    "translate",
-    "translate3d",
-    "translateX",
-    "translateY",
-    "translateZ"
-  ];
-  const animateTypes2 = ["opacity", "backgroundColor"];
-  const animateTypes3 = ["width", "height", "left", "right", "top", "bottom"];
-  animateTypes1.concat(animateTypes2, animateTypes3).forEach((type) => {
-    MPAnimation.prototype[type] = function(...args) {
-      this.animation[type](...args);
-      return this;
-    };
-  });
-  function createAnimation(option, _this2) {
-    if (!_this2)
-      return;
-    clearTimeout(_this2.timer);
-    return new MPAnimation(option, _this2);
-  }
-  const _sfc_main$6 = {
-    name: "uniTransition",
-    emits: ["click", "change"],
-    props: {
-      show: {
-        type: Boolean,
-        default: false
-      },
-      modeClass: {
-        type: [Array, String],
-        default() {
-          return "fade";
-        }
-      },
-      duration: {
-        type: Number,
-        default: 300
-      },
-      styles: {
-        type: Object,
-        default() {
-          return {};
-        }
-      },
-      customClass: {
-        type: String,
-        default: ""
-      },
-      onceRender: {
-        type: Boolean,
-        default: false
-      }
-    },
-    data() {
-      return {
-        isShow: false,
-        transform: "",
-        opacity: 1,
-        animationData: {},
-        durationTime: 300,
-        config: {}
-      };
-    },
-    watch: {
-      show: {
-        handler(newVal) {
-          if (newVal) {
-            this.open();
-          } else {
-            if (this.isShow) {
-              this.close();
-            }
-          }
-        },
-        immediate: true
-      }
-    },
-    computed: {
-      // 生成样式数据
-      stylesObject() {
-        let styles = {
-          ...this.styles,
-          "transition-duration": this.duration / 1e3 + "s"
-        };
-        let transform = "";
-        for (let i in styles) {
-          let line = this.toLine(i);
-          transform += line + ":" + styles[i] + ";";
-        }
-        return transform;
-      },
-      // 初始化动画条件
-      transformStyles() {
-        return "transform:" + this.transform + ";opacity:" + this.opacity + ";" + this.stylesObject;
-      }
-    },
-    created() {
-      this.config = {
-        duration: this.duration,
-        timingFunction: "ease",
-        transformOrigin: "50% 50%",
-        delay: 0
-      };
-      this.durationTime = this.duration;
-    },
-    methods: {
-      /**
-       *  ref 触发 初始化动画
-       */
-      init(obj = {}) {
-        if (obj.duration) {
-          this.durationTime = obj.duration;
-        }
-        this.animation = createAnimation(Object.assign(this.config, obj), this);
-      },
-      /**
-       * 点击组件触发回调
-       */
-      onClick() {
-        this.$emit("click", {
-          detail: this.isShow
-        });
-      },
-      /**
-       * ref 触发 动画分组
-       * @param {Object} obj
-       */
-      step(obj, config = {}) {
-        if (!this.animation)
-          return;
-        for (let i in obj) {
-          try {
-            if (typeof obj[i] === "object") {
-              this.animation[i](...obj[i]);
-            } else {
-              this.animation[i](obj[i]);
-            }
-          } catch (e) {
-            formatAppLog("error", "at uni_modules/uni-transition/components/uni-transition/uni-transition.vue:148", `方法 ${i} 不存在`);
-          }
-        }
-        this.animation.step(config);
-        return this;
-      },
-      /**
-       *  ref 触发 执行动画
-       */
-      run(fn) {
-        if (!this.animation)
-          return;
-        this.animation.run(fn);
-      },
-      // 开始过度动画
-      open() {
-        clearTimeout(this.timer);
-        this.transform = "";
-        this.isShow = true;
-        let { opacity, transform } = this.styleInit(false);
-        if (typeof opacity !== "undefined") {
-          this.opacity = opacity;
-        }
-        this.transform = transform;
-        this.$nextTick(() => {
-          this.timer = setTimeout(() => {
-            this.animation = createAnimation(this.config, this);
-            this.tranfromInit(false).step();
-            this.animation.run();
-            this.$emit("change", {
-              detail: this.isShow
-            });
-          }, 20);
-        });
-      },
-      // 关闭过度动画
-      close(type) {
-        if (!this.animation)
-          return;
-        this.tranfromInit(true).step().run(() => {
-          this.isShow = false;
-          this.animationData = null;
-          this.animation = null;
-          let { opacity, transform } = this.styleInit(false);
-          this.opacity = opacity || 1;
-          this.transform = transform;
-          this.$emit("change", {
-            detail: this.isShow
-          });
-        });
-      },
-      // 处理动画开始前的默认样式
-      styleInit(type) {
-        let styles = {
-          transform: ""
-        };
-        let buildStyle = (type2, mode) => {
-          if (mode === "fade") {
-            styles.opacity = this.animationType(type2)[mode];
-          } else {
-            styles.transform += this.animationType(type2)[mode] + " ";
-          }
-        };
-        if (typeof this.modeClass === "string") {
-          buildStyle(type, this.modeClass);
-        } else {
-          this.modeClass.forEach((mode) => {
-            buildStyle(type, mode);
-          });
-        }
-        return styles;
-      },
-      // 处理内置组合动画
-      tranfromInit(type) {
-        let buildTranfrom = (type2, mode) => {
-          let aniNum = null;
-          if (mode === "fade") {
-            aniNum = type2 ? 0 : 1;
-          } else {
-            aniNum = type2 ? "-100%" : "0";
-            if (mode === "zoom-in") {
-              aniNum = type2 ? 0.8 : 1;
-            }
-            if (mode === "zoom-out") {
-              aniNum = type2 ? 1.2 : 1;
-            }
-            if (mode === "slide-right") {
-              aniNum = type2 ? "100%" : "0";
-            }
-            if (mode === "slide-bottom") {
-              aniNum = type2 ? "100%" : "0";
-            }
-          }
-          this.animation[this.animationMode()[mode]](aniNum);
-        };
-        if (typeof this.modeClass === "string") {
-          buildTranfrom(type, this.modeClass);
-        } else {
-          this.modeClass.forEach((mode) => {
-            buildTranfrom(type, mode);
-          });
-        }
-        return this.animation;
-      },
-      animationType(type) {
-        return {
-          fade: type ? 1 : 0,
-          "slide-top": `translateY(${type ? "0" : "-100%"})`,
-          "slide-right": `translateX(${type ? "0" : "100%"})`,
-          "slide-bottom": `translateY(${type ? "0" : "100%"})`,
-          "slide-left": `translateX(${type ? "0" : "-100%"})`,
-          "zoom-in": `scaleX(${type ? 1 : 0.8}) scaleY(${type ? 1 : 0.8})`,
-          "zoom-out": `scaleX(${type ? 1 : 1.2}) scaleY(${type ? 1 : 1.2})`
-        };
-      },
-      // 内置动画类型与实际动画对应字典
-      animationMode() {
-        return {
-          fade: "opacity",
-          "slide-top": "translateY",
-          "slide-right": "translateX",
-          "slide-bottom": "translateY",
-          "slide-left": "translateX",
-          "zoom-in": "scale",
-          "zoom-out": "scale"
-        };
-      },
-      // 驼峰转中横线
-      toLine(name) {
-        return name.replace(/([A-Z])/g, "-$1").toLowerCase();
-      }
-    }
-  };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
-      ref: "ani",
-      animation: $data.animationData,
-      class: vue.normalizeClass($props.customClass),
-      style: vue.normalizeStyle($options.transformStyles),
-      onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
-    }, [
-      vue.renderSlot(_ctx.$slots, "default")
-    ], 14, ["animation"])), [
-      [vue.vShow, $data.isShow]
-    ]);
-  }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "E:/fuchuang/learn/demo1/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$5 = {
-    name: "uniPopup",
-    components: {},
-    emits: ["change", "maskClick"],
-    props: {
-      // 开启动画
-      animation: {
-        type: Boolean,
-        default: true
-      },
-      // 弹出层类型，可选值，top: 顶部弹出层；bottom：底部弹出层；center：全屏弹出层
-      // message: 消息提示 ; dialog : 对话框
-      type: {
-        type: String,
-        default: "center"
-      },
-      // maskClick
-      isMaskClick: {
-        type: Boolean,
-        default: null
-      },
-      // TODO 2 个版本后废弃属性 ，使用 isMaskClick
-      maskClick: {
-        type: Boolean,
-        default: null
-      },
-      backgroundColor: {
-        type: String,
-        default: "none"
-      },
-      safeArea: {
-        type: Boolean,
-        default: true
-      },
-      maskBackgroundColor: {
-        type: String,
-        default: "rgba(0, 0, 0, 0.4)"
-      },
-      borderRadius: {
-        type: String
-      }
-    },
-    watch: {
-      /**
-       * 监听type类型
-       */
-      type: {
-        handler: function(type) {
-          if (!this.config[type])
-            return;
-          this[this.config[type]](true);
-        },
-        immediate: true
-      },
-      isDesktop: {
-        handler: function(newVal) {
-          if (!this.config[newVal])
-            return;
-          this[this.config[this.type]](true);
-        },
-        immediate: true
-      },
-      /**
-       * 监听遮罩是否可点击
-       * @param {Object} val
-       */
-      maskClick: {
-        handler: function(val) {
-          this.mkclick = val;
-        },
-        immediate: true
-      },
-      isMaskClick: {
-        handler: function(val) {
-          this.mkclick = val;
-        },
-        immediate: true
-      },
-      // H5 下禁止底部滚动
-      showPopup(show) {
-      }
-    },
-    data() {
-      return {
-        duration: 300,
-        ani: [],
-        showPopup: false,
-        showTrans: false,
-        popupWidth: 0,
-        popupHeight: 0,
-        config: {
-          top: "top",
-          bottom: "bottom",
-          center: "center",
-          left: "left",
-          right: "right",
-          message: "top",
-          dialog: "center",
-          share: "bottom"
-        },
-        maskClass: {
-          position: "fixed",
-          bottom: 0,
-          top: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.4)"
-        },
-        transClass: {
-          backgroundColor: "transparent",
-          borderRadius: this.borderRadius || "0",
-          position: "fixed",
-          left: 0,
-          right: 0
-        },
-        maskShow: true,
-        mkclick: true,
-        popupstyle: "top"
-      };
-    },
-    computed: {
-      getStyles() {
-        let res = { backgroundColor: this.bg };
-        if (this.borderRadius || "0") {
-          res = Object.assign(res, { borderRadius: this.borderRadius });
-        }
-        return res;
-      },
-      isDesktop() {
-        return this.popupWidth >= 500 && this.popupHeight >= 500;
-      },
-      bg() {
-        if (this.backgroundColor === "" || this.backgroundColor === "none") {
-          return "transparent";
-        }
-        return this.backgroundColor;
-      }
-    },
-    mounted() {
-      const fixSize = () => {
-        const {
-          windowWidth,
-          windowHeight,
-          windowTop,
-          safeArea,
-          screenHeight,
-          safeAreaInsets
-        } = uni.getSystemInfoSync();
-        this.popupWidth = windowWidth;
-        this.popupHeight = windowHeight + (windowTop || 0);
-        if (safeArea && this.safeArea) {
-          this.safeAreaInsets = safeAreaInsets.bottom;
-        } else {
-          this.safeAreaInsets = 0;
-        }
-      };
-      fixSize();
-    },
-    // TODO vue3
-    unmounted() {
-      this.setH5Visible();
-    },
-    activated() {
-      this.setH5Visible(!this.showPopup);
-    },
-    deactivated() {
-      this.setH5Visible(true);
-    },
-    created() {
-      if (this.isMaskClick === null && this.maskClick === null) {
-        this.mkclick = true;
-      } else {
-        this.mkclick = this.isMaskClick !== null ? this.isMaskClick : this.maskClick;
-      }
-      if (this.animation) {
-        this.duration = 300;
-      } else {
-        this.duration = 0;
-      }
-      this.messageChild = null;
-      this.clearPropagation = false;
-      this.maskClass.backgroundColor = this.maskBackgroundColor;
-    },
-    methods: {
-      setH5Visible(visible = true) {
-      },
-      /**
-       * 公用方法，不显示遮罩层
-       */
-      closeMask() {
-        this.maskShow = false;
-      },
-      /**
-       * 公用方法，遮罩层禁止点击
-       */
-      disableMask() {
-        this.mkclick = false;
-      },
-      // TODO nvue 取消冒泡
-      clear(e) {
-        e.stopPropagation();
-        this.clearPropagation = true;
-      },
-      open(direction) {
-        if (this.showPopup) {
-          return;
-        }
-        let innerType = ["top", "center", "bottom", "left", "right", "message", "dialog", "share"];
-        if (!(direction && innerType.indexOf(direction) !== -1)) {
-          direction = this.type;
-        }
-        if (!this.config[direction]) {
-          formatAppLog("error", "at uni_modules/uni-popup/components/uni-popup/uni-popup.vue:298", "缺少类型：", direction);
-          return;
-        }
-        this[this.config[direction]]();
-        this.$emit("change", {
-          show: true,
-          type: direction
-        });
-      },
-      close(type) {
-        this.showTrans = false;
-        this.$emit("change", {
-          show: false,
-          type: this.type
-        });
-        clearTimeout(this.timer);
-        this.timer = setTimeout(() => {
-          this.showPopup = false;
-        }, 300);
-      },
-      // TODO 处理冒泡事件，头条的冒泡事件有问题 ，先这样兼容
-      touchstart() {
-        this.clearPropagation = false;
-      },
-      onTap() {
-        if (this.clearPropagation) {
-          this.clearPropagation = false;
-          return;
-        }
-        this.$emit("maskClick");
-        if (!this.mkclick)
-          return;
-        this.close();
-      },
-      /**
-       * 顶部弹出样式处理
-       */
-      top(type) {
-        this.popupstyle = this.isDesktop ? "fixforpc-top" : "top";
-        this.ani = ["slide-top"];
-        this.transClass = {
-          position: "fixed",
-          left: 0,
-          right: 0,
-          backgroundColor: this.bg,
-          borderRadius: this.borderRadius || "0"
-        };
-        if (type)
-          return;
-        this.showPopup = true;
-        this.showTrans = true;
-        this.$nextTick(() => {
-          if (this.messageChild && this.type === "message") {
-            this.messageChild.timerClose();
-          }
-        });
-      },
-      /**
-       * 底部弹出样式处理
-       */
-      bottom(type) {
-        this.popupstyle = "bottom";
-        this.ani = ["slide-bottom"];
-        this.transClass = {
-          position: "fixed",
-          left: 0,
-          right: 0,
-          bottom: 0,
-          paddingBottom: this.safeAreaInsets + "px",
-          backgroundColor: this.bg,
-          borderRadius: this.borderRadius || "0"
-        };
-        if (type)
-          return;
-        this.showPopup = true;
-        this.showTrans = true;
-      },
-      /**
-       * 中间弹出样式处理
-       */
-      center(type) {
-        this.popupstyle = "center";
-        this.ani = ["zoom-out", "fade"];
-        this.transClass = {
-          position: "fixed",
-          display: "flex",
-          flexDirection: "column",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: this.borderRadius || "0"
-        };
-        if (type)
-          return;
-        this.showPopup = true;
-        this.showTrans = true;
-      },
-      left(type) {
-        this.popupstyle = "left";
-        this.ani = ["slide-left"];
-        this.transClass = {
-          position: "fixed",
-          left: 0,
-          bottom: 0,
-          top: 0,
-          backgroundColor: this.bg,
-          borderRadius: this.borderRadius || "0",
-          display: "flex",
-          flexDirection: "column"
-        };
-        if (type)
-          return;
-        this.showPopup = true;
-        this.showTrans = true;
-      },
-      right(type) {
-        this.popupstyle = "right";
-        this.ani = ["slide-right"];
-        this.transClass = {
-          position: "fixed",
-          bottom: 0,
-          right: 0,
-          top: 0,
-          backgroundColor: this.bg,
-          borderRadius: this.borderRadius || "0",
-          display: "flex",
-          flexDirection: "column"
-        };
-        if (type)
-          return;
-        this.showPopup = true;
-        this.showTrans = true;
-      }
-    }
-  };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0);
-    return $data.showPopup ? (vue.openBlock(), vue.createElementBlock(
-      "view",
-      {
-        key: 0,
-        class: vue.normalizeClass(["uni-popup", [$data.popupstyle, $options.isDesktop ? "fixforpc-z-index" : ""]])
-      },
-      [
-        vue.createElementVNode(
-          "view",
-          {
-            onTouchstart: _cache[1] || (_cache[1] = (...args) => $options.touchstart && $options.touchstart(...args))
-          },
-          [
-            $data.maskShow ? (vue.openBlock(), vue.createBlock(_component_uni_transition, {
-              key: "1",
-              name: "mask",
-              "mode-class": "fade",
-              styles: $data.maskClass,
-              duration: $data.duration,
-              show: $data.showTrans,
-              onClick: $options.onTap
-            }, null, 8, ["styles", "duration", "show", "onClick"])) : vue.createCommentVNode("v-if", true),
-            vue.createVNode(_component_uni_transition, {
-              key: "2",
-              "mode-class": $data.ani,
-              name: "content",
-              styles: $data.transClass,
-              duration: $data.duration,
-              show: $data.showTrans,
-              onClick: $options.onTap
-            }, {
-              default: vue.withCtx(() => [
-                vue.createElementVNode(
-                  "view",
-                  {
-                    class: vue.normalizeClass(["uni-popup__wrapper", [$data.popupstyle]]),
-                    style: vue.normalizeStyle($options.getStyles),
-                    onClick: _cache[0] || (_cache[0] = (...args) => $options.clear && $options.clear(...args))
-                  },
-                  [
-                    vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
-                  ],
-                  6
-                  /* CLASS, STYLE */
-                )
-              ]),
-              _: 3
-              /* FORWARDED */
-            }, 8, ["mode-class", "styles", "duration", "show", "onClick"])
-          ],
-          32
-          /* HYDRATE_EVENTS */
-        )
-      ],
-      2
-      /* CLASS */
-    )) : vue.createCommentVNode("v-if", true);
-  }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/fuchuang/learn/demo1/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-d78c88b7"], ["__file", "E:/fuchuang/learn/demo1/uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog.vue"]]);
   const _sfc_main$4 = {
     data() {
       const currentDate = this.getDate({
@@ -5702,8 +5882,8 @@ if (uni.restoreGlobal) {
     }
   };
   function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_popup_dialog = resolveEasycom(vue.resolveDynamicComponent("uni-popup-dialog"), __easycom_0$1);
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1);
+    const _component_uni_popup_dialog = resolveEasycom(vue.resolveDynamicComponent("uni-popup-dialog"), __easycom_0);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "profile" }, [
       vue.createElementVNode("view", { class: "item" }, [
         vue.createElementVNode("view", { class: "item-left" }, "昵称"),
@@ -6106,13 +6286,12 @@ if (uni.restoreGlobal) {
     globalData: {
       BackEndUrl: "http://82.157.124.83:51603",
       llmUrl: "http://127.0.0.1:8000",
-      token: "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAADWLywqDMBAA_2XPBpK6Wa1_s3m0RAyEboSK-O9dD73NMMwJay-wwGjZjxyj4ZmsQU4vE2Iig-R8CmgxxwADFO6wuMk98Okd0QCyB73lkJ7r3UVU31upNX_UeU_q3Jpy_rb_O0_3W7T56wfz5p8PggAAAA.-LbMs0Yjl1qd9N6lJR1JOb2tf1YZ-FT-KrPwwgXeFvMKDLEMsNGHGZxnMnoj_hb3gVm_rp6JwCzHHh_TBNgmoA",
+      token: "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAADWLSQrDMAwA_6JzDF4i7OQ3ViIXlxpM5UBL6d-jHHKbYZgfPEeFFSxm2sNWTLSYzOyKNeSXYHihuBHHwgVhgpoHrC46jzj7kCaQg_SWrwxuVxdRfbxqa_xWz8eunntX5k-_35iut2rD_wnHjcgIggAAAA.3oIGB9_m2VKeItuVeK8EsIZu4-DWeklZawU6VCU3jIl2leRWf6vzSIozvw1Uf2_6GZznGoQki1xon3VeCb8heQ",
       phone: ""
     },
     onLaunch: function() {
       formatAppLog("log", "at App.vue:10", "App Launch");
       let token = getApp().globalData.token;
-      formatAppLog("log", "at App.vue:15", "token is " + token);
       if (token != "") {
         plus.navigator.closeSplashscreen();
       } else {

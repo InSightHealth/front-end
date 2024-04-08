@@ -1,5 +1,5 @@
 <template>
-		<view id="msglistview" class="chat-body" :style="{ width: windowWidth, height: windowHeight }">
+		<view id="msglistview" class="chat-body" :style="{ width: windowWidth }">
 			<!-- 聊天记录 -->
 			<view v-for="(item,index) in msgList" :key="index" :style="{ width: windowWidth}">
 				<view class="item self" v-if="item.userContent != ''" >
@@ -80,7 +80,6 @@ view {
 	flex-direction: column;
 	background-color: inherit;
 	width: 750rpx;
-	height: 750rpx;
 	box-sizing: content-box; 
 	
 	.self {
