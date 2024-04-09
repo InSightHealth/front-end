@@ -1,5 +1,11 @@
 <template>
 	<view class="profile">
+		<view class="item-high">
+			<view class="item-left">更改头像</view>
+			<image class="avatar" :src="avatar" @tap="changeAvatar"></image>
+		</view>
+		<view class="line"></view>
+		
 		<view class="item">
 			<view class="item-left">昵称</view>
 				<view class="item-right" @tap="nameChange">
@@ -78,7 +84,8 @@
 				genderSet: false,
 				height: 0,
 				weight: 0,
-				nickname: ''
+				nickname: '',
+				avatar: ''
 			}
 		},
 		onLoad() {
@@ -102,6 +109,12 @@
 					}
 					
 					this.nickname = response.nickname;
+					
+					if (response.imageUri == null) {
+						this.avatar = '/static/personal/girl.png'
+					} else {
+						this.avatar = response.imageUri;
+					}
 				}
 			})
 		},
@@ -168,6 +181,35 @@
 						})
 					}
 				})
+			},
+			changeAvatar() {
+				uni.chooseImage({
+					count: 1,
+					sourceType: ['album'],
+					success: res => {
+						console.log("chosed" +  res.tempFilePaths)
+					    let imgFiles = res.tempFilePaths;
+						uni.uploadFile({
+						    url: `http://82.157.124.83:51603/user/api/v1/uploadPicture`,
+						    header:{
+						        "token": getApp().globalData.token
+						    },
+						    filePath: imgFiles[0],
+							name: 'multipartFile',
+							success: (res) => {
+								let data=JSON.parse(res.data)   //返回的是字符串，需要转成对象格式，打印data如下图
+								console.log(data);
+						        if(data.code==200){
+									console.log(data.data.imageUri);
+						            this.avatar = data.data.imageUri;
+						        }
+						    },
+							fail: (err) => {
+								console.log(err);
+							}
+						});
+					}
+				})
 			}
 		}
 	}
@@ -182,6 +224,23 @@
 	.item-high {
 		height: 173rpx;
 		width: 750rpx;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		padding-bottom: 29rpx;
+		
+		.item-left {
+			margin-left: 33rpx;
+			font-size: 42rpx;
+			margin-bottom: 29rpx;
+		}
+		
+		.avatar {
+			margin-right: 33rpx;
+			height: 123rpx;
+			width: 123rpx;
+			border-radius: 50%;
+		}
 	}
 	
 	.item {

@@ -27,7 +27,8 @@
 			}" 
 			@touchstart="start" 
 			@touchend="end" 
-			@touchmove="move">
+			@touchmove="move"
+			:photoUrl="photoUrl">
 		</tab-chat>
 	</view>
 </template>
@@ -43,14 +44,40 @@ export default {
 				clientY: '',
 			},
 			moveY: 0,
-			state: 0
+			state: 0,
+			photoUrl: '',
 		};
 	},
 	onLoad(option) { 
 		const eventChannel = this.getOpenerEventChannel();
+		const token = getApp().globalData.token;
 		eventChannel.on('recieveFile', (data) => {
 			this.photoPath = data.filepath;
 			this.$refs.image.src = data.filepath;
+		})
+		
+		eventChannel.on('recieveFile', (data) => {
+			uni.uploadFile({
+				url: 'http://82.157.124.83:51603/storage/api/v1/uploadImg/photo'
+				,name: "multipartFile"
+				,filePath: data.filepath
+				,formData: { }
+				,header: {
+					'token': token
+				}
+				,success: (res) => { 
+					console.log("上传成功："+JSON.stringify(res));
+					
+					if (res.statusCode == 200) {
+						const response = JSON.parse(res.data);
+						console.log(response.data.image);
+						this.photoUrl = response.data.image;
+					} else {
+						
+					}
+				}
+				,fail: (err)=>{ console.error("上传录音失败："+err.errMsg); }
+			})
 		})
 	},
 	methods: {

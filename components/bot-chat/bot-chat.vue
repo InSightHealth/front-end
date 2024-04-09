@@ -21,7 +21,7 @@
 						<image src="/static/smart-chat/icon-bot.png"></image>
 					</view>
 					<!-- 文字内容 -->
-					<view class="content left">
+					<view class="content left" @tap="play(index)">
 						{{item.botContent}}
 					</view>
 				</view>
@@ -31,6 +31,10 @@
 </template>
 
 <script>
+	const innerAudioContext = uni.createInnerAudioContext();
+	innerAudioContext.autoplay = false;			//不让它自动播放
+	innerAudioContext.src = '';
+	
 	export default {
 		name:"bot-chat",
 		props: {
@@ -74,6 +78,19 @@
 				//发送的消息
 				chatMsg:""
 			};
+		},
+		methods: {
+			play(index) {
+				const text = this.msgList[index].botContent;
+				
+				const encoded = encodeURI(text);
+				console.log(encoded);
+				innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike
+					&spd=` + this.speed + `&ctp=1&amp&pdt=301&tex=` + encoded;
+				console.log(innerAudioContext.src);
+				innerAudioContext.play();
+				console.log("play over!!!"); 
+			}
 		}
 	}
 </script>

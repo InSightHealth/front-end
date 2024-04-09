@@ -3,11 +3,11 @@
 		<view class="content">
 			<view class="home-head">
 				<view class="head-left">
-					<image class="home-icon" src="/static/personal/girl.png"></image>
+					<image class="home-icon" :src="avatar"></image>
 					<view class="head-info">
-						<text class="home-title">张三</text>
-						<text class="info-text" v-if="gender"><span style="color: #1fa6ea;">♂</span>  男   45岁</text>
-						<text class="info-text" v-else><span style="color: #F49ED9;">♀</span>  女   45岁</text>
+						<text class="home-title"> {{ nickname }} </text>
+						<text class="info-text" v-if="gender"><span style="color: #1fa6ea;">♂</span>  男   {{age + "岁"}}</text>
+						<text class="info-text" v-else><span style="color: #F49ED9;">♀</span>  女   {{age + "岁"}}</text>
 					</view>
 				</view>
 				<navigator class="edit-button" url="/pages/personal/profile/profile">
@@ -51,8 +51,42 @@
 	export default {
 		data() {
 			return {
-				gender: true
+				gender: false,
+				avatar: '',
+				age: 0,
+				nickname: ''
 			};
+		},
+		onLoad() {
+			uni.request({
+				url: 'http://82.157.124.83:51603/user/api/v1',
+				method: 'GET',
+				header: {
+					'token': getApp().globalData.token
+				},
+				success: (res) => {
+					console.log(res.data.data);
+					const response = res.data.data
+					
+					this.date = response.birthday;
+					const date = new Date();
+					const year = parseInt(this.date.slice(0, 4));
+					this.age = date.getFullYear() - year;
+					this.nickname = response.nickname;
+					
+					if (response.imageUri == null) {
+						this.avatar = "/static/personal/girl.png";
+					} else {
+						this.avatar = response.imageUri;
+					}
+					
+					if (response.gender == '男') {
+						this.gender = true;
+					} else if (response.gender == '女') {
+						this.gender = false;
+					}
+				}
+			})
 		}
 	}
 </script>
@@ -87,6 +121,7 @@
 				.home-icon {
 					height: 123rpx;
 					width: 123rpx;
+					border-radius: 50%;
 				}
 				.head-info {
 					height: 123rpx;

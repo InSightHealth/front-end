@@ -1,7 +1,8 @@
 <template>
 	<view class="chat-view">
 		<textarea class="input-text" @input="textInput" v-model="inputText"
-		@focus="focus" :placeholder="placeholder" placeholder-style="font-size: 36rpx"></textarea>
+		@focus="focus" @blur="blur" :placeholder="placeholder" placeholder-style="font-size: 36rpx"></textarea>
+		<div class="clear" @tap="clearText" v-if="hasInput">清除内容</div>
 		<div class="tap-mic" @tap="send" v-if="hasInput">
 			确认发送
 		</div>
@@ -9,7 +10,8 @@
 			<image src="/static/recog/mic.png"></image>
 		</div>
 		<div class="divide"></div>
-		<div class="show-box"> {{ playText }} </div>
+		<div class="show-box" :style="{color:`${playColor}`}"> {{ playText }} </div>
+		<div class="clear" @tap="clearPlay" v-if="hasPlay">清除内容</div>
 		<div class="tap-mic" @tap="play">
 			点击播放
 		</div>
@@ -27,26 +29,40 @@
 	innerAudioContext.src = '';
 	
 	export default {
+		props: {
+		    photoUrl: {
+				type: String,
+				default: ''
+			},
+		},
 		data() {
 			return {
 				inputText: '',
 				hasInput: false,
-				playText: '',
-				placeholder: '你可以点击这里输入, 也可以按住下方语音发送'
+				playText: '我很高兴为您解答！你可以在上面手动或语音输入',
+				placeholder: '你可以点击这里输入, 也可以按住下方语音发送',
+				playColor: '#888888',
+				hasPlay: false
 			};
 		},
 		methods: {
 			moveHandle(){}, 
 			micStart() {
 				console.log('开始录音');
-				this.placeholder = '识别中...';
+				console.log(this.inputText);
+				this.hasPlay = false;
+				this.placeholder = '我正在听...';
+				this.playText = '你可以点击这里输入, 也可以按住下方语音发送';
+				this.playColor = '#888888';
 				recorderManager.start();
 			},
 			micStop() {
 				console.log('录音结束'); 
-				this.placeholder = '你可以点击这里输入,也可以按住下方语音发送';
+				this.placeholder = '识别中...';
 				recorderManager.stop();
-				recorderManager.onStop((res) => {
+				var _this = this;
+				recorderManager.onStop(function (res) {
+					console.log(res.tempFilePath);
 					uni.uploadFile({
 						url: "http://127.0.0.1:8000/speechtotext"
 						,name: "mp3" 
@@ -54,11 +70,18 @@
 						,formData: { }
 						,success: (res) => { 
 							console.log("上传成功："+JSON.stringify(res));
-							const response = JSON.parse(res.data);
-							this.playText = "sb服创大赛！！我哭死";
-							console.log(this.playText);
+							
 							if (res.statusCode == 200) {
+								const response = JSON.parse(res.data);
 								console.log(response.text);
+								_this.inputText = response.text;
+								_this.placeholder = '';
+								_this.hasInput = true;
+								_this.sendMsg();
+							} else {
+								_this.hasPlay = true;
+								_this.playText = '发送失败';
+								_this.playColor = 'red';
 							}
 						}
 						,fail: (err)=>{ console.error("上传录音失败："+JSON.stringify(err)); }
@@ -67,6 +90,22 @@
 			},
 			focus() {
 				this.placeholder = '';
+			},
+			blur() {
+				this.placeholder = '';
+				if (this.inputText == '') {
+					this.placeholder = '你可以点击这里输入, 也可以按住下方语音发送';
+				}
+			},
+			clearText() {
+				this.hasInput = false;
+				this.inputText = '';
+				this.placeholder = '你可以点击这里输入, 也可以按住下方语音发送';
+			},
+			clearPlay() {
+				this.hasPlay = false;
+				this.playText = '我很高兴为您解答！你可以在上面手动或语音输入';
+				this.playColor = '#888888';
 			},
 			play() {
 				console.log("播放");
@@ -79,7 +118,43 @@
 				console.log("play over!!!"); 
 			},
 			send() {
-				console.log(this.inputText);
+				this.sendMsg();
+			},
+			sendMsg() {
+				console.log(this.inputText, this.photoUrl);
+				this.playText = '发送中...';
+				this.playColor = '#888888'
+				uni.request({
+					url: 'http://127.0.0.1:8000/chatbot',
+					method: 'POST',
+					data: {
+						"prompt": this.inputText,
+						"image": this.photoUrl
+					},
+					success: (res) => {
+						console.log(res);
+						this.hasPlay = true;
+						
+						if (res.statusCode == 200) {
+							const response = JSON.parse(res.data);
+							console.log(response);
+							if (response.response) {
+								this.playText = response.response;
+								this.playColor = 'black';
+							} else {
+								this.playText = '发送失败！！';
+								this.playColor = 'red';
+							}
+						} else {
+							this.playText = '发送失败！！';
+							this.playColor = 'red';
+						}
+					},
+					fail: (err) => {
+						this.playText = '发送失败！！';
+						this.playColor = 'red';
+					}
+				})
 			},
 			textInput() {
 				console.log("input....");
@@ -109,6 +184,17 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
+	
+	.clear{
+		position: relative;
+		top: -40rpx;
+		right: -220rpx;
+		color: grey;
+		font-size: 25rpx;
+		background-color: rgba(219, 244, 228, 1);
+		height: 0rpx;
+		overflow: visible;
+	}
 	
 	.input-text {
 		margin-top: 73rpx;

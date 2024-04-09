@@ -177,6 +177,21 @@
 .profile .item-high[data-v-b9418a0f] {
   height: 5.40625rem;
   width: 23.4375rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 0.90625rem;
+}
+.profile .item-high .item-left[data-v-b9418a0f] {
+  margin-left: 1.03125rem;
+  font-size: 1.3125rem;
+  margin-bottom: 0.90625rem;
+}
+.profile .item-high .avatar[data-v-b9418a0f] {
+  margin-right: 1.03125rem;
+  height: 3.84375rem;
+  width: 3.84375rem;
+  border-radius: 50%;
 }
 .profile .item[data-v-b9418a0f] {
   height: 3.125rem;

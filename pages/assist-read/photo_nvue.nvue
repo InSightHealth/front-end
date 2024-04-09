@@ -65,7 +65,7 @@ export default {
 			//#ifdef APP-PLUS
 			if (plus.os.name == 'Android') {
 				this.poenCarmeInterval = setInterval(function() {
-					console.log(_this.camerastate);
+					// console.log(_this.camerastate);
 					if (!_this.camerastate) _this.startPreview();
 				}, 2500);
 			}
@@ -111,7 +111,7 @@ export default {
 		//状态
 		statechange(e) {
 			//状态改变
-			console.log(e);
+			// console.log(e);
 			if (e.detail.code == 1007) {
 				_this.camerastate = true;
 			} else if (e.detail.code == -1301) {
@@ -133,20 +133,17 @@ export default {
 			        console.log('success');
 			    }
 			});
-			//拍照
 			this.livePusher.snapshot({
 				success: e => {
 					_this.snapshotsrc = e.message.tempImagePath;
+					const token = getApp().globalData.token;
 					uni.navigateTo({
 						url: '/pages/assist-read/photo-recog',
 						success: function(res) {
-						    res.eventChannel.emit('recieveFile', { filepath: e.message.tempImagePath })
+						    res.eventChannel.emit('recieveFile', { filepath: _this.snapshotsrc })
 						},
 						fail: (e) => { console.log(e); } 
 					});
-					// _this.stopPreview();
-					// _this.setImage();
-					// uni.navigateBack();
 				}
 			});
 		},

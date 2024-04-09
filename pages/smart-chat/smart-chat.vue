@@ -43,7 +43,7 @@
 			</view>
 			<view class="show-listen" v-if="show_listen">
 				<text class="listen-title">正在听，请说出您的问题</text>
-				<image src="/static/smart-chat/wave.png"></image>
+				<image src="/static/homepage/sound.gif"></image>
 			</view>
 			<view class="listen-place" v-if="show_listen"></view>
 		</scroll-view>
@@ -80,6 +80,9 @@
 
 <script>
 	const recorderManager = uni.getRecorderManager();
+	const innerAudioContext = uni.createInnerAudioContext();
+	innerAudioContext.autoplay = false;			
+	innerAudioContext.src = '';
 	
 	export default {
 		data() {
@@ -186,6 +189,7 @@
 				recorderManager.start();
 			},
 			endRecord() {
+				var _this = this;
 				console.log('录音结束');
 				recorderManager.stop();
 				recorderManager.onStop(function (res) {
@@ -194,9 +198,12 @@
 						url: "http://127.0.0.1:8000/speechtotext"
 						,filePath: res.tempFilePath
 						,name: "mp3"
-						,formData: { }
+						,formData: { } 
 						,success: (res) => { 
 							console.log("上传成功："+JSON.stringify(res)); 
+							const response = JSON.parse(res.data);
+							_this.chatMsg = response.text;
+							_this.typeSend();
 						}
 						,fail: (err)=>{ console.error("上传录音失败："+err); }
 					});
@@ -213,6 +220,71 @@
 					titleId: 0,
 					userContent: this.chatMsg,
 					userId: 0
+				});
+				
+				this.msglist.push({
+					botContent: "思考中...",
+					recordId: 0,
+					titleId: 0,
+					userContent: "",
+					userId: 0
+				});
+				
+				uni.request({
+					url: 'http://127.0.0.1:8000/healthbot',
+					method: 'POST',
+					data: {
+						"prompt": this.chatMsg,
+					},
+					success: (res) => {
+						console.log(res);
+						this.msglist.pop();
+						
+						try{
+							const response = res.data;
+							this.msglist.push({
+								botContent: response.response,
+								recordId: 0,
+								titleId: 0,
+								userContent: "",
+								userId: 0
+							});
+							const encoded = encodeURI(response.response);
+							console.log(encoded);
+							innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike
+								&spd=` + this.speed + `&ctp=1&amp&pdt=301&tex=` + encoded;
+							innerAudioContext.play();
+						}catch(e){
+							this.msglist.push({
+								botContent: "发送失败",
+								recordId: 0,
+								titleId: 0,
+								userContent: "",
+								userId: 0
+							});
+							const encoded = encodeURI("发送失败");
+							console.log(encoded);
+							innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike
+								&spd=` + this.speed + `&ctp=1&amp&pdt=301&tex=` + encoded;
+							innerAudioContext.play();
+						}
+					},
+					fail: (err) => {
+						console.log(err);
+						this.msglist.pop();
+						this.msglist.push({
+							botContent: "发送失败",
+							recordId: 0,
+							titleId: 0,
+							userContent: "",
+							userId: 0
+						});
+						const encoded = encodeURI("发送失败");
+						innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike
+							&spd=` + this.speed + `&ctp=1&amp&pdt=301&tex=` + encoded;
+						console.log(innerAudioContext.src);
+						innerAudioContext.play();
+					}
 				})
 				
 				this.chatMsg = '';

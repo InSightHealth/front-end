@@ -87,7 +87,7 @@ export default {
 			//#ifdef APP-PLUS
 			if (plus.os.name == 'Android') {
 				this.poenCarmeInterval = setInterval(function() {
-					console.log(_this.camerastate);
+					// console.log(_this.camerastate);
 					if (!_this.camerastate) _this.startPreview();
 				}, 2500);
 			}
@@ -133,7 +133,7 @@ export default {
 		//状态
 		statechange(e) {
 			//状态改变
-			console.log(e);
+			// console.log(e);
 			if (e.detail.code == 1007) {
 				_this.camerastate = true;
 			} else if (e.detail.code == -1301) {
@@ -197,6 +197,14 @@ export default {
 								userId: 0
 							});
 							
+							_this.msglist.push({
+								botContent: "发送中...",
+								recordId: 0,
+								titleId: 0,
+								userContent: "",
+								userId: 0
+							});
+							
 							_this.handleRecord(response.text);
 						}
 					}
@@ -246,10 +254,20 @@ export default {
 				},
 				success: (res) => {
 					console.log(res);
+					_this.msglist.pop();
 					
-					if (true) { // res.statusCode == 200
+					if (res.statusCode == 200) {
+						const response = JSON.parse(res.data);
 						_this.msglist.push({
-							botContent: res.data,
+							botContent: response.response,
+							recordId: 0,
+							titleId: 0,
+							userContent: "",
+							userId: 0
+						});
+					} else {
+						_this.msglist.push({
+							botContent: "发送失败",
 							recordId: 0,
 							titleId: 0,
 							userContent: "",

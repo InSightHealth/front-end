@@ -205,7 +205,6 @@ const _sfc_main = {
     poenCarme() {
       if (plus.os.name == "Android") {
         this.poenCarmeInterval = setInterval(function() {
-          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:90", _this.camerastate);
           if (!_this.camerastate)
             _this.startPreview();
         }, 2500);
@@ -246,7 +245,6 @@ const _sfc_main = {
     },
     //状态
     statechange(e) {
-      formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:136", e);
       if (e.detail.code == 1007) {
         _this.camerastate = true;
       } else if (e.detail.code == -1301) {
@@ -301,11 +299,18 @@ const _sfc_main = {
                 userContent: response.text,
                 userId: 0
               });
+              _this.msglist.push({
+                botContent: "发送中...",
+                recordId: 0,
+                titleId: 0,
+                userContent: "",
+                userId: 0
+              });
               _this.handleRecord(response.text);
             }
           },
           fail: (err) => {
-            formatAppLog("error", "at pages/test-camera/cover_nvue.nvue:203", "上传录音失败：" + err.errMsg);
+            formatAppLog("error", "at pages/test-camera/cover_nvue.nvue:211", "上传录音失败：" + err.errMsg);
           }
         });
       });
@@ -315,8 +320,8 @@ const _sfc_main = {
         success: (e) => {
           _this.snapshotsrc = e.message.tempImagePath;
           const token = getApp().globalData.token;
-          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:213", "_this.snapshotsrc = " + _this.snapshotsrc);
-          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:214", "token = " + token);
+          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:221", "_this.snapshotsrc = " + _this.snapshotsrc);
+          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:222", "token = " + token);
           uni.uploadFile({
             url: "http://82.157.124.83:51603/storage/api/v1/uploadImg/move",
             filePath: _this.snapshotsrc,
@@ -326,22 +331,22 @@ const _sfc_main = {
               "token": token
             },
             success: (uploadFileRes) => {
-              formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:224", uploadFileRes.data);
+              formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:232", uploadFileRes.data);
               const response = JSON.parse(uploadFileRes.data);
               if (response.code == 200) {
-                formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:227", response.data);
+                formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:235", response.data);
                 _this.sendChat(text, response.data.image);
               }
             },
             fail: (err) => {
-              formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:231", err.errMsg);
+              formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:239", err.errMsg);
             }
           });
         }
       });
     },
     sendChat(text, imgUrl) {
-      formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:239", "text = " + text + "   imgUrl = " + imgUrl);
+      formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:247", "text = " + text + "   imgUrl = " + imgUrl);
       uni.request({
         url: "http://127.0.0.1:8000/chatbot",
         method: "POST",
@@ -350,10 +355,20 @@ const _sfc_main = {
           "image": imgUrl
         },
         success: (res) => {
-          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:248", res);
-          {
+          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:256", res);
+          _this.msglist.pop();
+          if (res.statusCode == 200) {
+            const response = JSON.parse(res.data);
             _this.msglist.push({
-              botContent: res.data,
+              botContent: response.response,
+              recordId: 0,
+              titleId: 0,
+              userContent: "",
+              userId: 0
+            });
+          } else {
+            _this.msglist.push({
+              botContent: "发送失败",
               recordId: 0,
               titleId: 0,
               userContent: "",

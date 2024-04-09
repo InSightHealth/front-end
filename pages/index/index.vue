@@ -24,9 +24,9 @@
 		</div>
 		<uni-popup ref="popup" type="bottom" class="popup">
 			<view class="popup"> 
-				<text class="holderText"> {{ holderText }} </text>
-				<text class="responseText"> {{recog}} </text>
-				<image src="/static/homepage/sound.gif"></image>
+				<text class="holderText" v-if="holding"> {{ holderText }} </text>
+				<text class="responseText" v-if="recoging"> {{ recogText }} </text>
+				<image class="popup-gif" src="/static/homepage/sound.gif"></image>
 			 </view>
 			<!-- <uni-popup-message :type="msgType" :message="message" :duration="700" /> -->
 		</uni-popup>
@@ -36,6 +36,14 @@
 
 <script>
 	export default {
+		data() {
+			return {
+				holding: true,
+				recoging: false,
+				holderText: '正在听，请说出你的问题...',
+				recogText: '',
+			}
+		},
 		onLoad() {
 		}
 	}
@@ -189,5 +197,20 @@
 		background-color: white; 
 		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
 		border-radius: 38rpx;
+		
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		
+		.holderText {
+			font-size: 40rpx;
+			color: #686868;
+		}
+		
+		.popup-gif {
+			height: 175rpx;
+			width: 350rpx;
+		}
 	}
 </style>

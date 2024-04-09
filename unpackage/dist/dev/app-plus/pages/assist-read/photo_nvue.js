@@ -117,7 +117,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       poenCarme() {
         if (plus.os.name == "Android") {
           this.poenCarmeInterval = setInterval(function() {
-            formatAppLog("log", "at pages/assist-read/photo_nvue.nvue:68", _this.camerastate);
             if (!_this.camerastate)
               _this.startPreview();
           }, 2500);
@@ -158,7 +157,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       },
       //状态
       statechange(e) {
-        formatAppLog("log", "at pages/assist-read/photo_nvue.nvue:114", e);
         if (e.detail.code == 1007) {
           _this.camerastate = true;
         } else if (e.detail.code == -1301) {
@@ -179,10 +177,11 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
         this.livePusher.snapshot({
           success: (e) => {
             _this.snapshotsrc = e.message.tempImagePath;
+            getApp().globalData.token;
             uni.navigateTo({
               url: "/pages/assist-read/photo-recog",
               success: function(res) {
-                res.eventChannel.emit("recieveFile", { filepath: e.message.tempImagePath });
+                res.eventChannel.emit("recieveFile", { filepath: _this.snapshotsrc });
               },
               fail: (e2) => {
                 formatAppLog("log", "at pages/assist-read/photo_nvue.nvue:145", e2);

@@ -142,6 +142,7 @@
 .personal .content .home-head .head-left .home-icon {
   height: 3.84375rem;
   width: 3.84375rem;
+  border-radius: 50%;
 }
 .personal .content .home-head .head-left .head-info {
   height: 3.84375rem;

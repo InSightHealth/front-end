@@ -36,6 +36,16 @@
   align-items: center;
   justify-content: flex-start;
 }
+.chat-view .clear[data-v-6c9e0889] {
+  position: relative;
+  top: -1.25rem;
+  right: -6.875rem;
+  color: grey;
+  font-size: 0.78125rem;
+  background-color: #dbf4e4;
+  height: 0;
+  overflow: visible;
+}
 .chat-view .input-text[data-v-6c9e0889] {
   margin-top: 2.28125rem;
   height: 8.875rem;

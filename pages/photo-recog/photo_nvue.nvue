@@ -65,7 +65,7 @@ export default {
 			//#ifdef APP-PLUS
 			if (plus.os.name == 'Android') {
 				this.poenCarmeInterval = setInterval(function() {
-					console.log(_this.camerastate);
+					// console.log(_this.camerastate);
 					if (!_this.camerastate) _this.startPreview();
 				}, 2500);
 			}
@@ -111,7 +111,7 @@ export default {
 		//状态
 		statechange(e) {
 			//状态改变
-			console.log(e);
+			// console.log(e);
 			if (e.detail.code == 1007) {
 				_this.camerastate = true;
 			} else if (e.detail.code == -1301) {
@@ -138,30 +138,13 @@ export default {
 				success: e => {
 					_this.snapshotsrc = e.message.tempImagePath;
 					const token = getApp().globalData.token;
-					uni.uploadFile({
-						url: 'http://82.157.124.83:51603/storage/api/v1/uploadImg/photo'
-						,name: "multipartFile"
-						,filePath: _this.snapshotsrc
-						,formData: { }
-						,header: {
-							'token': token
-						}
-						,success: (res) => { 
-							console.log("上传成功："+JSON.stringify(res));
-							const response = JSON.parse(res.data);
-							console.log(response.data.image);
-							if (res.statusCode == 200) {
-								uni.navigateTo({
-									url: '/pages/photo-recog/photo-recog',
-									success: function(res) {
-									    res.eventChannel.emit('recieveFile', { filepath: response.data.image })
-									},
-									fail: (e) => { console.log(e); } 
-								});
-							}
-						}
-						,fail: (err)=>{ console.error("上传录音失败："+err.errMsg); }
-					})
+					uni.navigateTo({
+						url: '/pages/photo-recog/photo-recog',
+						success: function(res) {
+						    res.eventChannel.emit('recieveFile', { filepath: _this.snapshotsrc })
+						},
+						fail: (e) => { console.log(e); } 
+					});
 				}
 			});
 		},

@@ -117,7 +117,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       poenCarme() {
         if (plus.os.name == "Android") {
           this.poenCarmeInterval = setInterval(function() {
-            formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:68", _this.camerastate);
             if (!_this.camerastate)
               _this.startPreview();
           }, 2500);
@@ -158,7 +157,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       },
       //状态
       statechange(e) {
-        formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:114", e);
         if (e.detail.code == 1007) {
           _this.camerastate = true;
         } else if (e.detail.code == -1301) {
@@ -179,33 +177,14 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
         this.livePusher.snapshot({
           success: (e) => {
             _this.snapshotsrc = e.message.tempImagePath;
-            const token = getApp().globalData.token;
-            uni.uploadFile({
-              url: "http://82.157.124.83:51603/storage/api/v1/uploadImg/photo",
-              name: "multipartFile",
-              filePath: _this.snapshotsrc,
-              formData: {},
-              header: {
-                "token": token
+            getApp().globalData.token;
+            uni.navigateTo({
+              url: "/pages/photo-recog/photo-recog",
+              success: function(res) {
+                res.eventChannel.emit("recieveFile", { filepath: _this.snapshotsrc });
               },
-              success: (res) => {
-                formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:150", "\u4E0A\u4F20\u6210\u529F\uFF1A" + JSON.stringify(res));
-                const response = JSON.parse(res.data);
-                formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:152", response.data.image);
-                if (res.statusCode == 200) {
-                  uni.navigateTo({
-                    url: "/pages/photo-recog/photo-recog",
-                    success: function(res2) {
-                      res2.eventChannel.emit("recieveFile", { filepath: response.data.image });
-                    },
-                    fail: (e2) => {
-                      formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:159", e2);
-                    }
-                  });
-                }
-              },
-              fail: (err) => {
-                formatAppLog("error", "at pages/photo-recog/photo_nvue.nvue:163", "\u4E0A\u4F20\u5F55\u97F3\u5931\u8D25\uFF1A" + err.errMsg);
+              fail: (e2) => {
+                formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:146", e2);
               }
             });
           }

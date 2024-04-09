@@ -84,9 +84,14 @@
 						this.text = 'request success';
 						
 						getApp().globalData.token = res.data.data.token;
+						getApp().setToken(res.data.data.token, 3600);
 						getApp().globalData.phone = this.phoneNumber;
+						console.log(res.data.data.token);
 						uni.navigateTo({
-							url: '/pages/index/index'
+							url: '/pages/index/index',
+							success() {
+								console.log(getApp().globalData.token);
+							}
 						})
 					},
 					fail(e) {

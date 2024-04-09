@@ -1,43 +1,70 @@
 <template>
 	<view class="tab-view">
-		<view class="show-box" style=""> {{ recogText }} </view>
+		<scroll-view class="show-box" style="" scroll-y="true"> {{ recogText }} </scroll-view>
 		<view class="menu">
 			<view class="first-row">
 				<image src="/static/read/start.png" class="start-play" @tap="play"></image>
-				<view class="mult-play">倍速</view>
+				<view class="mult-play" @tap="toggle"> {{ playHint }} </view>
 			</view>
 			<view class="second-row">
-				<image src="/static/recog/home.png"></image>
-				<div class="once-again">再拍一张</div>
+				<image src="/static/recog/home.png" @tap="goHome"></image>
+				<navigator class="once-again" url="/pages/assist-read/photo_nvue">再拍一张</navigator>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+const innerAudioContext = uni.createInnerAudioContext();
+innerAudioContext.autoplay = false;			//不让它自动播放
+innerAudioContext.src = '';
+
 export default {
 	props: {
-	    photoUrl: {
+	    recogText: {
 			type: String,
 			default: ''
 		},
 	},
 	data() {
 		return {
-			recogText: ''
+			speed: 5,
+			playHint: '正常'
 		}
 	},
-	onLoad() {
-		uni.request({
-			url: 'http://127.0.0.1:8000/ocr',
-			method: 'POST',
-			data: {
-				"image": photoUrl
-			},
-			success: (res) => {
-				console.log(res);
+	methods: {
+		goHome() {
+			uni.navigateTo({
+				url: '/pages/index/index'
+			})
+		},
+		play() {
+			console.log("播放" + this.recogText);
+			
+			const encoded = encodeURI(this.recogText);
+			console.log(encoded);
+			innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike
+				&spd=` + this.speed + `&ctp=1&amp&pdt=301&tex=` + encoded;
+			console.log(innerAudioContext.src);
+			innerAudioContext.play();
+			console.log("play over!!!"); 
+		},
+		toggle() {
+			switch(this.speed) {
+				case 3: 
+					this.speed = 5;
+					this.playHint = '正常';
+					break;
+				case 5:
+					this.speed = 8;
+					this.playHint = '倍速';
+					break;
+				case 8:
+					this.speed = 3;
+					this.playHint = '慢速';
+					break;
 			}
-		})
+		}
 	}
 }
 </script>
@@ -62,6 +89,10 @@ export default {
 		height: 640rpx; 
 		background-color: rgba(219, 244, 228, 1); 
 		border-radius: 38rpx;
+		box-sizing: border-box;
+		padding: 40rpx;
+		white-space: pre-line;
+		font-size: 36rpx;
 	}
 	
 	.menu {
@@ -83,7 +114,7 @@ export default {
 			height: 138rpx;
 			
 			.start-play {
-				margin-left: 300rpx;
+				margin-left: 250rpx;
 				width: 138rpx;
 				height: 138rpx;
 			}
@@ -91,10 +122,11 @@ export default {
 			.mult-play {
 				width: 138rpx; 
 				height: 65rpx; 
-				background-color: white; 
 				border-radius: 19rpx; 
 				border: 2rpx solid rgba(148, 200, 108, 1);
+				background-color: rgba(148, 200, 108, 1);
 				margin-left: 44rpx;
+				color: white;
 				
 				display: flex;
 				align-items: center;
@@ -104,13 +136,12 @@ export default {
 		
 		.second-row {
 			margin-top: 45rpx;
-			width: 600rpx;
+			width: 750rpx;
 			height: 77rpx;
-			margin-right: 100rpx;
 			
 			display: flex;
 			align-items: center;
-			justify-content: space-between;
+			justify-content: center;
 			
 			image {
 				width: 90rpx;
@@ -118,6 +149,7 @@ export default {
 			}
 			
 			.once-again {
+				margin-left: 30rpx;
 				height: 90rpx;
 				width: 490rpx;
 				background-color: rgba(8, 223, 134, 1); 

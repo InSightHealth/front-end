@@ -28,7 +28,7 @@
 			@touchstart="start" 
 			@touchend="end" 
 			@touchmove="move"
-			:photoUrl="photoPath">
+			:recogText="recogText">
 		</tab-recog>
 	</view>
 </template>
@@ -37,24 +37,53 @@
 export default {
     data() {
 		return {
-			photoPath: '/static/read/image.png',
+			photoPath: '',
 			heightRatio: 1,
 			thumbnail: false,
 			startData: {
 				clientY: '',
 			},
 			moveY: 0,
-			state: 0
+			state: 0,
+			recogText: ''
 		};
 	},
 	onLoad(option) { 
-		this.photoPath = "https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/image.png";
-		console.log("Hi there")
-		// const eventChannel = this.getOpenerEventChannel();
-		// eventChannel.on('recieveFile', (data) => {
-		// 	this.photoPath = data.filepath;
-		// 	this.$refs.image.src = data.filepath;
-		// })
+		const eventChannel = this.getOpenerEventChannel();
+		const token = getApp().globalData.token;
+		
+		this.recogText = '识别中，请稍等...';
+		
+		eventChannel.on('recieveFile', (data) => {
+			this.photoPath = data.filepath;
+			this.$refs.image.src = data.filepath;
+		})
+		
+		eventChannel.on('recieveFile', (data) => {
+			uni.uploadFile({
+				url: 'http://82.157.124.83:51603/storage/api/v1/uploadImg/read'
+				,name: "multipartFile"
+				,filePath: data.filepath
+				,formData: { }
+				,header: {
+					'token': token
+				}
+				,success: (res) => { 
+					console.log("上传成功："+JSON.stringify(res));
+					
+					if (res.statusCode == 200) {
+						const response = JSON.parse(res.data);
+						console.log(response.data.image);
+						this.photoUrl = response.data.image;
+						
+						this.handleImg();
+					} else {
+						
+					}
+				}
+				,fail: (err) => { console.error("上传图片失败："+err.errMsg); }
+			})
+		})
 	},
 	methods: {
 		back() {
@@ -63,6 +92,30 @@ export default {
 			} else {
 				uni.navigateBack();
 			}
+		},
+		handleImg() {
+			var _this = this;
+			console.log("photoUrl: " + this.photoUrl);
+			uni.request({
+				url: 'http://127.0.0.1:8000/ocr',
+				method: 'POST',
+				data: {
+					"image": this.photoUrl
+				},
+				success: (res) => {
+					console.log(res);
+					try {
+						const resText = res.data.join("\n");
+						_this.recogText = resText;
+						console.log(this.recogText);
+					} catch(e) {
+						_this.recogText = "发送失败";
+					}
+				}, 
+				fail: (err) => {
+					_this.recogText = "发送失败";
+				}
+			})
 		},
 		showThumb() {
 			this.thumbnail = true;
@@ -74,6 +127,7 @@ export default {
 		},
 		end(e){ 
 			//触摸事件结束
+			console.log(this.recogText);
 			console.log("this.moveY = ", this.touch.clientY - this.startData.clientY);
 			if(this.touch.clientY - this.startData.clientY > 300) {
 				this.state = 1;
