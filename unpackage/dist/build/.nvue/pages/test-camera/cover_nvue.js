@@ -1,10 +1,116 @@
 import { _ as _export_sfc, f as formatAppLog, r as resolveEasycom } from "../../_plugin-vue_export-helper.js";
-import { openBlock, createElementBlock, resolveDynamicComponent, createElementVNode, normalizeStyle, Fragment, renderList, toDisplayString, createCommentVNode, createVNode } from "vue";
-const _style_0$2 = { "mic": { "": { "width": "100rpx", "height": "100rpx" } } };
-const recorderManager = uni.getRecorderManager();
-const innerAudioContext = uni.createInnerAudioContext();
-innerAudioContext.autoplay = true;
+import { openBlock, createElementBlock, normalizeStyle, Fragment, renderList, createElementVNode, toDisplayString, createCommentVNode, resolveDynamicComponent, createVNode } from "vue";
+const _style_0$2 = { "chat-body": { "": { "display": "flex", "flexDirection": "column", "width": "750rpx", "boxSizing": "content-box" } }, "self": { ".chat-body ": { "justifyContent": "flex-end" } }, "item": { ".chat-body ": { "width": "750rpx", "display": "flex", "paddingTop": "45rpx", "paddingRight": "30rpx", "paddingBottom": "45rpx", "paddingLeft": "30rpx" } }, "right": { ".chat-body .item ": { "backgroundColor": "#ACEC9C", "alignSelf": "flex-end" } }, "left": { ".chat-body .item ": { "backgroundColor": "#FFFFFF" } }, "poly-right": { ".chat-body .item ": { "position": "relative", "top": "-50rpx", "left": "-5rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-end" } }, "poly-left": { ".chat-body .item ": { "position": "relative", "top": "50rpx", "left": "5rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-start" } }, "content": { ".chat-body .item ": { "position": "relative", "wordWrap": "break-word", "paddingTop": "24rpx", "paddingRight": "24rpx", "paddingBottom": "24rpx", "paddingLeft": "24rpx", "marginTop": 0, "marginRight": "24rpx", "marginBottom": 0, "marginLeft": "24rpx", "borderRadius": "30rpx", "fontSize": "32rpx", "fontFamily": "PingFang SC", "fontWeight": "500", "color": "#333333", "lineHeight": "42rpx", "maxWidth": "380rpx" } }, "avatar": { ".chat-body .item ": { "display": "flex", "alignItems": "center", "justifyContent": "center", "width": "115rpx", "height": "115rpx", "overflow": "hidden" } } };
+const innerAudioContext$2 = uni.createInnerAudioContext();
+innerAudioContext$2.autoplay = false;
+innerAudioContext$2.src = "";
 const _sfc_main$2 = {
+  name: "bot-chat",
+  props: {
+    msgList: {
+      type: Array,
+      default: [
+        {
+          botContent: "hello，请问我有什么可以帮助你的吗？",
+          recordId: 0,
+          titleId: 0,
+          userContent: "",
+          userId: 0
+        }
+        // {
+        //     botContent: "",
+        //     recordId: 0,
+        //     titleId: 0,
+        //     userContent: "你好呀我想问你一件事，可以吗？",
+        //     userId: 0
+        // },
+        // {
+        //     userContent: "",
+        //     recordId: 0,
+        //     titleId: 0,
+        //     botContent: "当然可以!",
+        //     userId: 0
+        // },
+        // {
+        //     botContent: "",
+        //     recordId: 0,
+        //     titleId: 0,
+        //     userContent: "我的问题是：blablabla...",
+        //     userId: 0
+        // },
+      ]
+    }
+  },
+  data() {
+    return {
+      userId: "",
+      //发送的消息
+      chatMsg: "",
+      randstr: "ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl"
+    };
+  },
+  methods: {
+    play(index) {
+      const text = this.msgList[index].botContent;
+      const encoded = encodeURI(text);
+      formatAppLog("log", "at components/cover-chat/cover-chat.vue:77", encoded);
+      innerAudioContext$2.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike
+					&spd=` + this.speed + `&ctp=1&amp&pdt=301&tex=` + encoded;
+      formatAppLog("log", "at components/cover-chat/cover-chat.vue:80", innerAudioContext$2.src);
+      innerAudioContext$2.play();
+      formatAppLog("log", "at components/cover-chat/cover-chat.vue:82", "play over!!!");
+    }
+  }
+};
+function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("view", {
+    id: "msglistview",
+    class: "chat-body",
+    style: normalizeStyle({ width: _ctx.windowWidth }),
+    renderWhole: true
+  }, [
+    (openBlock(true), createElementBlock(Fragment, null, renderList($props.msgList, (item, index) => {
+      return openBlock(), createElementBlock("view", {
+        key: index,
+        style: normalizeStyle({ width: _ctx.windowWidth })
+      }, [
+        item.userContent != "" ? (openBlock(), createElementBlock("view", {
+          key: 0,
+          class: "item self"
+        }, [
+          createElementVNode("view", { class: "content right" }, [
+            createElementVNode("u-text", null, toDisplayString(item.userContent), 1)
+          ]),
+          createElementVNode("u-image", {
+            class: "poly-right",
+            src: "/static/travel/polygon-right.png"
+          })
+        ])) : createCommentVNode("", true),
+        item.botContent != "" ? (openBlock(), createElementBlock("view", {
+          key: 1,
+          class: "item Ai"
+        }, [
+          createElementVNode("u-image", {
+            class: "poly-left",
+            src: "/static/travel/polygon-left.png"
+          }),
+          createElementVNode("view", {
+            class: "content left",
+            onClick: ($event) => $options.play(index)
+          }, [
+            createElementVNode("u-text", null, toDisplayString(item.botContent), 1)
+          ], 8, ["onClick"])
+        ])) : createCommentVNode("", true)
+      ], 4);
+    }), 128))
+  ], 4);
+}
+const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["styles", [_style_0$2]]]);
+const _style_0$1 = { "mic": { "": { "width": "130rpx", "height": "130rpx" } } };
+const recorderManager$1 = uni.getRecorderManager();
+const innerAudioContext$1 = uni.createInnerAudioContext();
+innerAudioContext$1.autoplay = true;
+const _sfc_main$1 = {
   data() {
     return {
       text: "uni-app",
@@ -14,238 +120,31 @@ const _sfc_main$2 = {
   methods: {
     startRecord() {
       formatAppLog("log", "at components/micphone/micphone.vue:20", "开始录音");
-      recorderManager.start();
+      recorderManager$1.start();
     },
     endRecord() {
-      formatAppLog("log", "at components/micphone/micphone.vue:24", "录音结束");
-      recorderManager.stop();
-      recorderManager.onStop(function(res) {
-        formatAppLog("log", "at components/micphone/micphone.vue:27", JSON.stringify(res));
-        uni.uploadFile({
-          url: "http://127.0.0.1:8000/speechtotext",
-          filePath: res.tempFilePath,
-          name: "mp3",
-          formData: {},
-          success: (res2) => {
-            formatAppLog("log", "at components/micphone/micphone.vue:34", "上传成功：" + JSON.stringify(res2));
-          },
-          fail: (err) => {
-            formatAppLog("error", "at components/micphone/micphone.vue:36", "上传录音失败：" + err);
-          }
-        });
+      let tmpfPath = "";
+      formatAppLog("log", "at components/micphone/micphone.vue:25", "录音结束");
+      recorderManager$1.stop();
+      recorderManager$1.onStop(function(res) {
+        this.voicePath = res.tempFilePath;
       });
-    }
-  }
-};
-function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("u-image", {
-    onTouchstart: _cache[0] || (_cache[0] = (...args) => $options.startRecord && $options.startRecord(...args)),
-    onTouchend: _cache[1] || (_cache[1] = (...args) => $options.endRecord && $options.endRecord(...args)),
-    src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/micphone/mic1.png",
-    class: "mic"
-  }, null, 32);
-}
-const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["styles", [_style_0$2]]]);
-const _style_0$1 = { "scroll-view": { ".chat ": { "width": "750rpx" } }, "chat-body": { ".chat .scroll-view ": { "display": "flex", "width": "750rpx", "flexDirection": "column", "paddingTop": "23rpx" } }, "self": { ".chat .scroll-view .chat-body ": { "justifyContent": "flex-end" } }, "item": { ".chat .scroll-view .chat-body ": { "display": "flex", "paddingTop": "23rpx", "paddingRight": "5rpx", "paddingBottom": "23rpx", "paddingLeft": "5rpx", "width": "750rpx" } }, "right": { ".chat .scroll-view .chat-body .item ": { "backgroundColor": "#ACEC9C", "position::after": "absolute", "content::after": '""', "width::after": 0, "height::after": 0, "left::after": 100, "top::after": 10, "borderWidth::after": "12rpx", "borderStyle::after": "solid", "borderColor::after": "rgba(0,0,0,0)", "borderLeftWidth::after": "15rpx", "borderLeftStyle::after": "solid", "borderLeftColor::after": "#ACEC9C", "transform::after": "translate(-4rpx)" } }, "left": { ".chat .scroll-view .chat-body .item ": { "backgroundColor": "#FFFFFF", "position::after": "absolute", "content::after": '""', "width::after": 0, "height::after": 0, "top::after": 10, "right::after": 100, "borderWidth::after": "12rpx", "borderStyle::after": "solid", "borderColor::after": "rgba(0,0,0,0)", "borderRightWidth::after": "15rpx", "borderRightStyle::after": "solid", "borderRightColor::after": "#FFFFFF", "transform::after": "translate(4rpx)" } }, "content": { ".chat .scroll-view .chat-body .item ": { "position": "relative", "maxWidth": "450rpx", "borderRadius": 12, "wordWrap": "break-word", "paddingTop": "10rpx", "paddingRight": "20rpx", "paddingBottom": "10rpx", "paddingLeft": "20rpx", "marginTop": 0, "marginRight": "24rpx", "marginBottom": 0, "marginLeft": "24rpx", "fontSize": "20rpx", "fontFamily": "PingFang SC", "fontWeight": "500", "color": "#333333", "lineHeight": "32rpx" } }, "chat-bottom": { ".chat ": { "width": "750rpx", "height": "177rpx", "paddingBottom": "20rpx", "transitionDuration": 100, "transitionTimingFunction": "ease", "display": "flex", "justifyContent": "center", "alignItems": "center" } }, "@TRANSITION": { "chat-bottom": { "duration": 100, "timingFunction": "ease" } } };
-const _sfc_main$1 = {
-  data() {
-    return {
-      //键盘高度
-      keyboardHeight: 0,
-      //底部消息发送高度
-      bottomHeight: 0,
-      //滚动距离
-      scrollTop: 0,
-      userId: "",
-      //发送的消息
-      chatMsg: "",
-      msgList: [
-        {
-          botContent: "按住屏幕下方按钮讲话",
-          recordId: 0,
-          titleId: 0,
-          userContent: "",
-          userId: 0
-        },
-        {
-          botContent: "",
-          recordId: 0,
-          titleId: 0,
-          userContent: "我的前面有什么？",
-          userId: 0
-        },
-        {
-          userContent: "",
-          recordId: 0,
-          titleId: 0,
-          botContent: "您的正前方有一个指示牌，请注意安全",
-          userId: 0
-        },
-        {
-          botContent: "",
-          recordId: 0,
-          titleId: 0,
-          userContent: "我的前面有什么？",
-          userId: 0
-        },
-        {
-          userContent: "",
-          recordId: 0,
-          titleId: 0,
-          botContent: "您的正前方有一个指示牌，请注意安全",
-          userId: 0
-        },
-        {
-          botContent: "",
-          recordId: 0,
-          titleId: 0,
-          userContent: "我的前面有什么？",
-          userId: 0
-        },
-        {
-          userContent: "",
-          recordId: 0,
-          titleId: 0,
-          botContent: "您的正前方有一个指示牌，请注意安全",
-          userId: 0
-        },
-        {
-          botContent: "",
-          recordId: 0,
-          titleId: 0,
-          userContent: "我的前面有什么？",
-          userId: 0
-        },
-        {
-          userContent: "",
-          recordId: 0,
-          titleId: 0,
-          botContent: "您的正前方有一个指示牌，请注意安全",
-          userId: 0
-        },
-        {
-          botContent: "",
-          recordId: 0,
-          titleId: 0,
-          userContent: "我的前面有什么？",
-          userId: 0
-        },
-        {
-          userContent: "",
-          recordId: 0,
-          titleId: 0,
-          botContent: "您的正前方有一个指示牌，请注意安全",
-          userId: 0
-        }
-      ]
-    };
-  },
-  updated() {
-    this.scrollToBottom();
-  },
-  computed: {
-    windowHeight() {
-      return this.rpxTopx(uni.getSystemInfoSync().windowHeight);
-    },
-    // 键盘弹起来的高度+发送框高度
-    inputHeight() {
-      return 177;
-    }
-  },
-  onLoad() {
-  },
-  onUnload() {
-    uni.offKeyboardHeightChange();
-  },
-  methods: {
-    focus() {
-      this.scrollToBottom();
-    },
-    blur() {
-      this.scrollToBottom();
-    },
-    // px转换成rpx
-    rpxTopx(px) {
-      let deviceWidth = wx.getSystemInfoSync().windowWidth;
-      let rpx = 750 / deviceWidth * Number(px);
-      return Math.floor(rpx);
-    },
-    // 监视聊天发送栏高度
-    sendHeight() {
-      setTimeout(() => {
-        let query = uni.createSelectorQuery();
-        query.select(".send-msg").boundingClientRect();
-        query.exec((res) => {
-          this.bottomHeight = this.rpxTopx(res[0].height);
-        });
-      }, 10);
-    },
-    // 滚动至聊天底部
-    scrollToBottom(e) {
-      setTimeout(() => {
-        let query = uni.createSelectorQuery().in(this);
-        query.select("#scrollview").boundingClientRect();
-        query.select("#msglistview").boundingClientRect();
-        query.exec((res) => {
-          if (res[1].height > res[0].height) {
-            this.scrollTop = this.rpxTopx(res[1].height - res[0].height);
-          }
-        });
-      }, 15);
-    },
-    // 发送消息
-    handleSend() {
-      formatAppLog("log", "at components/cover-chat/cover-chat.vue:210", "Here");
+      formatAppLog("log", "at components/micphone/micphone.vue:41", "tmpfPath = " + this.voicePath);
+      return tmpfPath;
     }
   }
 };
 function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_micphone = resolveEasycom(resolveDynamicComponent("micphone"), __easycom_0$1);
-  return openBlock(), createElementBlock("view", {
-    class: "chat",
-    renderWhole: true
-  }, [
-    createElementVNode("scroll-view", {
-      style: normalizeStyle({ height: `${$options.windowHeight - $options.inputHeight}rpx` }),
-      id: "scrollview",
-      scrollY: "true",
-      scrollTop: $data.scrollTop,
-      class: "scroll-view"
-    }, [
-      createElementVNode("view", {
-        id: "msglistview",
-        class: "chat-body"
-      }, [
-        (openBlock(true), createElementBlock(Fragment, null, renderList($data.msgList, (item, index) => {
-          return openBlock(), createElementBlock("view", { key: index }, [
-            item.userContent != "" ? (openBlock(), createElementBlock("view", {
-              key: 0,
-              class: "item self"
-            }, [
-              createElementVNode("view", { class: "content right" }, [
-                createElementVNode("u-text", null, toDisplayString(item.userContent), 1)
-              ])
-            ])) : createCommentVNode("", true),
-            item.botContent != "" ? (openBlock(), createElementBlock("view", {
-              key: 1,
-              class: "item Ai"
-            }, [
-              createElementVNode("view", { class: "content left" }, [
-                createElementVNode("u-text", null, toDisplayString(item.botContent), 1)
-              ])
-            ])) : createCommentVNode("", true)
-          ]);
-        }), 128))
-      ])
-    ], 12, ["scrollTop"]),
-    createElementVNode("view", { class: "chat-bottom" }, [
-      createVNode(_component_micphone, { StopHandler: $options.handleSend }, null, 8, ["StopHandler"])
-    ])
-  ]);
+  return openBlock(), createElementBlock("u-image", {
+    src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/micphone/mic1.png",
+    class: "mic"
+  });
 }
-const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]]]);
-const _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "chat": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "zIndex": 98, "alignItems": "center", "justifyContent": "center" } }, "coverchat": { ".pengke-camera .chat ": { "zIndex": 99 } } };
+const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]]]);
+const _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "chat": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "zIndex": 98, "alignItems": "center", "justifyContent": "center" } }, "coverchat": { ".pengke-camera .chat ": { "zIndex": 99, "display": "flex", "flexDirection": "column", "alignItems": "center", "justifyContent": "space-between" } }, "scroll-view": { ".pengke-camera .chat .coverchat ": { "height": 100, "width": "750rpx" } }, "mic-container": { ".pengke-camera .chat .coverchat ": { "height": "200rpx", "width": "200rpx", "display": "flex", "alignItems": "center", "justifyContent": "center" } } };
 let _this = null;
+const recorderManager = uni.getRecorderManager();
+const innerAudioContext = uni.createInnerAudioContext();
 const _sfc_main = {
   data() {
     return {
@@ -261,8 +160,19 @@ const _sfc_main = {
       //相机准备好了
       livePusher: null,
       //流视频对象
-      snapshotsrc: null
+      snapshotsrc: null,
       //快照
+      msglist: [
+        {
+          botContent: "hello，请问我有什么可以帮助你的吗？",
+          recordId: 0,
+          titleId: 0,
+          userContent: "",
+          userId: 0
+        }
+      ],
+      randstr: "ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl",
+      micScale: 1
     };
   },
   onLoad(e) {
@@ -282,7 +192,6 @@ const _sfc_main = {
     poenCarme() {
       if (plus.os.name == "Android") {
         this.poenCarmeInterval = setInterval(function() {
-          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:64", _this.camerastate);
           if (!_this.camerastate)
             _this.startPreview();
         }, 2500);
@@ -309,7 +218,7 @@ const _sfc_main = {
     startPreview() {
       this.livePusher.startPreview({
         success: (a) => {
-          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:93", a);
+          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:125", a);
         }
       });
     },
@@ -323,7 +232,6 @@ const _sfc_main = {
     },
     //状态
     statechange(e) {
-      formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:110", e);
       if (e.detail.code == 1007) {
         _this.camerastate = true;
       } else if (e.detail.code == -1301) {
@@ -338,32 +246,155 @@ const _sfc_main = {
     snapshot() {
       uni.vibrateShort({
         success: function() {
-          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:129", "success");
+          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:161", "success");
         }
       });
       this.livePusher.snapshot({
         success: (e) => {
           _this.snapshotsrc = e.message.tempImagePath;
-          _this.stopPreview();
-          _this.setImage();
-          uni.navigateBack();
+          this.snapshotsrc = e.message.tempImagePath;
         }
       });
-    },
-    //反转
-    flip() {
-      this.livePusher.switchCamera();
     },
     //设置
     setImage() {
       let pages = getCurrentPages();
       let prevPage = pages[pages.length - 2];
       prevPage.$vm.setImage({ path: _this.snapshotsrc });
+    },
+    startMic() {
+      formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:181", "开始录音");
+      recorderManager.start();
+      this.micScale = 1.3;
+    },
+    stopMic() {
+      formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:187", "录音结束");
+      recorderManager.stop();
+      this.micScale = 1;
+      recorderManager.onStop(function(res) {
+        uni.uploadFile({
+          url: "http://127.0.0.1:8000/speechtotext",
+          name: "mp3",
+          filePath: res.tempFilePath,
+          formData: {},
+          success: (res2) => {
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:197", "上传成功：" + JSON.stringify(res2));
+            const response = JSON.parse(res2.data);
+            if (res2.statusCode == 200) {
+              _this.msglist.push({
+                botContent: "",
+                recordId: 0,
+                titleId: 0,
+                userContent: response.text,
+                userId: 0
+              });
+              _this.msglist.push({
+                botContent: "发送中...",
+                recordId: 0,
+                titleId: 0,
+                userContent: "",
+                userId: 0
+              });
+              _this.handleRecord(response.text);
+            }
+          },
+          fail: (err) => {
+            formatAppLog("error", "at pages/test-camera/cover_nvue.nvue:219", "上传录音失败：" + err.errMsg);
+          }
+        });
+      });
+    },
+    handleRecord(text) {
+      this.livePusher.snapshot({
+        success: (e) => {
+          _this.snapshotsrc = e.message.tempImagePath;
+          const token = getApp().globalData.token;
+          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:229", "_this.snapshotsrc = " + _this.snapshotsrc);
+          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:230", "token = " + token);
+          uni.uploadFile({
+            url: "http://82.157.124.83:51603/storage/api/v1/uploadImg/move",
+            filePath: _this.snapshotsrc,
+            name: "multipartFile",
+            formData: {},
+            header: {
+              "token": token
+            },
+            success: (uploadFileRes) => {
+              formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:240", uploadFileRes.data);
+              const response = JSON.parse(uploadFileRes.data);
+              if (response.code == 200) {
+                formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:243", response.data);
+                _this.sendChat(text, response.data.image);
+              }
+            },
+            fail: (err) => {
+              formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:247", err.errMsg);
+            }
+          });
+        }
+      });
+    },
+    sendChat(text, imgUrl) {
+      formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:255", "text = " + text + "   imgUrl = " + imgUrl);
+      uni.request({
+        url: "http://127.0.0.1:8000/chatbot",
+        method: "POST",
+        data: {
+          "prompt": text,
+          "image": imgUrl
+        },
+        success: (res) => {
+          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:264", res);
+          _this.msglist.pop();
+          try {
+            const response = JSON.parse(res.data);
+            _this.msglist.push({
+              botContent: response.response,
+              recordId: 0,
+              titleId: 0,
+              userContent: "",
+              userId: 0
+            });
+            const encoded = encodeURI(response.response);
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:277", encoded);
+            innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&spd=5&ctp=1&amp&pdt=301&tex=` + encoded;
+            innerAudioContext.play();
+          } catch (e) {
+            _this.msglist.push({
+              botContent: "发送失败",
+              recordId: 0,
+              titleId: 0,
+              userContent: "",
+              userId: 0
+            });
+            const encoded = encodeURI("发送失败");
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:289", encoded);
+            innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&spd=5&ctp=1&amp&pdt=301&tex=` + encoded;
+            innerAudioContext.play();
+          }
+        },
+        fail: (err) => {
+          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:295", err);
+          _this.msglist.pop();
+          _this.msglist.push({
+            botContent: "发送失败",
+            recordId: 0,
+            titleId: 0,
+            userContent: "",
+            userId: 0
+          });
+          const encoded = encodeURI("发送失败");
+          formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:305", encoded);
+          innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&spd=5&ctp=1&amp&pdt=301&tex=` + encoded;
+          innerAudioContext.play();
+        }
+      });
     }
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_cover_chat = resolveEasycom(resolveDynamicComponent("cover-chat"), __easycom_0);
+  const _component_micphone = resolveEasycom(resolveDynamicComponent("micphone"), __easycom_1);
   return openBlock(), createElementBlock("scroll-view", {
     scrollY: true,
     showScrollbar: true,
@@ -402,7 +433,27 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           class: "coverchat",
           style: normalizeStyle({ width: $data.windowWidth, height: $data.windowHeight })
         }, [
-          createVNode(_component_cover_chat)
+          createElementVNode("scroll-view", {
+            style: normalizeStyle({ height: `${$data.windowHeight * 0.8}px` }),
+            id: "scrollview",
+            scrollY: "true",
+            scrollTop: _ctx.scrollTop,
+            class: "scroll-view",
+            enableFlex: "true"
+          }, [
+            createVNode(_component_cover_chat, { msgList: $data.msglist }, null, 8, ["msgList"])
+          ], 12, ["scrollTop"]),
+          createElementVNode("cover-view", {
+            class: "mic-container",
+            style: normalizeStyle({ height: `${$data.windowHeight * 0.2}px` })
+          }, [
+            createVNode(_component_micphone, {
+              ref: "micphone",
+              onTouchstart: $options.startMic,
+              onTouchend: $options.stopMic,
+              style: normalizeStyle({ transform: `scale(${$data.micScale})` })
+            }, null, 8, ["onTouchstart", "onTouchend", "style"])
+          ], 4)
         ], 4)
       ], 4)
     ], 4)

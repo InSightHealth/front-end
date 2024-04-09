@@ -50,17 +50,29 @@ export default {
 	},
 	onLoad(option) { 
 		const eventChannel = this.getOpenerEventChannel();
-		const token = getApp().globalData.token;
 		eventChannel.on('recieveFile', (data) => {
 			this.photoPath = data.filepath;
 			this.$refs.image.src = data.filepath;
 		})
 		
 		eventChannel.on('recieveFile', (data) => {
+			uni.compressImage({
+				src: data.filepath,
+				quality: 80,
+				success: res => {
+					console.log(res.tempFilePath);
+					this.uploadFile(res.tempFilePath);
+				}
+			})
+		})
+	},
+	methods: {
+		uploadFile(filepath) {
+			const token = getApp().globalData.token;
 			uni.uploadFile({
 				url: 'http://82.157.124.83:51603/storage/api/v1/uploadImg/photo'
 				,name: "multipartFile"
-				,filePath: data.filepath
+				,filePath: filepath
 				,formData: { }
 				,header: {
 					'token': token
@@ -78,9 +90,7 @@ export default {
 				}
 				,fail: (err)=>{ console.error("上传录音失败："+err.errMsg); }
 			})
-		})
-	},
-	methods: {
+		},
 		back() {
 			if (this.thumbnail) {
 				this.thumbnail = false;

@@ -87,6 +87,9 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
   // E:/fuchuang/learn/demo1/unpackage/dist/dev/.nvue/pages/test-camera/cover_nvue.js
   var import_vue2 = __toESM(require_vue());
   var _style_0$2 = { "chat-body": { "": { "display": "flex", "flexDirection": "column", "width": "750rpx", "boxSizing": "content-box" } }, "self": { ".chat-body ": { "justifyContent": "flex-end" } }, "item": { ".chat-body ": { "width": "750rpx", "display": "flex", "paddingTop": "45rpx", "paddingRight": "30rpx", "paddingBottom": "45rpx", "paddingLeft": "30rpx" } }, "right": { ".chat-body .item ": { "backgroundColor": "#ACEC9C", "alignSelf": "flex-end" } }, "left": { ".chat-body .item ": { "backgroundColor": "#FFFFFF" } }, "poly-right": { ".chat-body .item ": { "position": "relative", "top": "-50rpx", "left": "-5rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-end" } }, "poly-left": { ".chat-body .item ": { "position": "relative", "top": "50rpx", "left": "5rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-start" } }, "content": { ".chat-body .item ": { "position": "relative", "wordWrap": "break-word", "paddingTop": "24rpx", "paddingRight": "24rpx", "paddingBottom": "24rpx", "paddingLeft": "24rpx", "marginTop": 0, "marginRight": "24rpx", "marginBottom": 0, "marginLeft": "24rpx", "borderRadius": "30rpx", "fontSize": "32rpx", "fontFamily": "PingFang SC", "fontWeight": "500", "color": "#333333", "lineHeight": "42rpx", "maxWidth": "380rpx" } }, "avatar": { ".chat-body .item ": { "display": "flex", "alignItems": "center", "justifyContent": "center", "width": "115rpx", "height": "115rpx", "overflow": "hidden" } } };
+  var innerAudioContext$2 = uni.createInnerAudioContext();
+  innerAudioContext$2.autoplay = false;
+  innerAudioContext$2.src = "";
   var _sfc_main$2 = {
     name: "bot-chat",
     props: {
@@ -131,6 +134,18 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
         chatMsg: "",
         randstr: "ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl"
       };
+    },
+    methods: {
+      play(index) {
+        const text = this.msgList[index].botContent;
+        const encoded = encodeURI(text);
+        formatAppLog("log", "at components/cover-chat/cover-chat.vue:77", encoded);
+        innerAudioContext$2.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike
+					&spd=` + this.speed + `&ctp=1&amp&pdt=301&tex=` + encoded;
+        formatAppLog("log", "at components/cover-chat/cover-chat.vue:80", innerAudioContext$2.src);
+        innerAudioContext$2.play();
+        formatAppLog("log", "at components/cover-chat/cover-chat.vue:82", "play over!!!");
+      }
     }
   };
   function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
@@ -181,7 +196,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                     class: "poly-left",
                     src: "/static/travel/polygon-left.png"
                   }),
-                  (0, import_vue2.createElementVNode)("view", { class: "content left" }, [
+                  (0, import_vue2.createElementVNode)("view", {
+                    class: "content left",
+                    onClick: ($event) => $options.play(index)
+                  }, [
                     (0, import_vue2.createElementVNode)(
                       "u-text",
                       null,
@@ -189,7 +207,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                       1
                       /* TEXT */
                     )
-                  ])
+                  ], 8, ["onClick"])
                 ])) : (0, import_vue2.createCommentVNode)("v-if", true)
               ],
               4
@@ -208,8 +226,8 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
   var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["styles", [_style_0$2]], ["__file", "E:/fuchuang/learn/demo1/components/cover-chat/cover-chat.vue"]]);
   var _style_0$1 = { "mic": { "": { "width": "130rpx", "height": "130rpx" } } };
   var recorderManager$1 = uni.getRecorderManager();
-  var innerAudioContext = uni.createInnerAudioContext();
-  innerAudioContext.autoplay = true;
+  var innerAudioContext$1 = uni.createInnerAudioContext();
+  innerAudioContext$1.autoplay = true;
   var _sfc_main$1 = {
     data() {
       return {
@@ -241,10 +259,10 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     });
   }
   var __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["styles", [_style_0$1]], ["__file", "E:/fuchuang/learn/demo1/components/micphone/micphone.vue"]]);
-  var _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "chat": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "zIndex": 98, "alignItems": "center", "justifyContent": "center" } }, "coverchat": { ".pengke-camera .chat ": { "zIndex": 99, "display": "flex", "flexDirection": "column", "alignItems": "center", "justifyContent": "space-between" } }, "scroll-view": { ".pengke-camera .chat .coverchat ": { "height": 100, "width": "750rpx" } }, "mic-container": { ".pengke-camera .chat .coverchat ": { "height": "160rpx", "display": "flex", "alignItems": "center", "justifyContent": "center" } } };
+  var _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "chat": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "zIndex": 98, "alignItems": "center", "justifyContent": "center" } }, "coverchat": { ".pengke-camera .chat ": { "zIndex": 99, "display": "flex", "flexDirection": "column", "alignItems": "center", "justifyContent": "space-between" } }, "scroll-view": { ".pengke-camera .chat .coverchat ": { "height": 100, "width": "750rpx" } }, "mic-container": { ".pengke-camera .chat .coverchat ": { "height": "200rpx", "width": "200rpx", "display": "flex", "alignItems": "center", "justifyContent": "center" } } };
   var _this = null;
   var recorderManager = uni.getRecorderManager();
-  uni.createInnerAudioContext();
+  var innerAudioContext = uni.createInnerAudioContext();
   var _sfc_main = {
     data() {
       return {
@@ -271,7 +289,8 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
             userId: 0
           }
         ],
-        randstr: "ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl"
+        randstr: "ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl",
+        micScale: 1
       };
     },
     onLoad(e) {
@@ -317,7 +336,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       startPreview() {
         this.livePusher.startPreview({
           success: (a) => {
-            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:119", a);
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:125", a);
           }
         });
       },
@@ -345,7 +364,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       snapshot() {
         uni.vibrateShort({
           success: function() {
-            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:155", "success");
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:161", "success");
           }
         });
         this.livePusher.snapshot({
@@ -362,12 +381,14 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
         prevPage.$vm.setImage({ path: _this.snapshotsrc });
       },
       startMic() {
-        formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:175", "\u5F00\u59CB\u5F55\u97F3");
+        formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:181", "\u5F00\u59CB\u5F55\u97F3");
         recorderManager.start();
+        this.micScale = 1.3;
       },
       stopMic() {
-        formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:180", "\u5F55\u97F3\u7ED3\u675F");
+        formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:187", "\u5F55\u97F3\u7ED3\u675F");
         recorderManager.stop();
+        this.micScale = 1;
         recorderManager.onStop(function(res) {
           uni.uploadFile({
             url: "http://127.0.0.1:8000/speechtotext",
@@ -375,7 +396,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
             filePath: res.tempFilePath,
             formData: {},
             success: (res2) => {
-              formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:189", "\u4E0A\u4F20\u6210\u529F\uFF1A" + JSON.stringify(res2));
+              formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:197", "\u4E0A\u4F20\u6210\u529F\uFF1A" + JSON.stringify(res2));
               const response = JSON.parse(res2.data);
               if (res2.statusCode == 200) {
                 _this.msglist.push({
@@ -396,7 +417,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
               }
             },
             fail: (err) => {
-              formatAppLog("error", "at pages/test-camera/cover_nvue.nvue:211", "\u4E0A\u4F20\u5F55\u97F3\u5931\u8D25\uFF1A" + err.errMsg);
+              formatAppLog("error", "at pages/test-camera/cover_nvue.nvue:219", "\u4E0A\u4F20\u5F55\u97F3\u5931\u8D25\uFF1A" + err.errMsg);
             }
           });
         });
@@ -406,8 +427,8 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           success: (e) => {
             _this.snapshotsrc = e.message.tempImagePath;
             const token = getApp().globalData.token;
-            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:221", "_this.snapshotsrc = " + _this.snapshotsrc);
-            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:222", "token = " + token);
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:229", "_this.snapshotsrc = " + _this.snapshotsrc);
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:230", "token = " + token);
             uni.uploadFile({
               url: "http://82.157.124.83:51603/storage/api/v1/uploadImg/move",
               filePath: _this.snapshotsrc,
@@ -417,22 +438,22 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                 "token": token
               },
               success: (uploadFileRes) => {
-                formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:232", uploadFileRes.data);
+                formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:240", uploadFileRes.data);
                 const response = JSON.parse(uploadFileRes.data);
                 if (response.code == 200) {
-                  formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:235", response.data);
+                  formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:243", response.data);
                   _this.sendChat(text, response.data.image);
                 }
               },
               fail: (err) => {
-                formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:239", err.errMsg);
+                formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:247", err.errMsg);
               }
             });
           }
         });
       },
       sendChat(text, imgUrl) {
-        formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:247", "text = " + text + "   imgUrl = " + imgUrl);
+        formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:255", "text = " + text + "   imgUrl = " + imgUrl);
         uni.request({
           url: "http://127.0.0.1:8000/chatbot",
           method: "POST",
@@ -441,9 +462,9 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
             "image": imgUrl
           },
           success: (res) => {
-            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:256", res);
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:264", res);
             _this.msglist.pop();
-            if (res.statusCode == 200) {
+            try {
               const response = JSON.parse(res.data);
               _this.msglist.push({
                 botContent: response.response,
@@ -452,7 +473,11 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                 userContent: "",
                 userId: 0
               });
-            } else {
+              const encoded = encodeURI(response.response);
+              formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:277", encoded);
+              innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&spd=5&ctp=1&amp&pdt=301&tex=` + encoded;
+              innerAudioContext.play();
+            } catch (e) {
               _this.msglist.push({
                 botContent: "\u53D1\u9001\u5931\u8D25",
                 recordId: 0,
@@ -460,7 +485,26 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                 userContent: "",
                 userId: 0
               });
+              const encoded = encodeURI("\u53D1\u9001\u5931\u8D25");
+              formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:289", encoded);
+              innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&spd=5&ctp=1&amp&pdt=301&tex=` + encoded;
+              innerAudioContext.play();
             }
+          },
+          fail: (err) => {
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:295", err);
+            _this.msglist.pop();
+            _this.msglist.push({
+              botContent: "\u53D1\u9001\u5931\u8D25",
+              recordId: 0,
+              titleId: 0,
+              userContent: "",
+              userId: 0
+            });
+            const encoded = encodeURI("\u53D1\u9001\u5931\u8D25");
+            formatAppLog("log", "at pages/test-camera/cover_nvue.nvue:305", encoded);
+            innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&spd=5&ctp=1&amp&pdt=301&tex=` + encoded;
+            innerAudioContext.play();
           }
         });
       }
@@ -537,8 +581,9 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                       (0, import_vue2.createVNode)(_component_micphone, {
                         ref: "micphone",
                         onTouchstart: $options.startMic,
-                        onTouchend: $options.stopMic
-                      }, null, 8, ["onTouchstart", "onTouchend"])
+                        onTouchend: $options.stopMic,
+                        style: (0, import_vue2.normalizeStyle)({ transform: `scale(${$data.micScale})` })
+                      }, null, 8, ["onTouchstart", "onTouchend", "style"])
                     ],
                     4
                     /* STYLE */

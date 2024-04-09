@@ -1,6 +1,6 @@
 import { _ as _export_sfc, f as formatAppLog } from "../../_plugin-vue_export-helper.js";
 import { openBlock, createElementBlock, createElementVNode, normalizeStyle } from "vue";
-const _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "menu": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "width": "750rpx", "height": "180rpx", "zIndex": 98, "alignItems": "center", "justifyContent": "center" } }, "menu-mask": { ".pengke-camera .menu ": { "position": "absolute", "left": 0, "bottom": 0, "width": "750rpx", "height": "180rpx", "zIndex": 98 } }, "menu-back": { ".pengke-camera .menu ": { "position": "absolute", "left": "30rpx", "bottom": "50rpx", "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } }, "menu-snapshot": { ".pengke-camera .menu ": { "width": "130rpx", "height": "130rpx", "zIndex": 99 } }, "menu-flip": { ".pengke-camera .menu ": { "position": "absolute", "right": "30rpx", "bottom": "50rpx", "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } } };
+const _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "menu": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "width": "750rpx", "height": "180rpx", "zIndex": 97, "alignItems": "center", "justifyContent": "center" } }, "menu-mask": { ".pengke-camera .menu ": { "position": "absolute", "left": 0, "bottom": 0, "width": "750rpx", "height": "180rpx", "zIndex": 98, "backgroundColor": "#000000" } }, "menu-back": { ".pengke-camera .menu ": { "position": "absolute", "left": "30rpx", "bottom": "50rpx", "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } }, "menu-snapshot": { ".pengke-camera .menu ": { "width": "130rpx", "height": "130rpx", "zIndex": 99 } }, "menu-flip": { ".pengke-camera .menu ": { "position": "absolute", "right": "30rpx", "bottom": "50rpx", "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } } };
 let _this = null;
 const _sfc_main = {
   data() {
@@ -147,10 +147,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         style: normalizeStyle({ width: $data.windowWidth, height: $data.windowHeight })
       }, null, 44, ["aspect"]),
       createElementVNode("view", { class: "menu" }, [
-        createElementVNode("cover-image", {
-          class: "menu-mask",
-          src: "/static/camera/bar.png"
-        }),
+        createElementVNode("cover-view", { class: "menu-mask" }),
         createElementVNode("cover-image", {
           class: "menu-back",
           onClick: _cache[1] || (_cache[1] = (...args) => $options.back && $options.back(...args)),

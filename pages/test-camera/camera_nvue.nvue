@@ -138,6 +138,9 @@ export default {
 			this.livePusher.snapshot({
 				success: e => {
 					_this.snapshotsrc = e.message.tempImagePath;
+					uni.showToast({
+						title: _this.snapshotsrc
+					})
 					_this.stopPreview();
 					_this.setImage();
 					uni.navigateBack();

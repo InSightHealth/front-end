@@ -35,7 +35,7 @@
 						<text class="item2">关于明道</text>
 						<image class="item3" src="/static/personal/more1.png"></image>
 					</view>
-					<navigator class="service-box" url="/pages/personal/system/system">
+					<navigator class="service-box" url="/pages/test/test">
 						<image class="item1" src="/static/personal/setting.png"></image>
 						<text class="item2">系统设置</text>
 						<image class="item3" src="/static/personal/more1.png"></image>

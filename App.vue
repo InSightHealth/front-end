@@ -3,7 +3,7 @@
 		globalData: {  
 			BackEndUrl: 'http://82.157.124.83:51603',
 			llmUrl: 'http://127.0.0.1:8000',
-		    token: "",
+		    token: "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAC2L0QrCMAwA_yXPK6xpu6z7m9RFqVgopgNF_Hcz8O2O4z5wHxU2iHSZrzuLk0TFxbwGl6WQmwUT-pU5Fg8TVB6wefK4LDkEnECPYre-dUg7u6rp7VFbk6c5H7s5924sr_5_CfP5Vmvp-wOH4_q4ggAAAA.V91u6sbYgjBOdDS7NR1x4JO60J9QyX0ELX-xify0kma9cwxNfB1y6SikS0LSoYw5JBe38oS-JM7fPK32opbB6A",
 			phone: "17394961851",
 			avatar: "http://117.72.13.28:9000/picture/2024/04/08/b4a1b88eddea45d68893d431788d3b1b.jpg"
 		},
@@ -12,26 +12,26 @@
 			
 			// #ifdef APP-PLUS
 			    // token标志来判断
-			    let token = this.getToken();
-				console.log('token is '+token);
+			    // let token = this.getToken();
+				// console.log('token is '+token);
 				
-			    if (token == null) {
-					console.log("Here we go!!!");
-					//不存在则跳转至登录页
-			        uni.reLaunch({
-			            url: "/pages/test-page/login",
-					    success: () => {
-					        plus.navigator.closeSplashscreen();
-					    },
-						fail(e) {
-							console.log(e);
-						}
-			    	})
-			    } else {
-					//存在则关闭启动页进入首页
-					getApp().globalData.token = token;
-					plus.navigator.closeSplashscreen();
-			    }
+			 //    if (token == null) {
+				// 	console.log("Here we go!!!");
+				// 	//不存在则跳转至登录页
+			 //        uni.reLaunch({
+			 //            url: "/pages/test-page/login",
+				// 	    success: () => {
+				// 	        plus.navigator.closeSplashscreen();
+				// 	    },
+				// 		fail(e) {
+				// 			console.log(e);
+				// 		}
+			 //    	})
+			 //    } else {
+				// 	//存在则关闭启动页进入首页
+				// 	getApp().globalData.token = token;
+				// 	plus.navigator.closeSplashscreen();
+			 //    }
 			    // #endif
 		},
 		onShow: function() {

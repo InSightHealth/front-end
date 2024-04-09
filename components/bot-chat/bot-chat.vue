@@ -11,7 +11,7 @@
 					</view>
 					<!-- 头像 -->
 					<view class="avatar">
-						<image src="/static/smart-chat/icon-girl.png"></image>
+						<image src="https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/avatar.jpg"></image>
 					</view>
 				</view>
 				<!-- 机器人发的消息 -->

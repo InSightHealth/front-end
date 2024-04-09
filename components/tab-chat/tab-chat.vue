@@ -125,7 +125,7 @@
 				this.playText = '发送中...';
 				this.playColor = '#888888'
 				uni.request({
-					url: 'http://127.0.0.1:8000/chatbot',
+					url: 'http://8.137.38.90:8000/chatbot',
 					method: 'POST',
 					data: {
 						"prompt": this.inputText,
@@ -151,6 +151,7 @@
 						}
 					},
 					fail: (err) => {
+						console.log(err);
 						this.playText = '发送失败！！';
 						this.playColor = 'red';
 					}
