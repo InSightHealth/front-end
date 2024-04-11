@@ -46,9 +46,16 @@ export default {
 			moveY: 0,
 			state: 0,
 			photoUrl: '',
+			backUrl: '',
+			baseUrl: '', 
+			token: '',
 		};
 	},
 	onLoad(option) { 
+		this.token = getApp().getToken();
+		this.backUrl = getApp().globalData.backUrl;
+		this.baseUrl = getApp().globalData.baseUrl;
+		
 		const eventChannel = this.getOpenerEventChannel();
 		eventChannel.on('recieveFile', (data) => {
 			this.photoPath = data.filepath;
@@ -68,27 +75,36 @@ export default {
 	},
 	methods: {
 		uploadFile(filepath) {
-			const token = getApp().globalData.token;
+			console.log(this.backUrl + '/storage/api/v1/uploadImg/photo');
+			console.log(this.token);
 			uni.uploadFile({
-				url: 'http://82.157.124.83:51603/storage/api/v1/uploadImg/photo'
+				url: this.backUrl + '/storage/api/v1/uploadImg/photo'
 				,name: "multipartFile"
 				,filePath: filepath
 				,formData: { }
 				,header: {
-					'token': token
+					'token': this.token
 				}
-				,success: (res) => { 
+				,success: (res) => {
 					console.log("上传成功："+JSON.stringify(res));
 					
-					if (res.statusCode == 200) {
+					try {
 						const response = JSON.parse(res.data);
 						console.log(response.data.image);
 						this.photoUrl = response.data.image;
-					} else {
-						
+					} catch(e) {
+						console.error(e);
+						uni.showToast({
+							title: '图片上传失败，请检查网络'
+						});
 					}
 				}
-				,fail: (err)=>{ console.error("上传录音失败："+err.errMsg); }
+				,fail: (err) => {
+					console.error(err);
+					uni.showToast({
+						title: '图片上传失败，请检查网络'
+					});
+				}
 			})
 		},
 		back() {

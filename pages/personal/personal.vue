@@ -35,7 +35,7 @@
 						<text class="item2">关于明道</text>
 						<image class="item3" src="/static/personal/more1.png"></image>
 					</view>
-					<navigator class="service-box" url="/pages/test/test">
+					<navigator class="service-box" url="/pages/personal/system/system">
 						<image class="item1" src="/static/personal/setting.png"></image>
 						<text class="item2">系统设置</text>
 						<image class="item3" src="/static/personal/more1.png"></image>
@@ -43,7 +43,7 @@
 				</view>
 			</view>
 		</view>
-		<home-foot></home-foot>
+		<home-foot :pageType="false"></home-foot>
 	</view>
 </template>
 
@@ -54,15 +54,22 @@
 				gender: false,
 				avatar: '',
 				age: 0,
-				nickname: ''
+				nickname: '',
+				backUrl: '',
+				baseUrl: '', 
+				token: '',
 			};
 		},
 		onLoad() {
+			this.token = getApp().getToken();
+			this.backUrl = getApp().globalData.backUrl;
+			this.baseUrl = getApp().globalData.baseUrl;
+			
 			uni.request({
-				url: 'http://82.157.124.83:51603/user/api/v1',
+				url: this.backUrl + '/user/api/v1',
 				method: 'GET',
 				header: {
-					'token': getApp().globalData.token
+					'token': this.token
 				},
 				success: (res) => {
 					console.log(res.data.data);

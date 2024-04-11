@@ -88,29 +88,6 @@
   padding: 1.25rem;
   font-size: 1.125rem;
 }
-.chat-view .menu[data-v-6c9e0889] {
-  margin-top: 1.40625rem;
-  width: 18.75rem;
-  height: 2.40625rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.chat-view .menu uni-image[data-v-6c9e0889] {
-  width: 2.40625rem;
-  height: 2.40625rem;
-}
-.chat-view .menu .once-again[data-v-6c9e0889] {
-  height: 2.34375rem;
-  width: 15.3125rem;
-  background-color: #08df86;
-  border-radius: 0.59375rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 0.9375rem;
-}
 /**
  * 这里是uni-app内置的常用样式变量
  *

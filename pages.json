@@ -17,50 +17,12 @@
 			}
 		},
 		{
-			"path" : "pages/test-camera/test_nvue",
+			"path" : "pages/smart-travel/cover_nvue",
 			"style" : 
 			{
 				"navigationBarTitleText" : "",
 				"enablePullDownRefresh" : false
 			}
-		},
-		{
-			"path" : "pages/test-camera/camera_nvue",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
-				"enablePullDownRefresh" : false
-			}
-		},
-		{
-			"path" : "pages/test_api/test_api",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
-				"enablePullDownRefresh" : false
-			}
-		},
-		{
-			"path" : "pages/smart-travel/smart-travel",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
-				"enablePullDownRefresh" : false
-			}
-		},
-		{
-			"path" : "pages/test-camera/cover_nvue",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
-				"enablePullDownRefresh" : false
-			}
-		},
-		{
-		    "path" : "pages/recTest/native_test",
-		    "style" : {
-		        "navigationBarTitleText": "RecordApp纯renderjs调用 - uni-app"
-		    }
 		},
 		{
 			"path" : "pages/smart-chat/smart-chat",
@@ -86,23 +48,7 @@
 			"path" : "pages/photo-recog/photo_nvue",
 			"style" : 
 			{
-				"navigationBarTitleText" : "",
-				"enablePullDownRefresh" : false
-			}
-		},
-		{
-			"path" : "pages/test-page/test-page",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
-				"enablePullDownRefresh" : false
-			}
-		},
-		{
-			"path" : "pages/assist-read/assist-read",
-			"style" : 
-			{
-				"navigationBarTitleText" : "辅助阅读",
+				"navigationBarTitleText" : "拍照识图",
 				"enablePullDownRefresh" : false
 			}
 		},
@@ -120,15 +66,7 @@
 			"path" : "pages/assist-read/photo_nvue",
 			"style" : 
 			{
-				"navigationBarTitleText" : "",
-				"enablePullDownRefresh" : false
-			}
-		},
-		{
-			"path" : "pages/test_api/test-upload",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
+				"navigationBarTitleText" : "辅助阅读",
 				"enablePullDownRefresh" : false
 			}
 		},
@@ -167,7 +105,35 @@
 			}
 		},
 		{
-			"path" : "pages/test-page/login",
+			"path" : "pages/test/test-record/test-record",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/login/login",
+			"style" : 
+			{
+				"app-plus": {
+					"titleNView":  false
+				},
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/login/verify-login/verify-login",
+			"style" : 
+			{
+				"app-plus": {
+					"titleNView":  false
+				},
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/login/easy-login/easy-login",
 			"style" : 
 			{
 				"app-plus": {
@@ -181,7 +147,8 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F8F8F8",
+		"animationType": "none"
 	},
 	"uniIdRouter": {},
 	"condition" : { //模式配置，仅开发期间生效

@@ -3,7 +3,8 @@
 		<scroll-view class="show-box" style="" scroll-y="true"> {{ recogText }} </scroll-view>
 		<view class="menu">
 			<view class="first-row">
-				<image src="/static/read/start.png" class="start-play" @tap="play"></image>
+				<image class="start-play" @tap="play" v-if="playing" src="/static/read/start.png"></image>
+				<image class="start-play" v-else src="/static/read/bg-suspend.png"></image>
 				<view class="mult-play" @tap="toggle"> {{ playHint }} </view>
 			</view>
 			<view class="second-row">
@@ -23,13 +24,15 @@ export default {
 	props: {
 	    recogText: {
 			type: String,
-			default: ''
+			default: '',
 		},
 	},
 	data() {
 		return {
 			speed: 5,
-			playHint: '正常'
+			playHint: '正常',
+			playicon: '/static/read/start.png',
+			playing: true
 		}
 	},
 	methods: {
@@ -41,13 +44,19 @@ export default {
 		play() {
 			console.log("播放" + this.recogText);
 			
+			this.playing = false;
+			
 			const encoded = encodeURI(this.recogText);
 			console.log(encoded);
 			innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike
 				&spd=` + this.speed + `&ctp=1&amp&pdt=301&tex=` + encoded;
 			console.log(innerAudioContext.src);
 			innerAudioContext.play();
-			console.log("play over!!!"); 
+			
+			innerAudioContext.onEnded(()=>{
+				console.log("play over!!!"); 
+				this.playing = true;
+			})
 		},
 		toggle() {
 			switch(this.speed) {

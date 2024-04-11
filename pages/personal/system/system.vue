@@ -27,7 +27,7 @@
 		<view class="line"></view>
 		
 		<view class="item">
-			<view class="item-left"> 账号注销 </view>
+			<view class="item-left" @tap="logout"> 退出登录 </view>
 			<image class="icon-right" src="/static/personal/more1.png"></image>
 		</view>
 		<view class="line"></view>
@@ -42,7 +42,12 @@
 			}
 		},
 		methods: {
-			
+			logout() {
+				uni.removeStorageSync('token');
+				uni.redirectTo({
+					url: '/pages/login/login'
+				})
+			}
 		}
 	}
 </script>

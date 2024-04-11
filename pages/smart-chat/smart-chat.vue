@@ -25,8 +25,8 @@
 			<view class="middlebox1" v-if="showbox1">
 				<view class="row11"> Hi，你好，我是你的智能助手 </view>
 				<view class="row12">可能偶尔产生不正确的信息，可能偶尔产生有害的指令，内容仅供参考。</view>
-				<view class="row13"></view>
-				<view class="row14"></view>
+				<view class="row13">我有点头疼</view>
+				<view class="row14">阿司匹林是治疗什么的？</view>
 			</view>
 			<view class="middlebox2" v-if="showbox2">
 				<view class="col21">
@@ -105,7 +105,9 @@
 						userContent: "",
 						userId: 0
 					}
-				]
+				],
+				backUrl: '',
+				baseUrl: ''
 			}
 		},
 		updated() {
@@ -116,6 +118,8 @@
 			}
 		},
 		onLoad(){
+			this.backUrl = getApp().globalData.backUrl;
+			this.baseUrl = getApp().globalData.baseUrl;
 		},
 		onUnload(){
 			uni.offKeyboardHeightChange()//如果不传入监听的对象，则移除所有监听函数
@@ -190,12 +194,14 @@
 			},
 			endRecord() {
 				var _this = this;
+				const url = _this.baseUrl + "/speechtotext";
 				console.log('录音结束');
+				console.log(url);
 				recorderManager.stop();
 				recorderManager.onStop(function (res) {
 					console.log(JSON.stringify(res));
 					uni.uploadFile({
-						url: "http://127.0.0.1:8000/speechtotext"
+						url: url
 						,filePath: res.tempFilePath
 						,name: "mp3"
 						,formData: { } 
@@ -231,7 +237,7 @@
 				});
 				
 				uni.request({
-					url: 'http://127.0.0.1:8000/healthbot',
+					url: this.baseUrl + '/healthbot',
 					method: 'POST',
 					data: {
 						"prompt": this.chatMsg,
@@ -435,6 +441,10 @@
 				height: 79rpx;
 				background-color: white; 
 				border-radius: 19rpx;
+				padding-top: 24rpx;
+				padding-left: 24rpx;	
+				font-size: 30rpx;
+				color: grey;
 			}
 			
 			.row14 {
@@ -443,6 +453,10 @@
 				height: 79rpx;
 				background-color: white;
 				border-radius: 19rpx;
+				font-size: 30rpx;
+				color: grey;
+				padding-top: 24rpx;
+				padding-left: 24rpx;
 			}
 		}
 		.polygon2 {

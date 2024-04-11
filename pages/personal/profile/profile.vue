@@ -89,14 +89,15 @@
 			}
 		},
 		onLoad() {
+			const token = getApp().getToken();
 			uni.request({
 				url: 'http://82.157.124.83:51603/user/api/v1',
 				method: 'GET',
 				header: {
-					'token': getApp().globalData.token
+					'token': token
 				},
 				success: (res) => {
-					console.log(res.data.data);
+					console.log(res);
 					const response = res.data.data
 					this.date = response.birthday;
 					this.height = response.height;
@@ -159,6 +160,7 @@
 				this.$refs['popup-weight'].open();
 			},
 			save() {
+				const token = getApp().getToken();
 				uni.request({
 					url: 'http://82.157.124.83:51603/user/api/v1',
 					method: 'PUT',
@@ -168,11 +170,10 @@
 						"gender": this.array[this.index],
 						"height": this.height,
 						"nickname": this.nickname,
-						"phone": getApp().globalData.phone,
 						"weight": this.weight
 					},
 					header: {
-						'token': getApp().globalData.token
+						'token': token
 					},
 					success() {
 						uni.showToast({
@@ -183,6 +184,7 @@
 				})
 			},
 			changeAvatar() {
+				const token = getApp().getToken();
 				uni.chooseImage({
 					count: 1,
 					sourceType: ['album'],
@@ -192,7 +194,7 @@
 						uni.uploadFile({
 						    url: `http://82.157.124.83:51603/user/api/v1/uploadPicture`,
 						    header:{
-						        "token": getApp().globalData.token
+						        "token": token
 						    },
 						    filePath: imgFiles[0],
 							name: 'multipartFile',

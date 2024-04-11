@@ -1,11 +1,15 @@
 <template>
 	<view>
 		<footer class="footer-container">
-		    <div class = "footer-parter-left">
+		    <div class = "footer-parter-left" v-if="pageType">
 		        <!-- Replace with your actual home icon SVG or image -->
 		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/home-icon.png" class="icon-footer" id="home-icon" @tap="navigateHome">
 				<text class = "footer-words" style="color: #08DF86;"> 首页 </text>
 		    </div>
+			<div class = "footer-parter-left" v-else>
+				<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/black_home.png" class="icon-footer" id="home-icon" @tap="navigateHome">
+				<text class = "footer-words"> 首页 </text>
+			</div>
 		    <div class = "footer-parter-center">
 		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/segment.png" 
 					class="icon-footer-center"
@@ -14,11 +18,16 @@
 				<text class = "footer-words"> 智能助手 </text>
 		        <!-- <img src="path_to_microphone_icon.png" class="icon-footer" id="icon microphone-icon"> -->
 		    </div>
-		    <div class = "footer-parter-right">
+		    <div class = "footer-parter-right" v-if="pageType">
 		        <!-- Replace with your actual user profile icon SVG or image -->
 				<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/user.png" class="icon-footer" id="user-icon" @tap="navigatePerson">
 				<text class = "footer-words"> 个人 </text>
 		    </div>
+			<div class = "footer-parter-right" v-else>
+			    <!-- Replace with your actual user profile icon SVG or image -->
+				<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/green_person.png" class="icon-footer" id="user-icon" @tap="navigatePerson">
+				<text class = "footer-words" style="color: #08DF86;"> 个人 </text>
+			</div>
 			<uni-popup ref="popup" type="bottom" class="popup">
 				<view class="popup"> 
 					<text class="holderText" v-if="holding"> {{ holderText }} </text>
@@ -37,6 +46,12 @@
 	
 	export default {
 		name:"homeFoot",
+		props: {
+			pageType: {
+				type: Boolean,
+				default: true
+			}
+		},
 		data() {
 			return {
 				chatMsg: '',

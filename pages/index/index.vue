@@ -3,7 +3,7 @@
 		<home-head></home-head>
 		<div class="content">
 			<div class="content-first-row">
-				<navigator id="link-to-smart-travel" url="/pages/test-camera/cover_nvue">
+				<navigator id="link-to-smart-travel" url="/pages/smart-travel/cover_nvue">
 					智能出行
 				</navigator>
 				<navigator id="link-to-snap-recognize" url="/pages/photo-recog/photo_nvue">
@@ -14,7 +14,7 @@
 			<div class="content-second-row">
 				<navigator id="link-to-health-assistant" url="/pages/smart-chat/smart-chat">
 					<text>智能健康助手</text>
-					<image src="https://img-insight.oss-cn-chengdu.aliyuncs.com/poe.png"> </image>
+					<image src="/static/homepage/poe.png"> </image>
 				</navigator>
 				<navigator id="link-to-assist-read" url="/pages/assist-read/photo_nvue">
 					<text>辅助阅读</text>
@@ -22,7 +22,7 @@
 				</navigator>
 			</div>
 		</div>
-		<home-foot></home-foot>
+		<home-foot :pageType="true"></home-foot>
 	</view>
 </template>
 

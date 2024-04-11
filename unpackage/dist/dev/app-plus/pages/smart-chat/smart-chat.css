@@ -94,6 +94,7 @@ uni-view[data-v-fb69b191] {
   width: 3.59375rem;
   height: 3.59375rem;
   overflow: hidden;
+  border-radius: 50%;
 }
 .chat-body .item .avatar uni-image[data-v-fb69b191] {
   width: 3.59375rem;
@@ -299,6 +300,10 @@ uni-view[data-v-fb69b191] {
   height: 2.46875rem;
   background-color: white;
   border-radius: 0.59375rem;
+  padding-top: 0.75rem;
+  padding-left: 0.75rem;
+  font-size: 0.9375rem;
+  color: grey;
 }
 .wholeview .scroll-view .middlebox1 .row14 {
   margin-top: 0.9375rem;
@@ -306,6 +311,10 @@ uni-view[data-v-fb69b191] {
   height: 2.46875rem;
   background-color: white;
   border-radius: 0.59375rem;
+  font-size: 0.9375rem;
+  color: grey;
+  padding-top: 0.75rem;
+  padding-left: 0.75rem;
 }
 .wholeview .scroll-view .polygon2 {
   position: absolute;

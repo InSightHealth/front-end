@@ -173,6 +173,7 @@ view {
 			width: 115rpx;
 			height: 115rpx;
 			overflow: hidden;
+			border-radius: 50%;
 						
 			image {
 				width: 115rpx;

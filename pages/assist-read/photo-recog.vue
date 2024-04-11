@@ -45,14 +45,19 @@ export default {
 			},
 			moveY: 0,
 			state: 0,
-			recogText: ''
+			recogText: '',
+			backUrl: '',
+			baseUrl: '', 
+			token: '',
 		};
 	},
 	onLoad(option) { 
-		const eventChannel = this.getOpenerEventChannel();
-		const token = getApp().globalData.token;
+		this.token = getApp().getToken();
+		this.backUrl = getApp().globalData.backUrl;
+		this.baseUrl = getApp().globalData.baseUrl;
 		
-		this.recogText = '识别中，请稍等...';
+		const eventChannel = this.getOpenerEventChannel();
+		this.recogText = '';
 		
 		eventChannel.on('recieveFile', (data) => {
 			this.photoPath = data.filepath;
@@ -61,27 +66,35 @@ export default {
 		
 		eventChannel.on('recieveFile', (data) => {
 			uni.uploadFile({
-				url: 'http://82.157.124.83:51603/storage/api/v1/uploadImg/read'
+				url: this.backUrl + '/storage/api/v1/uploadImg/read'
 				,name: "multipartFile"
 				,filePath: data.filepath
 				,formData: { }
 				,header: {
-					'token': token
+					'token': this.token
 				}
 				,success: (res) => { 
 					console.log("上传成功："+JSON.stringify(res));
 					
-					if (res.statusCode == 200) {
+					try {
 						const response = JSON.parse(res.data);
 						console.log(response.data.image);
 						this.photoUrl = response.data.image;
 						
 						this.handleImg();
-					} else {
-						
+					} catch(e) {
+						console.error(e);
+						uni.showToast({
+							title: '图片上传失败，请检查网络'
+						});
 					}
 				}
-				,fail: (err) => { console.error("上传图片失败："+err.errMsg); }
+				,fail: (err) => { 
+					console.error(err); 
+					uni.showToast({
+						title: '图片上传失败，请检查网络'
+					});
+				}
 			})
 		})
 	},
@@ -97,7 +110,7 @@ export default {
 			var _this = this;
 			console.log("photoUrl: " + this.photoUrl);
 			uni.request({
-				url: 'http://127.0.0.1:8000/ocr',
+				url: this.baseUrl + '/ocr',
 				method: 'POST',
 				data: {
 					"image": this.photoUrl
@@ -126,7 +139,6 @@ export default {
 		    this.startData.clientY = e.changedTouches[0].clientY;
 		},
 		end(e){ 
-			//触摸事件结束
 			console.log(this.recogText);
 			console.log("this.moveY = ", this.touch.clientY - this.startData.clientY);
 			if(this.touch.clientY - this.startData.clientY > 300) {

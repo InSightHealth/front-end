@@ -15,10 +15,6 @@
 		<div class="tap-mic" @tap="play">
 			点击播放
 		</div>
-		<!-- <div class="menu">
-			<image src="/static/recog/home.png"></image>
-			<navigator class="once-again" url="/pages/photo-recog/photo_nvue">再拍一张</navigator>
-		</div> -->
 	</view>
 </template>
 
@@ -46,17 +42,17 @@
 			};
 		},
 		methods: {
-			moveHandle(){}, 
 			micStart() {
 				console.log('开始录音');
 				console.log(this.inputText);
 				this.hasPlay = false;
 				this.placeholder = '我正在听...';
-				this.playText = '你可以点击这里输入, 也可以按住下方语音发送';
+				this.playText = '我很高兴为您解答！你可以在上面手动或语音输入';
 				this.playColor = '#888888';
 				recorderManager.start();
 			},
 			micStop() {
+				const baseUrl = getApp().globalData.baseUrl;
 				console.log('录音结束'); 
 				this.placeholder = '识别中...';
 				recorderManager.stop();
@@ -64,7 +60,7 @@
 				recorderManager.onStop(function (res) {
 					console.log(res.tempFilePath);
 					uni.uploadFile({
-						url: "http://127.0.0.1:8000/speechtotext"
+						url: baseUrl + "/speechtotext"
 						,name: "mp3" 
 						,filePath: res.tempFilePath
 						,formData: { }
@@ -122,10 +118,11 @@
 			},
 			sendMsg() {
 				console.log(this.inputText, this.photoUrl);
+				const baseUrl = getApp().globalData.baseUrl;
 				this.playText = '发送中...';
 				this.playColor = '#888888'
 				uni.request({
-					url: 'http://8.137.38.90:8000/chatbot',
+					url: baseUrl + '/chatbot',
 					method: 'POST',
 					data: {
 						"prompt": this.inputText,
@@ -135,17 +132,13 @@
 						console.log(res);
 						this.hasPlay = true;
 						
-						if (res.statusCode == 200) {
-							const response = JSON.parse(res.data);
-							console.log(response);
-							if (response.response) {
-								this.playText = response.response;
-								this.playColor = 'black';
-							} else {
-								this.playText = '发送失败！！';
-								this.playColor = 'red';
-							}
-						} else {
+						try {
+							console.log(res.data);
+							// const response = JSON.parse(res.data);
+							console.log(res.data.response);
+							this.playText = res.data.response;
+							this.playColor = 'black';
+						} catch(e) {
 							this.playText = '发送失败！！';
 							this.playColor = 'red';
 						}
@@ -161,7 +154,7 @@
 				console.log("input....");
 				if (this.inputText == '') {
 					this.hasInput = false;
-					this.placeholder = '你可以点击这里输入,也可以按住下方语音发送';
+					this.placeholder = '你可以在上方输入,也可以按住语音发送';
 				} else {
 					this.hasInput = true;
 					this.placeholder = '';
@@ -240,34 +233,6 @@
 		box-sizing: border-box;
 		padding: 40rpx;
 		font-size: 36rpx;
-	}
-	.menu {
-		margin-top: 45rpx;
-		width: 600rpx;
-		height: 77rpx;
-		
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		
-		image {
-			width: 77rpx;
-			height: 77rpx;
-		}
-		
-		.once-again {
-			height: 75rpx;
-			width: 490rpx;
-			background-color: rgba(8, 223, 134, 1); 
-			border-radius: 19rpx;
-			
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			
-			color: white;
-			font-size: 30rpx;
-		}
 	}
 }
 </style>

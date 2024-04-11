@@ -43,11 +43,8 @@
   position: absolute;
   top: 4.84375rem;
   left: 4.84375rem;
-  width: auto;
-  height: 2.71875rem;
-  font-size: 1.4375rem;
-  line-height: 100%;
-  color: black;
+  height: 1.53125rem;
+  width: 13.375rem;
 }
 /**
  * 这里是uni-app内置的常用样式变量

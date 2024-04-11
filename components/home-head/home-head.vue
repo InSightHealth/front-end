@@ -2,7 +2,7 @@
 	<view>
 		<view class="home-head">
 			<image class="home-icon" src="/static/homepage/image.png"></image>
-			<text class="home-title">明道-掌上之眼助慧行</text>
+			<image class="home-title" src="/static/homepage/title.png"></image>
 		</view>
 	</view>
 </template>
@@ -39,11 +39,8 @@
 			position: absolute;
 			top: 155rpx;
 			left: 155rpx;
-			width: auto; 
-			height: 87rpx; 
-			font-size: 46rpx; 
-			line-height: 100%; 
-			color: black;
+			height: 49rpx; 
+			width: 428rpx;
 		}
 	}
 </style>
