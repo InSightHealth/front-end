@@ -2,7 +2,6 @@
 	<view>
 		<footer class="footer-container">
 		    <div class = "footer-parter-left" v-if="pageType">
-		        <!-- Replace with your actual home icon SVG or image -->
 		        <img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/home-icon.png" class="icon-footer" id="home-icon" @tap="navigateHome">
 				<text class = "footer-words" style="color: #08DF86;"> 首页 </text>
 		    </div>
@@ -16,15 +15,12 @@
 					@touchstart="assist" 
 					@touchend="close">
 				<text class = "footer-words"> 智能助手 </text>
-		        <!-- <img src="path_to_microphone_icon.png" class="icon-footer" id="icon microphone-icon"> -->
 		    </div>
 		    <div class = "footer-parter-right" v-if="pageType">
-		        <!-- Replace with your actual user profile icon SVG or image -->
 				<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/user.png" class="icon-footer" id="user-icon" @tap="navigatePerson">
 				<text class = "footer-words"> 个人 </text>
 		    </div>
 			<div class = "footer-parter-right" v-else>
-			    <!-- Replace with your actual user profile icon SVG or image -->
 				<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/green_person.png" class="icon-footer" id="user-icon" @tap="navigatePerson">
 				<text class = "footer-words" style="color: #08DF86;"> 个人 </text>
 			</div>
@@ -41,7 +37,7 @@
 
 <script>
 	const innerAudioContext = uni.createInnerAudioContext();
-	innerAudioContext.autoplay = false;			//不让它自动播放
+	innerAudioContext.autoplay = false;	
 	innerAudioContext.src = '';
 	
 	export default {
@@ -88,8 +84,6 @@
 			},
 			assist() {
 				const pages = getCurrentPages()
-				//    getCurrentPages() 方法用于获取当前页面栈的实例，返回一个由页面实例组成的数组，
-				//    数组的顺序是由打开的页面依次排序的，也就是说你每跳转一个页面，这个数组就会将那个页面
 				const page = pages[pages.length-1];
 				console.log(page);
 				
@@ -125,8 +119,6 @@
 			},
 			close() {
 				const pages = getCurrentPages()
-				//    getCurrentPages() 方法用于获取当前页面栈的实例，返回一个由页面实例组成的数组，
-				//    数组的顺序是由打开的页面依次排序的，也就是说你每跳转一个页面，这个数组就会将那个页面
 				const page = pages[pages.length-1];
 				console.log(page);
 				var index = -1;

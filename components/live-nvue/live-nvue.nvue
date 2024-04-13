@@ -31,13 +31,13 @@ let _this = null;
 export default {
 	data() {
 		return {
-			poenCarmeInterval:null,//打开相机的轮询
-			aspect: '2:3', //比例
-			windowWidth: '', //屏幕可用宽度
-			windowHeight: '', //屏幕可用高度
-			camerastate: false, //相机准备好了
-			livePusher: null, //流视频对象
-			snapshotsrc: null, //快照
+			poenCarmeInterval:null,
+			aspect: '2:3', 
+			windowWidth: '', 
+			windowHeight: '', 
+			camerastate: false,
+			livePusher: null,
+			snapshotsrc: null, 
 		};
 	},
 	onLoad(e) {
@@ -46,12 +46,10 @@ export default {
 	},
 	onReady() {
 		this.livePusher = uni.createLivePusherContext('livePusher', this);
-		this.startPreview(); //开启预览并设置摄像头
+		this.startPreview(); 
 		this.poenCarme();
 	},
 	methods: {
-		
-		//轮询打开
 		poenCarme(){
 			//#ifdef APP-PLUS
 			if (plus.os.name == 'Android') {
@@ -62,7 +60,7 @@ export default {
 			}
 			//#endif
 		},
-		//初始化相机
+		
 		initCamera() {
 			console.log('正在 initCamera');
 			uni.getSystemInfo({
@@ -79,13 +77,13 @@ export default {
 			});
 		},
 		
-		//整除数计算
+		
 		aliquot(x, y) {
 			if (x % y == 0) return y;
 			return this.aliquot(y, x % y);
 		},
 
-		//开始预览
+
 		startPreview() {
 			this.livePusher.startPreview({
 				success: a => {
@@ -94,7 +92,7 @@ export default {
 			});
 		},
 		
-		//停止预览
+		
 		stopPreview() {
 			this.livePusher.stopPreview({
 				success: a => {
@@ -103,9 +101,8 @@ export default {
 			});
 		},
 		
-		//状态
+		
 		statechange(e) {
-			//状态改变
 			console.log(e);
 			if (e.detail.code == 1007) {
 				_this.camerastate = true;
@@ -115,7 +112,6 @@ export default {
 		},
 		
 
-		//返回
 		back() {
 			uni.navigateBack();
 		},
@@ -124,15 +120,12 @@ export default {
 			this.livePusher.switchCamera();
 		},
 
-		//抓拍
 		snapshot() {
-			//震动
 			uni.vibrateShort({
 			    success: function () {
 			        console.log('success');
 			    }
 			});
-			//拍照
 			this.livePusher.snapshot({
 				success: e => {
 					_this.snapshotsrc = e.message.tempImagePath;
@@ -142,8 +135,7 @@ export default {
 				}
 			});
 		},
-
-		//设置
+		
 		setImage() {
 			let pages = getCurrentPages();
 			let prevPage = pages[pages.length - 2];

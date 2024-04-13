@@ -1,6 +1,5 @@
 <template>
 		<view id="msglistview" class="chat-body" :style="{ width: windowWidth }">
-			<!-- 聊天记录 -->
 			<view v-for="(item,index) in msgList" :key="index" :style="{ width: windowWidth}">
 				<view class="item self" v-if="item.userContent != ''" >
 					<view class="content right">
@@ -15,13 +14,12 @@
 					</view>
 				</view>
 			</view>
-<!-- 			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>-->
 		</view>
 </template>
 
 <script>
 	const innerAudioContext = uni.createInnerAudioContext();
-	innerAudioContext.autoplay = false;			//不让它自动播放
+	innerAudioContext.autoplay = false;	
 	innerAudioContext.src = '';
 	
 	export default {
@@ -37,34 +35,11 @@
 					    userContent: "",
 					    userId: 0
 					},
-					// {
-					//     botContent: "",
-					//     recordId: 0,
-					//     titleId: 0,
-					//     userContent: "你好呀我想问你一件事，可以吗？",
-					//     userId: 0
-					// },
-					// {
-					//     userContent: "",
-					//     recordId: 0,
-					//     titleId: 0,
-					//     botContent: "当然可以!",
-					//     userId: 0
-					// },
-					// {
-					//     botContent: "",
-					//     recordId: 0,
-					//     titleId: 0,
-					//     userContent: "我的问题是：blablabla...",
-					//     userId: 0
-					// },
 				]
 		    }
 		},
 		data() {
 			return {
-				userId:'',
-				//发送的消息
 				chatMsg:"",
 				randstr: 'ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl',
 			};

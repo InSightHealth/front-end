@@ -17,7 +17,7 @@
 
 <script>
 const innerAudioContext = uni.createInnerAudioContext();
-innerAudioContext.autoplay = false;			//不让它自动播放
+innerAudioContext.autoplay = false;			
 innerAudioContext.src = '';
 
 export default {

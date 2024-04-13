@@ -122,7 +122,7 @@
 			this.baseUrl = getApp().globalData.baseUrl;
 		},
 		onUnload(){
-			uni.offKeyboardHeightChange()//如果不传入监听的对象，则移除所有监听函数
+			uni.offKeyboardHeightChange()
 		},
 		methods: {
 			keyboardInput() {
@@ -157,8 +157,8 @@
 				    const scrollH = res.top;
 					console.log("scroll view selected!!");
 					uni.pageScrollTo({
-				    	duration: 100,// 过渡时间
-				    	scrollTop: scrollH,// 滚动的实际距离
+				    	duration: 100,
+				    	scrollTop: scrollH,
 					})
 				}).exec();
 			},
@@ -168,8 +168,8 @@
 					const scrollH = res.bottom;
 					console.log("scroll view selected!!");
 					uni.pageScrollTo({
-						duration: 100,// 过渡时间
-						scrollTop: scrollH,// 滚动的实际距离
+						duration: 100,
+						scrollTop: scrollH,
 					})
 				}).exec();
 			},

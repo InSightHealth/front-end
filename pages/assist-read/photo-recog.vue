@@ -154,14 +154,14 @@ export default {
 			let touch = event.touches[0];
 			this.touch = touch;
 			let data = 0;
-			if(touch.clientY > this.startData.clientY && this.state === 0) {  //向下移动
+			if(touch.clientY > this.startData.clientY && this.state === 0) { 
 				data = touch.clientY - this.startData.clientY;
 				if(data > 1000) {
 					data = 1000;
 				}
 				this.moveY = data;
 			}
-			if(touch.clientY < this.startData.clientY && this.state === 1) {  //向上移动
+			if(touch.clientY < this.startData.clientY && this.state === 1) { 
 				data = this.startData.clientY - touch.clientY;
 				if(data > 1000) {
 					data = -1000;
@@ -193,16 +193,16 @@ export default {
 			position: absolute;
 			top: 78rpx;
 			left: 65rpx;
-			height: 1200rpx; // 1200
-			width: 619rpx;  // 619
+			height: 1200rpx;
+			width: 619rpx;
 		}
 		
 		.preview-img-thumb {
 			position: absolute;
 			top: -346rpx;
 			left: 0rpx;
-			height: 1454rpx; // 1200
-			width: 750rpx;  // 619
+			height: 1454rpx;
+			width: 750rpx;
 		}
 		
 		.menu {

@@ -21,15 +21,12 @@
 		></live-pusher>
 
 		<cover-view class="menu">
-			<!--返回键-->
 			<cover-image class="menu-back" @tap="back" src="/static/camera/back.png"></cover-image>
-
-			<!--快门键-->
+			
 			<cover-view class="menu-snapshot" @tap="snapshot">
 				<cover-view class="snapshot-button"></cover-view>
 			</cover-view>
-
-			<!--反转键-->
+			
 			<cover-image class="menu-flip" @tap="flip" src="/static/camera/flip.png"></cover-image>
 		</cover-view>
 	</view>
@@ -40,13 +37,13 @@ let _this = null;
 export default {
 	data() {
 		return {
-			poenCarmeInterval:null,//打开相机的轮询
-			aspect: '2:3', //比例
-			windowWidth: '', //屏幕可用宽度
-			windowHeight: '', //屏幕可用高度
-			camerastate: false, //相机准备好了
-			livePusher: null, //流视频对象
-			snapshotsrc: null, //快照
+			poenCarmeInterval:null,
+			aspect: '2:3', 
+			windowWidth: '', 
+			windowHeight: '', 
+			camerastate: false, 
+			livePusher: null, 
+			snapshotsrc: null, 
 		};
 	},
 	onLoad(e) {
@@ -55,12 +52,10 @@ export default {
 	},
 	onReady() {
 		this.livePusher = uni.createLivePusherContext('livePusher', this);
-		this.startPreview(); //开启预览并设置摄像头
+		this.startPreview(); 
 		this.poenCarme();
 	},
 	methods: {
-		
-		//轮询打开
 		poenCarme(){
 			//#ifdef APP-PLUS
 			if (plus.os.name == 'Android') {
@@ -71,7 +66,7 @@ export default {
 			}
 			//#endif
 		},
-		//初始化相机
+		
 		initCamera() {
 			uni.getSystemInfo({
 				success: function(res) {
@@ -79,18 +74,15 @@ export default {
 					_this.windowHeight = res.windowHeight;
 					let zcs = _this.aliquot(_this.windowWidth,_this.windowHeight);
 					_this.aspect = (_this.windowWidth/zcs)+':'+(_this.windowHeight/zcs);
-					// console.log('画面比例：'+_this.aspect);
 				}
 			});
 		},
 		
-		//整除数计算
 		aliquot(x, y) {
 			if (x % y == 0) return y;
 			return this.aliquot(y, x % y);
 		},
-
-		//开始预览
+		
 		startPreview() {
 			this.livePusher.startPreview({
 				success: a => {
@@ -99,7 +91,6 @@ export default {
 			});
 		},
 		
-		//停止预览
 		stopPreview() {
 			this.livePusher.stopPreview({
 				success: a => {
@@ -108,10 +99,7 @@ export default {
 			});
 		},
 		
-		//状态
 		statechange(e) {
-			//状态改变
-			// console.log(e);
 			if (e.detail.code == 1007) {
 				_this.camerastate = true;
 			} else if (e.detail.code == -1301) {
@@ -119,21 +107,17 @@ export default {
 			}
 		},
 		
-
-		//返回
 		back() {
 			uni.navigateBack();
 		},
-
-		//抓拍
+		
 		snapshot() {
-			//震动
 			uni.vibrateShort({
 			    success: function () {
 			        console.log('success');
 			    }
 			});
-			//拍照
+			
 			this.livePusher.snapshot({
 				success: e => {
 					_this.snapshotsrc = e.message.tempImagePath;
@@ -148,13 +132,11 @@ export default {
 				}
 			});
 		},
-
-		//反转
+		
 		flip() {
 			this.livePusher.switchCamera();
 		},
-
-		//设置
+		
 		setImage() {
 			let pages = getCurrentPages();
 			let prevPage = pages[pages.length - 2];

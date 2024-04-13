@@ -1,26 +1,19 @@
 <template>
 	<view>
 		<view id="msglistview" class="chat-body">
-			<!-- 聊天记录 -->
 			<view v-for="(item,index) in msgList" :key="index">
-				<!-- 自己发的消息 -->
 				<view class="item self" v-if="item.userContent != ''" >
-					<!-- 文字内容 -->
 					<view class="content right">
 					{{item.userContent}}
 					</view>
-					<!-- 头像 -->
 					<view class="avatar">
 						<image src="https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/avatar.jpg"></image>
 					</view>
 				</view>
-				<!-- 机器人发的消息 -->
 				<view class="item Ai" v-if="item.botContent != ''">
-					<!-- 头像 -->     
 					<view class="avatar">
 						<image src="/static/smart-chat/icon-bot.png"></image>
 					</view>
-					<!-- 文字内容 -->
 					<view class="content left" @tap="play(index)">
 						{{item.botContent}}
 					</view>
@@ -32,7 +25,7 @@
 
 <script>
 	const innerAudioContext = uni.createInnerAudioContext();
-	innerAudioContext.autoplay = false;			//不让它自动播放
+	innerAudioContext.autoplay = false;	
 	innerAudioContext.src = '';
 	
 	export default {
@@ -41,41 +34,18 @@
 		    msgList: {
 				type: Array,
 				default: [
-					// {
-					//     botContent: "hello，请问我有什么可以帮助你的吗？",
-					//     recordId: 0,
-					//     titleId: 0,
-					//     userContent: "",
-					//     userId: 0
-					// },
-					// {
-					//     botContent: "",
-					//     recordId: 0,
-					//     titleId: 0,
-					//     userContent: "你好呀我想问你一件事，可以吗？",
-					//     userId: 0
-					// },
-					// {
-					//     userContent: "",
-					//     recordId: 0,
-					//     titleId: 0,
-					//     botContent: "当然可以!",
-					//     userId: 0
-					// },
-					// {
-					//     botContent: "",
-					//     recordId: 0,
-					//     titleId: 0,
-					//     userContent: "我的问题是：blablabla...",
-					//     userId: 0
-					// },
+					{
+					    botContent: "hello，请问我有什么可以帮助你的吗？",
+					    recordId: 0,
+					    titleId: 0,
+					    userContent: "",
+					    userId: 0
+					},
 				]
 		    }
 		},
 		data() {
 			return {
-				userId:'',
-				//发送的消息
 				chatMsg:""
 			};
 		},
@@ -125,7 +95,7 @@ view {
 		.left {
 			background-color: #FFFFFF;
 		}
-		// 聊天消息的三角形
+		
 		.right::after {
 			position: absolute;
 			display: inline-block;
