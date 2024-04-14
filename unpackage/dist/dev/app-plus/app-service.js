@@ -38,13 +38,13 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$m = {
+  const _sfc_main$l = {
     name: "homeHead",
     data() {
       return {};
     }
   };
-  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "home-head" }, [
         vue.createElementVNode("image", {
@@ -58,7 +58,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
+  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-fe552612"], ["__file", "E:/fuchuang/learn/demo1/components/home-head/home-head.vue"]]);
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
       uni.__log__(type, filename, ...args);
@@ -181,7 +181,7 @@ if (uni.restoreGlobal) {
     clearTimeout(_this.timer);
     return new MPAnimation(option, _this);
   }
-  const _sfc_main$l = {
+  const _sfc_main$k = {
     name: "uniTransition",
     emits: ["click", "change"],
     props: {
@@ -432,7 +432,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
       ref: "ani",
       animation: $data.animationData,
@@ -445,8 +445,8 @@ if (uni.restoreGlobal) {
       [vue.vShow, $data.isShow]
     ]);
   }
-  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__file", "E:/fuchuang/learn/demo1/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$k = {
+  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__file", "E:/fuchuang/learn/demo1/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$j = {
     name: "uniPopup",
     components: {},
     emits: ["change", "maskClick"],
@@ -796,7 +796,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$5);
     return $data.showPopup ? (vue.openBlock(), vue.createElementBlock(
       "view",
@@ -856,11 +856,11 @@ if (uni.restoreGlobal) {
       /* CLASS */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/fuchuang/learn/demo1/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/fuchuang/learn/demo1/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
   const innerAudioContext$5 = uni.createInnerAudioContext();
   innerAudioContext$5.autoplay = false;
   innerAudioContext$5.src = "";
-  const _sfc_main$j = {
+  const _sfc_main$i = {
     name: "homeFoot",
     props: {
       pageType: {
@@ -886,7 +886,7 @@ if (uni.restoreGlobal) {
         let routes = getCurrentPages();
         let curRoute = routes[routes.length - 1].route;
         const url = "/pages/index/index";
-        formatAppLog("log", "at components/home-foot/home-foot.vue:73", curRoute, url);
+        formatAppLog("log", "at components/home-foot/home-foot.vue:69", curRoute, url);
         if (url != curRoute) {
           uni.navigateTo({ url });
         }
@@ -895,7 +895,7 @@ if (uni.restoreGlobal) {
         let routes = getCurrentPages();
         let curRoute = routes[routes.length - 1].route;
         const url = "/pages/personal/personal";
-        formatAppLog("log", "at components/home-foot/home-foot.vue:83", curRoute, url);
+        formatAppLog("log", "at components/home-foot/home-foot.vue:79", curRoute, url);
         if (url != curRoute) {
           uni.navigateTo({ url });
         }
@@ -903,34 +903,34 @@ if (uni.restoreGlobal) {
       assist() {
         const pages = getCurrentPages();
         const page = pages[pages.length - 1];
-        formatAppLog("log", "at components/home-foot/home-foot.vue:94", page);
+        formatAppLog("log", "at components/home-foot/home-foot.vue:88", page);
         this.recoging = false;
         this.holding = true;
         this.holderText = "正在听，请说出你的问题...";
         this.$refs["popup"].open();
-        formatAppLog("log", "at components/home-foot/home-foot.vue:101", "开始录音");
+        formatAppLog("log", "at components/home-foot/home-foot.vue:95", "开始录音");
         recorderManager.start();
       },
       stopMic() {
         var _this = this;
-        formatAppLog("log", "at components/home-foot/home-foot.vue:106", "录音结束");
+        formatAppLog("log", "at components/home-foot/home-foot.vue:100", "录音结束");
         this.holderText = "正在识别...";
         recorderManager.stop();
         recorderManager.onStop(function(res) {
-          formatAppLog("log", "at components/home-foot/home-foot.vue:110", JSON.stringify(res));
+          formatAppLog("log", "at components/home-foot/home-foot.vue:104", JSON.stringify(res));
           uni.uploadFile({
             url: "http://8.137.38.90:8000/speechtotext",
             filePath: res.tempFilePath,
             name: "mp3",
             formData: {},
             success: (res2) => {
-              formatAppLog("log", "at components/home-foot/home-foot.vue:117", "上传成功：" + JSON.stringify(res2));
+              formatAppLog("log", "at components/home-foot/home-foot.vue:111", "上传成功：" + JSON.stringify(res2));
               const response = JSON.parse(res2.data);
               _this.chatMsg = response.text;
               _this.close();
             },
             fail: (err) => {
-              formatAppLog("error", "at components/home-foot/home-foot.vue:122", "上传录音失败：" + err);
+              formatAppLog("error", "at components/home-foot/home-foot.vue:116", "上传录音失败：" + err);
               _this.close();
             }
           });
@@ -939,7 +939,7 @@ if (uni.restoreGlobal) {
       close() {
         const pages = getCurrentPages();
         const page = pages[pages.length - 1];
-        formatAppLog("log", "at components/home-foot/home-foot.vue:131", page);
+        formatAppLog("log", "at components/home-foot/home-foot.vue:123", page);
         var index = -1;
         const links = [
           "/pages/smart-travel/smart-travel",
@@ -964,17 +964,17 @@ if (uni.restoreGlobal) {
         } else {
           this.recogText = "抱歉，我没听清...";
           setTimeout(() => {
-            formatAppLog("log", "at components/home-foot/home-foot.vue:157", "Timeout Here!");
+            formatAppLog("log", "at components/home-foot/home-foot.vue:149", "Timeout Here!");
             this.$refs["popup"].close();
           }, 5e3);
           const text2 = this.recogText;
           const encoded2 = encodeURI(text2);
-          formatAppLog("log", "at components/home-foot/home-foot.vue:163", encoded2);
+          formatAppLog("log", "at components/home-foot/home-foot.vue:155", encoded2);
           innerAudioContext$5.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike
 						&spd=6&ctp=1&amp&pdt=301&tex=` + encoded2;
-          formatAppLog("log", "at components/home-foot/home-foot.vue:166", innerAudioContext$5.src);
+          formatAppLog("log", "at components/home-foot/home-foot.vue:158", innerAudioContext$5.src);
           innerAudioContext$5.play();
-          formatAppLog("log", "at components/home-foot/home-foot.vue:168", "play over!!!");
+          formatAppLog("log", "at components/home-foot/home-foot.vue:160", "play over!!!");
         }
         setTimeout(() => {
           this.$refs["popup"].close();
@@ -984,24 +984,23 @@ if (uni.restoreGlobal) {
         }, 3e3);
         const text = this.recogText;
         const encoded = encodeURI(text);
-        formatAppLog("log", "at components/home-foot/home-foot.vue:181", encoded);
+        formatAppLog("log", "at components/home-foot/home-foot.vue:173", encoded);
         innerAudioContext$5.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike
 					&spd=6&ctp=1&amp&pdt=301&tex=` + encoded;
-        formatAppLog("log", "at components/home-foot/home-foot.vue:184", innerAudioContext$5.src);
+        formatAppLog("log", "at components/home-foot/home-foot.vue:176", innerAudioContext$5.src);
         innerAudioContext$5.play();
-        formatAppLog("log", "at components/home-foot/home-foot.vue:186", "play over!!!");
+        formatAppLog("log", "at components/home-foot/home-foot.vue:178", "play over!!!");
       }
     }
   };
-  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("footer", { class: "footer-container" }, [
         $props.pageType ? (vue.openBlock(), vue.createElementBlock("div", {
           key: 0,
           class: "footer-parter-left"
         }, [
-          vue.createCommentVNode(" Replace with your actual home icon SVG or image "),
           vue.createElementVNode("img", {
             src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/home-icon.png",
             class: "icon-footer",
@@ -1037,14 +1036,12 @@ if (uni.restoreGlobal) {
             32
             /* HYDRATE_EVENTS */
           ),
-          vue.createElementVNode("text", { class: "footer-words" }, " 智能助手 "),
-          vue.createCommentVNode(' <img src="path_to_microphone_icon.png" class="icon-footer" id="icon microphone-icon"> ')
+          vue.createElementVNode("text", { class: "footer-words" }, " 智能助手 ")
         ]),
         $props.pageType ? (vue.openBlock(), vue.createElementBlock("div", {
           key: 2,
           class: "footer-parter-right"
         }, [
-          vue.createCommentVNode(" Replace with your actual user profile icon SVG or image "),
           vue.createElementVNode("img", {
             src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/user.png",
             class: "icon-footer",
@@ -1056,7 +1053,6 @@ if (uni.restoreGlobal) {
           key: 3,
           class: "footer-parter-right"
         }, [
-          vue.createCommentVNode(" Replace with your actual user profile icon SVG or image "),
           vue.createElementVNode("img", {
             src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/green_person.png",
             class: "icon-footer",
@@ -1113,8 +1109,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
-  const _sfc_main$i = {
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-5c189880"], ["__file", "E:/fuchuang/learn/demo1/components/home-foot/home-foot.vue"]]);
+  const _sfc_main$h = {
     data() {
       return {
         holding: true,
@@ -1124,7 +1120,7 @@ if (uni.restoreGlobal) {
     onLoad() {
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_home_head = resolveEasycom(vue.resolveDynamicComponent("home-head"), __easycom_0$6);
     const _component_home_foot = resolveEasycom(vue.resolveDynamicComponent("home-foot"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "main-container" }, [
@@ -1163,8 +1159,8 @@ if (uni.restoreGlobal) {
       vue.createVNode(_component_home_foot, { pageType: true })
     ]);
   }
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
-  const _sfc_main$h = {
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "E:/fuchuang/learn/demo1/pages/index/index.vue"]]);
+  const _sfc_main$g = {
     data() {
       return {
         pathList: [
@@ -1195,7 +1191,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("div", { class: "container" }, [
         (vue.openBlock(true), vue.createElementBlock(
@@ -1213,51 +1209,28 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
+  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__file", "E:/fuchuang/learn/demo1/pages/test/test.vue"]]);
   const innerAudioContext$4 = uni.createInnerAudioContext();
   innerAudioContext$4.autoplay = false;
   innerAudioContext$4.src = "";
-  const _sfc_main$g = {
+  const _sfc_main$f = {
     name: "bot-chat",
     props: {
       msgList: {
         type: Array,
         default: [
-          // {
-          //     botContent: "hello，请问我有什么可以帮助你的吗？",
-          //     recordId: 0,
-          //     titleId: 0,
-          //     userContent: "",
-          //     userId: 0
-          // },
-          // {
-          //     botContent: "",
-          //     recordId: 0,
-          //     titleId: 0,
-          //     userContent: "你好呀我想问你一件事，可以吗？",
-          //     userId: 0
-          // },
-          // {
-          //     userContent: "",
-          //     recordId: 0,
-          //     titleId: 0,
-          //     botContent: "当然可以!",
-          //     userId: 0
-          // },
-          // {
-          //     botContent: "",
-          //     recordId: 0,
-          //     titleId: 0,
-          //     userContent: "我的问题是：blablabla...",
-          //     userId: 0
-          // },
+          {
+            botContent: "hello，请问我有什么可以帮助你的吗？",
+            recordId: 0,
+            titleId: 0,
+            userContent: "",
+            userId: 0
+          }
         ]
       }
     },
     data() {
       return {
-        userId: "",
-        //发送的消息
         chatMsg: ""
       };
     },
@@ -1265,33 +1238,30 @@ if (uni.restoreGlobal) {
       play(index) {
         const text = this.msgList[index].botContent;
         const encoded = encodeURI(text);
-        formatAppLog("log", "at components/bot-chat/bot-chat.vue:87", encoded);
+        formatAppLog("log", "at components/bot-chat/bot-chat.vue:57", encoded);
         innerAudioContext$4.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike
 					&spd=` + this.speed + `&ctp=1&amp&pdt=301&tex=` + encoded;
-        formatAppLog("log", "at components/bot-chat/bot-chat.vue:90", innerAudioContext$4.src);
+        formatAppLog("log", "at components/bot-chat/bot-chat.vue:60", innerAudioContext$4.src);
         innerAudioContext$4.play();
-        formatAppLog("log", "at components/bot-chat/bot-chat.vue:92", "play over!!!");
+        formatAppLog("log", "at components/bot-chat/bot-chat.vue:62", "play over!!!");
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", {
         id: "msglistview",
         class: "chat-body"
       }, [
-        vue.createCommentVNode(" 聊天记录 "),
         (vue.openBlock(true), vue.createElementBlock(
           vue.Fragment,
           null,
           vue.renderList($props.msgList, (item, index) => {
             return vue.openBlock(), vue.createElementBlock("view", { key: index }, [
-              vue.createCommentVNode(" 自己发的消息 "),
               item.userContent != "" ? (vue.openBlock(), vue.createElementBlock("view", {
                 key: 0,
                 class: "item self"
               }, [
-                vue.createCommentVNode(" 文字内容 "),
                 vue.createElementVNode(
                   "view",
                   { class: "content right" },
@@ -1299,21 +1269,17 @@ if (uni.restoreGlobal) {
                   1
                   /* TEXT */
                 ),
-                vue.createCommentVNode(" 头像 "),
                 vue.createElementVNode("view", { class: "avatar" }, [
                   vue.createElementVNode("image", { src: "https://img-insight.oss-cn-chengdu.aliyuncs.com/tmp/avatar.jpg" })
                 ])
               ])) : vue.createCommentVNode("v-if", true),
-              vue.createCommentVNode(" 机器人发的消息 "),
               item.botContent != "" ? (vue.openBlock(), vue.createElementBlock("view", {
                 key: 1,
                 class: "item Ai"
               }, [
-                vue.createCommentVNode(" 头像 "),
                 vue.createElementVNode("view", { class: "avatar" }, [
                   vue.createElementVNode("image", { src: "/static/smart-chat/icon-bot.png" })
                 ]),
-                vue.createCommentVNode(" 文字内容 "),
                 vue.createElementVNode("view", {
                   class: "content left",
                   onClick: ($event) => $options.play(index)
@@ -1327,19 +1293,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-fb69b191"], ["__file", "E:/fuchuang/learn/demo1/components/bot-chat/bot-chat.vue"]]);
-  const _sfc_main$f = {
-    name: "press-mic",
-    data() {
-      return {};
-    }
-  };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "speakarea" }, [
-      vue.createElementVNode("image", { src: "/static/smart-chat/press-mic.png" })
-    ]);
-  }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-f48dac70"], ["__file", "E:/fuchuang/learn/demo1/components/press-mic/press-mic.vue"]]);
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-fb69b191"], ["__file", "E:/fuchuang/learn/demo1/components/bot-chat/bot-chat.vue"]]);
   const recorderManager$3 = uni.getRecorderManager();
   const innerAudioContext$3 = uni.createInnerAudioContext();
   innerAudioContext$3.autoplay = false;
@@ -1416,9 +1370,7 @@ if (uni.restoreGlobal) {
           formatAppLog("log", "at pages/smart-chat/smart-chat.vue:158", "scroll view selected!!");
           uni.pageScrollTo({
             duration: 100,
-            // 过渡时间
             scrollTop: scrollH
-            // 滚动的实际距离
           });
         }).exec();
       },
@@ -1429,9 +1381,7 @@ if (uni.restoreGlobal) {
           formatAppLog("log", "at pages/smart-chat/smart-chat.vue:169", "scroll view selected!!");
           uni.pageScrollTo({
             duration: 100,
-            // 过渡时间
             scrollTop: scrollH
-            // 滚动的实际距离
           });
         }).exec();
       },
@@ -1559,7 +1509,7 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_bot_chat = resolveEasycom(vue.resolveDynamicComponent("bot-chat"), __easycom_0$3);
-    const _component_press_mic = resolveEasycom(vue.resolveDynamicComponent("press-mic"), __easycom_1);
+    const _component_press_mic = vue.resolveComponent("press-mic");
     return vue.openBlock(), vue.createElementBlock("view", { class: "wholeview" }, [
       vue.createElementVNode("view", { class: "topview" }),
       vue.createElementVNode("view", { class: "topbar" }, [
@@ -3213,7 +3163,7 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_popup_dialog = resolveEasycom(vue.resolveDynamicComponent("uni-popup-dialog"), __easycom_0);
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "profile" }, [
       vue.createElementVNode("view", { class: "item-high" }, [
         vue.createElementVNode("view", { class: "item-left" }, "更改头像"),
@@ -3711,13 +3661,15 @@ if (uni.restoreGlobal) {
   const PagesLoginVerifyLoginVerifyLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__scopeId", "data-v-84a775d7"], ["__file", "E:/fuchuang/learn/demo1/pages/login/verify-login/verify-login.vue"]]);
   const _sfc_main$1 = {
     data() {
-      return {};
+      return {
+        phoneNumber: ""
+      };
     },
     methods: {
       login() {
         const backUrl = getApp().globalData.backUrl;
         const url = backUrl + "/user/api/v1/loginFast";
-        formatAppLog("log", "at pages/login/easy-login/easy-login.vue:34", "phoneNumber: " + this.verifyCode);
+        formatAppLog("log", "at pages/login/easy-login/easy-login.vue:35", "phoneNumber: " + this.phoneNumber);
         uni.request({
           url,
           method: "POST",
@@ -3725,19 +3677,19 @@ if (uni.restoreGlobal) {
             phone: this.phoneNumber
           },
           success: (res) => {
-            formatAppLog("log", "at pages/login/easy-login/easy-login.vue:42", res.data);
+            formatAppLog("log", "at pages/login/easy-login/easy-login.vue:43", res.data);
             this.text = "request success";
             getApp().setToken(res.data.data.token, 3600);
-            formatAppLog("log", "at pages/login/easy-login/easy-login.vue:46", res.data.data.token);
+            formatAppLog("log", "at pages/login/easy-login/easy-login.vue:47", res.data.data.token);
             uni.navigateTo({
               url: "/pages/index/index",
               success() {
-                formatAppLog("log", "at pages/login/easy-login/easy-login.vue:50", getApp().getToken());
+                formatAppLog("log", "at pages/login/easy-login/easy-login.vue:51", getApp().getToken());
               }
             });
           },
           fail(e) {
-            formatAppLog("log", "at pages/login/easy-login/easy-login.vue:55", e);
+            formatAppLog("log", "at pages/login/easy-login/easy-login.vue:56", e);
           }
         });
       }
@@ -3764,14 +3716,14 @@ if (uni.restoreGlobal) {
         {
           class: "input1",
           placeholder: "请输入手机号码",
-          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.phoneNumber = $event),
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.phoneNumber = $event),
           "placeholder-style": "font-size: 30rpx; color: rgba(0, 0, 0, 0.26);"
         },
         null,
         512
         /* NEED_PATCH */
       ), [
-        [vue.vModelText, _ctx.phoneNumber]
+        [vue.vModelText, $data.phoneNumber]
       ]),
       vue.createElementVNode(
         "checkbox-group",
@@ -3819,7 +3771,7 @@ if (uni.restoreGlobal) {
   const _sfc_main = {
     globalData: {
       backUrl: "http://82.157.124.83:51603",
-      baseUrl: "http://127.0.0.1:8000"
+      baseUrl: "http://192.168.177.100:8000"
     },
     onLaunch: function() {
       formatAppLog("log", "at App.vue:8", "App Launch");

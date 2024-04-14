@@ -1,24 +1,17 @@
 import { _ as _export_sfc, f as formatAppLog } from "../../_plugin-vue_export-helper.js";
-import { openBlock, createElementBlock, createElementVNode, normalizeStyle, createCommentVNode } from "vue";
+import { openBlock, createElementBlock, createElementVNode, normalizeStyle } from "vue";
 const _style_0 = { "pengke-camera": { "": { "justifyContent": "center", "alignItems": "center" } }, "menu": { ".pengke-camera ": { "position": "absolute", "left": 0, "bottom": 0, "width": "750rpx", "height": "250rpx", "zIndex": 97, "backgroundColor": "#000000", "display": "flex", "alignItems": "center", "justifyContent": "space-around", "flexDirection": "row" } }, "menu-back": { ".pengke-camera .menu ": { "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } }, "menu-snapshot": { ".pengke-camera .menu ": { "width": "170rpx", "height": "170rpx", "zIndex": 99, "backgroundColor": "#FFFFFF", "borderRadius": 50, "display": "flex", "alignItems": "center", "justifyContent": "center" } }, "snapshot-button": { ".pengke-camera .menu .menu-snapshot ": { "zIndex": 100, "borderWidth": "4rpx", "borderStyle": "solid", "borderColor": "#000000", "backgroundColor": "#FFFFFF", "width": "138rpx", "height": "138rpx", "borderRadius": 50 } }, "menu-flip": { ".pengke-camera .menu ": { "width": "80rpx", "height": "80rpx", "zIndex": 99, "alignItems": "center", "justifyContent": "center" } } };
 let _this = null;
 const _sfc_main = {
   data() {
     return {
       poenCarmeInterval: null,
-      //打开相机的轮询
       aspect: "2:3",
-      //比例
       windowWidth: "",
-      //屏幕可用宽度
       windowHeight: "",
-      //屏幕可用高度
       camerastate: false,
-      //相机准备好了
       livePusher: null,
-      //流视频对象
       snapshotsrc: null
-      //快照
     };
   },
   onLoad(e) {
@@ -31,7 +24,6 @@ const _sfc_main = {
     this.poenCarme();
   },
   methods: {
-    //轮询打开
     poenCarme() {
       if (plus.os.name == "Android") {
         this.poenCarmeInterval = setInterval(function() {
@@ -40,7 +32,6 @@ const _sfc_main = {
         }, 2500);
       }
     },
-    //初始化相机
     initCamera() {
       uni.getSystemInfo({
         success: function(res) {
@@ -51,21 +42,18 @@ const _sfc_main = {
         }
       });
     },
-    //整除数计算
     aliquot(x, y) {
       if (x % y == 0)
         return y;
       return this.aliquot(y, x % y);
     },
-    //开始预览
     startPreview() {
       this.livePusher.startPreview({
         success: (a) => {
-          formatAppLog("log", "at pages/assist-read/photo_nvue.nvue:97", a);
+          formatAppLog("log", "at pages/assist-read/photo_nvue.nvue:89", a);
         }
       });
     },
-    //停止预览
     stopPreview() {
       this.livePusher.stopPreview({
         success: (a) => {
@@ -73,7 +61,6 @@ const _sfc_main = {
         }
       });
     },
-    //状态
     statechange(e) {
       if (e.detail.code == 1007) {
         _this.camerastate = true;
@@ -81,15 +68,13 @@ const _sfc_main = {
         _this.camerastate = false;
       }
     },
-    //返回
     back() {
       uni.navigateBack();
     },
-    //抓拍
     snapshot() {
       uni.vibrateShort({
         success: function() {
-          formatAppLog("log", "at pages/assist-read/photo_nvue.nvue:133", "success");
+          formatAppLog("log", "at pages/assist-read/photo_nvue.nvue:120", "success");
         }
       });
       this.livePusher.snapshot({
@@ -102,7 +87,7 @@ const _sfc_main = {
               res.eventChannel.emit("recieveFile", { filepath: _this.snapshotsrc });
             },
             fail: (e2) => {
-              formatAppLog("log", "at pages/assist-read/photo_nvue.nvue:145", e2);
+              formatAppLog("log", "at pages/assist-read/photo_nvue.nvue:132", e2);
             }
           });
         }
@@ -155,20 +140,17 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           style: normalizeStyle({ width: $data.windowWidth, height: $data.windowHeight })
         }, null, 44, ["aspect"]),
         createElementVNode("cover-view", { class: "menu" }, [
-          createCommentVNode("返回键"),
           createElementVNode("cover-image", {
             class: "menu-back",
             onClick: _cache[1] || (_cache[1] = (...args) => $options.back && $options.back(...args)),
             src: "/static/camera/back.png"
           }),
-          createCommentVNode("快门键"),
           createElementVNode("cover-view", {
             class: "menu-snapshot",
             onClick: _cache[2] || (_cache[2] = (...args) => $options.snapshot && $options.snapshot(...args))
           }, [
             createElementVNode("cover-view", { class: "snapshot-button" })
           ]),
-          createCommentVNode("反转键"),
           createElementVNode("cover-image", {
             class: "menu-flip",
             onClick: _cache[3] || (_cache[3] = (...args) => $options.flip && $options.flip(...args)),

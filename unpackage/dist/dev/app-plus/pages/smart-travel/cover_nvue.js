@@ -103,34 +103,11 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
             userContent: "",
             userId: 0
           }
-          // {
-          //     botContent: "",
-          //     recordId: 0,
-          //     titleId: 0,
-          //     userContent: "你好呀我想问你一件事，可以吗？",
-          //     userId: 0
-          // },
-          // {
-          //     userContent: "",
-          //     recordId: 0,
-          //     titleId: 0,
-          //     botContent: "当然可以!",
-          //     userId: 0
-          // },
-          // {
-          //     botContent: "",
-          //     recordId: 0,
-          //     titleId: 0,
-          //     userContent: "我的问题是：blablabla...",
-          //     userId: 0
-          // },
         ]
       }
     },
     data() {
       return {
-        userId: "",
-        //发送的消息
         chatMsg: "",
         randstr: "ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl"
       };
@@ -139,12 +116,12 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       play(index) {
         const text = this.msgList[index].botContent;
         const encoded = encodeURI(text);
-        formatAppLog("log", "at components/cover-chat/cover-chat.vue:77", encoded);
+        formatAppLog("log", "at components/cover-chat/cover-chat.vue:52", encoded);
         innerAudioContext$2.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike
 					&spd=` + this.speed + `&ctp=1&amp&pdt=301&tex=` + encoded;
-        formatAppLog("log", "at components/cover-chat/cover-chat.vue:80", innerAudioContext$2.src);
+        formatAppLog("log", "at components/cover-chat/cover-chat.vue:55", innerAudioContext$2.src);
         innerAudioContext$2.play();
-        formatAppLog("log", "at components/cover-chat/cover-chat.vue:82", "play over!!!");
+        formatAppLog("log", "at components/cover-chat/cover-chat.vue:57", "play over!!!");
       }
     }
   };
@@ -158,7 +135,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
         renderWhole: true
       },
       [
-        (0, import_vue2.createCommentVNode)(" \u804A\u5929\u8BB0\u5F55 "),
         ((0, import_vue2.openBlock)(true), (0, import_vue2.createElementBlock)(
           import_vue2.Fragment,
           null,
@@ -216,8 +192,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           }),
           128
           /* KEYED_FRAGMENT */
-        )),
-        (0, import_vue2.createCommentVNode)(" 			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>")
+        ))
       ],
       4
       /* STYLE */
@@ -247,7 +222,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
         recorderManager$1.onStop(function(res) {
           this.voicePath = res.tempFilePath;
         });
-        formatAppLog("log", "at components/micphone/micphone.vue:41", "tmpfPath = " + this.voicePath);
+        formatAppLog("log", "at components/micphone/micphone.vue:30", "tmpfPath = " + this.voicePath);
         return tmpfPath;
       }
     }
@@ -267,19 +242,12 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     data() {
       return {
         poenCarmeInterval: null,
-        //打开相机的轮询
         aspect: "2:3",
-        //比例
         windowWidth: "",
-        //屏幕可用宽度
         windowHeight: "",
-        //屏幕可用高度
         camerastate: false,
-        //相机准备好了
         livePusher: null,
-        //流视频对象
         snapshotsrc: null,
-        //快照
         msglist: [
           {
             botContent: "hello\uFF0C\u8BF7\u95EE\u6211\u6709\u4EC0\u4E48\u53EF\u4EE5\u5E2E\u52A9\u4F60\u7684\u5417\uFF1F",
@@ -312,7 +280,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       this.poenCarme();
     },
     methods: {
-      //轮询打开
       poenCarme() {
         if (plus.os.name == "Android") {
           this.poenCarmeInterval = setInterval(function() {
@@ -321,7 +288,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           }, 2500);
         }
       },
-      //初始化相机
       initCamera() {
         uni.getSystemInfo({
           success: function(res) {
@@ -332,21 +298,18 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           }
         });
       },
-      //整除数计算
       aliquot(x, y) {
         if (x % y == 0)
           return y;
         return this.aliquot(y, x % y);
       },
-      //开始预览
       startPreview() {
         this.livePusher.startPreview({
           success: (a) => {
-            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:131", a);
+            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:126", a);
           }
         });
       },
-      //停止预览
       stopPreview() {
         this.livePusher.stopPreview({
           success: (a) => {
@@ -354,7 +317,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           }
         });
       },
-      //状态
       statechange(e) {
         if (e.detail.code == 1007) {
           _this.camerastate = true;
@@ -362,15 +324,13 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           _this.camerastate = false;
         }
       },
-      //返回
       back() {
         uni.navigateBack();
       },
-      //抓拍
       snapshot() {
         uni.vibrateShort({
           success: function() {
-            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:167", "success");
+            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:155", "success");
           }
         });
         this.livePusher.snapshot({
@@ -380,23 +340,22 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           }
         });
       },
-      //设置
       setImage() {
         let pages = getCurrentPages();
         let prevPage = pages[pages.length - 2];
         prevPage.$vm.setImage({ path: _this.snapshotsrc });
       },
       startMic() {
-        formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:187", "\u5F00\u59CB\u5F55\u97F3");
+        formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:174", "\u5F00\u59CB\u5F55\u97F3");
         recorderManager.start();
         this.micScale = 1.3;
       },
       stopMic() {
-        formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:193", "\u5F55\u97F3\u7ED3\u675F");
+        formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:180", "\u5F55\u97F3\u7ED3\u675F");
         const url = this.baseUrl + "/speechtotext";
         recorderManager.stop();
         this.micScale = 1;
-        formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:197", "");
+        formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:184", "");
         recorderManager.onStop(function(res) {
           uni.uploadFile({
             url,
@@ -404,7 +363,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
             filePath: res.tempFilePath,
             formData: {},
             success: (res2) => {
-              formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:205", "\u4E0A\u4F20\u6210\u529F\uFF1A" + JSON.stringify(res2));
+              formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:192", "\u4E0A\u4F20\u6210\u529F\uFF1A" + JSON.stringify(res2));
               const response = JSON.parse(res2.data);
               if (res2.statusCode == 200) {
                 _this.msglist.push({
@@ -425,7 +384,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
               }
             },
             fail: (err) => {
-              formatAppLog("error", "at pages/smart-travel/cover_nvue.nvue:227", "\u4E0A\u4F20\u5F55\u97F3\u5931\u8D25\uFF1A" + err.errMsg);
+              formatAppLog("error", "at pages/smart-travel/cover_nvue.nvue:214", "\u4E0A\u4F20\u5F55\u97F3\u5931\u8D25\uFF1A" + err.errMsg);
             }
           });
         });
@@ -434,7 +393,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
         this.livePusher.snapshot({
           success: (e) => {
             _this.snapshotsrc = e.message.tempImagePath;
-            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:236", "_this.snapshotsrc = " + _this.snapshotsrc);
+            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:223", "_this.snapshotsrc = " + _this.snapshotsrc);
             uni.uploadFile({
               url: this.backUrl + "/storage/api/v1/uploadImg/move",
               filePath: _this.snapshotsrc,
@@ -444,22 +403,22 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                 "token": this.token
               },
               success: (uploadFileRes) => {
-                formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:246", uploadFileRes.data);
+                formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:233", uploadFileRes.data);
                 const response = JSON.parse(uploadFileRes.data);
                 if (response.code == 200) {
-                  formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:249", response.data);
+                  formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:236", response.data);
                   _this.sendChat(text, response.data.image);
                 }
               },
               fail: (err) => {
-                formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:253", err.errMsg);
+                formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:240", err.errMsg);
               }
             });
           }
         });
       },
       sendChat(text, imgUrl) {
-        formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:261", "text = " + text + "   imgUrl = " + imgUrl);
+        formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:248", "text = " + text + "   imgUrl = " + imgUrl);
         uni.request({
           url: this.baseUrl + "/chatbot",
           method: "POST",
@@ -468,7 +427,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
             "image": imgUrl
           },
           success: (res) => {
-            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:270", res);
+            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:257", res);
             _this.msglist.pop();
             try {
               const response = res.data;
@@ -480,7 +439,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                 userId: 0
               });
               const encoded = encodeURI(response.response);
-              formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:283", encoded);
+              formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:270", encoded);
               innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&spd=5&ctp=1&amp&pdt=301&tex=` + encoded;
               innerAudioContext.play();
             } catch (e) {
@@ -492,13 +451,13 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                 userId: 0
               });
               const encoded = encodeURI("\u53D1\u9001\u5931\u8D25");
-              formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:295", encoded);
+              formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:282", encoded);
               innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&spd=5&ctp=1&amp&pdt=301&tex=` + encoded;
               innerAudioContext.play();
             }
           },
           fail: (err) => {
-            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:301", err);
+            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:288", err);
             _this.msglist.pop();
             _this.msglist.push({
               botContent: "\u53D1\u9001\u5931\u8D25",
@@ -508,7 +467,7 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
               userId: 0
             });
             const encoded = encodeURI("\u53D1\u9001\u5931\u8D25");
-            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:311", encoded);
+            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:298", encoded);
             innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&spd=5&ctp=1&amp&pdt=301&tex=` + encoded;
             innerAudioContext.play();
           }

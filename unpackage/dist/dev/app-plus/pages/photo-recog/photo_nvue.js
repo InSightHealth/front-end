@@ -88,19 +88,12 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
     data() {
       return {
         poenCarmeInterval: null,
-        //打开相机的轮询
         aspect: "2:3",
-        //比例
         windowWidth: "",
-        //屏幕可用宽度
         windowHeight: "",
-        //屏幕可用高度
         camerastate: false,
-        //相机准备好了
         livePusher: null,
-        //流视频对象
         snapshotsrc: null
-        //快照
       };
     },
     onLoad(e) {
@@ -113,7 +106,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
       this.poenCarme();
     },
     methods: {
-      //轮询打开
       poenCarme() {
         if (plus.os.name == "Android") {
           this.poenCarmeInterval = setInterval(function() {
@@ -122,7 +114,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           }, 2500);
         }
       },
-      //初始化相机
       initCamera() {
         uni.getSystemInfo({
           success: function(res) {
@@ -133,21 +124,18 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           }
         });
       },
-      //整除数计算
       aliquot(x, y) {
         if (x % y == 0)
           return y;
         return this.aliquot(y, x % y);
       },
-      //开始预览
       startPreview() {
         this.livePusher.startPreview({
           success: (a) => {
-            formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:97", a);
+            formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:89", a);
           }
         });
       },
-      //停止预览
       stopPreview() {
         this.livePusher.stopPreview({
           success: (a) => {
@@ -155,7 +143,6 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           }
         });
       },
-      //状态
       statechange(e) {
         if (e.detail.code == 1007) {
           _this.camerastate = true;
@@ -163,15 +150,13 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
           _this.camerastate = false;
         }
       },
-      //返回
       back() {
         uni.navigateBack();
       },
-      //抓拍
       snapshot() {
         uni.vibrateShort({
           success: function() {
-            formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:133", "success");
+            formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:117", "success");
           }
         });
         this.livePusher.snapshot({
@@ -184,17 +169,15 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
                 res.eventChannel.emit("recieveFile", { filepath: _this.snapshotsrc });
               },
               fail: (e2) => {
-                formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:146", e2);
+                formatAppLog("log", "at pages/photo-recog/photo_nvue.nvue:130", e2);
               }
             });
           }
         });
       },
-      //反转
       flip() {
         this.livePusher.switchCamera();
       },
-      //设置
       setImage() {
         let pages = getCurrentPages();
         let prevPage = pages[pages.length - 2];
@@ -237,20 +220,17 @@ if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
             style: (0, import_vue2.normalizeStyle)({ width: $data.windowWidth, height: $data.windowHeight })
           }, null, 44, ["aspect"]),
           (0, import_vue2.createElementVNode)("cover-view", { class: "menu" }, [
-            (0, import_vue2.createCommentVNode)("\u8FD4\u56DE\u952E"),
             (0, import_vue2.createElementVNode)("cover-image", {
               class: "menu-back",
               onClick: _cache[1] || (_cache[1] = (...args) => $options.back && $options.back(...args)),
               src: "/static/camera/back.png"
             }),
-            (0, import_vue2.createCommentVNode)("\u5FEB\u95E8\u952E"),
             (0, import_vue2.createElementVNode)("cover-view", {
               class: "menu-snapshot",
               onClick: _cache[2] || (_cache[2] = (...args) => $options.snapshot && $options.snapshot(...args))
             }, [
               (0, import_vue2.createElementVNode)("cover-view", { class: "snapshot-button" })
             ]),
-            (0, import_vue2.createCommentVNode)("\u53CD\u8F6C\u952E"),
             (0, import_vue2.createElementVNode)("cover-image", {
               class: "menu-flip",
               onClick: _cache[3] || (_cache[3] = (...args) => $options.flip && $options.flip(...args)),

@@ -1,5 +1,5 @@
 import { _ as _export_sfc, f as formatAppLog, r as resolveEasycom } from "../../_plugin-vue_export-helper.js";
-import { openBlock, createElementBlock, normalizeStyle, createCommentVNode, Fragment, renderList, createElementVNode, toDisplayString, resolveDynamicComponent, createVNode } from "vue";
+import { openBlock, createElementBlock, normalizeStyle, Fragment, renderList, createElementVNode, toDisplayString, createCommentVNode, resolveDynamicComponent, createVNode } from "vue";
 const _style_0$2 = { "chat-body": { "": { "display": "flex", "flexDirection": "column", "width": "750rpx", "boxSizing": "content-box" } }, "self": { ".chat-body ": { "justifyContent": "flex-end" } }, "item": { ".chat-body ": { "width": "750rpx", "display": "flex", "paddingTop": "45rpx", "paddingRight": "30rpx", "paddingBottom": "45rpx", "paddingLeft": "30rpx" } }, "right": { ".chat-body .item ": { "backgroundColor": "#ACEC9C", "alignSelf": "flex-end" } }, "left": { ".chat-body .item ": { "backgroundColor": "#FFFFFF" } }, "poly-right": { ".chat-body .item ": { "position": "relative", "top": "-50rpx", "left": "-5rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-end" } }, "poly-left": { ".chat-body .item ": { "position": "relative", "top": "50rpx", "left": "5rpx", "height": "30rpx", "width": "30rpx", "alignSelf": "flex-start" } }, "content": { ".chat-body .item ": { "position": "relative", "wordWrap": "break-word", "paddingTop": "24rpx", "paddingRight": "24rpx", "paddingBottom": "24rpx", "paddingLeft": "24rpx", "marginTop": 0, "marginRight": "24rpx", "marginBottom": 0, "marginLeft": "24rpx", "borderRadius": "30rpx", "fontSize": "32rpx", "fontFamily": "PingFang SC", "fontWeight": "500", "color": "#333333", "lineHeight": "42rpx", "maxWidth": "380rpx" } }, "avatar": { ".chat-body .item ": { "display": "flex", "alignItems": "center", "justifyContent": "center", "width": "115rpx", "height": "115rpx", "overflow": "hidden" } } };
 const innerAudioContext$2 = uni.createInnerAudioContext();
 innerAudioContext$2.autoplay = false;
@@ -17,34 +17,11 @@ const _sfc_main$2 = {
           userContent: "",
           userId: 0
         }
-        // {
-        //     botContent: "",
-        //     recordId: 0,
-        //     titleId: 0,
-        //     userContent: "你好呀我想问你一件事，可以吗？",
-        //     userId: 0
-        // },
-        // {
-        //     userContent: "",
-        //     recordId: 0,
-        //     titleId: 0,
-        //     botContent: "当然可以!",
-        //     userId: 0
-        // },
-        // {
-        //     botContent: "",
-        //     recordId: 0,
-        //     titleId: 0,
-        //     userContent: "我的问题是：blablabla...",
-        //     userId: 0
-        // },
       ]
     }
   },
   data() {
     return {
-      userId: "",
-      //发送的消息
       chatMsg: "",
       randstr: "ksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfklksdafhaslihflksahfkl"
     };
@@ -53,12 +30,12 @@ const _sfc_main$2 = {
     play(index) {
       const text = this.msgList[index].botContent;
       const encoded = encodeURI(text);
-      formatAppLog("log", "at components/cover-chat/cover-chat.vue:77", encoded);
+      formatAppLog("log", "at components/cover-chat/cover-chat.vue:52", encoded);
       innerAudioContext$2.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike
 					&spd=` + this.speed + `&ctp=1&amp&pdt=301&tex=` + encoded;
-      formatAppLog("log", "at components/cover-chat/cover-chat.vue:80", innerAudioContext$2.src);
+      formatAppLog("log", "at components/cover-chat/cover-chat.vue:55", innerAudioContext$2.src);
       innerAudioContext$2.play();
-      formatAppLog("log", "at components/cover-chat/cover-chat.vue:82", "play over!!!");
+      formatAppLog("log", "at components/cover-chat/cover-chat.vue:57", "play over!!!");
     }
   }
 };
@@ -72,7 +49,6 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
       renderWhole: true
     },
     [
-      createCommentVNode(" 聊天记录 "),
       (openBlock(true), createElementBlock(
         Fragment,
         null,
@@ -130,8 +106,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         }),
         128
         /* KEYED_FRAGMENT */
-      )),
-      createCommentVNode(" 			{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>{{randstr}}<br>")
+      ))
     ],
     4
     /* STYLE */
@@ -161,7 +136,7 @@ const _sfc_main$1 = {
       recorderManager$1.onStop(function(res) {
         this.voicePath = res.tempFilePath;
       });
-      formatAppLog("log", "at components/micphone/micphone.vue:41", "tmpfPath = " + this.voicePath);
+      formatAppLog("log", "at components/micphone/micphone.vue:30", "tmpfPath = " + this.voicePath);
       return tmpfPath;
     }
   }
@@ -181,19 +156,12 @@ const _sfc_main = {
   data() {
     return {
       poenCarmeInterval: null,
-      //打开相机的轮询
       aspect: "2:3",
-      //比例
       windowWidth: "",
-      //屏幕可用宽度
       windowHeight: "",
-      //屏幕可用高度
       camerastate: false,
-      //相机准备好了
       livePusher: null,
-      //流视频对象
       snapshotsrc: null,
-      //快照
       msglist: [
         {
           botContent: "hello，请问我有什么可以帮助你的吗？",
@@ -226,7 +194,6 @@ const _sfc_main = {
     this.poenCarme();
   },
   methods: {
-    //轮询打开
     poenCarme() {
       if (plus.os.name == "Android") {
         this.poenCarmeInterval = setInterval(function() {
@@ -235,7 +202,6 @@ const _sfc_main = {
         }, 2500);
       }
     },
-    //初始化相机
     initCamera() {
       uni.getSystemInfo({
         success: function(res) {
@@ -246,21 +212,18 @@ const _sfc_main = {
         }
       });
     },
-    //整除数计算
     aliquot(x, y) {
       if (x % y == 0)
         return y;
       return this.aliquot(y, x % y);
     },
-    //开始预览
     startPreview() {
       this.livePusher.startPreview({
         success: (a) => {
-          formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:131", a);
+          formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:126", a);
         }
       });
     },
-    //停止预览
     stopPreview() {
       this.livePusher.stopPreview({
         success: (a) => {
@@ -268,7 +231,6 @@ const _sfc_main = {
         }
       });
     },
-    //状态
     statechange(e) {
       if (e.detail.code == 1007) {
         _this.camerastate = true;
@@ -276,15 +238,13 @@ const _sfc_main = {
         _this.camerastate = false;
       }
     },
-    //返回
     back() {
       uni.navigateBack();
     },
-    //抓拍
     snapshot() {
       uni.vibrateShort({
         success: function() {
-          formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:167", "success");
+          formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:155", "success");
         }
       });
       this.livePusher.snapshot({
@@ -294,23 +254,22 @@ const _sfc_main = {
         }
       });
     },
-    //设置
     setImage() {
       let pages = getCurrentPages();
       let prevPage = pages[pages.length - 2];
       prevPage.$vm.setImage({ path: _this.snapshotsrc });
     },
     startMic() {
-      formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:187", "开始录音");
+      formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:174", "开始录音");
       recorderManager.start();
       this.micScale = 1.3;
     },
     stopMic() {
-      formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:193", "录音结束");
+      formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:180", "录音结束");
       const url = this.baseUrl + "/speechtotext";
       recorderManager.stop();
       this.micScale = 1;
-      formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:197", "");
+      formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:184", "");
       recorderManager.onStop(function(res) {
         uni.uploadFile({
           url,
@@ -318,7 +277,7 @@ const _sfc_main = {
           filePath: res.tempFilePath,
           formData: {},
           success: (res2) => {
-            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:205", "上传成功：" + JSON.stringify(res2));
+            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:192", "上传成功：" + JSON.stringify(res2));
             const response = JSON.parse(res2.data);
             if (res2.statusCode == 200) {
               _this.msglist.push({
@@ -339,7 +298,7 @@ const _sfc_main = {
             }
           },
           fail: (err) => {
-            formatAppLog("error", "at pages/smart-travel/cover_nvue.nvue:227", "上传录音失败：" + err.errMsg);
+            formatAppLog("error", "at pages/smart-travel/cover_nvue.nvue:214", "上传录音失败：" + err.errMsg);
           }
         });
       });
@@ -348,7 +307,7 @@ const _sfc_main = {
       this.livePusher.snapshot({
         success: (e) => {
           _this.snapshotsrc = e.message.tempImagePath;
-          formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:236", "_this.snapshotsrc = " + _this.snapshotsrc);
+          formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:223", "_this.snapshotsrc = " + _this.snapshotsrc);
           uni.uploadFile({
             url: this.backUrl + "/storage/api/v1/uploadImg/move",
             filePath: _this.snapshotsrc,
@@ -358,22 +317,22 @@ const _sfc_main = {
               "token": this.token
             },
             success: (uploadFileRes) => {
-              formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:246", uploadFileRes.data);
+              formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:233", uploadFileRes.data);
               const response = JSON.parse(uploadFileRes.data);
               if (response.code == 200) {
-                formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:249", response.data);
+                formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:236", response.data);
                 _this.sendChat(text, response.data.image);
               }
             },
             fail: (err) => {
-              formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:253", err.errMsg);
+              formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:240", err.errMsg);
             }
           });
         }
       });
     },
     sendChat(text, imgUrl) {
-      formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:261", "text = " + text + "   imgUrl = " + imgUrl);
+      formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:248", "text = " + text + "   imgUrl = " + imgUrl);
       uni.request({
         url: this.baseUrl + "/chatbot",
         method: "POST",
@@ -382,7 +341,7 @@ const _sfc_main = {
           "image": imgUrl
         },
         success: (res) => {
-          formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:270", res);
+          formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:257", res);
           _this.msglist.pop();
           try {
             const response = res.data;
@@ -394,7 +353,7 @@ const _sfc_main = {
               userId: 0
             });
             const encoded = encodeURI(response.response);
-            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:283", encoded);
+            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:270", encoded);
             innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&spd=5&ctp=1&amp&pdt=301&tex=` + encoded;
             innerAudioContext.play();
           } catch (e) {
@@ -406,13 +365,13 @@ const _sfc_main = {
               userId: 0
             });
             const encoded = encodeURI("发送失败");
-            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:295", encoded);
+            formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:282", encoded);
             innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&spd=5&ctp=1&amp&pdt=301&tex=` + encoded;
             innerAudioContext.play();
           }
         },
         fail: (err) => {
-          formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:301", err);
+          formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:288", err);
           _this.msglist.pop();
           _this.msglist.push({
             botContent: "发送失败",
@@ -422,7 +381,7 @@ const _sfc_main = {
             userId: 0
           });
           const encoded = encodeURI("发送失败");
-          formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:311", encoded);
+          formatAppLog("log", "at pages/smart-travel/cover_nvue.nvue:298", encoded);
           innerAudioContext.src = `https://tts.baidu.com/text2audio.mp3?lan=ZH&cuid=baike&spd=5&ctp=1&amp&pdt=301&tex=` + encoded;
           innerAudioContext.play();
         }

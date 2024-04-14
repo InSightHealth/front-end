@@ -25,13 +25,14 @@
 	export default {
 		data() {
 			return {
+				phoneNumber: ''
 			}
 		},
 		methods: {
 			login(){
 				const backUrl = getApp().globalData.backUrl;
 				const url = backUrl + '/user/api/v1/loginFast';
-				console.log("phoneNumber: " + this.verifyCode);
+				console.log("phoneNumber: " + this.phoneNumber);
 				uni.request({
 					url: url,
 					method: 'POST',
