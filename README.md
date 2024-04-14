@@ -23,16 +23,14 @@
 
 1. 克隆本项目到本地机器。
 
-shell
-
 ```
 $ git clone https://github.com/InSightHealth/front-end
 ```
 
-1. 将项目导入HBuilder。
-2. 在HBuilder中选择“发行 -> 原生APP（云打包）”。
-3. 根据HBuilder的指引进行配置和打包，生成Android APP。
-4. 将生成的APK文件安装到Android设备上。
+2. 将项目导入HBuilder。
+3. 在HBuilder中选择“发行 -> 原生APP（云打包）”。
+4. 根据HBuilder的指引进行配置和打包，生成Android APP。
+5. 将生成的APK文件安装到Android设备上。
 
 ## 贡献
 
