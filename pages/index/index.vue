@@ -1,0 +1,179 @@
+<template>
+	<view class="main-container">
+		<home-head></home-head>
+		<div class="content">
+			<div class="content-first-row">
+				<navigator id="link-to-smart-travel" url="/pages/smart-travel/cover_nvue">
+					智能出行
+				</navigator>
+				<navigator id="link-to-snap-recognize" url="/pages/photo-recog/photo_nvue">
+					<img src="https://img-insight.oss-cn-chengdu.aliyuncs.com/snap-icon.png">
+					拍照识图
+				</navigator>
+			</div>
+			<div class="content-second-row">
+				<navigator id="link-to-health-assistant" url="/pages/smart-chat/smart-chat">
+					<text>智能健康助手</text>
+					<image src="/static/homepage/poe.png"> </image>
+				</navigator>
+				<navigator id="link-to-assist-read" url="/pages/assist-read/photo_nvue">
+					<text>辅助阅读</text>
+					<image src="/static/homepage/book.png"> </image>
+				</navigator>
+			</div>
+		</div>
+		<home-foot :pageType="true"></home-foot>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				holding: true,
+				recoging: false,
+			}
+		},
+		onLoad() {
+		}
+	}
+</script>
+
+<style lang='scss'>
+	* {
+		margin: 0px;
+		padding: 0px;
+	}
+	page {
+		width: 100%;
+		height: 100%;
+	}
+	
+	.main-container {
+		background-color: #EFEFEF;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+	
+	.content {
+		position: fixed;
+		top: 300rpx;
+		width: 750rpx;
+		
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		
+		.content-first-row {
+			margin: 0px;
+			height: 380rpx;
+			width: 630rpx;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: flex-start;
+			padding-top: 55rpx;
+			padding-bottom: 15rpx;
+			
+			#link-to-smart-travel {
+				width: 355rpx;
+				height: 355rpx;
+				
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: white;
+				font-size: 69rpx;
+				font-weight: 700;
+				-webkit-text-stroke: 0.5px black;
+				background-image: url("/static/homepage/smart-travel.png");
+				background-size: 100% 100%;
+			}
+			
+			#link-to-snap-recognize {
+				width: 230rpx;
+				height: 355rpx;
+				
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+				justify-content: space-evenly;
+				color: white;
+				font-size: 46rpx;
+				font-weight: 700;
+				-webkit-text-stroke: 0.3px black;
+				
+				background-color: #DBF4E4;
+				border-radius: 8%;
+				border: 0.7px solid #BFD4C6;
+				
+				img {
+					height: 123rpx;
+					width: 123rpx;
+				}
+			}
+		}
+		
+		.content-second-row {
+			height: 265rpx; /* 277 */
+			width: 630rpx; /*660*/
+			display: flex;
+			flex-direction: row;
+			align-items: flex-start;
+			justify-content: space-between;
+			
+			#link-to-health-assistant {
+				width: 290rpx;
+				height: 263rpx;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+				justify-content: space-evenly;
+				
+				background-color: #DBF4E4;
+				border-radius: 10%;
+				border: 0.7px solid #BFD4C6;
+				
+				image {
+					height: 123rpx;
+					width: 123rpx;
+				}
+				
+				text {
+					color: white;
+					font-size: 46rpx;
+					font-weight: 700;
+					-webkit-text-stroke: 0.3px black;
+					align-self: center;
+				}
+			}
+			
+			#link-to-assist-read {
+				width: 290rpx;
+				height: 263rpx;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+				justify-content: space-evenly;
+				
+				background-color: #DBF4E4;
+				border-radius: 10%;
+				border: 0.7px solid #BFD4C6;
+				
+				image {
+					height: 123rpx;
+					width: 123rpx;
+				}
+				
+				text {
+					color: white;
+					font-size: 46rpx;
+					font-weight: 700;
+					-webkit-text-stroke: 0.3px black;
+					align-self: center;
+				}
+			}
+		}
+	} 
+</style>
