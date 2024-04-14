@@ -1,7 +1,7 @@
 <script>
 	export default {
 		globalData: {  
-			backUrl: 'http://82.157.124.83:51603',
+			backUrl: 'http://101.35.235.245:51603',
 			baseUrl: 'http://192.168.177.100:8000'
 		},
 		onLaunch: function() {
